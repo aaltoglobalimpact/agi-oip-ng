@@ -566,7 +566,7 @@ div#cpOrangeTopRowSeparator{height:20px;}
 }
 
 .fancyTextColor{
-    color: #F17D1F;
+    color: #F17D1F !important;
 }
 
 .whiteTextColor{
@@ -866,6 +866,28 @@ div#contentPanel.content.active {
         width: 100%;
         max-width: 245px;
         height: auto;
+    }
+
+    .orbit-container .orbit-slides-container li .orbit-caption {
+        width:80%; /*used to be 100% Hugo*/
+    }
+}
+
+@media only screen and (max-width: 31.250em) {
+/*Aprox 500px*/
+    .orbit-container .orbit-slides-container li .orbit-caption {
+        width:70%; /*used to be 100% Hugo*/
+        font-size:16px;
+        line-height:21px;
+    }
+}
+
+@media only screen and (max-width: 21.250em) {
+    /*Aprox 340px*/
+    .orbit-container .orbit-slides-container li .orbit-caption {
+        width:80%; /*used to be 100% Hugo*/
+        font-size:14px;
+        line-height:21px;
     }
 }
 /*

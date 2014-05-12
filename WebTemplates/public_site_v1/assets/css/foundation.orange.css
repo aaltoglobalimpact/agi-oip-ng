@@ -2185,11 +2185,13 @@ meta.foundation-mq-topbar {
 .orbit-container .orbit-slides-container li .orbit-caption {
     position: absolute;
     bottom: 0;
-    background-color: rgba(51, 51, 51, 0.8);
+    /*background-color: rgba(51, 51, 51, 0.8); Hugo THIS WAS the original value*/
+    background-color: transparent;
     color: white;
-    width: 100%;
+    width: 60%; /*used to be 100% Hugo*/
     padding: 0.625rem 0.875rem;
-    font-size: 0.875rem; }
+    /*font-size: 0.875rem;Hugo this was the original */
+    font-size: 24px;}
 .orbit-container .orbit-slide-number {
     position: absolute;
     top: 10px;
