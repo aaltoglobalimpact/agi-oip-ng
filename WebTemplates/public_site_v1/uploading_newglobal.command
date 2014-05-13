@@ -1,1 +1,0 @@
-mono /Users/Hugo/Dev/ContentSyncTool.exe sync -c newglobalwww -s upwww
