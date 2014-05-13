@@ -1,0 +1,1 @@
+mono /Users/Hugo/Dev/ContentSyncTool.exe sync -s Datasync -c wstest

@@ -1,0 +1,1 @@
+mono /Users/Hugo/Dev/ContentSyncTool.exe sync -s CPsync -c wstest
