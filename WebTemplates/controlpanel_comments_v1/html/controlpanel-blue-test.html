@@ -430,26 +430,21 @@ $(document).ready(function(){
     };
 
     var commentsRL = tUP.RegisterDataURL("COMMENTS", null,
-            [ "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json",
-              "../../AaltoGlobalImpact.OIP/NodeSummaryContainer/default.json"]);
-
-    var constructData = function (args) {
-        return { "kala": "kukko"};
-    };
-    commentsRL.constructData = constructData;
+            [ "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json" ]);
 
     var ReConnectComments = function(parentItemID) {
-        var $commentPh = $("#viewmodalcommentareaph");
-        $commentPh.empty();
-        tUP.GetData("COMMENTS", function(args) {
-            alert(args["kala"]);
-        });
-        return;
-        $.getJSON("../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json", function(allComments) {
+        commentsRL.constructData = function (allComments) {
+            allComments = allComments[0];
             var myComments = allComments.CollectionContent.filter(function(item)
             {
                 return item.TargetObjectID === parentItemID;
             });
+            return myComments;
+        };
+        var $commentPh = $("#viewmodalcommentareaph");
+        $commentPh.empty();
+
+        tUP.GetData("COMMENTS", function(myComments) {
             if(myComments.length > 0) {
                 myComments.sort(function(comment1, comment2) {
                     var c1 = comment1.Created;

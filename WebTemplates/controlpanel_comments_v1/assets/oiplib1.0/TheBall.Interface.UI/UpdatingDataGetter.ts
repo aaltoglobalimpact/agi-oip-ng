@@ -98,9 +98,8 @@ module TheBall.Interface.UI {
                 });
             } else {
                 var prom = this.getDataPromise(url);
-                prom.then(function() {
-                    var content = arguments;
-                    callback(content);
+                $.when(prom).then(function(content) {
+                    return callback(content);
                 });
             }
         }
@@ -119,16 +118,13 @@ module TheBall.Interface.UI {
                     return me.getDataPromise(dsObj.urlKey);
                 });
                 result = $.Deferred();
-                result.MYOBJECT = true;
-                result.done(function(args) {
-                    return rlObj.constructData(args);
-                });
                 $.when.apply($, promises).then(function() {
                     var args = arguments;
-                    result.resolve(args);
+                    var value = rlObj.constructData(args);
+                    return result.resolve(value);
                 });
             }
-            return result.promise();
+            return result;
         }
     }
 }
