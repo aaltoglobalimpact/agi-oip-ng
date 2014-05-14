@@ -369,6 +369,18 @@ div#cpOrangeTopRowSeparator{height:20px;}
     font-weight: 200;
 }
 
+.viewModal-commentAuthor-span{font-size:13px;font-weight: bold;padding-right: 10px;}
+.viewModal-commentDate-span{font-size:13px;font-weight:normal;padding-right: 10px;color: #999999; }
+.viewModal-commentDelete-a {color: #999999;}
+.viewModal-hr {color: #b0b0b0;margin-bottom:5px; margin-top: 5px;}
+.viewModal-commentDelete-a:hover {color: #0095ff;}
+.viewModal-commentTextdiv {line-height: 21px; font-size: 13px;}
+#viewModal-allCommentsDiv {padding-bottom: 30px;}
+.viewModal-textInputField {background-color: #eeeeee !important; font-size: 12px !important;line-height: 19px !important; }
+.viewModal-commentContainer, .viewModal-commentContainer p, .viewModal-commentContainer a, .viewModal-commentContainer div, .viewModal-commentContainer div div
+{line-height: 21px;font-size: 13px;}
+
+
 .lineHeight45{
     line-height: 45px;
 }

@@ -206,7 +206,12 @@
                     <div class="row">
                         <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
                     </div>
-                    <div id="viewmodalcommentareaph"></div>
+
+                    <div class="row" id="viewModalcommentarea-row">
+                        <div class="large-12 columns">
+                            <div id="viewmodalcommentareaph"></div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="large-12">
                             <br>
@@ -266,6 +271,7 @@
         <p>Using psychohistory, Seldon has discovered the declining nature of the Empire, angering the aristocratic members of the Committee of Public Safety, the de facto rulers of the Empire. The Committee considers Seldon's views and statements treasonous, and he is arrested along with young mathematician Gaal Dornick, who has arrived on Trantor to meet Seldon. Seldon is tried by the Committee and defends his beliefs, explaining his theories and predictions, including his belief that the Empire will collapse in 500 years and enter a 30,000-year dark age, to the Committee's members.</p>
     </div>
 </div>
+</div>
 </section>
 <a class="exit-off-canvas"></a>
 </div></div>
@@ -281,7 +287,7 @@
 <script src="../assets/controlpanel/js/jquery.isotope.js" type="text/javascript"></script>
 <script src="../assets/controlpanel/js/jquery.form.min.js"></script>
 <script src="../assets/controlpanel/js/redactor.min.js"></script>
-<script src="../assets/controlpanel/js/jquery.htmlClean.min.js "></script>
+<script src="../assets/controlpanel/js/jquery.htmlClean.min.js"></script>
 <script src="../assets/controlpanel/js/markdowndeep/MarkdownDeepLib.min.js"></script>
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js"></script>
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js"></script>
@@ -406,14 +412,19 @@ $(document).ready(function(){
     };
 
     var runKeyPress = function(e) {
-        if (e.keyCode == 13) {
+        var $newCommentField = $("#addNewCommentField");
+        var parentObjectID = $newCommentField.data("ParentObjectID");
+        var commentText = $newCommentField.val();
+        saveNewComment(commentText, parentObjectID);
+        alert("Your message: "+commentText);
+        return false;
+        /*if (e.keyCode == 13) {
             var $newCommentField = $("#addNewCommentField");
             var parentObjectID = $newCommentField.data("ParentObjectID");
             var commentText = $newCommentField.val();
             saveNewComment(commentText, parentObjectID);
-            return false;
-        }
-        return true;
+            return false;}
+        return true;*/
     }
 
     var deleteComment = function() {
@@ -445,28 +456,34 @@ $(document).ready(function(){
                         return 1;
                     return 0;
                 });
-                $commentPh.html("<div></div>");
+                $commentPh.append("<div id='viewModal-allCommentsDiv'></div>");
+                var $allcommentsHTML = $("#viewModal-allCommentsDiv");
                 for(var i = 0; i < myComments.length; i++) {
                     var currComment = myComments[i];
                     var commentText = currComment.CommentText;
                     var lastAuthorName = currComment.LastAuthorName;
                     var created = ParseRawTimestampToDateTimeString(currComment.Created);
                     //var lastModified = ParseRawTimestampToISOString(currComment.LastModified);
-                    var $commentLine = $("<div><span>" + lastAuthorName + "</span>"
-                        + "<span>" + created + "</span><a href='#'>Delete</a><br>"
-                        + "<div>" + commentText + "</div>"
+                    var $commentLine = $("<div class='viewModal-commentContainer'><hr class='viewModal-hr'><span class='viewModal-commentAuthor-span'>" + lastAuthorName + "</span>"
+                        + "<span class='viewModal-commentDate-span'>" + created + "</span><a href='#' class='viewModal-commentDelete-a'>Delete</a><br>"
+                        + "<div class='viewModal-commentTextdiv'>" + commentText + "</div>"
                         + "</div>");
                     var $deleteComment = $commentLine.find("a");
                     $deleteComment.data("CommentID", currComment.ID);
                     $deleteComment.data("ParentObjectID", parentItemID);
                     $deleteComment.on("click", deleteComment);
-                    $commentPh.append($commentLine);
+                    /*$commentPh.append($commentLine);*/
+                    $allcommentsHTML.append($commentLine);
                 }
+
             }
-            var $newCommentField = $('<input id="addNewCommentField" type="text">');
-            $newCommentField.data("ParentObjectID", parentItemID);
-            $newCommentField.keypress(runKeyPress);
+            /*var $newCommentField = $('<input id="addNewCommentField" placeholder="Add a comment..." class="viewModal-textInputField" type="text">');*/
+            var $newCommentField = $('<div class="row"><div class="large-12 columns"><div class="row collapse" id="viewModal-inputField+SendButton-div"><div class="small-10 columns"><input id="addNewCommentField" placeholder="Add a comment..." class="viewModal-textInputField" type="text"></div><div class="small-2 columns"><a href="#" id="viewModal-SendNewComment-Button" class="button secondary postfix">Send</a></div></div></div></div>');
+            var $commentInputField = $("#addNewCommentField");
+            $commentInputField.data("ParentObjectID", parentItemID);
+            /*$newCommentField.keypress(runKeyPress);*/
             $commentPh.append($newCommentField);
+            $("#viewModal-SendNewComment-Button").on("click",runKeyPress );
         });
     };
 
