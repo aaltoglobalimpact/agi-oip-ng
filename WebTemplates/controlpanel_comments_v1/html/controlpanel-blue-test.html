@@ -276,7 +276,7 @@
 </div>
 
 
-<script src="../assets/controlpanel/js/jquery.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="../assets/controlpanel/js/foundation.min.js"></script>
 <script src="../assets/controlpanel/js/jquery.isotope.js" type="text/javascript"></script>
 <script src="../assets/controlpanel/js/jquery.form.min.js"></script>
@@ -286,6 +286,7 @@
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js"></script>
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js"></script>
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js"></script>
+<script src="../assets/oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter.js"></script>
 <link rel="stylesheet" href="../assets/controlpanel/css/redactor.css" />
 
 
@@ -385,6 +386,7 @@ $(document).ready(function(){
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
+    var tUP = new tUI.UpdatingDataGetter();
 
     function test(){
         alert ("triggered!");
@@ -427,14 +429,22 @@ $(document).ready(function(){
         return false;
     };
 
+    var commentsRL = tUP.RegisterDataURL("COMMENTS", null,
+            [ "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json" ]);
+
     var ReConnectComments = function(parentItemID) {
-        var $commentPh = $("#viewmodalcommentareaph");
-        $commentPh.empty();
-        $.getJSON("../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json", function(allComments) {
+        commentsRL.constructData = function (allComments) {
+            allComments = allComments[0];
             var myComments = allComments.CollectionContent.filter(function(item)
             {
                 return item.TargetObjectID === parentItemID;
             });
+            return myComments;
+        };
+        var $commentPh = $("#viewmodalcommentareaph");
+        $commentPh.empty();
+
+        tUP.GetData("COMMENTS", function(myComments) {
             if(myComments.length > 0) {
                 myComments.sort(function(comment1, comment2) {
                     var c1 = comment1.Created;

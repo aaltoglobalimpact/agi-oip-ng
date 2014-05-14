@@ -7,9 +7,10 @@ var TheBall;
     (function (Interface) {
         (function (UI) {
             var ResourceLocatedObject = (function () {
-                function ResourceLocatedObject(isJSONUrl, urlKey, onUpdate, boundToElements, boundToObjects, dataSourceObjects) {
+                function ResourceLocatedObject(isJSONUrl, urlKey, constructData, onUpdate, boundToElements, boundToObjects, dataSourceObjects) {
                     this.isJSONUrl = isJSONUrl;
                     this.urlKey = urlKey;
+                    this.constructData = constructData;
                     this.onUpdate = onUpdate;
                     this.boundToElements = boundToElements;
                     this.boundToObjects = boundToObjects;
@@ -35,7 +36,7 @@ var TheBall;
                             var sourceIsJson = _this.isJSONUrl(sourceUrl);
                             if (!sourceIsJson)
                                 throw "Local source URL needs to be defined before using as source";
-                            var source = new ResourceLocatedObject(sourceIsJson, sourceUrl);
+                            var source = new ResourceLocatedObject(sourceIsJson, sourceUrl, null);
                             _this.TrackedURLDictionary[sourceUrl] = source;
                         }
                     });
@@ -49,7 +50,7 @@ var TheBall;
                     var rlObj = this.TrackedURLDictionary[url];
                     if (!rlObj) {
                         var sourceIsJson = this.isJSONUrl(url);
-                        rlObj = new ResourceLocatedObject(sourceIsJson, url);
+                        rlObj = new ResourceLocatedObject(sourceIsJson, url, null);
                         this.TrackedURLDictionary[url] = rlObj;
                     }
                     return rlObj;
@@ -68,9 +69,15 @@ var TheBall;
                 };
 
                 UpdatingDataGetter.prototype.RegisterDataURL = function (url, onUpdate, sourceUrls) {
-                    if (sourceUrls)
-                        this.registerSourceUrls(sourceUrls);
-                    var rlObj = this.getOrRegisterUrl(url);
+                    var me = this;
+                    var rlObj = me.getOrRegisterUrl(url);
+                    if (sourceUrls) {
+                        me.registerSourceUrls(sourceUrls);
+                        rlObj.dataSourceObjects = sourceUrls.map(function (sourceUrl) {
+                            return me.getOrRegisterUrl(sourceUrl);
+                        });
+                    }
+                    return rlObj;
                 };
 
                 UpdatingDataGetter.prototype.UnregisterDataUrl = function (url) {
@@ -86,7 +93,34 @@ var TheBall;
                         $.getJSON(url, function (content) {
                             callback(content);
                         });
+                    } else {
+                        var prom = this.getDataPromise(url);
+                        $.when(prom).then(function (content) {
+                            return callback(content);
+                        });
                     }
+                };
+
+                UpdatingDataGetter.prototype.getDataPromise = function (url) {
+                    var me = this;
+                    var rlObj = this.TrackedURLDictionary[url];
+                    if (!rlObj)
+                        throw "Data URL needs to be registered before getDataPromise: " + url;
+                    var result;
+                    if (rlObj.isJSONUrl) {
+                        result = $.ajax({ url: url });
+                    } else {
+                        var promises = rlObj.dataSourceObjects.map(function (dsObj) {
+                            return me.getDataPromise(dsObj.urlKey);
+                        });
+                        result = $.Deferred();
+                        $.when.apply($, promises).then(function () {
+                            var args = arguments;
+                            var value = rlObj.constructData(args);
+                            return result.resolve(value);
+                        });
+                    }
+                    return result;
                 };
                 return UpdatingDataGetter;
             })();

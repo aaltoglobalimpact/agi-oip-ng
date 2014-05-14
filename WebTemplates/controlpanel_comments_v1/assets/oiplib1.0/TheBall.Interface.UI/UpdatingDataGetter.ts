@@ -6,6 +6,7 @@
 module TheBall.Interface.UI {
     export class ResourceLocatedObject {
         constructor(public isJSONUrl:boolean, public urlKey:string,
+            public constructData : ConstructDataObject,
             public onUpdate? :UpdateDataObjectEvent[],
             public boundToElements? :JQuery[],
             public boundToObjects? :ResourceLocatedObject[],
@@ -16,12 +17,14 @@ module TheBall.Interface.UI {
             this.boundToObjects = boundToObjects || [];
             this.dataSourceObjects = dataSourceObjects || [];
         }
-
-
     }
 
     export interface UpdateDataObjectEvent {
         (objectToUpdate: ResourceLocatedObject, sourceObjects:ResourceLocatedObject[]): boolean;
+    }
+
+    export interface ConstructDataObject {
+        (args: any) : any;
     }
 
     export interface DataRetrievedEvent {
@@ -37,7 +40,7 @@ module TheBall.Interface.UI {
                     var sourceIsJson = this.isJSONUrl(sourceUrl);
                     if(!sourceIsJson)
                         throw "Local source URL needs to be defined before using as source";
-                    var source = new ResourceLocatedObject(sourceIsJson, sourceUrl);
+                    var source = new ResourceLocatedObject(sourceIsJson, sourceUrl, null);
                     this.TrackedURLDictionary[sourceUrl] = source;
                 }
             });
@@ -51,7 +54,7 @@ module TheBall.Interface.UI {
             var rlObj = this.TrackedURLDictionary[url];
             if(!rlObj) {
                 var sourceIsJson = this.isJSONUrl(url);
-                rlObj = new ResourceLocatedObject(sourceIsJson, url);
+                rlObj = new ResourceLocatedObject(sourceIsJson, url, null);
                 this.TrackedURLDictionary[url] = rlObj;
             }
             return rlObj;
@@ -68,10 +71,16 @@ module TheBall.Interface.UI {
             }
         }
 
-        RegisterDataURL(url:string, onUpdate:UpdateDataObjectEvent, sourceUrls:string[]) {
-            if(sourceUrls)
-                this.registerSourceUrls(sourceUrls);
-            var rlObj = this.getOrRegisterUrl(url);
+        RegisterDataURL(url:string, onUpdate:UpdateDataObjectEvent, sourceUrls:string[]) : ResourceLocatedObject {
+            var me = this;
+            var rlObj = me.getOrRegisterUrl(url);
+            if(sourceUrls) {
+                me.registerSourceUrls(sourceUrls);
+                rlObj.dataSourceObjects = sourceUrls.map(sourceUrl => {
+                    return me.getOrRegisterUrl(sourceUrl);
+                });
+            }
+            return rlObj;
         }
 
         UnregisterDataUrl(url:string) {
@@ -87,7 +96,35 @@ module TheBall.Interface.UI {
                 $.getJSON(url, content => {
                     callback(content);
                 });
+            } else {
+                var prom = this.getDataPromise(url);
+                $.when(prom).then(function(content) {
+                    return callback(content);
+                });
             }
+        }
+
+        getDataPromise(url:string) : JQueryPromise<any> {
+            var me = this;
+            var rlObj = this.TrackedURLDictionary[url];
+            if(!rlObj)
+                throw "Data URL needs to be registered before getDataPromise: " + url;
+            var result;
+            if(rlObj.isJSONUrl) {
+                result = $.ajax({ url: url});
+            }
+            else {
+                var promises = rlObj.dataSourceObjects.map(dsObj => {
+                    return me.getDataPromise(dsObj.urlKey);
+                });
+                result = $.Deferred();
+                $.when.apply($, promises).then(function() {
+                    var args = arguments;
+                    var value = rlObj.constructData(args);
+                    return result.resolve(value);
+                });
+            }
+            return result;
         }
     }
 }
