@@ -412,6 +412,7 @@ $(document).ready(function(){
             var $newCommentField = $("#addNewCommentField");
             var parentObjectID = $newCommentField.data("ParentObjectID");
             var commentText = $newCommentField.val();
+            alert("Your message: "+commentText+"\nParentObjectID: "+parentObjectID);
             saveNewComment(commentText, parentObjectID);
             return false;
         }
@@ -475,6 +476,7 @@ $(document).ready(function(){
             }
             var $newCommentField = $('<input id="addNewCommentField" type="text">');
             $newCommentField.data("ParentObjectID", parentItemID);
+            alert("ParentObjectID: "+parentItemID);
             $newCommentField.keypress(runKeyPress);
             $commentPh.append($newCommentField);
         });

@@ -416,7 +416,7 @@ $(document).ready(function(){
         var parentObjectID = $newCommentField.data("ParentObjectID");
         var commentText = $newCommentField.val();
         saveNewComment(commentText, parentObjectID);
-        alert("Your message: "+commentText);
+        /*alert("Your message: "+commentText+"\nParentObjectID: "+parentObjectID);*/
         return false;
         /*if (e.keyCode == 13) {
             var $newCommentField = $("#addNewCommentField");
@@ -479,10 +479,11 @@ $(document).ready(function(){
             }
             /*var $newCommentField = $('<input id="addNewCommentField" placeholder="Add a comment..." class="viewModal-textInputField" type="text">');*/
             var $newCommentField = $('<div class="row"><div class="large-12 columns"><div class="row collapse" id="viewModal-inputField+SendButton-div"><div class="small-10 columns"><input id="addNewCommentField" placeholder="Add a comment..." class="viewModal-textInputField" type="text"></div><div class="small-2 columns"><a href="#" id="viewModal-SendNewComment-Button" class="button secondary postfix">Send</a></div></div></div></div>');
+            $commentPh.append($newCommentField);
             var $commentInputField = $("#addNewCommentField");
             $commentInputField.data("ParentObjectID", parentItemID);
+            /*alert("ParentObjectID: "+parentItemID);*/
             /*$newCommentField.keypress(runKeyPress);*/
-            $commentPh.append($newCommentField);
             $("#viewModal-SendNewComment-Button").on("click",runKeyPress );
         });
     };
