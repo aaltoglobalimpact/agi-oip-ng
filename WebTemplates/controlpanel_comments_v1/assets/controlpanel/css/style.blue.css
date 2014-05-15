@@ -461,7 +461,8 @@ div.articleText,
 .content-card-line hr {width:100%;padding: 0px;margin: 0px;line-height: 1px !important;}
 
 .content-card-options a {float: left;font-size: 70%;}
-a.content-card-options-right {float: right; font-size: 70%;}
+a.content-card-options-right, span.content-card-options-right {float: right; font-size: 70%;}
+span.content-card-options-right,  span.content-card-options-right i,  span.content-card-options-right p {color:#0095FF;}
 
 h1#myHeading{
     color: white;

@@ -197,7 +197,7 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
     display:inline-block;
 }
 .vAlignMiddle{
-vertical-align: middle !important;
+    vertical-align: middle !important;
 }
 
 .content-card
@@ -263,6 +263,7 @@ vertical-align: middle !important;
 #postUpdateButton{padding-right: 10px;}
 .orangeButton
 {
+    /*background-color:#F17D1F !important;*/
     background-color:#F17D1F !important;
     border:none;
     /*margin: 10px;*/
@@ -368,6 +369,18 @@ div#cpOrangeTopRowSeparator{height:20px;}
     font-weight: 200;
 }
 
+.viewModal-commentAuthor-span{font-size:13px;font-weight: bold;padding-right: 10px;}
+.viewModal-commentDate-span{font-size:13px;font-weight:normal;padding-right: 10px;color: #999999; }
+.viewModal-commentDelete-a {color: #999999;}
+.viewModal-hr {color: #b0b0b0;margin-bottom:5px; margin-top: 5px;}
+.viewModal-commentDelete-a:hover {color: #F17D1F;}
+.viewModal-commentTextdiv {line-height: 21px; font-size: 13px;}
+#viewModal-allCommentsDiv {padding-bottom: 30px;}
+.viewModal-textInputField {background-color: #eeeeee !important; font-size: 12px !important;line-height: 19px !important; }
+.viewModal-commentContainer, .viewModal-commentContainer p, .viewModal-commentContainer a, .viewModal-commentContainer div, .viewModal-commentContainer div div
+{line-height: 21px;font-size: 13px;}
+
+
 .lineHeight45{
     line-height: 45px;
 }
@@ -387,12 +400,12 @@ div#cpOrangeTopRowSeparator{height:20px;}
     color: #F17D1F;
 }
 .content-card-spanExcerpt, .content-card-spanExcerpt p {
-     color: #585757;
-     font-size: 80%;
-     line-height: 130%;
-     padding-top:2px;
+    color: #585757;
+    font-size: 80%;
+    line-height: 130%;
+    padding-top:2px;
     overflow: hidden;
- }
+}
 
 .content-card-spanAuthor {
     color: #4a4949;
@@ -448,7 +461,8 @@ div.articleText,
 .content-card-line hr {width:100%;padding: 0px;margin: 0px;line-height: 1px !important;}
 
 .content-card-options a {float: left;font-size: 70%;}
-a.content-card-options-right {float: right; font-size: 70%;}
+a.content-card-options-right, span.content-card-options-right {float: right; font-size: 70%;}
+span.content-card-options-right,  span.content-card-options-right i,  span.content-card-options-right p {color:#F17D1F;}
 
 h1#myHeading{
     color: white;
@@ -468,10 +482,10 @@ h1#myHeading{
     /*margin-bottom: 10px;*/
 }
 
-.portfolioFilter a { 
-    margin-right: 10px; 
-	color:#666;
-	text-decoration:none;
+.portfolioFilter a {
+    margin-right: 10px;
+    color:#666;
+    text-decoration:none;
 }
 
 .portfolioFilter a.current {
@@ -489,17 +503,17 @@ h1#myHeading{
 }
 
 div.portfolioContainer.isotope {
-box-sizing:border-box;
--moz-box-sizing:border-box; /* Firefox */
-width:100%;
-float:left;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    width:100%;
+    float:left;
 }
 
 div#panel1a.content.active {
-box-sizing:border-box;
--moz-box-sizing:border-box; /* Firefox */
-width:100%;
-float:left;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    width:100%;
+    float:left;
 }
 
 div#contentPanel.content.active {
@@ -511,11 +525,11 @@ div#contentPanel.content.active {
 
 .isotope-item {
     z-index: 2;
-/*    border:1px solid #d4d4d4;
-    margin: 10px;
-    -moz-box-shadow:    10px 10px 10px #dddddd;
-    -webkit-box-shadow: 10px 10px 10px #dddddd;
-    box-shadow:         10px 10px 10px #dddddd;*/
+    /*    border:1px solid #d4d4d4;
+        margin: 10px;
+        -moz-box-shadow:    10px 10px 10px #dddddd;
+        -webkit-box-shadow: 10px 10px 10px #dddddd;
+        box-shadow:         10px 10px 10px #dddddd;*/
 }
 .isotope-hidden.isotope-item {
     pointer-events: none;
@@ -524,28 +538,28 @@ div#contentPanel.content.active {
 
 .isotope,
 .isotope .isotope-item {
-  /* change duration value to whatever you like */
-  -webkit-transition-duration: 0.8s;
-     -moz-transition-duration: 0.8s;
-      -ms-transition-duration: 0.8s;
-       -o-transition-duration: 0.8s;
-          transition-duration: 0.8s;
+    /* change duration value to whatever you like */
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
 }
 
 .isotope {
-  -webkit-transition-property: height, width;
-     -moz-transition-property: height, width;
-      -ms-transition-property: height, width;
-       -o-transition-property: height, width;
-          transition-property: height, width;
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
 }
 
 .isotope .isotope-item {
-  -webkit-transition-property: -webkit-transform, opacity;
-     -moz-transition-property:    -moz-transform, opacity;
-      -ms-transition-property:     -ms-transform, opacity;
-       -o-transition-property:      -o-transform, opacity;
-          transition-property:         transform, opacity;
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
 }
 
 /**** disabling Isotope CSS3 transitions ****/
@@ -553,11 +567,11 @@ div#contentPanel.content.active {
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {
-  -webkit-transition-duration: 0s;
-     -moz-transition-duration: 0s;
-      -ms-transition-duration: 0s;
-       -o-transition-duration: 0s;
-          transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    -moz-transition-duration: 0s;
+    -ms-transition-duration: 0s;
+    -o-transition-duration: 0s;
+    transition-duration: 0s;
 }
 @media only screen and (max-width: 64em) {
     #postUpdateButton{padding-right: 0;}
