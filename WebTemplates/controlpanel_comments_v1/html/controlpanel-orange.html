@@ -360,7 +360,18 @@ $(document).ready(function(){
                 buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
             });
 
-    $.when(get_content()).then(function(){populateWebsitesMenu_and_groupsTabTable ();start_isotope();setInterval(reLayout_isotope, 2000); console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_content()).then(function(){populateWebsitesMenu_and_groupsTabTable ();start_isotope();setInterval(reLayout_isotope, 2000);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    /*src: '../assets/images/preview.png',*/
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#postAndimportantWrapperRow").delegate("#postUpdateButton",{ click: reveal_addNewContentModal } );
     $("#contentDivContainer").delegate(".editContentButton",{ click: editContent_PopulateModal} );
     $("#contentDivContainer").delegate(".viewContentButton",{ click: viewContent } );
@@ -744,6 +755,16 @@ $(document).ready(function(){
             $("#viewContentModal-image").empty(); //clean the image Placeholder in the form
             queryValue = "<img src='"+currentImagePath+"' style='width:auto;height:auto;max-width:350;max-height:450px;margin-left:auto;margin-right:auto;'>";
             $("#viewContentModal-image").append(queryValue);
+            $('#viewContentModal-image img').each(function() {
+                $(this).error(function() {
+                    $(this).attr({
+                        src: '../assets/controlpanel/images/white.png',
+                        /*class:"hide",*/
+                        alt: 'No image'
+                    });
+                });
+                this.src = this.src;
+            });
             ReConnectComments(currentID);
             $('#viewContentModal').foundation('reveal', 'open');
         })//ends getJson

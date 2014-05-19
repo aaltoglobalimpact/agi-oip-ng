@@ -30,7 +30,7 @@
         </div> <!--Closes logoDiv-->
         <div class="small-12 medium-9 large-9 columns" id="logoLinksDiv" style="display:inline-block;">
             <div id="importantLinksDiv" style="overflow:visible !important;">
-                <div id="importantLinksDiv1"><a href="index.html"  id="importantLinks1" class="activeLinkTopNavigation">Front page</a></div>
+                <div id="importantLinksDiv1"><a href="index.html"  id="importantLinks1">Front page</a></div>
                 <div id="importantLinksDiv2"><a href="research.html"  id="importantLinks2">Research</a></div>
                 <div id="importantLinksDiv3"><a href="business.html"  id="importantLinks3">Business</a></div>
                 <div id="importantLinksDiv4"><a href="innovation.html"  id="importantLinks4">Innovation Platforms</a></div>
@@ -60,47 +60,29 @@
 </nav>
 <!-- alternative TOPBAR for mobile ********************************************* -->
 
+
 <div class="row" id="topbarDivSeparator"></div>
+<div class="row" id="topbarDivSeparator2"></div>
 
 <div class="row" id="homeContentArea">
-    <div class="small-12 medium-12 large-12 columns" style="padding:10px 0 0 0;" id="divImageCaroussel">
-        <ul class="example-orbit" data-orbit data-options="animation:fade;
-                  pause_on_hover:true;timer_speed:7000;
-                  animation_speed:500;
-                  navigation_arrows:false;
-                  bullets:false;
-                  timer:true; pause_on_hover: true; resume_on_mouseout:true;
-                  next_on_click: true;
-                  slide_number: false;">
-            <li>
-                <img class="show-for-medium-up" src="../assets/images/bannerFront.png" alt="Bringing people together." />
-                <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
-                <div class="show-for-small-only orbit-caption" style="width: 100%;">
-                    The New Global is an innovation project integrating academic research and private sector business development to jointly innovate in developing high business potential markets.
-                </div>
-            </li>
 
-            <!--<li><img src="../assets/images/bannerFront2.png" alt="The New Global.Towards a better world." />
-                &lt;!&ndash;<div class="orbit-caption">
-                    Co-creating New Partnerships for Financing Sustainable Development
-                    </div>&ndash;&gt;
-            </li>-->
-        </ul>
-    </div><!--Closes divSection1-->
 
-        <div class="small-12 medium-12 large-12 columns" style="padding-left:0;padding-right:0;" id="divSection2">
-            <div id="relatedItemsDiv" style="overflow:visible !important; padding:15px 0 15px 0; width:100%">
-                <div id="relatedItemsTitleDiv" class="relatedMenuItem" style="width: 67%;">
-                    <a href="#" id="relatedItemsTitleA">Recent posts</a></div>
-                <div id="relatedItemsSubTitleDiv" class="relatedMenuItem" style="text-align: right;width:30%;">
-                    <a href="articles.html" id="relatedItemsSubTitleA" style="font-size: 10px;">All posts>></a></div>
-            </div>
-
-            <div id="divSection2container">
-                <div id="contentDivContainer" class="contentDivContainerIsotope"></div>
-            </div>
+    <div class="small-12 medium-12 large-12 columns" id="articlesTitleSection">
+        <div id="articlesTitleDiv" style="overflow:visible !important; padding:15px 0 15px 0; width:100%">
+            <div id="leftTitleDiv" class="relatedMenuItem" style="width: 67%;">
+                <a href="#" id="leftTitleA">All posts</a></div>
+            <div id="rightTitleDiv" class="relatedMenuItem" style="text-align: right;width:30%;">
+                <a href="#" id="backrightTitleA">Back</a></div>
         </div>
-</div> <!--Closes homeContentArea-->
+    </div>
+
+
+
+    <div class="small-12 medium-12 large-12 columns" id="allarticlesIsotopeItemscontainer">
+        <div id="contentDivContainer" class="contentDivContainerIsotope"></div>
+    </div>
+</div><!--Closes contentAreaRow-->
+
 
 <div class="row" id="ModalsHolderDiv-ContentRow">
     <div id="ModalsHolderDiv-Content-about">
@@ -135,18 +117,14 @@
 </div>
 
 
-<div id="aboutPage"></div>
-
-<!--<div class="aaltoBottomBar contain-to-grid sticky topbar">-->
 <div id="bottombar">
     <div class="row">
         <div class="small-12 medium-12 large-12 columns" id="aaltoLogoDiv" style="display:inline-block; margin:auto;">
-        <div class="boldieText whiteTextColor" style="font-size:45px; padding:15px 0 0 0;display:inline-block;">A?</div>
+            <div class="boldieText whiteTextColor" style="font-size:45px; padding:15px 0 0 0;display:inline-block;">A?</div>
             <div class="boldieText whiteTextColor" style="font-size:15px; padding:15px 0 0 0;display:inline-block;">Aalto University</div>
         </div> <!--Closes logoDiv-->
     </div>
 </div>
-<!--</div>-->
 
 <script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
@@ -250,12 +228,28 @@ $(document).ready(function(){
     $.ajaxSetup({cache: true});
 
     getAndPopulate_Isotope_Filter_Categories();
-    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    src: '../assets/images/preview.png',
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#contentDivContainer").delegate(".cardClickableWrapper",{ click: viewContent } );
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
     $("#schoolsButton").click(function () { $(document).foundation('joyride', 'start');});
     $(".innovationPlatformSubmenuLink").on('click', switchSections);
+
+    $('a#backrightTitleA').click(function(){
+        parent.history.back();
+        return false;
+    });
 
 
     function switchSections (event){
@@ -432,13 +426,10 @@ $(document).ready(function(){
 
                 else
                 {
-                    /*var imgID = contentData.CollectionContent[i].ImageData.ID;
-                     var imgExtension = contentData.CollectionContent[i].ImageData.AdditionalFormatFileExt;
-                     var currentImage= "../../AaltoGlobalImpact.OIP/MediaContent/"+imgID+"_320x240_crop"+imgExtension;*/
                     currentImage = currItem.image;
                 }
 
-                user_content+="<a href='#' class='cardClickableWrapper'><img src='"+currentImage+"' alt='image' id='contentCardImage-dataID-"+currItem.id+"'/></a>";
+                user_content+="<a href='#' class='cardClickableWrapper'><img src='"+currentImage+"' id='contentCardImage-dataID-"+currItem.id+"'/></a>";
                 user_content+="<div class='content-card-fancyTag'><div class='fancyTagDiv'>"+currentMainCategory+"</div></div>";
                 user_content+="<a href='#' class='cardClickableWrapper'><div class='content-card-title' style='font-size:95%; font-weight:bold; color:#000000;' id='contentCardTitle-dataID-"+currItem.id+"'>"+currItem.title+"</div></a>";
                 user_content+="<a href='#' class='cardClickableWrapper'><div class='content-card-excerpt content-card-spanExcerpt' id='contentCardExcerpt-dataID-"+currItem.id+"'>"+currItem.excerpt+"</div></a>";
