@@ -207,7 +207,7 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
     padding: 10px;
     width:210px;
     float:left;
-    min-height:210px;
+    /*min-height:210px;*/
     overflow: hidden !important;
     border-bottom-color: #1A2228 !important;
     border-bottom-style: none !important;
@@ -396,6 +396,11 @@ div#cpOrangeTopRowSeparator{height:20px;}
     color: #7f7e7e;
 }
 
+
+.darkTextColor{
+    color: #636363;
+}
+
 .fancyTextColor{
     color: #F17D1F;
 }
@@ -475,8 +480,14 @@ h1#myHeading{
 
 }
 
+textarea.pageEditingTextArea {
+    resize: none;
+    font-size: 12px;
+}
 
-
+input.pageEditingInputField{
+    font-size: 12px;
+}
 
 .portfolioFilter {
     text-align: center;
