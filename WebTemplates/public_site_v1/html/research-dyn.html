@@ -84,7 +84,7 @@
                         <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
 
                         <div class="show-for-medium-up orbit-caption fancyTextColor">
-                            Research topics related to the <br/> New Global project
+                            Research topics related to the New Global project
                         </div>
                         <div class="show-for-small-only orbit-caption">
                             Research topics related to the New Global project
@@ -328,7 +328,18 @@ $(document).ready(function(){
     $.ajaxSetup({cache: true});
 
     getAndPopulate_Isotope_Filter_Categories();
-    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    /*src: '../assets/images/preview.png',*/
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#contentDivContainer").delegate(".cardClickableWrapper",{ click: viewContent } );
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
@@ -433,7 +444,7 @@ $(document).ready(function(){
                         currentImage = currItem.image;
                     }
 
-                    user_content+="<a href='#' class='cardClickableWrapper'><img src='"+currentImage+"' alt='image' id='contentCardImage-dataID-"+currItem.id+"'/></a>";
+                    user_content+="<a href='#' class='cardClickableWrapper'><img src='"+currentImage+"' id='contentCardImage-dataID-"+currItem.id+"'/></a>";
                     user_content+="<a href='#' class='cardClickableWrapper'><div class='content-card-title' style='font-size:95%; font-weight:bold; color:#000000;' id='contentCardTitle-dataID-"+currItem.id+"'>"+currItem.title+"</div></a>";
                     user_content+="<a href='#' class='cardClickableWrapper'><div class='content-card-excerpt content-card-spanExcerpt' id='contentCardExcerpt-dataID-"+currItem.id+"'>"+currItem.excerpt+"</div></a>";
                     /*user_content+="<div class='content-card-line'><hr></div>";*/

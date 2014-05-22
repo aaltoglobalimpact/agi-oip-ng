@@ -221,7 +221,7 @@ vertical-align: middle !important;
     width:100%;
     max-width: 240px;
     float:left;
-    min-height:210px;
+    /*min-height:210px;*/
     overflow: hidden !important;
     border-bottom-color: #1A2228 !important;
     border-bottom-style: none !important;
@@ -250,6 +250,16 @@ vertical-align: middle !important;
     width: 100%;
     /*max-width: 245px;
     height: auto;*/
+}
+
+.articleText, .articleText p, body.articleText, body .articleText,
+div.articleText,
+.articleText ul,
+.articleText ol
+{
+    font-size: 14px !important; /*(used to be 90% and line height 130%)*/
+    line-height:19px !important;
+    word-wrap: break-word !important;
 }
 
 .content-card a
