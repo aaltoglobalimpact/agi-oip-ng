@@ -1,21 +1,27 @@
 /**
 * Created by kalle on 31.5.2014.
 */
-define(["require", "exports"], function(require, exports) {
-    /// <reference path="require.d.ts" />
-    /// <reference path="../groupinfo/GroupInfoViewController.ts" />
+define(["require", "exports", "categories/CategoriesViewController"], function(require, exports, CategoriesViewController) {
     var AppMain = (function () {
         function AppMain() {
         }
         AppMain.prototype.run = function () {
-            alert("Go go");
-            var gvc = require(["groupinfo/GroupInfoViewController"], function (gvc) {
-                alert("go on!");
-                var runner = new gvc.GroupInfoViewController();
-                runner.VisibleTemplateRender();
+            require(["groupinfo/GroupInfoViewController", "categories/CategoriesViewController"], function (grpvc, catvc) {
                 alert("rock");
+
+                // View base way
+                var groupRunner = new grpvc.GroupInfoViewController();
+                groupRunner.InvisibleTemplateRender();
+                groupRunner.VisibleTemplateRender();
+
+                alert("roll");
+
+                // Alternate way
+                var catRunner = new catvc();
+                catRunner.InvisibleTemplateRender();
+                catRunner.VisibleTemplateRender();
+                alert("show must go on");
             });
-            alert("carnival!");
         };
         return AppMain;
     })();

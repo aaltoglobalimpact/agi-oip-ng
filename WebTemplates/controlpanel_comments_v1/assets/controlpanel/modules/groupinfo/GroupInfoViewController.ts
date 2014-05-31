@@ -7,7 +7,7 @@
 
 import ViewControllerBase = require("../boot/ViewControllerBase");
 
-export class GroupInfoViewController extends ViewControllerBase {
+export class GroupInfoViewController implements ViewControllerBase {
     public VisibleTemplateRender():void {
         alert("grp info view visible");
     }
