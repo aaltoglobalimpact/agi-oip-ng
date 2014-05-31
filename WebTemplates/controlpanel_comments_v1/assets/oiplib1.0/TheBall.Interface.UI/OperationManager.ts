@@ -5,7 +5,6 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="DataConnectionManager.ts" />
 
-
 module TheBall.Interface.UI {
     export class BinaryFileItem {
         constructor(public inputElement:HTMLInputElement, public file:any, public content:string) {

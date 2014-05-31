@@ -130,4 +130,3 @@ var TheBall;
     })(TheBall.Interface || (TheBall.Interface = {}));
     var Interface = TheBall.Interface;
 })(TheBall || (TheBall = {}));
-//# sourceMappingURL=UpdatingDataGetter.js.map

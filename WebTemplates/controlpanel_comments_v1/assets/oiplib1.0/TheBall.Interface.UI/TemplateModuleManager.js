@@ -5,7 +5,7 @@ var TheBall;
 (function (TheBall) {
     (function (Interface) {
         /// <reference path="jquery.d.ts" />
-        /// <reference path="DataConnectionManager.ts" />
+        /// <reference path="DataConnectionMgr.ts" />
         /// <reference path="dustjs-linkedin.d.ts" />
         (function (UI) {
             var TemplateHook = (function () {
@@ -243,4 +243,3 @@ var TheBall;
     })(TheBall.Interface || (TheBall.Interface = {}));
     var Interface = TheBall.Interface;
 })(TheBall || (TheBall = {}));
-//# sourceMappingURL=TemplateModuleManager.js.map

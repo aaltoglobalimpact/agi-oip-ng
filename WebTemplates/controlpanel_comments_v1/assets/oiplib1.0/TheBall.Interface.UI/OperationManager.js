@@ -383,4 +383,3 @@ var TheBall;
     })(TheBall.Interface || (TheBall.Interface = {}));
     var Interface = TheBall.Interface;
 })(TheBall || (TheBall = {}));
-//# sourceMappingURL=OperationManager.js.map
