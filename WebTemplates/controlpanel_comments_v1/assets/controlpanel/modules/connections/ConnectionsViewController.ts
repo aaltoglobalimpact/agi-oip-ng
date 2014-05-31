@@ -3,14 +3,15 @@
  */
 
 import ViewControllerBase = require("../ViewControllerBase");
+import IViewController = require("../IViewController");
 
-class ConnectionsViewController implements ViewControllerBase {
+class ConnectionsViewController extends ViewControllerBase implements IViewController {
     VisibleTemplateRender():void {
-        alert("Connections view ctrl visible render");
+        alert("Connections view ctrl visible render: " + this.divID);
     }
 
     InvisibleTemplateRender():void {
-        alert("Connections view ctrl invisible render");
+        alert("Connections view ctrl invisible render: " + this.divID);
     }
 
 }
