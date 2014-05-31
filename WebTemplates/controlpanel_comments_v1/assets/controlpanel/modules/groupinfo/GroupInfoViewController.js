@@ -14,5 +14,7 @@ define(["require", "exports"], function(require, exports) {
         };
         return GroupInfoViewController;
     })();
-    exports.GroupInfoViewController = GroupInfoViewController;
+
+    
+    return GroupInfoViewController;
 });
