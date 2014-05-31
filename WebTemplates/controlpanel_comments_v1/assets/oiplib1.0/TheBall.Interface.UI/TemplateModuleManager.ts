@@ -4,7 +4,7 @@
 
 
 /// <reference path="jquery.d.ts" />
-/// <reference path="DataConnectionMgr.ts" />
+/// <reference path="DataConnectionManager.ts" />
 /// <reference path="dustjs-linkedin.d.ts" />
 
 module TheBall.Interface.UI {
