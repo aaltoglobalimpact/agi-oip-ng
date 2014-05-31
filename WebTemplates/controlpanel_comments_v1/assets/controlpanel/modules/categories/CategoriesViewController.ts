@@ -3,9 +3,8 @@
  */
 
 import ViewControllerBase = require("../ViewControllerBase");
-import IViewController = require("../IViewController");
 
-class CategoriesViewController extends ViewControllerBase implements IViewController {
+class CategoriesViewController extends ViewControllerBase {
     public VisibleTemplateRender():void {
         alert("categories visible renderer: " + this.divID);
     }

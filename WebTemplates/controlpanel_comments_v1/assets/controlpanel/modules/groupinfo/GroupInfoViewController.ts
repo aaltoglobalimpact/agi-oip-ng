@@ -3,9 +3,8 @@
  */
 
 import ViewControllerBase = require("../ViewControllerBase");
-import IViewController = require("../IViewController");
 
-class GroupInfoViewController extends ViewControllerBase implements IViewController {
+class GroupInfoViewController extends ViewControllerBase {
 
     public VisibleTemplateRender():void {
         alert("grp info view visible: " + this.divID);

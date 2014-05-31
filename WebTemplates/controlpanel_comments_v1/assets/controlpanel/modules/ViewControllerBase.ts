@@ -4,8 +4,12 @@
 
 import IViewController = require("IViewController");
 
-class ViewControllerBase {
-    public CurrentController:IViewController;
+class ViewControllerBase implements IViewController{
+    VisibleTemplateRender():void {
+    }
+
+    InvisibleTemplateRender():void {
+    }
     constructor(public divID:string) {
     }
 }

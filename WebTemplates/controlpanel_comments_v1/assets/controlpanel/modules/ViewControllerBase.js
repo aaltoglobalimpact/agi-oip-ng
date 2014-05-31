@@ -6,6 +6,11 @@ define(["require", "exports"], function(require, exports) {
         function ViewControllerBase(divID) {
             this.divID = divID;
         }
+        ViewControllerBase.prototype.VisibleTemplateRender = function () {
+        };
+
+        ViewControllerBase.prototype.InvisibleTemplateRender = function () {
+        };
         return ViewControllerBase;
     })();
 
