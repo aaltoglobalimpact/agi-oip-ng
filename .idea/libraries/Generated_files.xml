@@ -2,23 +2,25 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
-        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManagr.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/main.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/ViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/groupinfo/GroupInfoViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/config.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
-      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/main.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/ViewControllerBase.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/groupinfo/GroupInfoViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/config.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
     </CLASSES>
     <SOURCES />
   </library>
