@@ -2,7 +2,7 @@
  * Created by kalle on 31.5.2014.
  */
 
-import ViewControllerBase = require("../boot/ViewControllerBase");
+import ViewControllerBase = require("../ViewControllerBase");
 
 class ConnectionsViewController implements ViewControllerBase {
     VisibleTemplateRender():void {

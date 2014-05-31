@@ -2,10 +2,10 @@
  * Created by kalle on 31.5.2014.
  */
 
-/// <reference path="../boot/ViewControllerBase.ts" />
+/// <reference path="../ViewControllerBase.ts" />
 
 
-import ViewControllerBase = require("../boot/ViewControllerBase");
+import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupInfoViewController implements ViewControllerBase {
     public VisibleTemplateRender():void {

@@ -5,11 +5,11 @@
 /// <reference path="require.d.ts" />
 
 import ViewControllerBase = require("ViewControllerBase");
-import CategoriesViewController = require("../categories/CategoriesViewController");
+import CategoriesViewController = require("categories/CategoriesViewController");
 
 export class AppMain  {
     run() {
-        require(["../groupinfo/GroupInfoViewController", "../categories/CategoriesViewController"], (grpvc,catvc) => {
+        require(["groupinfo/GroupInfoViewController", "categories/CategoriesViewController"], (grpvc,catvc) => {
             alert("rock");
             // View base way
             var groupRunner:ViewControllerBase = new grpvc();
@@ -23,7 +23,7 @@ export class AppMain  {
             catRunner.VisibleTemplateRender();
             alert("show must go on");
         });
-        require(["../connections/ConnectionsViewController"], (convc)=> {
+        require(["connections/ConnectionsViewController"], (convc)=> {
             var connVC:ViewControllerBase = new convc();
             connVC.InvisibleTemplateRender();
             connVC.VisibleTemplateRender();
