@@ -1,0 +1,1 @@
+(function(){dust.register("GroupInfo.dust",body_0);function body_0(chk,ctx){return chk.write("divkala");}return body_0;})();

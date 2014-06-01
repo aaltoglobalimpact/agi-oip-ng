@@ -14,11 +14,16 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         GroupInfoViewController.prototype.VisibleTemplateRender = function () {
-            alert("grp info view visible: " + this.divID);
+            require(["groupinfo/GroupInfo_dust"], function (template) {
+                dust.render("GroupInfo.dust", {}, function (error, output) {
+                    alert("rendering...");
+                    alert(output);
+                    alert("rendered");
+                });
+            });
         };
 
         GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
-            alert("grp info view invisible: " + this.divID);
         };
         return GroupInfoViewController;
     })(ViewControllerBase);
