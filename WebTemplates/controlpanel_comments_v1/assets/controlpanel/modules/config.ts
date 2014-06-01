@@ -1,13 +1,16 @@
 /**
-* Created by kalle on 31.5.2014.
-*/
-/// <reference path="../require.d.ts" />
+ * Created by kalle on 31.5.2014.
+ */
+
+/// <reference path="require.d.ts" />
+
 require.config({
     "baseUrl": "../assets/controlpanel/modules/",
     "paths": {
+        /*
+         "underscore": "//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min",
+         "dust": "//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min",
         "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min",
-        "underscore": "//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min",
-        "dust": "//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min",
         "foundation": "../js/foundation.min",
         "jqueryisotope": "../js/jquery.isotope",
         "jqueryform": "../js/jquery.form.min",
@@ -18,24 +21,33 @@ require.config({
         "dataconnectionmanager": "../../oiplib1.0/TheBall.Interface.UI/DataConnectionManager",
         "operationmanager": "../../oiplib1.0/TheBall.Interface.UI/OperationManager",
         "updatingdatagetter": "../../oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter"
+        */
+        //"main": "boot/main"
     },
     shim: {
+        /*
+        underscore: {
+            exports: "_"
+        },
+        dust: {
+            exports: "dust"
+        }
         jquery: {
             exports: "$"
         },
-        jqueryform: ["jquery"],
-        jqueryclean: ["jquery"],
+        jqueryform:["jquery"],
+        jqueryclean:["jquery"],
         underscore: {
             exports: "_"
         },
         dust: {
             exports: "dust"
         },
-        jqueryisotope: ["jquery"],
-        redactor: [],
-        markdowndeep: [],
+        jqueryisotope:["jquery"],
+        redactor:[],
+        markdowndeep:[],
         dataconnectionmanager: {
-            deps: ["jquery"],
+            deps:["jquery"],
             exports: "TheBall.Interface.UI"
         },
         templatemodulemanager: {
@@ -44,11 +56,19 @@ require.config({
         operationmanager: {
             deps: ["dataconnectionmanager", "jquery"]
         },
-        updatingdatagetter: ["jquery"]
+        updatingdatagetter:["jquery"]
+        */
     }
+
+    /*,
+     backbone: {
+     deps: ['underscore', 'jquery'],
+     exports: 'Backbone'
+     }*/
+
 });
 
-require(["main", "jquery", "underscore", "dust"], function (main, $, _, dust) {
+require(["main" ], (main) => {
     var app = new main.AppMain();
     app.run();
 });

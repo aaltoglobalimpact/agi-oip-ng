@@ -25,7 +25,7 @@
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/categories/CategoriesViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js" />
-      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/boot/config.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/config.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js" />
     </CLASSES>
     <SOURCES />

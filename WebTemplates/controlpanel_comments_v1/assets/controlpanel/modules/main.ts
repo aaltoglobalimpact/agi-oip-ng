@@ -3,6 +3,7 @@
  */
 
 /// <reference path="require.d.ts" />
+/// <reference path="lodash.d.ts" />
 
 //import ViewControllerBase = require("ViewControllerBase");
 import IViewController = require("IViewController");
@@ -10,6 +11,13 @@ import CategoriesViewController = require("categories/CategoriesViewController")
 
 export class AppMain  {
     run() {
+        var o1 = {"kala": "pulla"};
+        var o2 = {kana: { patee:true }, "kala": "pulla"};
+        var o3 = {"kala": "pulla", kana: { patee:true }};
+        var result = _.isEqual(o2, o3);
+        alert(result.toString() + "zzy");
+        // Some tests below... not used for the time being
+        /*
         require(["groupinfo/GroupInfoViewController", "categories/CategoriesViewController"], (grpvc,catvc) => {
             alert("rock");
             // View base way
@@ -29,6 +37,7 @@ export class AppMain  {
             connVC.InvisibleTemplateRender();
             connVC.VisibleTemplateRender();
         });
+        */
     }
 }
 
