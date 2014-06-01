@@ -13,9 +13,7 @@ class GroupInfoViewController extends ViewControllerBase {
         require(["groupinfo/GroupInfo_dust"], (template) => {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
-                alert("rendering...");
                 alert(output);
-                alert("rendered");
             });
         });
     }

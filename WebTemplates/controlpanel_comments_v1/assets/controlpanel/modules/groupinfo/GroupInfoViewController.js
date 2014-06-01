@@ -16,9 +16,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         GroupInfoViewController.prototype.VisibleTemplateRender = function () {
             require(["groupinfo/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
-                    alert("rendering...");
                     alert(output);
-                    alert("rendered");
                 });
             });
         };

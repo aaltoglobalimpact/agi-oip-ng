@@ -14,11 +14,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         CategoriesViewController.prototype.VisibleTemplateRender = function () {
-            alert("categories visible renderer: " + this.divID);
+            // alert("categories visible renderer: " + this.divID);
         };
 
         CategoriesViewController.prototype.InvisibleTemplateRender = function () {
-            alert("categories invisible renderer" + this.divID);
+            // alert("categories invisible renderer" + this.divID);
         };
         return CategoriesViewController;
     })(ViewControllerBase);

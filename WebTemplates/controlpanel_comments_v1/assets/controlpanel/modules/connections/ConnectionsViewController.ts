@@ -6,11 +6,11 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class ConnectionsViewController extends ViewControllerBase {
     VisibleTemplateRender():void {
-        alert("Connections view ctrl visible render: " + this.divID);
+        //alert("Connections view ctrl visible render: " + this.divID);
     }
 
     InvisibleTemplateRender():void {
-        alert("Connections view ctrl invisible render: " + this.divID);
+        //alert("Connections view ctrl invisible render: " + this.divID);
     }
 
 }

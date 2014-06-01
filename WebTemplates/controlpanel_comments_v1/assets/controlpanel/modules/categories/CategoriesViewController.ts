@@ -6,11 +6,11 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class CategoriesViewController extends ViewControllerBase {
     public VisibleTemplateRender():void {
-        alert("categories visible renderer: " + this.divID);
+        // alert("categories visible renderer: " + this.divID);
     }
 
     public InvisibleTemplateRender():void {
-        alert("categories invisible renderer" + this.divID);
+        // alert("categories invisible renderer" + this.divID);
     }
 }
 

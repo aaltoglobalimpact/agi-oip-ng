@@ -14,11 +14,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         ConnectionsViewController.prototype.VisibleTemplateRender = function () {
-            alert("Connections view ctrl visible render: " + this.divID);
+            //alert("Connections view ctrl visible render: " + this.divID);
         };
 
         ConnectionsViewController.prototype.InvisibleTemplateRender = function () {
-            alert("Connections view ctrl invisible render: " + this.divID);
+            //alert("Connections view ctrl invisible render: " + this.divID);
         };
         return ConnectionsViewController;
     })(ViewControllerBase);
