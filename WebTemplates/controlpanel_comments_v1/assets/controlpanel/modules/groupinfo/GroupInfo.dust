@@ -23,7 +23,7 @@
         <!-- end group profile image and group icon image -->
         <div class="control-group">
             <label class="control-label">Group name</label>
-            <div class="controls"><input name="GroupName" type="text" value="Workspace Dev May 2014 TEST"></div>
+            <div class="controls"><input name="GroupName" type="text" value=""></div>
         </div>
         <div class="control-group">
             <label class="control-label">Description</label>

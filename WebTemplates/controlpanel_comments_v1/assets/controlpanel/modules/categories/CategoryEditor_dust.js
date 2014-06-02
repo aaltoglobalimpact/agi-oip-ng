@@ -1,0 +1,1 @@
+(function(){dust.register("CategoryEditor.dust",body_0);function body_0(chk,ctx){return chk.write("<h3>Manage Categories</h3><p>Category editor controllerview placeholder</p>");}return body_0;})();

@@ -14,7 +14,17 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         CategoriesViewController.prototype.VisibleTemplateRender = function () {
-            // alert("categories visible renderer: " + this.divID);
+            var _this = this;
+            require(["categories/CategoryEditor_dust"], function (template) {
+                dust.render("CategoryEditor.dust", {}, function (error, output) {
+                    var $hostDiv = $("#" + _this.divID);
+
+                    //alert(this.divID);
+                    //alert(output);
+                    //alert(_.isEqual(1,1).toString() + "lodashed...");
+                    $hostDiv.html(output);
+                });
+            });
         };
 
         CategoriesViewController.prototype.InvisibleTemplateRender = function () {
