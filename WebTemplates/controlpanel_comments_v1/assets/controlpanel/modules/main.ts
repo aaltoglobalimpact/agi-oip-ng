@@ -7,7 +7,7 @@
 
 //import ViewControllerBase = require("ViewControllerBase");
 import IViewController = require("IViewController");
-import CategoriesViewController = require("categories/CategoriesViewController");
+import CategoriesViewController = require("CategoryView/CategoryViewController");
 
 export class AppMain  {
     run() {
@@ -20,7 +20,7 @@ export class AppMain  {
          alert(result.toString() + "zzy");
 
 
-        require(["groupinfo/GroupInfoViewController", "categories/CategoriesViewController"], (grpvc,catvc) => {
+        require(["groupinfo/GroupInfoViewController", "categories/CategoryViewController"], (grpvc,catvc) => {
             alert("rock");
             // View base way
             var groupRunner:IViewController = new grpvc("testiID");
@@ -29,12 +29,12 @@ export class AppMain  {
 
             alert("roll");
             // Alternate way
-            var catRunner:CategoriesViewController = new catvc("testiID");
+            var catRunner:CategoryViewController = new catvc("testiID");
             catRunner.InvisibleTemplateRender();
             catRunner.VisibleTemplateRender();
             alert("show must go on");
         });
-        require(["connections/ConnectionsViewController"], (convc)=> {
+        require(["connections/ConnectionViewController"], (convc)=> {
             var connVC:IViewController = new convc("testiID");
             connVC.InvisibleTemplateRender();
             connVC.VisibleTemplateRender();

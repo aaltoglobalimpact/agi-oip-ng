@@ -670,13 +670,13 @@
             }
     );
 
-    require(["groupinfo/GroupInfoViewController"], function(gvcClass) {
+    require(["GroupInfoView/GroupInfoViewController"], function(gvcClass) {
         var gvc = new gvcClass("groupsSection");
         gvc.VisibleTemplateRender();
     });
-    require(["categories/CategoriesViewController"], function(gvcClass) {
-        var gvc = new gvcClass("categoriesSection");
-        gvc.VisibleTemplateRender();
+    require(["CategoryView/CategoryViewController"], function(vcClass) {
+        var vc = new vcClass("categoriesSection");
+        vc.VisibleTemplateRender();
     });
 
 </script>

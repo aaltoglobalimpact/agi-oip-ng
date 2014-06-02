@@ -8,15 +8,15 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var CategoriesViewController = (function (_super) {
-        __extends(CategoriesViewController, _super);
-        function CategoriesViewController() {
+    var GroupInfoViewController = (function (_super) {
+        __extends(GroupInfoViewController, _super);
+        function GroupInfoViewController() {
             _super.apply(this, arguments);
         }
-        CategoriesViewController.prototype.VisibleTemplateRender = function () {
+        GroupInfoViewController.prototype.VisibleTemplateRender = function () {
             var _this = this;
-            require(["categories/CategoryEditor_dust"], function (template) {
-                dust.render("CategoryEditor.dust", {}, function (error, output) {
+            require(["GroupInfoView/GroupInfo_dust"], function (template) {
+                dust.render("GroupInfo.dust", {}, function (error, output) {
                     var $hostDiv = $("#" + _this.divID);
 
                     //alert(this.divID);
@@ -27,12 +27,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
-        CategoriesViewController.prototype.InvisibleTemplateRender = function () {
-            // alert("categories invisible renderer" + this.divID);
+        GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
         };
-        return CategoriesViewController;
+        return GroupInfoViewController;
     })(ViewControllerBase);
 
     
-    return CategoriesViewController;
+    return GroupInfoViewController;
 });

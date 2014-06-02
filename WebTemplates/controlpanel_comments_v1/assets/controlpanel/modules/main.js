@@ -1,7 +1,7 @@
 /**
 * Created by kalle on 31.5.2014.
 */
-define(["require", "exports", "categories/CategoriesViewController"], function(require, exports, CategoriesViewController) {
+define(["require", "exports", "CategoryView/CategoryViewController"], function(require, exports, CategoriesViewController) {
     var AppMain = (function () {
         function AppMain() {
         }
@@ -15,7 +15,7 @@ define(["require", "exports", "categories/CategoriesViewController"], function(r
             alert(result.toString() + "zzy");
             
             
-            require(["groupinfo/GroupInfoViewController", "categories/CategoriesViewController"], (grpvc,catvc) => {
+            require(["groupinfo/GroupInfoViewController", "categories/CategoryViewController"], (grpvc,catvc) => {
             alert("rock");
             // View base way
             var groupRunner:IViewController = new grpvc("testiID");
@@ -24,12 +24,12 @@ define(["require", "exports", "categories/CategoriesViewController"], function(r
             
             alert("roll");
             // Alternate way
-            var catRunner:CategoriesViewController = new catvc("testiID");
+            var catRunner:CategoryViewController = new catvc("testiID");
             catRunner.InvisibleTemplateRender();
             catRunner.VisibleTemplateRender();
             alert("show must go on");
             });
-            require(["connections/ConnectionsViewController"], (convc)=> {
+            require(["connections/ConnectionViewController"], (convc)=> {
             var connVC:IViewController = new convc("testiID");
             connVC.InvisibleTemplateRender();
             connVC.VisibleTemplateRender();

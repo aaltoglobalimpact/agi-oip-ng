@@ -4,7 +4,7 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class ConnectionsViewController extends ViewControllerBase {
+class ConnectionViewController extends ViewControllerBase {
     VisibleTemplateRender():void {
         //alert("Connections view ctrl visible render: " + this.divID);
     }
@@ -15,4 +15,4 @@ class ConnectionsViewController extends ViewControllerBase {
 
 }
 
-export = ConnectionsViewController;
+export = ConnectionViewController;

@@ -8,21 +8,21 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var ConnectionsViewController = (function (_super) {
-        __extends(ConnectionsViewController, _super);
-        function ConnectionsViewController() {
+    var ConnectionViewController = (function (_super) {
+        __extends(ConnectionViewController, _super);
+        function ConnectionViewController() {
             _super.apply(this, arguments);
         }
-        ConnectionsViewController.prototype.VisibleTemplateRender = function () {
+        ConnectionViewController.prototype.VisibleTemplateRender = function () {
             //alert("Connections view ctrl visible render: " + this.divID);
         };
 
-        ConnectionsViewController.prototype.InvisibleTemplateRender = function () {
+        ConnectionViewController.prototype.InvisibleTemplateRender = function () {
             //alert("Connections view ctrl invisible render: " + this.divID);
         };
-        return ConnectionsViewController;
+        return ConnectionViewController;
     })(ViewControllerBase);
 
     
-    return ConnectionsViewController;
+    return ConnectionViewController;
 });

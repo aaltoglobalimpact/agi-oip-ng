@@ -9,9 +9,9 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class CategoriesViewController extends ViewControllerBase {
+class CategoryViewController extends ViewControllerBase {
     public VisibleTemplateRender():void {
-        require(["categories/CategoryEditor_dust"], (template) => {
+        require(["CategoryView/CategoryEditor_dust"], (template) => {
             dust.render("CategoryEditor.dust", {
             }, (error, output) =>  {
                 var $hostDiv = $("#" + this.divID);
@@ -28,4 +28,4 @@ class CategoriesViewController extends ViewControllerBase {
     }
 }
 
-export = CategoriesViewController;
+export = CategoryViewController;

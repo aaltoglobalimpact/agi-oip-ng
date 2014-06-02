@@ -13,7 +13,7 @@ import ViewControllerBase = require("../ViewControllerBase");
 class GroupInfoViewController extends ViewControllerBase {
 
     public VisibleTemplateRender():void {
-        require(["groupinfo/GroupInfo_dust"], (template) => {
+        require(["GroupInfoView/GroupInfo_dust"], (template) => {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
                 var $hostDiv = $("#" + this.divID);
