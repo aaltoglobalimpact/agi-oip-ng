@@ -13,6 +13,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function GroupInfoViewController() {
             _super.apply(this, arguments);
         }
+        GroupInfoViewController.prototype.Initialize = function (dataUrl) {
+        };
+
         GroupInfoViewController.prototype.VisibleTemplateRender = function () {
             var _this = this;
             require(["GroupInfoView/GroupInfo_dust"], function (template) {

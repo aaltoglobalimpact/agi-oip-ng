@@ -25,11 +25,15 @@
     <script src="../assets/controlpanel/js/jquery.htmlClean.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min.js"></script>
+    <script src="../assets/controlpanel/modules/lib/jquery-nestable/jquery.nestable.js"></script>
+    <link rel="stylesheet" href="../assets/controlpanel/modules/lib/jquery-nestable/jquery-nestable.css" />
 
     <script src="../assets/controlpanel/js/markdowndeep/MarkdownDeepLib.min.js"></script>
     <script src="../assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js"></script>
     <script src="../assets/oiplib1.0/TheBall.Interface.UI/DataConnectionManager.js"></script>
     <script src="../assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js"></script>
+    <script src="../assets/oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter.js"></script>
+    <script src="../assets/controlpanel/modules/ModuleCustomGlue.js"></script>
     <script data-main="../assets/controlpanel/modules/config" type="text/javascript" src="../assets/controlpanel/modules/require.js"></script>
 </head>
 <body>
@@ -670,12 +674,30 @@
             }
     );
 
-    require(["GroupInfoView/GroupInfoViewController"], function(gvcClass) {
-        var gvc = new gvcClass("groupsSection");
-        gvc.VisibleTemplateRender();
+
+    var tUI = TheBall.Interface.UI;
+    var tDCM = new tUI.DataConnectionManager();
+    var tOP = new tUI.OperationManager(tDCM);
+    var tUDG = new tUI.UpdatingDataGetter();
+
+    tUDG.RegisterDataURL("CATEGORYTREE", function(args) {
+        var nodeSummaryContainer = args[0];
+        var categoriesWithChildren = AppScripts.Common.ConvertCategoriesFromParentToChildren(nodeSummaryContainer.NodeSourceCategories.CollectionContent);
+        return { CategoriesWithChildren: categoriesWithChildren};
+    }, [ "../../AaltoGlobalImpact.OIP/NodeSummaryContainer/default.json" ]);
+
+    tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/GroupContainer/default.json", function(args) {
+        alert("Kau!");
+    });
+
+    require(["GroupInfoView/GroupInfoViewController"], function(vcClass) {
+        var vc = new vcClass("groupsSection", tOP, tUDG);
+        vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
+        vc.VisibleTemplateRender();
     });
     require(["CategoryView/CategoryViewController"], function(vcClass) {
-        var vc = new vcClass("categoriesSection");
+        var vc = new vcClass("categoriesSection", tOP, tUDG);
+        vc.Initialize("CATEGORYTREE");
         vc.VisibleTemplateRender();
     });
 
@@ -767,9 +789,6 @@ $(document).ready(function(){
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
     $("#create-group-button").click(function () {$('#create-group-modal').foundation('reveal', 'open');});
 
-    var tUI = TheBall.Interface.UI;
-    var tDCM = new tUI.DataConnectionManager();
-    var tOP = new tUI.OperationManager(tDCM);
 
     function test(){
         alert ("triggered!");

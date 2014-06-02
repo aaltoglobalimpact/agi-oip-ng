@@ -5,12 +5,15 @@
 /// <reference path="../require.d.ts" />
 /// <reference path="../dustjs-linkedin.d.ts" />
 /// <reference path="../lodash.d.ts" />
-/// <reference path="../jquery.d.ts" />
 
 
 import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupInfoViewController extends ViewControllerBase {
+
+    public Initialize(dataUrl:string):void {
+
+    }
 
     public VisibleTemplateRender():void {
         require(["GroupInfoView/GroupInfo_dust"], (template) => {

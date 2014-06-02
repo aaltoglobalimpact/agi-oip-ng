@@ -13,6 +13,21 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function CategoryViewController() {
             _super.apply(this, arguments);
         }
+        CategoryViewController.prototype.Initialize = function (dataUrl) {
+            var _this = this;
+            require([
+                "CategoryView/category_treeeditor_dust",
+                "CategoryView/category_treeitem_dust",
+                "CategoryView/objectdeleteicon_dust"], function (template1, template2) {
+                _this.currUDG.GetData(dataUrl, function (callBackData) {
+                    dust.render("category_treeeditor.dust", callBackData, function (error, output) {
+                        var $hostDiv = $("#" + _this.divID);
+                        $hostDiv.html(output);
+                    });
+                });
+            });
+        };
+
         CategoryViewController.prototype.VisibleTemplateRender = function () {
             var _this = this;
             require(["CategoryView/CategoryEditor_dust"], function (template) {

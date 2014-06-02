@@ -139,16 +139,18 @@ var TheBall;
                     $form.submit();
                     $form.empty();
                 };
-                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject) {
+                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, callBack) {
                     var jsonData = JSON.stringify(contentObject);
+                    if (!callBack)
+                        callBack = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         url: "?operation=" + operationFullName,
                         dataType: "json",
                         contentType: "application/json",
                         data: jsonData,
-                        success: function () {
-                        },
+                        success: callBack,
                         error: function () {
                         }
                     });
