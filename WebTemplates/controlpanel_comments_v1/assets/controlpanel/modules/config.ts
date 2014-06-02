@@ -7,9 +7,9 @@
 require.config({
     "baseUrl": "../assets/controlpanel/modules/",
     "paths": {
+        /*
         "dust": "//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min",
          "underscore": "//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min"
-        /*
          "dust": "//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min",
         "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min",
         "foundation": "../js/foundation.min",
@@ -26,13 +26,13 @@ require.config({
         //"main": "boot/main"
     },
     shim: {
+        /*,
         "dust": {
             exports: "dust"
         },
         "underscore": {
             exports: "_"
         }
-        /*,
         dust: {
             exports: "dust"
         }
@@ -72,7 +72,7 @@ require.config({
 
 });
 
-require(["main", "underscore", "dust" ], (main) => {
+require(["main" ], (main) => {
     var app = new main.AppMain();
     app.run();
 });

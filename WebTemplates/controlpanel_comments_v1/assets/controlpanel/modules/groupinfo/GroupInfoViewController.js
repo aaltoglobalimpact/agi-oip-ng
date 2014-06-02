@@ -14,10 +14,15 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         GroupInfoViewController.prototype.VisibleTemplateRender = function () {
+            var _this = this;
             require(["groupinfo/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
-                    alert(output);
-                    alert(_.isEqual(1, 1).toString() + "lodashed...");
+                    var $hostDiv = $("#" + _this.divID);
+
+                    //alert(this.divID);
+                    //alert(output);
+                    //alert(_.isEqual(1,1).toString() + "lodashed...");
+                    $hostDiv.html(output);
                 });
             });
         };

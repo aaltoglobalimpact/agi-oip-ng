@@ -5,6 +5,8 @@
 /// <reference path="../require.d.ts" />
 /// <reference path="../dustjs-linkedin.d.ts" />
 /// <reference path="../lodash.d.ts" />
+/// <reference path="../jquery.d.ts" />
+
 
 import ViewControllerBase = require("../ViewControllerBase");
 
@@ -14,8 +16,11 @@ class GroupInfoViewController extends ViewControllerBase {
         require(["groupinfo/GroupInfo_dust"], (template) => {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
-                alert(output);
-                alert(_.isEqual(1,1).toString() + "lodashed...");
+                var $hostDiv = $("#" + this.divID);
+                //alert(this.divID);
+                //alert(output);
+                //alert(_.isEqual(1,1).toString() + "lodashed...");
+                $hostDiv.html(output);
             });
         });
     }
