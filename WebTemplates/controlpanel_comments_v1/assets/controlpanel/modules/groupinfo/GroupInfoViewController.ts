@@ -4,6 +4,7 @@
 
 /// <reference path="../require.d.ts" />
 /// <reference path="../dustjs-linkedin.d.ts" />
+/// <reference path="../lodash.d.ts" />
 
 import ViewControllerBase = require("../ViewControllerBase");
 
@@ -14,6 +15,7 @@ class GroupInfoViewController extends ViewControllerBase {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
                 alert(output);
+                alert(_.isEqual(1,1).toString() + "lodashed...");
             });
         });
     }

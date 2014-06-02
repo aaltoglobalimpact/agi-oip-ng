@@ -17,6 +17,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             require(["groupinfo/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
                     alert(output);
+                    alert(_.isEqual(1, 1).toString() + "lodashed...");
                 });
             });
         };
