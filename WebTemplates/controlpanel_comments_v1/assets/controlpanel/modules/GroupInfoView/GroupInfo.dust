@@ -23,7 +23,7 @@
         <!-- end group profile image and group icon image -->
         <div class="control-group">
             <label class="control-label">Group name</label>
-            <div class="controls"><input name="GroupName" type="text" value=""></div>
+            <div class="controls"><input name="GroupName" type="text"></div>
         </div>
         <div class="control-group">
             <label class="control-label">Description</label>
@@ -50,10 +50,7 @@
             <div class="control-group controls pull-right">
                 <div class="form-actions"
                      style="margin: 0px; padding: 0px; border-top-color: currentColor; border-top-width: 0px; border-top-style: none; background-color: transparent;">
-                    <button name="btnCancel" class="btn" value="true">Cancel</button>
-                    <button name="RootSourceAction" class="btn btn-primary" id="RootSourceAction" type="submit"
-                            value="Save">Save changes
-                    </button>
+                    <button class="btn btn-primary oip-controller-command" data-oip-command="Save" type="submit">Save changes</button>
                 </div>
             </div>
         </footer>

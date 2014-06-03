@@ -39,6 +39,14 @@ class ViewControllerBase implements IViewController{
         throw "InvisibleTemplateRender not implemented";
     }
 
+    handleEvent($source, eventName, eventData):void {
+        var commandName = $source.data("oip-command");
+        var commandFunction = this[commandName];
+        if(!_.isFunction(commandFunction))
+            throw "Controller's command function not implemented: " + commandName;
+        commandFunction();
+    }
+
     constructor(public divID:string, public currOPM:TheBall.Interface.UI.OperationManager,
         public currUDG:TheBall.Interface.UI.UpdatingDataGetter) {
     }

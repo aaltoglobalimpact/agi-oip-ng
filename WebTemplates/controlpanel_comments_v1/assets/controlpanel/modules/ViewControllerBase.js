@@ -36,6 +36,14 @@ define(["require", "exports"], function(require, exports) {
         ViewControllerBase.prototype.InvisibleTemplateRender = function () {
             throw "InvisibleTemplateRender not implemented";
         };
+
+        ViewControllerBase.prototype.handleEvent = function ($source, eventName, eventData) {
+            var commandName = $source.data("oip-command");
+            var commandFunction = this[commandName];
+            if (!_.isFunction(commandFunction))
+                throw "Controller's command function not implemented: " + commandName;
+            commandFunction();
+        };
         return ViewControllerBase;
     })();
 

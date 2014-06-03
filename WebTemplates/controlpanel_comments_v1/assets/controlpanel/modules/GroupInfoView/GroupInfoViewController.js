@@ -14,23 +14,33 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         GroupInfoViewController.prototype.Initialize = function (dataUrl) {
-        };
-
-        GroupInfoViewController.prototype.VisibleTemplateRender = function () {
-            var _this = this;
+            this.dataUrl = dataUrl;
+            var $hostDiv = $("#" + this.divID);
+            $hostDiv.addClass("oip-controller-root");
+            $hostDiv.data("oip-controller", this);
+            var me = this;
+            $hostDiv.on("click", ".oip-controller-command", function (event) {
+                me.handleEvent($(this), "click", event);
+            });
             require(["GroupInfoView/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
-                    var $hostDiv = $("#" + _this.divID);
-
-                    //alert(this.divID);
-                    //alert(output);
-                    //alert(_.isEqual(1,1).toString() + "lodashed...");
                     $hostDiv.html(output);
                 });
             });
         };
 
+        GroupInfoViewController.prototype.VisibleTemplateRender = function () {
+            this.currUDG.GetData(this.dataUrl, function (myData) {
+                alert("Group info...");
+                alert(myData.ID);
+            });
+        };
+
         GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
+        };
+
+        GroupInfoViewController.prototype.Save = function () {
+            alert("Calling save by GroupInfoController plugged in at: " + this.divID);
         };
         return GroupInfoViewController;
     })(ViewControllerBase);

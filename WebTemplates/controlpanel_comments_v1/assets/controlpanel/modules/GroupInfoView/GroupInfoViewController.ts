@@ -11,24 +11,38 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupInfoViewController extends ViewControllerBase {
 
+    public dataUrl:string;
+
     public Initialize(dataUrl:string):void {
-
-    }
-
-    public VisibleTemplateRender():void {
+        this.dataUrl = dataUrl;
+        var $hostDiv = $("#" + this.divID);
+        $hostDiv.addClass("oip-controller-root");
+        $hostDiv.data("oip-controller", this);
+        var me = this;
+        $hostDiv.on("click", ".oip-controller-command", function(event) {
+            me.handleEvent($(this), "click", event);
+        });
         require(["GroupInfoView/GroupInfo_dust"], (template) => {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
-                var $hostDiv = $("#" + this.divID);
-                //alert(this.divID);
-                //alert(output);
-                //alert(_.isEqual(1,1).toString() + "lodashed...");
                 $hostDiv.html(output);
             });
         });
     }
 
+    public VisibleTemplateRender():void {
+        this.currUDG.GetData(this.dataUrl, myData => {
+            alert("Group info...");
+            alert(myData.ID);
+        });
+    }
+
     public InvisibleTemplateRender():void {
+
+    }
+
+    Save() {
+        alert("Calling save by GroupInfoController plugged in at: " + this.divID);
     }
 }
 
