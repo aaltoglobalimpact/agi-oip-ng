@@ -12,20 +12,8 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupMemberViewController extends ViewControllerBase {
 
-    public dataUrl:string;
-    $initialized:JQueryPromise<any>;
-
-    public Initialize(dataUrl:string):void {
-        this.dataUrl = dataUrl;
-        var $hostDiv = $("#" + this.divID);
-        $hostDiv.addClass("oip-controller-root");
-        $hostDiv.data("oip-controller", this);
+    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
         var me = this;
-        var $initialDeferred = $.Deferred();
-        me.$initialized = $initialDeferred.promise();
-        $hostDiv.on("click", ".oip-controller-command", function(event) {
-            me.handleEvent($(this), "click", event);
-        });
         require(["GroupMemberView/GroupMembers_dust",
             "lib/dusts/command_button_begin_dust",
             "lib/dusts/command_button_end_dust",

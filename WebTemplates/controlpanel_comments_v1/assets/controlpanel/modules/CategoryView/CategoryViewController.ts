@@ -10,26 +10,15 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class CategoryViewController extends ViewControllerBase {
 
-    public dataUrl:string;
-    $initialized:JQueryPromise<any>;
-
-    public Initialize(dataUrl:string) {
-        this.dataUrl = dataUrl;
-        var $hostDiv = $("#" + this.divID);
-        $hostDiv.addClass("oip-controller-root");
-        $hostDiv.data("oip-controller", this);
+    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
         var me = this;
-        var $initialDeferred = $.Deferred();
-        me.$initialized = $initialDeferred.promise();
-        $hostDiv.on("click", ".oip-controller-command", function(event) {
-            me.handleEvent($(this), "click", event);
-        });
         require(["CategoryView/CategoryEditor_dust",
             "CategoryView/category_treeitem_dust",
-            "lib/dusts/objectdeleteicon_dust"], (template1, template2) => {
-            this.currUDG.GetData(dataUrl, (callBackData) => {
+            "lib/dusts/objectdeleteicon_dust",
+            "lib/dusts/command_button_dust"], (template1, template2) => {
+            me.currUDG.GetData(me.dataUrl, (callBackData) => {
                 dust.render("CategoryEditor.dust", callBackData, (error, output) => {
-                    var $hostDiv = $("#" + this.divID);
+                    var $hostDiv = $("#" + me.divID);
                     $hostDiv.html(output);
                     $initialDeferred.resolve();
                 });

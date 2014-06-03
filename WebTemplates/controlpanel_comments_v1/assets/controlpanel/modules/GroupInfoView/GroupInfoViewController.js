@@ -13,19 +13,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function GroupInfoViewController() {
             _super.apply(this, arguments);
         }
-        GroupInfoViewController.prototype.Initialize = function (dataUrl) {
-            this.dataUrl = dataUrl;
-            var $hostDiv = $("#" + this.divID);
-            $hostDiv.addClass("oip-controller-root");
-            $hostDiv.data("oip-controller", this);
+        GroupInfoViewController.prototype.ControllerInitialize = function ($initialDeferred) {
             var me = this;
-            var $initialDeferred = $.Deferred();
-            me.$initialized = $initialDeferred.promise();
-            $hostDiv.on("click", ".oip-controller-command", function (event) {
-                me.handleEvent($(this), "click", event);
-            });
             require(["GroupInfoView/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
+                    var $hostDiv = $("#" + me.divID);
                     $hostDiv.html(output);
                     $initialDeferred.resolve();
                 });

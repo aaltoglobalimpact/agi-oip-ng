@@ -13,17 +13,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function GroupMemberViewController() {
             _super.apply(this, arguments);
         }
-        GroupMemberViewController.prototype.Initialize = function (dataUrl) {
-            this.dataUrl = dataUrl;
-            var $hostDiv = $("#" + this.divID);
-            $hostDiv.addClass("oip-controller-root");
-            $hostDiv.data("oip-controller", this);
+        GroupMemberViewController.prototype.ControllerInitialize = function ($initialDeferred) {
             var me = this;
-            var $initialDeferred = $.Deferred();
-            me.$initialized = $initialDeferred.promise();
-            $hostDiv.on("click", ".oip-controller-command", function (event) {
-                me.handleEvent($(this), "click", event);
-            });
             require([
                 "GroupMemberView/GroupMembers_dust",
                 "lib/dusts/command_button_begin_dust",

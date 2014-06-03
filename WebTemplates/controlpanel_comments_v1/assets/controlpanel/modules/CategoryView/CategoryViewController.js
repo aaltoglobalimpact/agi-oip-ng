@@ -13,25 +13,16 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function CategoryViewController() {
             _super.apply(this, arguments);
         }
-        CategoryViewController.prototype.Initialize = function (dataUrl) {
-            var _this = this;
-            this.dataUrl = dataUrl;
-            var $hostDiv = $("#" + this.divID);
-            $hostDiv.addClass("oip-controller-root");
-            $hostDiv.data("oip-controller", this);
+        CategoryViewController.prototype.ControllerInitialize = function ($initialDeferred) {
             var me = this;
-            var $initialDeferred = $.Deferred();
-            me.$initialized = $initialDeferred.promise();
-            $hostDiv.on("click", ".oip-controller-command", function (event) {
-                me.handleEvent($(this), "click", event);
-            });
             require([
                 "CategoryView/CategoryEditor_dust",
                 "CategoryView/category_treeitem_dust",
-                "lib/dusts/objectdeleteicon_dust"], function (template1, template2) {
-                _this.currUDG.GetData(dataUrl, function (callBackData) {
+                "lib/dusts/objectdeleteicon_dust",
+                "lib/dusts/command_button_dust"], function (template1, template2) {
+                me.currUDG.GetData(me.dataUrl, function (callBackData) {
                     dust.render("CategoryEditor.dust", callBackData, function (error, output) {
-                        var $hostDiv = $("#" + _this.divID);
+                        var $hostDiv = $("#" + me.divID);
                         $hostDiv.html(output);
                         $initialDeferred.resolve();
                     });

@@ -2,7 +2,8 @@
     <button class="btn oip-controller-command" data-oip-command="SaveCategoryHierarchy">Save Category Hierarchy</button>
 </p>
 <p>Edit categories by dragging the items below up/down (= order) and sideways (= hierarchy). Save changes by clicking button above.</p>
-<p>{!{>"button_addcategory.dust" /}  {>"button_addcategories.dust" /}!} add category, add categories
+<p> {>"command_button.dust" button_label="Add Category" icon_class_name="icon-plus-sign" /}
+    {>"command_button.dust" button_label="Add Multiple Categories" icon_class_name="icon-plus-sign" /}
 
 <div name="nestableTree" class="dd">
     <ol class="dd-list">

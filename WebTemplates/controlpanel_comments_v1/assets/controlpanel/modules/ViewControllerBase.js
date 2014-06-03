@@ -9,7 +9,21 @@ define(["require", "exports"], function(require, exports) {
             this.currUDG = currUDG;
         }
         ViewControllerBase.prototype.Initialize = function (dataUrl) {
-            throw "Initialize not implemented";
+            this.dataUrl = dataUrl;
+            var $hostDiv = $("#" + this.divID);
+            $hostDiv.addClass("oip-controller-root");
+            $hostDiv.data("oip-controller", this);
+            var me = this;
+            var $initialDeferred = $.Deferred();
+            me.$initialized = $initialDeferred.promise();
+            $hostDiv.on("click", ".oip-controller-command", function (event) {
+                me.handleEvent($(this), "click", event);
+            });
+            me.ControllerInitialize($initialDeferred);
+        };
+
+        ViewControllerBase.prototype.ControllerInitialize = function ($initialDeferred) {
+            throw "ControllerInitialize not implemented";
         };
 
         ViewControllerBase.prototype.ExecuteCommand = function (commandName) {
