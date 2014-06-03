@@ -16,8 +16,9 @@ class ViewControllerBase implements IViewController{
 
     ExecuteCommand(commandName:string) {
         var commandFunction = this[commandName];
-        if(_.isFunction(commandFunction))
-            commandFunction();
+        if(_.isFunction(commandFunction)) {
+            commandFunction.call(this);
+        }
         else
             throw "Command implementing function not found: " + commandName;
     }
@@ -27,6 +28,10 @@ class ViewControllerBase implements IViewController{
         var callBack = this[callBackName];
         if(!_.isFunction(callBack)) {
             callBack = null;
+        } else {
+            callBack = function() {
+                callBack.call(this);
+            };
         }
         this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
     }
@@ -44,7 +49,12 @@ class ViewControllerBase implements IViewController{
         var commandFunction = this[commandName];
         if(!_.isFunction(commandFunction))
             throw "Controller's command function not implemented: " + commandName;
-        commandFunction();
+        commandFunction.call(this);
+    }
+
+    $getNamedFieldWithin(controlName):JQuery {
+        var $hostDiv = $("#" + this.divID);
+        return $hostDiv.find("[name='" + controlName + "']");
     }
 
     constructor(public divID:string, public currOPM:TheBall.Interface.UI.OperationManager,

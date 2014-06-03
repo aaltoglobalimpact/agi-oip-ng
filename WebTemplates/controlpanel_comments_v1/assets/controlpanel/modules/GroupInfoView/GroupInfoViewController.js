@@ -19,28 +19,58 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $hostDiv.addClass("oip-controller-root");
             $hostDiv.data("oip-controller", this);
             var me = this;
+            var $initialDeferred = $.Deferred();
+            me.$initialized = $initialDeferred.promise();
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
             require(["GroupInfoView/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
                     $hostDiv.html(output);
+                    $initialDeferred.resolve();
                 });
             });
         };
 
         GroupInfoViewController.prototype.VisibleTemplateRender = function () {
+            var me = this;
             this.currUDG.GetData(this.dataUrl, function (myData) {
-                alert("Group info...");
-                alert(myData.ID);
+                me.currentData = myData;
+                $.when(me.$initialized).then(function () {
+                    me.populateFromCurrentData();
+                });
             });
+        };
+
+        GroupInfoViewController.prototype.populateFromCurrentData = function () {
+            var groupProfile = this.currentData.GroupProfile;
+
+            //alert(JSON.stringify(groupProfile));
+            this.$getNamedFieldWithin("GroupName").val(groupProfile.GroupName);
+            this.$getNamedFieldWithin("Description").val(groupProfile.Description);
+            this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val(groupProfile.OrganizationsAndGroupsLinkedToUs);
+            this.$getNamedFieldWithin("WwwSiteToPublishTo").val(groupProfile.WwwSiteToPublishTo);
         };
 
         GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
         };
 
         GroupInfoViewController.prototype.Save = function () {
-            alert("Calling save by GroupInfoController plugged in at: " + this.divID);
+            var objectID = this.currentData.ID;
+            var objectRelativeLocation = this.currentData.RelativeLocation;
+            var eTag = this.currentData.MasterETag;
+            var groupName = this.$getNamedFieldWithin("GroupName").val();
+            var description = this.$getNamedFieldWithin("Description").val();
+            var organizationsAndGroupsLinkedToUs = this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val();
+            var wwwSiteToPublishTo = this.$getNamedFieldWithin("WwwSiteToPublishTo").val();
+
+            var saveData = {
+                GroupName: groupName,
+                Description: description,
+                OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
+                WwwSiteToPublishTo: wwwSiteToPublishTo
+            };
+            this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
         };
         return GroupInfoViewController;
     })(ViewControllerBase);

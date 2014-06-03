@@ -14,9 +14,9 @@ define(["require", "exports"], function(require, exports) {
 
         ViewControllerBase.prototype.ExecuteCommand = function (commandName) {
             var commandFunction = this[commandName];
-            if (_.isFunction(commandFunction))
-                commandFunction();
-            else
+            if (_.isFunction(commandFunction)) {
+                commandFunction.call(this);
+            } else
                 throw "Command implementing function not found: " + commandName;
         };
 
@@ -25,6 +25,10 @@ define(["require", "exports"], function(require, exports) {
             var callBack = this[callBackName];
             if (!_.isFunction(callBack)) {
                 callBack = null;
+            } else {
+                callBack = function () {
+                    callBack.call(this);
+                };
             }
             this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
         };
@@ -42,7 +46,12 @@ define(["require", "exports"], function(require, exports) {
             var commandFunction = this[commandName];
             if (!_.isFunction(commandFunction))
                 throw "Controller's command function not implemented: " + commandName;
-            commandFunction();
+            commandFunction.call(this);
+        };
+
+        ViewControllerBase.prototype.$getNamedFieldWithin = function (controlName) {
+            var $hostDiv = $("#" + this.divID);
+            return $hostDiv.find("[name='" + controlName + "']");
         };
         return ViewControllerBase;
     })();
