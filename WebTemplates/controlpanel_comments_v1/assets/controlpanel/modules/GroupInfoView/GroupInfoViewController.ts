@@ -12,6 +12,7 @@ import ViewControllerBase = require("../ViewControllerBase");
 class GroupInfoViewController extends ViewControllerBase {
 
     public dataUrl:string;
+    $initialized:JQueryPromise<any>;
 
     public Initialize(dataUrl:string):void {
         this.dataUrl = dataUrl;
@@ -32,8 +33,6 @@ class GroupInfoViewController extends ViewControllerBase {
             });
         });
     }
-
-    $initialized:JQueryPromise<any>;
 
     // Instead of hidden fields in "form", we can store the last fetched data as current
     currentData:any;

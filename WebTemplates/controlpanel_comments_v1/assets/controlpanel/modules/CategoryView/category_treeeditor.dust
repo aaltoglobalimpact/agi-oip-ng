@@ -1,10 +1,10 @@
 <p>
-    <button class="btn" onclick="javascript:SaveCategoryHierarchy();">Save Category Hierarchy</button>
+    <button class="btn oip-controller-command" data-oip-command="SaveCategoryHierarchy">Save Category Hierarchy</button>
 </p>
 <p>Edit categories by dragging the items below up/down (= order) and sideways (= hierarchy). Save changes by clicking button above.</p>
 <p>{!{>"button_addcategory.dust" /}  {>"button_addcategories.dust" /}!} add category, add categories
 
-<div id="nesttest" class="dd">
+<div name="nestableTree" class="dd">
     <ol class="dd-list">
 {#CategoriesWithChildren}
     {>"category_treeitem.dust" /}
@@ -12,6 +12,3 @@
     </ol>
 </div>
 </p>
-<script>
-    $('.dd').nestable({ });
-</script>

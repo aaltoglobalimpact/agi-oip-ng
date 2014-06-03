@@ -49,6 +49,11 @@ define(["require", "exports"], function(require, exports) {
             commandFunction.call(this);
         };
 
+        ViewControllerBase.prototype.$getSelectedFieldsWithin = function (selector) {
+            var $hostDiv = $("#" + this.divID);
+            return $hostDiv.find(selector);
+        };
+
         ViewControllerBase.prototype.$getNamedFieldWithin = function (controlName) {
             var $hostDiv = $("#" + this.divID);
             return $hostDiv.find("[name='" + controlName + "']");

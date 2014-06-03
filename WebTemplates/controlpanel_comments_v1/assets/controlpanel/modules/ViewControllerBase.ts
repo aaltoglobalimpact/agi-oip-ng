@@ -52,6 +52,11 @@ class ViewControllerBase implements IViewController{
         commandFunction.call(this);
     }
 
+    $getSelectedFieldsWithin(selector:string):JQuery {
+        var $hostDiv = $("#" + this.divID);
+        return $hostDiv.find(selector);
+    }
+
     $getNamedFieldWithin(controlName):JQuery {
         var $hostDiv = $("#" + this.divID);
         return $hostDiv.find("[name='" + controlName + "']");
