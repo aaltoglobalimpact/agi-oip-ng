@@ -11,9 +11,9 @@
                 </section>
                 <footer>
                 <span class="pull-right">
-                    {>"executeoperation_button_begin.dust" form_name="removecollaborator" /}
+                    {>"command_button_begin.dust" form_name="removecollaborator" /}
                     data-accountid="{AccountID}"
-                    {>"executeoperation_button_end.dust" icon_class_name="icon-remove-sign" /}
+                    {>"command_button_end.dust" icon_class_name="icon-remove-sign" /}
                 </span>
                     <span class="pull-right"><a data-toggle="modal" role="button" href="#view-collaborator-profile"><i class="icon-eye-open"></i></a></span>
                 </footer>
@@ -24,14 +24,14 @@
     </div>
 {/Collaborators}
 
-{>"executeoperation_button.dust" form_name="invitemember" button_label="Invite New Member" icon_class_name="icon-plus-sign" /}
+{>"command_button.dust" form_name="invitemember" button_label="Invite New Member" icon_class_name="icon-plus-sign" /}
 
-{>"modal_executeoperation_begin.dust" form_name="invitemember" header_title="Invite New Member" operation_name="InviteMemberToGroup" /}
+{>"modal_begin.dust" form_name="invitemember" header_title="Invite New Member" operation_name="InviteMemberToGroup" /}
 {>"textinput_singleline.dust" field_id="InviteMember_EmailAddress"
 field_name="EmailAddress" field_label="Member Email Address" /}
-{>"modal_executeoperation_end.dust" cancel_button_label="Cancel" accept_button_label="Send Invitation Email" /}
+{>"modal_end.dust" cancel_button_label="Cancel" accept_button_label="Send Invitation Email" /}
 
-{>"modal_executeoperation_begin.dust" form_name="removecollaborator" header_title="Remove Collaborator"
+{>"modal_begin.dust" form_name="removecollaborator" header_title="Remove Collaborator"
 operation_name="RemoveCollaboratorFromGroup" map_data_values="AccountID" /}
 {>"hiddeninput.dust" field_name="AccountID" /}
-{>"modal_executeoperation_end.dust" cancel_button_label="Cancel" accept_button_label="Remove!" /}
+{>"modal_end.dust" cancel_button_label="Cancel" accept_button_label="Remove!" /}

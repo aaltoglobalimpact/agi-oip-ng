@@ -27,12 +27,12 @@ class GroupMemberViewController extends ViewControllerBase {
             me.handleEvent($(this), "click", event);
         });
         require(["GroupMemberView/GroupMembers_dust",
-            "lib/dusts/executeoperation_button_begin_dust",
-            "lib/dusts/executeoperation_button_end_dust",
-            "lib/dusts/executeoperation_button_dust",
-            "lib/dusts/modal_executeoperation_begin_dust",
+            "lib/dusts/command_button_begin_dust",
+            "lib/dusts/command_button_end_dust",
+            "lib/dusts/command_button_dust",
+            "lib/dusts/modal_begin_dust",
             "lib/dusts/textinput_singleline_dust",
-            "lib/dusts/modal_executeoperation_end_dust",
+            "lib/dusts/modal_end_dust",
             "lib/dusts/hiddeninput_dust"], (template) => {
                 $initialDeferred.resolve();
         });

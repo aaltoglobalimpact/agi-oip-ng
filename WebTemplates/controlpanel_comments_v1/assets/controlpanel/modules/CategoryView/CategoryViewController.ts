@@ -24,11 +24,11 @@ class CategoryViewController extends ViewControllerBase {
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });
-        require(["CategoryView/category_treeeditor_dust",
+        require(["CategoryView/CategoryEditor_dust",
             "CategoryView/category_treeitem_dust",
             "lib/dusts/objectdeleteicon_dust"], (template1, template2) => {
             this.currUDG.GetData(dataUrl, (callBackData) => {
-                dust.render("category_treeeditor.dust", callBackData, (error, output) => {
+                dust.render("CategoryEditor.dust", callBackData, (error, output) => {
                     var $hostDiv = $("#" + this.divID);
                     $hostDiv.html(output);
                     $initialDeferred.resolve();

@@ -1,2 +1,14 @@
-<h3>Manage Categories</h3>
-<p>Category editor controllerview placeholder</p>
+<p>
+    <button class="btn oip-controller-command" data-oip-command="SaveCategoryHierarchy">Save Category Hierarchy</button>
+</p>
+<p>Edit categories by dragging the items below up/down (= order) and sideways (= hierarchy). Save changes by clicking button above.</p>
+<p>{!{>"button_addcategory.dust" /}  {>"button_addcategories.dust" /}!} add category, add categories
+
+<div name="nestableTree" class="dd">
+    <ol class="dd-list">
+        {#CategoriesWithChildren}
+            {>"category_treeitem.dust" /}
+        {/CategoriesWithChildren}
+    </ol>
+</div>
+</p>

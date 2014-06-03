@@ -26,11 +26,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 me.handleEvent($(this), "click", event);
             });
             require([
-                "CategoryView/category_treeeditor_dust",
+                "CategoryView/CategoryEditor_dust",
                 "CategoryView/category_treeitem_dust",
                 "lib/dusts/objectdeleteicon_dust"], function (template1, template2) {
                 _this.currUDG.GetData(dataUrl, function (callBackData) {
-                    dust.render("category_treeeditor.dust", callBackData, function (error, output) {
+                    dust.render("CategoryEditor.dust", callBackData, function (error, output) {
                         var $hostDiv = $("#" + _this.divID);
                         $hostDiv.html(output);
                         $initialDeferred.resolve();
