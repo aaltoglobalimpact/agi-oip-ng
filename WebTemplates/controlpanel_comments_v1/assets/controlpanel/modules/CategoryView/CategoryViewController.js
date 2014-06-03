@@ -28,7 +28,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             require([
                 "CategoryView/category_treeeditor_dust",
                 "CategoryView/category_treeitem_dust",
-                "CategoryView/objectdeleteicon_dust"], function (template1, template2) {
+                "lib/dusts/objectdeleteicon_dust"], function (template1, template2) {
                 _this.currUDG.GetData(dataUrl, function (callBackData) {
                     dust.render("category_treeeditor.dust", callBackData, function (error, output) {
                         var $hostDiv = $("#" + _this.divID);

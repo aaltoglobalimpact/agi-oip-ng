@@ -26,7 +26,7 @@ class CategoryViewController extends ViewControllerBase {
         });
         require(["CategoryView/category_treeeditor_dust",
             "CategoryView/category_treeitem_dust",
-            "CategoryView/objectdeleteicon_dust"], (template1, template2) => {
+            "lib/dusts/objectdeleteicon_dust"], (template1, template2) => {
             this.currUDG.GetData(dataUrl, (callBackData) => {
                 dust.render("category_treeeditor.dust", callBackData, (error, output) => {
                     var $hostDiv = $("#" + this.divID);

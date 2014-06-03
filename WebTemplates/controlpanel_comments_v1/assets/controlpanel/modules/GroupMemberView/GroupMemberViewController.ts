@@ -1,6 +1,7 @@
 /**
- * Created by kalle on 31.5.2014.
+ * Created by kalle on 3.6.2014.
  */
+
 
 /// <reference path="../require.d.ts" />
 /// <reference path="../dustjs-linkedin.d.ts" />
@@ -9,7 +10,7 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class GroupInfoViewController extends ViewControllerBase {
+class GroupMemberViewController extends ViewControllerBase {
 
     public dataUrl:string;
     $initialized:JQueryPromise<any>;
@@ -25,12 +26,15 @@ class GroupInfoViewController extends ViewControllerBase {
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });
-        require(["GroupInfoView/GroupInfo_dust"], (template) => {
-            dust.render("GroupInfo.dust", {
-            }, (error, output) =>  {
-                $hostDiv.html(output);
+        require(["GroupMemberView/GroupMembers_dust",
+            "lib/dusts/executeoperation_button_begin_dust",
+            "lib/dusts/executeoperation_button_end_dust",
+            "lib/dusts/executeoperation_button_dust",
+            "lib/dusts/modal_executeoperation_begin_dust",
+            "lib/dusts/textinput_singleline_dust",
+            "lib/dusts/modal_executeoperation_end_dust",
+            "lib/dusts/hiddeninput_dust"], (template) => {
                 $initialDeferred.resolve();
-            });
         });
     }
 
@@ -42,7 +46,11 @@ class GroupInfoViewController extends ViewControllerBase {
         this.currUDG.GetData(this.dataUrl, myData => {
             me.currentData = myData;
             $.when(me.$initialized).then(() => {
-                me.populateFromCurrentData();
+                //me.populateFromCurrentData();
+                dust.render("GroupMembers.dust", myData, (error, output) => {
+                    var $hostDiv = $("#" + me.divID);
+                    $hostDiv.html(output);
+                });
             });
         });
     }
@@ -66,7 +74,7 @@ class GroupInfoViewController extends ViewControllerBase {
     }
 
     Save() {
-        var objectID = this.currentData.GroupProfile.ID;
+        var objectID = this.currentData.ID;
         var objectRelativeLocation = this.currentData.RelativeLocation;
         var eTag = this.currentData.MasterETag;
         var groupName = this.$getNamedFieldWithin("GroupName").val();
@@ -84,4 +92,4 @@ class GroupInfoViewController extends ViewControllerBase {
     }
 }
 
-export = GroupInfoViewController;
+export = GroupMemberViewController;

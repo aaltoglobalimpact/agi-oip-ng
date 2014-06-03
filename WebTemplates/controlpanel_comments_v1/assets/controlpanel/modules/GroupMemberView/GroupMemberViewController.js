@@ -1,5 +1,5 @@
 /**
-* Created by kalle on 31.5.2014.
+* Created by kalle on 3.6.2014.
 */
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -8,12 +8,12 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var GroupInfoViewController = (function (_super) {
-        __extends(GroupInfoViewController, _super);
-        function GroupInfoViewController() {
+    var GroupMemberViewController = (function (_super) {
+        __extends(GroupMemberViewController, _super);
+        function GroupMemberViewController() {
             _super.apply(this, arguments);
         }
-        GroupInfoViewController.prototype.Initialize = function (dataUrl) {
+        GroupMemberViewController.prototype.Initialize = function (dataUrl) {
             this.dataUrl = dataUrl;
             var $hostDiv = $("#" + this.divID);
             $hostDiv.addClass("oip-controller-root");
@@ -24,25 +24,34 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
-            require(["GroupInfoView/GroupInfo_dust"], function (template) {
-                dust.render("GroupInfo.dust", {}, function (error, output) {
-                    $hostDiv.html(output);
-                    $initialDeferred.resolve();
-                });
+            require([
+                "GroupMemberView/GroupMembers_dust",
+                "lib/dusts/executeoperation_button_begin_dust",
+                "lib/dusts/executeoperation_button_end_dust",
+                "lib/dusts/executeoperation_button_dust",
+                "lib/dusts/modal_executeoperation_begin_dust",
+                "lib/dusts/textinput_singleline_dust",
+                "lib/dusts/modal_executeoperation_end_dust",
+                "lib/dusts/hiddeninput_dust"], function (template) {
+                $initialDeferred.resolve();
             });
         };
 
-        GroupInfoViewController.prototype.VisibleTemplateRender = function () {
+        GroupMemberViewController.prototype.VisibleTemplateRender = function () {
             var me = this;
             this.currUDG.GetData(this.dataUrl, function (myData) {
                 me.currentData = myData;
                 $.when(me.$initialized).then(function () {
-                    me.populateFromCurrentData();
+                    //me.populateFromCurrentData();
+                    dust.render("GroupMembers.dust", myData, function (error, output) {
+                        var $hostDiv = $("#" + me.divID);
+                        $hostDiv.html(output);
+                    });
                 });
             });
         };
 
-        GroupInfoViewController.prototype.populateFromCurrentData = function () {
+        GroupMemberViewController.prototype.populateFromCurrentData = function () {
             var groupProfile = this.currentData.GroupProfile;
 
             //alert(JSON.stringify(groupProfile));
@@ -52,15 +61,15 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             this.$getNamedFieldWithin("WwwSiteToPublishTo").val(groupProfile.WwwSiteToPublishTo);
         };
 
-        GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
+        GroupMemberViewController.prototype.InvisibleTemplateRender = function () {
         };
 
-        GroupInfoViewController.prototype.myFunc = function () {
+        GroupMemberViewController.prototype.myFunc = function () {
             alert("My stuff to do!");
         };
 
-        GroupInfoViewController.prototype.Save = function () {
-            var objectID = this.currentData.GroupProfile.ID;
+        GroupMemberViewController.prototype.Save = function () {
+            var objectID = this.currentData.ID;
             var objectRelativeLocation = this.currentData.RelativeLocation;
             var eTag = this.currentData.MasterETag;
             var groupName = this.$getNamedFieldWithin("GroupName").val();
@@ -76,9 +85,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             };
             this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
         };
-        return GroupInfoViewController;
+        return GroupMemberViewController;
     })(ViewControllerBase);
 
     
-    return GroupInfoViewController;
+    return GroupMemberViewController;
 });
