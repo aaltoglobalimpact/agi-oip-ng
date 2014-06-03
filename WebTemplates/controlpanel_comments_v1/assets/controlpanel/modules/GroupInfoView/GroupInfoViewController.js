@@ -60,7 +60,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         };
 
         GroupInfoViewController.prototype.Save = function () {
-            var objectID = this.currentData.ID;
+            var objectID = this.currentData.GroupProfile.ID;
             var objectRelativeLocation = this.currentData.RelativeLocation;
             var eTag = this.currentData.MasterETag;
             var groupName = this.$getNamedFieldWithin("GroupName").val();
@@ -69,10 +69,10 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var wwwSiteToPublishTo = this.$getNamedFieldWithin("WwwSiteToPublishTo").val();
 
             var saveData = {
-                GroupName: groupName,
-                Description: description,
-                OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
-                WwwSiteToPublishTo: wwwSiteToPublishTo
+                "GroupName": groupName,
+                "Description": description,
+                "OrganizationsAndGroupsLinkedToUs": organizationsAndGroupsLinkedToUs,
+                "WwwSiteToPublishTo": wwwSiteToPublishTo
             };
             this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
         };
