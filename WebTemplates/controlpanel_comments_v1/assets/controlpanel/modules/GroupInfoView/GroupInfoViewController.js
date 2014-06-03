@@ -55,6 +55,10 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
         };
 
+        GroupInfoViewController.prototype.myFunc = function () {
+            alert("My stuff to do!");
+        };
+
         GroupInfoViewController.prototype.Save = function () {
             var objectID = this.currentData.ID;
             var objectRelativeLocation = this.currentData.RelativeLocation;

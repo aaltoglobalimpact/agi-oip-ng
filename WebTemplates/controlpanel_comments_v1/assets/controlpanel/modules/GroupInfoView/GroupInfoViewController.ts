@@ -62,7 +62,11 @@ class GroupInfoViewController extends ViewControllerBase {
 
     }
 
-    public Save():void {
+    myFunc() {
+        alert("My stuff to do!");
+    }
+
+    Save() {
         var objectID = this.currentData.ID;
         var objectRelativeLocation = this.currentData.RelativeLocation;
         var eTag = this.currentData.MasterETag;

@@ -50,6 +50,7 @@
             <div class="form-actions"
                  style="margin: 0px; padding: 0px; border-top-color: currentColor; border-top-width: 0px; border-top-style: none; background-color: transparent;">
                 <button class="btn btn-primary oip-controller-command" data-oip-command="Save" type="button">Save changes</button>
+                <button class="btn btn-primary oip-controller-command" data-oip-command="myFunc" type="button">My stuff!</button>
             </div>
         </div>
     </footer>
