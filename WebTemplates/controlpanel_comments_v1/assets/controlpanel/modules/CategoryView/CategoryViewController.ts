@@ -16,7 +16,7 @@ class CategoryViewController extends ViewControllerBase {
             "CategoryView/category_treeitem_dust",
             "lib/dusts/objectdeleteicon_dust",
             "lib/dusts/command_button_dust",
-            "lib/dusts/openmodal_button_dust"], (template1, template2) => {
+            "lib/dusts/openmodal_button_dust"], () => {
             me.currUDG.GetData(me.dataUrl, (callBackData) => {
                 dust.render("CategoryEditor.dust", callBackData, (error, output) => {
                     var $hostDiv = $("#" + me.divID);
@@ -40,12 +40,7 @@ class CategoryViewController extends ViewControllerBase {
 
     OpenModalAddCategoryModal() {
         var $modal:any = this.$getNamedFieldWithin("AddCategoryModal");
-        var $doc:any = $(document);
-        $doc.foundation();
-        //var $modal:any = $("#AddCategoryModal");
-        //alert("Opening");
         $modal.foundation('reveal', 'open');
-        //alert("Opened");
     }
 
     SaveCategoryHierarchy() {

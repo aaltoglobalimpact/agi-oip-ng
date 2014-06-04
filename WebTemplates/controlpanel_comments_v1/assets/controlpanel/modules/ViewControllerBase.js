@@ -22,10 +22,15 @@ define(["require", "exports"], function(require, exports) {
             // ... and FOR SOME OTHER REASON - the below (which narrows it down to this #div and its children)...
             // ... FAILS TO FIRE on the modal again... => so we're back at direct div + class filter
             //$(document).on("click", "#" + this.divID + " .oip-controller-command", function(event) {
+            // The reason found - foundation MOVES the modal on reveal elsewhere on the element tree...
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
             me.ControllerInitialize($initialDeferred);
+            $.when($initialDeferred.promise()).then(function () {
+                var $me = $hostDiv;
+                $me.foundation();
+            });
         };
 
         ViewControllerBase.prototype.ControllerInitialize = function ($initialDeferred) {
