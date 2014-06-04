@@ -37,6 +37,9 @@ class ViewControllerBase implements IViewController{
         $.when($initialDeferred.promise()).then(() => {
             var $me:any = $hostDiv;
             $me.foundation();
+            var wnd:any=window;
+            $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
+            $me.find(".oip-controller-modal").data("oip-controller-instance", me);
         });
     }
 

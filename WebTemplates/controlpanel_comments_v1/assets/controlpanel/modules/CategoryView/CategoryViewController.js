@@ -20,6 +20,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "CategoryView/category_treeitem_dust",
                 "lib/dusts/objectdeleteicon_dust",
                 "lib/dusts/command_button_dust",
+                "lib/dusts/insidemodal_button_dust",
                 "lib/dusts/openmodal_button_dust"], function () {
                 me.currUDG.GetData(me.dataUrl, function (callBackData) {
                     dust.render("CategoryEditor.dust", callBackData, function (error, output) {
@@ -58,7 +59,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $.ajax({
                 type: "POST",
                 url: "?operation=AaltoGlobalImpact.OIP.SetCategoryHierarchyAndOrderInNodeSummary",
-                //dataType: "json",
+                //dataType: "json", - this would require returning parseable json (on TODO list)
                 contentType: "application/json",
                 data: jsonData,
                 success: function () {

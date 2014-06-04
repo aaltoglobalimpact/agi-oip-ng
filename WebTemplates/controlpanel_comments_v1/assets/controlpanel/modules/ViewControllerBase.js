@@ -30,6 +30,9 @@ define(["require", "exports"], function(require, exports) {
             $.when($initialDeferred.promise()).then(function () {
                 var $me = $hostDiv;
                 $me.foundation();
+                var wnd = window;
+                $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
+                $me.find(".oip-controller-modal").data("oip-controller-instance", me);
             });
         };
 

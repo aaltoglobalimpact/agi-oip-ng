@@ -16,6 +16,7 @@ class CategoryViewController extends ViewControllerBase {
             "CategoryView/category_treeitem_dust",
             "lib/dusts/objectdeleteicon_dust",
             "lib/dusts/command_button_dust",
+            "lib/dusts/insidemodal_button_dust",
             "lib/dusts/openmodal_button_dust"], () => {
             me.currUDG.GetData(me.dataUrl, (callBackData) => {
                 dust.render("CategoryEditor.dust", callBackData, (error, output) => {
@@ -52,7 +53,7 @@ class CategoryViewController extends ViewControllerBase {
         $.ajax(
             { type: "POST",
                 url: "?operation=AaltoGlobalImpact.OIP.SetCategoryHierarchyAndOrderInNodeSummary",
-                //dataType: "json",
+                //dataType: "json", - this would require returning parseable json (on TODO list)
                 contentType: "application/json",
                 data: jsonData,
                 success: function() {

@@ -11,6 +11,16 @@ import CategoriesViewController = require("CategoryView/CategoryViewController")
 
 export class AppMain  {
     run() {
+        var wnd:any = window;
+        if(!wnd.ControllerCommon) {
+            wnd.ControllerCommon = { };
+        }
+        wnd.ControllerCommon.ModalButtonClick = function() {
+            alert("Mooodaaal!");
+            var $owningModal = $(this).closest(".oip-controller-modal");
+            var controller = $owningModal.data("oip-controller-instance");
+            alert(controller.divID);
+        };
         // Some tests below... not used for the time being
         /*
          var o1 = {"kala": "pulla"};

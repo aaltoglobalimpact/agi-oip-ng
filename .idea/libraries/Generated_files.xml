@@ -3,8 +3,9 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupMemberView/GroupMemberViewController.js" />
-        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ModuleCustomGlue.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/main.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ViewControllerBase.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ModuleCustomGlue.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/CategoryView/CategoryViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupInfoView/GroupInfoViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/IViewController.js" />
@@ -12,8 +13,9 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupMemberView/GroupMemberViewController.js" />
-      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ViewControllerBase.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/main.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ModuleCustomGlue.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ViewControllerBase.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/CategoryView/CategoryViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupInfoView/GroupInfoViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/IViewController.js" />

@@ -17,7 +17,7 @@
 
 {>"modal_begin.dust" modal_name="AddCategoryModal" /}
 <h2>Adding a new category</h2>
-{>"command_button.dust" button_label="Add Multiple Categories" icon_class_name="icon-plus-sign" /}
+{>"insidemodal_button.dust" button_label="Add Multiple Categories (Modal)" icon_class_name="icon-plus-sign" /}
 
 <div class="row">
     <div class="large-6 columns">
