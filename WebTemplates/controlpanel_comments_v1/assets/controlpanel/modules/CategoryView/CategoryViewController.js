@@ -19,7 +19,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "CategoryView/CategoryEditor_dust",
                 "CategoryView/category_treeitem_dust",
                 "lib/dusts/objectdeleteicon_dust",
-                "lib/dusts/command_button_dust"], function (template1, template2) {
+                "lib/dusts/command_button_dust",
+                "lib/dusts/openmodal_button_dust"], function (template1, template2) {
                 me.currUDG.GetData(me.dataUrl, function (callBackData) {
                     dust.render("CategoryEditor.dust", callBackData, function (error, output) {
                         var $hostDiv = $("#" + me.divID);
@@ -40,6 +41,17 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
 
         CategoryViewController.prototype.InvisibleTemplateRender = function () {
             // alert("categories invisible renderer" + this.divID);
+        };
+
+        CategoryViewController.prototype.OpenModalAddCategoryModal = function () {
+            var $modal = this.$getNamedFieldWithin("AddCategoryModal");
+            var $doc = $(document);
+            $doc.foundation();
+
+            //var $modal:any = $("#AddCategoryModal");
+            //alert("Opening");
+            $modal.foundation('reveal', 'open');
+            //alert("Opened");
         };
 
         CategoryViewController.prototype.SaveCategoryHierarchy = function () {

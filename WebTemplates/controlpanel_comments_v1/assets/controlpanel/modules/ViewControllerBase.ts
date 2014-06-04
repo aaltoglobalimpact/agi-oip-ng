@@ -22,6 +22,12 @@ class ViewControllerBase implements IViewController{
         var me = this;
         var $initialDeferred = $.Deferred();
         me.$initialized = $initialDeferred.promise();
+        // FOR SOME REASON - the $hostDiv element IS NOT covering all events within, for example a modal...
+        //$hostDiv.on("click", ".oip-controller-command", function(event) {
+        // ... and FOR SOME OTHER REASON - the below (which narrows it down to this #div and its children)...
+        // ... FAILS TO FIRE on the modal again... => so we're back at direct div + class filter
+        //$(document).on("click", "#" + this.divID + " .oip-controller-command", function(event) {
+
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });
@@ -38,7 +44,7 @@ class ViewControllerBase implements IViewController{
             commandFunction.call(this);
         }
         else
-            throw "Command implementing function not found: " + commandName;
+            throw "Command implementing function not found: " + commandName
     }
 
     ExecuteOperation(operationDomain:string, operationName:string, parameters):any {
@@ -66,8 +72,17 @@ class ViewControllerBase implements IViewController{
         var commandName = $source.data("oip-command");
         var commandFunction = this[commandName];
         if(!_.isFunction(commandFunction))
-            throw "Controller's command function not implemented: " + commandName;
+            throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;;
         commandFunction.call(this);
+    }
+
+    Common_CloseOpenModal() {
+        var $hostDiv:any = $("#" + this.divID);
+        alert("KK!");
+        var modals:any = $hostDiv.find(".oip-controller-modal");
+        alert(modals.length.toString());
+        modals.foundation('reveal', 'close');
+        alert("PP")
     }
 
     $getSelectedFieldsWithin(selector:string):JQuery {

@@ -1,8 +1,8 @@
 <p>
-    <button class="btn oip-controller-command" data-oip-command="SaveCategoryHierarchy">Save Category Hierarchy</button>
+    {>"command_button.dust" button_label="Save Category Hierarchy" command="SaveCategoryHierarchy" /}
 </p>
 <p>Edit categories by dragging the items below up/down (= order) and sideways (= hierarchy). Save changes by clicking button above.</p>
-<p> {>"command_button.dust" button_label="Add Category" icon_class_name="icon-plus-sign" /}
+<p> {>"openmodal_button.dust" modal_name="AddCategoryModal" button_label="Add Category" icon_class_name="icon-plus-sign" /}
     {>"command_button.dust" button_label="Add Multiple Categories" icon_class_name="icon-plus-sign" /}
 
 <div name="nestableTree" class="dd">
@@ -13,3 +13,55 @@
     </ol>
 </div>
 </p>
+
+
+{>"modal_begin.dust" modal_name="AddCategoryModal" /}
+<h2>Adding a new category</h2>
+{>"command_button.dust" button_label="Add Multiple Categories" icon_class_name="icon-plus-sign" /}
+
+<div class="row">
+    <div class="large-6 columns">
+        <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+            <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#ccc;text-align: center;">
+                <input type="file" id="addNewContentModal-ImageData">
+            </div>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+            <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
+                <div class="title-field"><label>Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
+                <div class="published-field"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
+                <div class="excerpt-field"><label>Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
+                <div class="author-field"><label>Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
+                <div class="categories-field"><label>Category
+                    <select id="addNewContentCategorySelect">
+                    </select>
+                </label>
+                </div>
+                <!--<div class="categories-field"><label>Categories</label> <input type="text" id="addNewContentModal-categories"/></div>-->
+                <div class="hide"><label>ID</label><input type="text" class="hide" id="addNewContentModal-id"/></div>
+                <div class="hide"><label>Image Path</label>   <input type="text" class="hide" id="addNewContentModal-imagePath"/></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns right textAreaEditorDiv"><label>Content</label>
+        <!--
+                                            <textarea id="addNewContentModal-content" cols="50"style="height: 300px;"></textarea>
+                                           <textarea cols="50" id="area4">HTML <b>content</b> <i>default</i> in textarea</textarea>
+        -->
+        <div id="addNewTextareaDivHolder"><textarea id="addNewContentModal-content" style="height: 300px;" name="content"></textarea></div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="large-12 columns">
+        <a class="button oip-controller-command" data-oip-command="Common_CloseOpenModal" id="cancelAddNewContentModal" style="float: right;">Cancel</a><div style="width: 10px;float: right;">&nbsp;</div>
+        <a class="button" id="addNewContentModal-submit" style="float: right;">Submit</a>
+    </div>
+</div>
+
+{>"modal_end.dust" /}
