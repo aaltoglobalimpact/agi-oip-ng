@@ -71,6 +71,16 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 }
             });
         };
+
+        CategoryViewController.prototype.Modal_SaveNew = function ($modal, $source) {
+            var title = this.$getNamedFieldWithinModal($modal, "title").val();
+            var excerpt = this.$getNamedFieldWithinModal($modal, "excerpt").val();
+            var saveData = {
+                "Title": title,
+                "Excerpt": excerpt
+            };
+            this.currOPM.CreateObject("AaltoGlobalImpact.OIP", "Category", saveData);
+        };
         return CategoryViewController;
     })(ViewControllerBase);
 

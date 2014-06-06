@@ -15,11 +15,10 @@ export class AppMain  {
         if(!wnd.ControllerCommon) {
             wnd.ControllerCommon = { };
         }
-        wnd.ControllerCommon.ModalButtonClick = function() {
-            alert("Mooodaaal!");
+        wnd.ControllerCommon.ModalButtonClick = function(event) {
             var $owningModal = $(this).closest(".oip-controller-modal");
             var controller = $owningModal.data("oip-controller-instance");
-            alert(controller.divID);
+            controller.handleModalEvent($owningModal, $(this), "click", event);
         };
         // Some tests below... not used for the time being
         /*

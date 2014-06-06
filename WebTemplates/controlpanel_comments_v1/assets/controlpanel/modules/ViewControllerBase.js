@@ -78,13 +78,25 @@ define(["require", "exports"], function(require, exports) {
             commandFunction.call(this);
         };
 
-        ViewControllerBase.prototype.Common_CloseOpenModal = function () {
-            var $hostDiv = $("#" + this.divID);
-            alert("KK!");
-            var modals = $hostDiv.find(".oip-controller-modal");
-            alert(modals.length.toString());
-            modals.foundation('reveal', 'close');
-            alert("PP");
+        ViewControllerBase.prototype.handleModalEvent = function ($modal, $source, eventName, eventData) {
+            var commandName = "Modal_" + $source.data("oip-command");
+            var commandFunction = this[commandName];
+            if (!_.isFunction(commandFunction))
+                throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;
+            ;
+            commandFunction.call(this, $modal, $source);
+        };
+
+        ViewControllerBase.prototype.Modal_Common_CloseOpenModal = function ($modal, $source) {
+            $modal.foundation('reveal', 'close');
+        };
+
+        ViewControllerBase.prototype.$getSelectedFieldWithinModal = function ($modal, selector) {
+            return $modal.find(selector);
+        };
+
+        ViewControllerBase.prototype.$getNamedFieldWithinModal = function ($modal, controlName) {
+            return $modal.find("[name='" + controlName + "']");
         };
 
         ViewControllerBase.prototype.$getSelectedFieldsWithin = function (selector) {

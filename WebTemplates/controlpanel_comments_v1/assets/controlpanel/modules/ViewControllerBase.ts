@@ -85,13 +85,25 @@ class ViewControllerBase implements IViewController{
         commandFunction.call(this);
     }
 
-    Common_CloseOpenModal() {
-        var $hostDiv:any = $("#" + this.divID);
-        alert("KK!");
-        var modals:any = $hostDiv.find(".oip-controller-modal");
-        alert(modals.length.toString());
-        modals.foundation('reveal', 'close');
-        alert("PP")
+    handleModalEvent($modal, $source, eventName, eventData):void {
+        var commandName = "Modal_" + $source.data("oip-command");
+        var commandFunction = this[commandName];
+        if(!_.isFunction(commandFunction))
+            throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;;
+        commandFunction.call(this, $modal, $source);
+    }
+
+
+    Modal_Common_CloseOpenModal($modal, $source) {
+        $modal.foundation('reveal', 'close');
+    }
+
+    $getSelectedFieldWithinModal($modal, selector:string) {
+        return $modal.find(selector);
+    }
+
+    $getNamedFieldWithinModal($modal, controlName):JQuery {
+        return $modal.find("[name='" + controlName + "']");
     }
 
     $getSelectedFieldsWithin(selector:string):JQuery {

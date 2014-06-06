@@ -66,6 +66,17 @@ class CategoryViewController extends ViewControllerBase {
             }
         );
     }
+
+    Modal_SaveNew($modal, $source) {
+        var title = this.$getNamedFieldWithinModal($modal, "title").val();
+        var excerpt = this.$getNamedFieldWithinModal($modal, "excerpt").val();
+        var saveData = {
+            "Title": title,
+            "Excerpt": excerpt,
+        }
+        this.currOPM.CreateObject("AaltoGlobalImpact.OIP", "Category", saveData);
+    }
+
 }
 
 export = CategoryViewController;
