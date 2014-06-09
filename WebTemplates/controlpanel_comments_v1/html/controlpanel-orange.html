@@ -31,7 +31,7 @@
         <li><label>Manage Posts</label></li>
         <li><a href="#" id="addEditContentMenuAnchor" class="offCanvasMenuAnchor">Add or edit posts</a></li>
         <li><a href="#" id="manageCategoriesMenuAnchor" class="offCanvasMenuAnchor">Add or edit categories</a></li>
-        <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">Upload files</a></li>
+        <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">File Manager</a></li>
         <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
         <li><label>Manage Pages</label></li>
             <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
@@ -40,13 +40,14 @@
             <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
 
         <li><label>General Options</label></li>
-        <li><a href="#" id="groupsMenuAnchor" class="offCanvasMenuAnchor">Groups</a></li>
+        <li><a href="#" id="collaboratorsMenuAnchor" class="offCanvasMenuAnchor">Collaborators</a></li>
         <li><a href="#">Meta</a></li>
     </ul>
 </aside>
 
 <section class="main-section">
 <div class="row" id="canvasMainSectionRow">
+
 <div class="large-12 columns contentSwitchableSection activeSection" id="addEditContentSection">
     <div class="row" id="cpOrangeTopRowSeparator"></div>
     <div class="row" id="postAndimportantWrapperRow">
@@ -125,7 +126,7 @@
                             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                                 <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
                                     <div class="title-field"><label>Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                                    <div class="published-field"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
+                                    <div class="published-field hide"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
                                     <div class="excerpt-field"><label>Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
                                     <div class="author-field"><label>Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
                                     <div class="categories-field"><label>Category
@@ -150,6 +151,20 @@
                             <div id="addNewTextareaDivHolder"><textarea id="addNewContentModal-content" style="height: 300px;" name="content"></textarea></div>
                         </div>
                     </div>
+
+                   <div class="row" id="addNewPost-attachmenRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
+                       <div class="small-6 medium-6 large-6 columns">
+                           <div><label>Attachment</label><input type="file" id="addNewBinaryModal-Data"></div>
+                       </div>
+                       <div class="small-6 medium-6 large-6 columns" style="vertical-align: middle; display: inline-block;">
+                           <a class="button secondary tiny" id="addNewContentModal-uploadFile1" style="margin-top:5%;">Upload</a>
+                       </div>
+                   </div> <!--Closes addNewPost-attachmenRow-->
+
+                    <div class="row" style="margin-top: 10px;" id="addNewContentAttachmentAlertRow">
+                        <div class="large-12 columns" id="addNewContentAttachmentAlertHOLDER">
+                        </div>
+                    </div> <!--Closes addNewContentAttachmentAlertRow-->
 
                     <div class="row" style="margin-top: 20px;">
                         <div class="large-12 columns">
@@ -249,6 +264,14 @@
                     </div>
                     <a id="close-alert-contentDelete-confirm" class="close-reveal-modal">&#215;</a>
                 </div>
+                <div id="alert-pageSave-successful" class="reveal-modal medium" data-reveal>
+                    <h3>The content of this page  was updated successfully.
+                    </h3>
+                    <div class="large-12 columns">
+                        <a class="button" id="close-alert-pageSave-successful-a" style="float: right;">Close</a>
+                    </div>
+                    <a id="close-alert-pageSave-successful" class="close-reveal-modal">&#215;</a>
+                </div>
 
             </div>
             <!-- +++Isotope content starts +++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -261,21 +284,136 @@
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="categoriesSection">
-    <h3>Manage Categories</h3>
-    <p>Set in the year 0 F.E. ("Foundation Era"), The Psychohistorians opens on Trantor, the capital of the 12,000-year-old Galactic Empire. Though the empire appears stable and powerful, it is slowly decaying in ways that parallel the decline of the Western Roman Empire. Hari Seldon, a mathematician and psychologist, has developed psychohistory, a new field of science and psychology that equates all possibilities in large societies to mathematics, allowing for the prediction of future events. </p>
-    <p>Using psychohistory, Seldon has discovered the declining nature of the Empire, angering the aristocratic members of the Committee of Public Safety, the de facto rulers of the Empire. The Committee considers Seldon's views and statements treasonous, and he is arrested along with young mathematician Gaal Dornick, who has arrived on Trantor to meet Seldon. Seldon is tried by the Committee and defends his beliefs, explaining his theories and predictions, including his belief that the Empire will collapse in 500 years and enter a 30,000-year dark age, to the Committee's members.</p>
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns" style="padding:0 15px 0 15px;">
+            <h4 class="boldieText" style="padding:0 15px 0 15px;"> Current available categories: </h4>
+            <div style="padding:0 15px 0 15px;">
+                <table id="categories-table" style="text-align: left;">
+                    <tr>
+                        <th width>Category</th>
+                        <th width>Description</th>
+                        <th width></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up">
+            <h4 class="boldieText">Category hierarchy:</h4>
+            <div data-alert class="alert-box secondary">
+                Dummy Category 1
+                <a href="#" class="close">&times;</a>
+            </div>
+            <div data-alert class="alert-box secondary">
+                Dummy Category 2
+                <a href="#" class="close">&times;</a>
+            </div>
+        </div>
+    </div>
+    <div class="small-12 medium-6 large-6 columns">
+        <div class="row">
+            <div class="large-12 columns">
+                <h4 class="boldieText">Add a new category:</h4>
+                <label>Category name
+                    <input type="text" placeholder="Example: News" id="addNewCategoryName-textInput"/>
+                </label>
+            </div>
+            <div class="large-12 columns">
+                <label>Description (optional)
+                    <input type="text" placeholder="Example: Use this category for relevant events" id="addNewCategoryDescription-textInput"/>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <a class="button" id="submitNewCategoryButton" style="float:right !important;">Submit</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
-    <h3>File Manager</h3>
-    <p>Set in the year 0 F.E. ("Foundation Era"), The Psychohistorians opens on Trantor, the capital of the 12,000-year-old Galactic Empire. Though the empire appears stable and powerful, it is slowly decaying in ways that parallel the decline of the Western Roman Empire. Hari Seldon, a mathematician and psychologist, has developed psychohistory, a new field of science and psychology that equates all possibilities in large societies to mathematics, allowing for the prediction of future events. </p>
-    <p>Using psychohistory, Seldon has discovered the declining nature of the Empire, angering the aristocratic members of the Committee of Public Safety, the de facto rulers of the Empire. The Committee considers Seldon's views and statements treasonous, and he is arrested along with young mathematician Gaal Dornick, who has arrived on Trantor to meet Seldon. Seldon is tried by the Committee and defends his beliefs, explaining his theories and predictions, including his belief that the Empire will collapse in 500 years and enter a 30,000-year dark age, to the Committee's members.</p>
+        <h4 class="boldieText">Uploading images or files</h4>
+        <div class="row">
+            <div class="large-6 columns">
+                <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                    <form id="form-addNewfile-fileUpload" action='new_file.php' method='POST' enctype='multipart/form-data'>
+                        <div id="addNewfile-image" style="width: 100%; height: 300px; background-color:#d4d4d4; text-align: center;"></div>
+                        <div class="large-6 columns"><input type ='file' name='myfile' id="addNewfile-fileInput"><p></div>
+                        <!--<a class="button" id="addNewContentModal-imageUpload-submit">Upload Photo</a>-->
+                    </form>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                    <form id="form-addNewFileForm" method='POST' enctype='multipart/form-data' data-abide="ajax">
+                        <label>Description
+                            <textarea id="form-addNewFileForm-description" placeholder="(optional)"></textarea>
+                        </label>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="large-12 columns">
+                                <a class="button" id="submitform-addNewFileForm" style="float: right;">Submit</a><div style="width: 10px;float: right;">&nbsp;</div>
+                                <a class="button" id="preview-addNewFileForm" style="float: right;">Preview (photo)</a>
+
+                            </div>
+                        </div>
+                        <div class="hide"><label>ID</label><input type="text" class="hide" id="form-addNewFileForm-id"/></div>
+                        <div class="hide"><label>Name</label><input type="text" class="hide" id="form-addNewFileForm-name"/></div>
+                        <div class="hide"><label>Upload Date</label><input type="text" class="hide" id="form-addNewFileForm-uploadDate"/></div>
+                        <div class="hide"><label>URL</label><input type="text" class="hide" id="form-addNewFileForm-URL"/></div>
+                        <div class="hide"><label>Extension</label><input type="text" class="hide" id="form-addNewFileForm-extension"/></div>
+                        <div class="hide"><label>Local Path</label><input type="text" class="hide" id="form-addNewFileForm-localPath"/></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns" id="fileTableDivContainer">
+                <table id="filemanager-table"style='table-layout:fixed;width:100%;'>
+                    <thead><tr><th style='width:20%;max-width: 130px;'>Preview</th>
+                                <th class='breakwords'>URL</th>
+                                <th>Description</th>
+                                <th>Uploaded</th></tr></thead>
+                    <tbody></tbody></table>
+            </div>
+        </div>
 </div>
 
-<div class="large-12 columns contentSwitchableSection" id="groupsSection">
-    <h3>Groups Section</h3>
-    <p>Set in the year 0 F.E. ("Foundation Era"), The Psychohistorians opens on Trantor, the capital of the 12,000-year-old Galactic Empire. Though the empire appears stable and powerful, it is slowly decaying in ways that parallel the decline of the Western Roman Empire. Hari Seldon, a mathematician and psychologist, has developed psychohistory, a new field of science and psychology that equates all possibilities in large societies to mathematics, allowing for the prediction of future events. </p>
-    <p>Using psychohistory, Seldon has discovered the declining nature of the Empire, angering the aristocratic members of the Committee of Public Safety, the de facto rulers of the Empire. The Committee considers Seldon's views and statements treasonous, and he is arrested along with young mathematician Gaal Dornick, who has arrived on Trantor to meet Seldon. Seldon is tried by the Committee and defends his beliefs, explaining his theories and predictions, including his belief that the Empire will collapse in 500 years and enter a 30,000-year dark age, to the Committee's members.</p>
+<div class="large-12 columns contentSwitchableSection" id="collaboratorsSection">
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns" style="padding:0 15px 0 15px;">
+            <h4 class="boldieText" style="padding:0 15px 0 15px;"> Current members: </h4>
+            <div style="padding:0 15px 0 15px;">
+                <table id="collaborators-table" style="text-align: left;">
+                    <tr>
+                        <th width>Name</th>
+                        <th width>Role</th>
+                        <th width></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up">
+
+        </div>
+    </div>
+
+        <div class="small-12 medium-6 large-6 columns">
+            <div class="row">
+                <div class="large-12 columns">
+                    <h4 class="boldieText">Add a new member:</h4>
+                    <label>Email Address
+                        <input type="text" placeholder="Example: someone@somewhere.com" id="addNewMember-textInput"/>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <a class="button" id="submitNewMemberButton" style="float:right !important;">Submit</a>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="homePageEditingSection">
@@ -368,7 +506,7 @@
                     <a href="#" id="researchPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
                 </div>
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="researchPageEditing-saveAllButton" class="button tiny">Save</a>
+                    <a id="researchPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
             </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
 
@@ -663,7 +801,6 @@
         return timestamp.toISOString();
     }
 
-
     $(document).foundation(
             {
                 reveal : {
@@ -755,19 +892,70 @@ $(document).ready(function(){
     $("#addNewContentModal-imageUpload-submit2").on('click', upload_editedContentModalForm_picture);
     $("#preview-addNewFileForm").on('click', upload_newFile);
     $("#submitform-addNewFileForm").on('click',upload_newFile);
-    /*$("#submitform-addNewFileForm").on('click', upload_newFile);*/
+    $("#researchPageEditing-saveAllButton").on('click',submitResearchPageData);
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#editContentModal-submit").on('click', submit_EditedContent_to_Server);
     $("#cancelEditContentModal").click(function () {$('#editContentModal').foundation('reveal', 'close');});
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
+    $("#close-alert-pageSave-successful-a").click(function () { $('#alert-pageSave-successful').foundation('reveal', 'close');});
     $("#create-group-button").click(function () {$('#create-group-modal').foundation('reveal', 'open');});
+    $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
+    $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose",{ click: closeAlertDynamicNotification } );
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
+    var global_uploaded_attachments=0;
 
     function test(){
         alert ("triggered!");
+    }
+
+    function closeAlertDynamicNotification (){
+
+        var $alertboxClicked = $(this).closest('.alert-box');
+        var alertboxClickedID=$alertboxClicked.attr('id')
+        /*$("#"+alertboxClickedID).foundation('alert-box', 'close');*/
+        $("#"+alertboxClickedID).removeClass("alert-box").removeClass("secondary").removeClass("articleText2").addClass("hide");
+        /*console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+$alertboxClicked.attr('id'));*/
+        console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+alertboxClickedID);
+
+    }
+
+    function submit_New_Binary_Form(){
+        /*var new_binary_title = $('#addNewBinaryModal-title').val();*/
+        var new_binary_title=$("#addNewContentModal-title").val();
+        /*var new_binary_description = $("#addNewBinaryModal-description").val();*/
+        var new_binary_description=$("#addNewContentModal-excerpt").val();
+        /*var new_binary_categories = $("#addNewBinaryCategorySelect option:selected").val();*/
+        var new_binary_categories= $("#addNewContentCategorySelect option:selected").val();
+        var saveData =
+        {
+            Title: new_binary_title,
+            Description: new_binary_description,
+            Object_Categories: new_binary_categories
+        };
+        tOP.AppendBinaryFileValuesToData("000", saveData, function() {
+            tOP.CreateObject("AaltoGlobalImpact.OIP", "BinaryFile", saveData);
+            /*$('#addNewBinaryModal').foundation('reveal', 'close');
+            setTimeout(function() {
+                $('#alert-addNewContent-successful-modal').foundation('reveal', 'open');
+                setTimeout(function() {
+                    location.reload();
+                    return false;
+                }, 2500);
+                return false;
+            }, 2500);*/
+        });
+        /*$('#addNewBinaryModal-title').val("");
+        $("#addNewBinaryModal-description").val("");*/
+        //clearing the fileInput
+        var newupdatefileinputID = $("#addNewBinaryModal-Data");
+        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        //here the "cleaning" or resetting of the input fields ends.
+        global_uploaded_attachments++;
+        var notify="<div data-alert class='alert-box secondary articleText2' id='addNewContent-attachment-alert"+global_uploaded_attachments+"'>Attachment "+global_uploaded_attachments+" uploaded successfully.<a class='close alertAnchorClose'>&times;</a></div>";
+        $("#addNewContentAttachmentAlertHOLDER").append(notify);
     }
 
     var saveNewComment = function(commentText, parentTextContentID) {
@@ -862,8 +1050,6 @@ $(document).ready(function(){
         });
     };
 
-
-
     function switchActiveCanvasSection (event){
         var triggerid= event.target.id;
         var currentactive=$(".activeSection").attr("id");
@@ -874,19 +1060,116 @@ $(document).ready(function(){
             $("#addEditContentSection").addClass("activeSection");
 
         if (triggerid=="manageCategoriesMenuAnchor")
+        {
             $("#categoriesSection").addClass("activeSection");
+            $("#categories-table td").remove();
+            $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
+                for (var i in contentData.CollectionContent) {
+                    var currentObject=contentData.CollectionContent[i];
+                    var currentDescription="No description available.";
+                    var currentID=currentObject.ID;
+                    var currentTitle=currentObject.Title ? currentObject.Title : "";
+                    var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentTitle + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;'>" + currentDescription + "</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteCategory = $categoryTableData.find("a");
+                    $deleteCategory.data("CategoryID", currentID);
+                    $deleteCategory.on("click", deleteComment);
+                    $("#categories-table").append($categoryTableData);
+                }//ends FOR loop
 
-        if (triggerid=="fileManagerMenuAnchor")
+            })//ends getJson
+        }
+        if (triggerid=="fileManagerMenuAnchor"){
             $("#fileManagerSection").addClass("activeSection");
+            $("#filemanager-table td").remove();
+            $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function(contentData) {
+                for (var i in contentData.CollectionContent) {
+                    var currentObject=contentData.CollectionContent[i];
+                    var currentPreview=currentObject.Data.FileExt;
+                    var currentURL=currentObject.Data.RelativeLocation;
+                    var currentDescription=currentObject.Description ? currentObject.Description:"No description available.";
+                    var currentID=currentObject.ID;
 
-        if (triggerid=="groupsMenuAnchor")
-            $("#groupsSection").addClass("activeSection");
-
+                    var $fileTableData=$("<tr><td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>" + currentPreview + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;font-size:11px;'>" + currentURL + "</td>"+
+                            "<td>"+currentDescription+"</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteFile = $fileTableData.find("a");
+                    $deleteFile.data("FileID", currentID);
+                    $deleteFile.on("click", deleteComment);
+                    $("#filemanager-table").append($fileTableData);
+                }//ends FOR loop
+            })//ends getJson
+        }
+        if (triggerid=="collaboratorsMenuAnchor"){
+            $("#collaboratorsSection").addClass("activeSection");
+            $("#collaborators-table td").remove();
+            $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
+                for (var i in contentData.Collaborators.CollectionContent) {
+                    var currentObject=contentData.Collaborators.CollectionContent[i];
+                    var currentID=currentObject.ID;
+                    var currentCollaboratorName=currentObject.CollaboratorName ? currentObject.CollaboratorName : "";
+                    var currentRole=currentObject.Role ? currentObject.Role : "";
+                    var $collaboratorTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentCollaboratorName + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;'>" + currentRole + "</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteMember = $collaboratorTableData.find("a");
+                    $deleteMember.data("MemberID", currentID);
+                    $deleteMember.on("click", deleteComment);
+                    $("#collaborators-table").append($collaboratorTableData);
+                }//ends FOR loop
+            })//ends JSON
+        }
         if (triggerid=="homePageEditingMenuAnchor")
             $("#homePageEditingSection").addClass("activeSection");
 
-        if (triggerid=="researchPageEditingMenuAnchor")
+        if (triggerid=="researchPageEditingMenuAnchor"){
             $("#researchPageEditingSection").addClass("activeSection");
+            $.getJSON('../../AaltoGlobalImpact.OIP/PagesContent/Research.json', function(contentData) {
+                for (var i in contentData.CollectionContent)
+                {
+                    var $caption1textarea = $("#researchPageEditingCarCaption1-textarea");
+                    var $caption2textarea = $("#researchPageEditingCarCaption2-textarea");
+                    var $nametextarea = $("#researchPageEditingContactName-input");
+                    var $jobtextarea = $("#researchPageEditingContactJobTitle-input");
+                    var $emailtextarea = $("#researchPageEditingContactEmail-input");
+                    var $contenttextarea = $("#researchPageEditingContent-redactortextarea");
+                    var currItem = contentData.CollectionContent[i];
+                    var caption1=currItem.SliderCaption1;
+                    var caption2=currItem.SliderCaption2;
+                    var name=currItem.ContactName;
+                    var job=currItem.ContactTitle;
+                    var email=currItem.ContactEmail;
+                    var content=currItem.Body;
+
+                    $caption1textarea.val(caption1);
+                    $caption2textarea.val(caption2);
+                    $nametextarea.val(name);
+                    $jobtextarea.val(job);
+                    $emailtextarea.val(email);
+
+                    $('#researchPageEditingContent-textareaDIV').empty();
+                    var textareaResearch = $("<textarea id='researchPageEditingContent-redactortextarea' style='height: 300px;'>");
+                    $('#researchPageEditingContent-textareaDIV').append(textareaResearch);
+                    $('#researchPageEditingContent-redactortextarea').val(content);
+                    $('#researchPageEditingContent-redactortextarea').redactor(
+                            {   minHeight: 300,
+                                maxHeight: 350,
+                                autoresize: false,
+                                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                            });
+                    /*if ((contentData.CollectionContent[i].Title===null)||(!contentData.CollectionContent[i].Title)||(currItem.Categories===null))
+                    {}else {then do stuff}*/
+                        /*if (contentData.CollectionContent[i].ImageData===null){var currentImage= "images/preview.jpg";}
+                        else { var imgID = contentData.CollectionContent[i].ImageData.ID;var imgExtension = contentData.CollectionContent[i].ImageData.AdditionalFormatFileExt;var currentImage= "livedata/MediaContent/"+imgID+"_320x240_crop"+imgExtension;}*/
+                        /*if ((contentData.CollectionContent[i].Author===null)||(!contentData.CollectionContent[i].Author) ) var currentAuthor="Aalto Global Impact";
+                        else var currentAuthor=contentData.CollectionContent[i].Author;*/
+                }//ends for loop
+                /*$caption1textarea.append(ImageSliderCaption1);*/
+            })
+        } //closes IF the research page editing was clicked
+
 
         if (triggerid=="businessPageEditingMenuAnchor")
             $("#businessPageEditingSection").addClass("activeSection");
@@ -913,7 +1196,6 @@ $(document).ready(function(){
             $("#site-dropdown-list").append(output);
         })
     }//--ends: Populating the list of websites TopLeft Navbar and Populates the GroupTables on the Groups TAB
-
 
     function submit_EditedContent_to_Server() {
         var edited_content_id = $("#editContentModal-id").val();
@@ -1212,12 +1494,10 @@ $(document).ready(function(){
         })//ends getJson
     }//Ends Function LaunchCommentModal
 
-
     function reLayout_isotope() {
         var $container = $('#contentDivContainer');
         $container.isotope( 'reLayout');
     }
-
     //--begins: Function get_content
     function get_content(){
         $("#contentDivContainer").empty();
@@ -1441,8 +1721,13 @@ $(document).ready(function(){
                     buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
                 });
         //clearing the fileInput
-        var newupdatefileinputID = $("#addNewContentModal-ImageData");
+        var newupdatefileinputID = $("#addNewContent-fileInput");
         newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        //here the "cleaning" or reseting of the input fields ends.
+        $("#addNewContentAttachmentAlertHOLDER").empty();
+        global_uploaded_attachments=0;
+        var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
+        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
         //here the "cleaning" or resetting of the input fields ends.
 
 
@@ -1487,17 +1772,17 @@ $(document).ready(function(){
     }
 
     function reveal_addNewContentModal () {
-        //$('#form-addNewContentModal-imageUpload').ajaxForm();//initializes the Image Upload Form
-        //$("#tooltip-choosePhotoHere").trigger("mouseover");
-
         getAndPopulateCategoryOptions();
         $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
         var currentPublished = ParseRawTimestampToISOString(null);
         $("#addNewContentModal-published").val(currentPublished);
         tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000" ,"ImageData", null);
         $('#addNewContentModal').foundation('reveal', 'open');
-        //getAndPopulate_Isotope_Filter_Categories ();
-        //$.when($('#addNewContentModal').foundation('reveal', 'open')).then(function(){$("#tooltip-choosePhotoHere").trigger("mouseover");}).fail(function(){console.log( "Couldn't reveal the addNewContentModal." );});
+
+        //***************initializing the inputfile elment for the attachments on the "add new content" modal
+        $("#addNewBinaryModal-Data").attr("data-oipfile-filegroupid", "addNewBinaryModal");
+        tOP.InitiateBinaryFileElements("addNewBinaryModal-Data", "000" ,"Data", null);
+        //***************ends the inputfile elment for the attachments on the "add new content" modal
     }
 
     function close_NewContent_Modal_Form(){
@@ -1524,6 +1809,11 @@ $(document).ready(function(){
         var newupdatefileinputID = $("#addNewContent-fileInput");
         newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
         //here the "cleaning" or reseting of the input fields ends.
+        $("#addNewContentAttachmentAlertHOLDER").empty();
+        global_uploaded_attachments=0;
+        var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
+        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
+        //here the "cleaning" or resetting of the input fields ends.
 
         $('#addNewContentModal').foundation('reveal', 'close');
     }
@@ -1537,7 +1827,6 @@ $(document).ready(function(){
             return false;
         }, 3000);
     }
-
 
     function close_contentDelete_confirm() {
         $('#alert-contentDelete-confirm').foundation('reveal', 'close');
@@ -1683,6 +1972,54 @@ $(document).ready(function(){
         $("#site-dropdown-list").append(new_site);
         $('#alert-groupadded-successful').foundation('reveal', 'open');
     };
+
+    function submitResearchPageData(){
+        var ImageSliderCaption1=$("#researchPageEditingCarCaption1-textarea").val();
+        var ImageSliderCaption2=$("#researchPageEditingCarCaption2-textarea").val();
+        var researchContactName=$("#researchPageEditingContactName-input").val();
+        var researchContactJobTitle=$("#researchPageEditingContactJobTitle-input").val();
+        var researchContactEmail=$("#researchPageEditingContactEmail-input").val();
+
+        var researchMainContent=$("#researchPageEditingContent-redactortextarea").val();
+
+        /*alert("ImageSliderCaption1: " +ImageSliderCaption1);*/
+        var multihandlerResponse = $.ajax({
+            url: "multihandler.php",
+            type: "POST",
+            data: ({action: "saveResearchPageData",
+                caption1: ImageSliderCaption1,
+                caption2: ImageSliderCaption2,
+                contactName: researchContactName,
+                contactTitle: researchContactJobTitle,
+                contactEmail: researchContactEmail,
+                mainContent: researchMainContent
+            }),
+            async: false
+        }).responseText;
+        console.log("Response from ajax call to multihandler.php (called from SubmitResearchPageData Function): "+multihandlerResponse);
+        /*alert("PHP response: " +multihandlerResponse);*/
+        /*$("#addNewfile-image").empty();*/
+        /*$("#form-addNewFileForm-description").empty();*/
+
+        /*$("#researchPageEditingCarCaption1-textarea").val("");
+        $("#researchPageEditingCarCaption2-textarea").val("");
+        $("#researchPageEditingContactName-input").val("");
+        $("#researchPageEditingContactJobTitle-input").val("");
+        $("#researchPageEditingContactEmail-input").val("");
+
+        $('#researchPageEditingContent-textareaDIV').empty();
+        var textareaResearch = $("<textarea id='researchPageEditingContent-redactortextarea' style='height: 300px;'>");
+        $('#researchPageEditingContent-textareaDIV').append(textareaResearch);
+        $('#researchPageEditingContent-redactortextarea').val("");
+        $('#researchPageEditingContent-redactortextarea').redactor(
+                {   minHeight: 300,
+                    maxHeight: 350,
+                    autoresize: false,
+                    buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                });*/
+        $('#alert-pageSave-successful').foundation('reveal', 'open');
+
+    }
 
 
 });
