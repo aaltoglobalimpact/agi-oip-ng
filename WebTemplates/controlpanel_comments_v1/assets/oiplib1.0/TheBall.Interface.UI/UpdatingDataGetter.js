@@ -68,9 +68,10 @@ var TheBall;
                     }
                 };
 
-                UpdatingDataGetter.prototype.RegisterDataURL = function (url, onUpdate, sourceUrls) {
+                UpdatingDataGetter.prototype.RegisterDataURL = function (url, onConstruct, sourceUrls) {
                     var me = this;
                     var rlObj = me.getOrRegisterUrl(url);
+                    rlObj.constructData = onConstruct;
                     if (sourceUrls) {
                         me.registerSourceUrls(sourceUrls);
                         rlObj.dataSourceObjects = sourceUrls.map(function (sourceUrl) {
@@ -130,4 +131,3 @@ var TheBall;
     })(TheBall.Interface || (TheBall.Interface = {}));
     var Interface = TheBall.Interface;
 })(TheBall || (TheBall = {}));
-//# sourceMappingURL=UpdatingDataGetter.js.map

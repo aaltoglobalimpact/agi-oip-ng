@@ -5,7 +5,6 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="DataConnectionManager.ts" />
 
-
 module TheBall.Interface.UI {
     export class BinaryFileItem {
         constructor(public inputElement:HTMLInputElement, public file:any, public content:string) {
@@ -144,16 +143,17 @@ module TheBall.Interface.UI {
             $form.submit();
             $form.empty();
         }
-        ExecuteOperationWithAjax(operationFullName:string, contentObject:any) {
+        ExecuteOperationWithAjax(operationFullName:string, contentObject:any, callBack?:any) {
             var jsonData = JSON.stringify(contentObject);
+            if(!callBack)
+                callBack = function() {};
             $.ajax(
                 { type: "POST",
                     url: "?operation=" + operationFullName,
                     dataType: "json",
                     contentType: "application/json",
                     data: jsonData,
-                    success: function() {
-                    },
+                    success: callBack,
                     error: function(){
                     }
                 }

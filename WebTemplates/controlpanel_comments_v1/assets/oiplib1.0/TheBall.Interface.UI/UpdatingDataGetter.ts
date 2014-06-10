@@ -71,9 +71,10 @@ module TheBall.Interface.UI {
             }
         }
 
-        RegisterDataURL(url:string, onUpdate:UpdateDataObjectEvent, sourceUrls:string[]) : ResourceLocatedObject {
+        RegisterDataURL(url:string, onConstruct:ConstructDataObject, sourceUrls:string[]) : ResourceLocatedObject {
             var me = this;
             var rlObj = me.getOrRegisterUrl(url);
+            rlObj.constructData = onConstruct;
             if(sourceUrls) {
                 me.registerSourceUrls(sourceUrls);
                 rlObj.dataSourceObjects = sourceUrls.map(sourceUrl => {

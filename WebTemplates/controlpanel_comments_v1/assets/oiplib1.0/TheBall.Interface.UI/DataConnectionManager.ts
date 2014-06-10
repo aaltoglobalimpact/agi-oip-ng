@@ -35,14 +35,14 @@ module TheBall.Interface.UI {
             //var templateDataSource =
             /*
              var fetchUrl = currObject.UIExtension.FetchedUrl;
-            console.log("Fetching from url: " + fetchUrl);
-            $.ajax( { url : fetchUrl, cache: false,
-                success: function(updatedObject:TrackedObject) {
-                    dcm.SetObjectInStorage(updatedObject);
-                    updatedObject.UIExtension.LastUpdatedTick = triggeredTick;
-                    updatedObject.UIExtension.ChangeListeners.forEach(func => func(updatedObject));
-                }
-            });*/
+             console.log("Fetching from url: " + fetchUrl);
+             $.ajax( { url : fetchUrl, cache: false,
+             success: function(updatedObject:TrackedObject) {
+             dcm.SetObjectInStorage(updatedObject);
+             updatedObject.UIExtension.LastUpdatedTick = triggeredTick;
+             updatedObject.UIExtension.ChangeListeners.forEach(func => func(updatedObject));
+             }
+             });*/
         }
     }
 
