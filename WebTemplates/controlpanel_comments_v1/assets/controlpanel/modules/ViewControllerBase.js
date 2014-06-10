@@ -58,7 +58,9 @@ define(["require", "exports"], function(require, exports) {
                     callBack.call(this);
                 };
             }
-            this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+
+            //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+            this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
         };
 
         ViewControllerBase.prototype.VisibleTemplateRender = function () {
@@ -75,7 +77,7 @@ define(["require", "exports"], function(require, exports) {
             if (!_.isFunction(commandFunction))
                 throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;
             ;
-            commandFunction.call(this);
+            commandFunction.call(this, $source, eventName, eventData);
         };
 
         ViewControllerBase.prototype.handleModalEvent = function ($modal, $source, eventName, eventData) {

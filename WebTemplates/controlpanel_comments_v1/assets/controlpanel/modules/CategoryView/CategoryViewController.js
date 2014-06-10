@@ -25,11 +25,25 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 me.currUDG.GetData(me.dataUrl, function (callBackData) {
                     dust.render("CategoryEditor.dust", callBackData, function (error, output) {
                         var $hostDiv = $("#" + me.divID);
+                        $hostDiv.empty();
                         $hostDiv.html(output);
+                        me.$currentModal = me.$getNamedFieldWithin("AddCategoryModal");
                         $initialDeferred.resolve();
                     });
                 });
             });
+        };
+
+        CategoryViewController.prototype.ReInitialize = function () {
+            if (this.$currentModal)
+                this.$currentModal.remove();
+            else
+                alert("NO MODAL");
+            var $hostDiv = $("#" + this.divID);
+            $hostDiv.empty();
+            var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);
+            vc.Initialize(this.dataUrl);
+            vc.VisibleTemplateRender();
         };
 
         CategoryViewController.prototype.VisibleTemplateRender = function () {
@@ -49,6 +63,21 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $modal.foundation('reveal', 'open');
         };
 
+        CategoryViewController.prototype.DeleteObject = function ($source) {
+            var id = $source.data("objectid");
+            var domainName = $source.data("domainname");
+            var objectName = $source.data("objectname");
+
+            var me = this;
+            this.currOPM.DeleteIndependentObject(domainName, objectName, id, function (responseData) {
+                me.ReInitialize();
+            });
+            /*
+            data-objectid="{ID}" data-objectname="{Name}" data-domainname="{SemanticDomainName}"
+            
+            */
+        };
+
         CategoryViewController.prototype.SaveCategoryHierarchy = function () {
             var $nestableTree = this.$getNamedFieldWithin("nestableTree");
             var list = $nestableTree.length ? $nestableTree : $($nestableTree);
@@ -56,6 +85,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             /*output = list.data('output');*/
             var jsonData;
             jsonData = JSON.stringify(list.nestable('serialize'));
+            var me = this;
             $.ajax({
                 type: "POST",
                 url: "?operation=AaltoGlobalImpact.OIP.SetCategoryHierarchyAndOrderInNodeSummary",
@@ -63,7 +93,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 contentType: "application/json",
                 data: jsonData,
                 success: function () {
-                    //window.location.reload(false);
+                    me.ReInitialize();
                 },
                 error: function () {
                     alert("Error Occurred at Save");
@@ -79,7 +109,13 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "Title": title,
                 "Excerpt": excerpt
             };
-            this.currOPM.CreateObject("AaltoGlobalImpact.OIP", "Category", saveData);
+            var me = this;
+            this.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "Category", saveData, function (obj) {
+                $modal.foundation('reveal', 'close');
+                me.ReInitialize();
+            }, function () {
+                alert("Save failed!");
+            });
         };
         return CategoryViewController;
     })(ViewControllerBase);

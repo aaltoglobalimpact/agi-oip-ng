@@ -94,7 +94,18 @@ var TheBall;
                         var $hiddenInput = this.getHiddenInput(realKey, objectData[key]);
                         $form.append($hiddenInput);
                     }
-                    $form.submit();
+
+                    //$form.submit();
+                    $.ajax({
+                        type: "POST",
+                        data: $form.serialize(),
+                        success: function () {
+                            alert("Save successful");
+                        },
+                        fail: function () {
+                            alert("Save failed");
+                        }
+                    });
                     $form.empty();
                 };
                 OperationManager.prototype.SaveObject = function (objectID, objectETag, dataContents) {
@@ -106,14 +117,28 @@ var TheBall;
                     this.SaveIndependentObject(obj.ID, obj.RelativeLocation, obj.MasterETag, dataContents);
                 };
 
-                OperationManager.prototype.DeleteIndependentObject = function (domainName, objectName, objectID) {
+                OperationManager.prototype.DeleteIndependentObject = function (domainName, objectName, objectID, successCallback, failureCallback) {
                     var $form = this.$submitForm;
                     $form.empty();
                     $form.append(this.getHiddenInput("ObjectDomainName", domainName));
                     $form.append(this.getHiddenInput("ObjectName", objectName));
                     $form.append(this.getHiddenInput("ObjectID", objectID));
                     $form.append(this.getHiddenInput("ExecuteOperation", "DeleteSpecifiedInformationObject"));
-                    $form.submit();
+
+                    //$form.submit();
+                    $.ajax({
+                        type: "POST",
+                        data: $form.serialize(),
+                        //dataType: "json",
+                        success: function (responseData) {
+                            if (successCallback)
+                                successCallback(responseData);
+                        },
+                        error: function () {
+                            if (failureCallback)
+                                failureCallback();
+                        }
+                    });
                     $form.empty();
                 };
 
@@ -128,7 +153,35 @@ var TheBall;
                     this.DeleteIndependentObject(domainName, objectName, objectID);
                 };
 
-                OperationManager.prototype.ExecuteOperationWithForm = function (operationName, operationParameters) {
+                OperationManager.prototype.CreateObjectAjax = function (domainName, objectName, dataContents, successCallback, failureCallback) {
+                    var $form = this.$submitForm;
+                    $form.empty();
+                    $form.append(this.getHiddenInput("ObjectDomainName", domainName));
+                    $form.append(this.getHiddenInput("ObjectName", objectName));
+                    $form.append(this.getHiddenInput("ExecuteOperation", "CreateSpecifiedInformationObjectWithValues"));
+                    for (var key in dataContents) {
+                        var $hiddenInput = this.getHiddenInput(key, dataContents[key]);
+                        $form.append($hiddenInput);
+                    }
+
+                    //$form.submit();
+                    $.ajax({
+                        type: "POST",
+                        data: $form.serialize(),
+                        //dataType: "json",
+                        success: function (responseData) {
+                            if (successCallback)
+                                successCallback(responseData);
+                        },
+                        error: function () {
+                            if (failureCallback)
+                                failureCallback();
+                        }
+                    });
+                    $form.empty();
+                };
+
+                OperationManager.prototype.ExecuteOperationWithForm = function (operationName, operationParameters, successCallback, failureCallback) {
                     var $form = this.$submitForm;
                     $form.empty();
                     $form.append(this.getHiddenInput("ExecuteOperation", operationName));
@@ -136,7 +189,19 @@ var TheBall;
                         var $hiddenInput = this.getHiddenInput(key, operationParameters[key]);
                         $form.append($hiddenInput);
                     }
-                    $form.submit();
+
+                    //$form.submit();
+                    $.ajax({
+                        type: "POST",
+                        data: $form.serialize(),
+                        dataType: "json",
+                        success: function (responseData) {
+                            successCallback(responseData);
+                        },
+                        fail: function () {
+                            failureCallback();
+                        }
+                    });
                     $form.empty();
                 };
                 OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, callBack) {

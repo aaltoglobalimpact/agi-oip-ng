@@ -28,7 +28,7 @@
     </div>
     <div class="large-6 columns">
         <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-            <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
+            <form id="form-addNewContentModal">
                 <div class="title-field"><label>Title<input type="text" name="title" required/></label><small class="error">A title to category is required.</small></div>
                 <div class="excerpt-field"><label>Excerpt<input type="text" name="excerpt" required/></label><small class="error">An excerpt to category is required.</small></div>
             </form>

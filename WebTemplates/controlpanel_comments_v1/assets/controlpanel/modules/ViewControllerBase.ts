@@ -66,7 +66,8 @@ class ViewControllerBase implements IViewController{
                 callBack.call(this);
             };
         }
-        this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+        //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+        this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
     }
 
     VisibleTemplateRender():void {
@@ -82,7 +83,7 @@ class ViewControllerBase implements IViewController{
         var commandFunction = this[commandName];
         if(!_.isFunction(commandFunction))
             throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;;
-        commandFunction.call(this);
+        commandFunction.call(this, $source, eventName, eventData);
     }
 
     handleModalEvent($modal, $source, eventName, eventData):void {
