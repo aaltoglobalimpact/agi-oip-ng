@@ -41,7 +41,7 @@
 
         <li><label>General Options</label></li>
         <li><a href="#" id="collaboratorsMenuAnchor" class="offCanvasMenuAnchor">Collaborators</a></li>
-        <li><a href="#">Meta</a></li>
+        <!--<li><a href="#">Meta</a></li>-->
     </ul>
 </aside>
 
@@ -285,54 +285,66 @@
 
 <div class="large-12 columns contentSwitchableSection" id="categoriesSection">
     <div class="row">
-        <div class="small-12 medium-6 large-6 columns" style="padding:0 15px 0 15px;">
-            <h4 class="boldieText" style="padding:0 15px 0 15px;"> Current available categories: </h4>
-            <div style="padding:0 15px 0 15px;">
+        <div class="small-12 medium-6 large-6 columns">
+            <h4 class="boldieText"> Current available categories: </h4>
+            <div>
                 <table id="categories-table" style="text-align: left;">
                     <tr>
-                        <th width>Category</th>
-                        <th width>Description</th>
-                        <th width></th>
+                        <th width="10%">Category</th>
+                        <th width="80%">Description</th>
+                        <th width="10%"></th>
                     </tr>
                 </table>
             </div>
         </div>
-        <div class="small-12 medium-6 large-6 columns show-for-medium-up">
-            <h4 class="boldieText">Category hierarchy:</h4>
-            <div data-alert class="alert-box secondary">
-                Dummy Category 1
-                <a href="#" class="close">&times;</a>
-            </div>
-            <div data-alert class="alert-box secondary">
-                Dummy Category 2
-                <a href="#" class="close">&times;</a>
-            </div>
-        </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up"><h6 class="discreetTextColor"></h6></div>
     </div>
-    <div class="small-12 medium-6 large-6 columns">
-        <div class="row">
-            <div class="large-12 columns">
+    <div class="row">
+            <div class="small-12 medium-6 large-6 columns">
+                <a class="button small" id="categoriesSection-hierarchyModal-launchModalButton" style="float: right;">Define hierarchy</a>
+            </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up"><h6 class="discreetTextColor"></h6></div>
+    </div>
+
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns">
                 <h4 class="boldieText">Add a new category:</h4>
                 <label>Category name
                     <input type="text" placeholder="Example: News" id="addNewCategoryName-textInput"/>
                 </label>
-            </div>
-            <div class="large-12 columns">
-                <label>Description (optional)
-                    <input type="text" placeholder="Example: Use this category for relevant events" id="addNewCategoryDescription-textInput"/>
-                </label>
-            </div>
         </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up"><h6 class="discreetTextColor"></h6></div>
+    </div>
         <div class="row">
-            <div class="large-12 columns">
+            <div class="small-12 medium-6 large-6 columns">
                 <a class="button" id="submitNewCategoryButton" style="float:right !important;">Submit</a>
             </div>
+        </div>
+    <div class="row" id="categoriesSectionModalRow">
+        <div id="categoriesSection-hierarchyModal" class="reveal-modal medium" data-reveal>
+            <h3 class="boldieText">Defining subcategories and hierarchy</h3>
+            <h6 class="discreetTextColor">Drag the categories up/down and/or sideways to define subcategories and hierarchy, then save your changes.</h6>
+            <div class="row" id="categoriesSection-hierarchyModal-contentRow">
+                <div style="width: 80%;margin:auto;">
+                    <img src="../assets/controlpanel/images/hierarchy.png" style="padding:20px 0 20px 0;">
+                </div>
+            </div>
+
+            <div class="row" id="categoriesSection-hierarchyModal-buttonsRow">
+            <div class="small-9 medium-9 large-9 columns">
+                <a class="button" id="categoriesSection-hierarchyModal-SaveCustomButton" style="float: right;">Save Changes</a>
+            </div>
+            <div class="small-3 medium-3 large-3 columns">
+                <a class="button" id="categoriesSection-hierarchyModal-CloseCustomButton" style="float: right;">Close</a>
+            </div>
+        </div> <!--Closes categoriesSection-hierarchyModal-buttonsRow-->
+            <a id="categoriesSection-hierarchyModal-factoryCloseButton" class="close-reveal-modal">&#215;</a>
         </div>
     </div>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
-        <h4 class="boldieText">Uploading images or files</h4>
+        <h4 class="boldieText">Uploading images/files</h4>
         <div class="row">
             <div class="large-6 columns">
                 <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
@@ -381,38 +393,36 @@
 
 <div class="large-12 columns contentSwitchableSection" id="collaboratorsSection">
     <div class="row">
-        <div class="small-12 medium-6 large-6 columns" style="padding:0 15px 0 15px;">
-            <h4 class="boldieText" style="padding:0 15px 0 15px;"> Current members: </h4>
-            <div style="padding:0 15px 0 15px;">
+        <div class="small-12 medium-6 large-6 columns">
+            <h4 class="boldieText"> Current members: </h4>
+            <div>
                 <table id="collaborators-table" style="text-align: left;">
                     <tr>
-                        <th width>Name</th>
-                        <th width>Role</th>
-                        <th width></th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th></th>
                     </tr>
                 </table>
             </div>
         </div>
-        <div class="small-12 medium-6 large-6 columns show-for-medium-up">
-
-        </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up"></div>
     </div>
 
-        <div class="small-12 medium-6 large-6 columns">
-            <div class="row">
-                <div class="large-12 columns">
-                    <h4 class="boldieText">Add a new member:</h4>
-                    <label>Email Address
-                        <input type="text" placeholder="Example: someone@somewhere.com" id="addNewMember-textInput"/>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
-                    <a class="button" id="submitNewMemberButton" style="float:right !important;">Submit</a>
-                </div>
-            </div>
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Add a new member:</h4></div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-3 large-3 columns"><label>Email Address<input type="text" placeholder="Example: someone@somewhere.com" id="addNewMember-textInput"/></label></div>
+        <div class="small-12 medium-3 large-3 columns"><label>Role<select class="discreetTextColor" style="font-size: 12px;">
+                <option value="administrator">Administrator</option>
+                <option value="initiator">Initiator</option>
+                <option value="collaborator">Collaborator</option>
+                <option value="subscriber">Subscriber</option></select></label>
         </div>
+        <div class="small-12 medium-6 large-6 columns show-for-medium-up"></div>
+    </div>
+
+    <div class="row"><div class="small-12 medium-6 large-6 columns"><a class="button" id="submitNewMemberButton" style="float:right !important;">Submit</a></div></div>
 
 </div>
 
@@ -901,6 +911,8 @@ $(document).ready(function(){
     $("#create-group-button").click(function () {$('#create-group-modal').foundation('reveal', 'open');});
     $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
     $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose",{ click: closeAlertDynamicNotification } );
+    $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
+    $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
@@ -1057,20 +1069,24 @@ $(document).ready(function(){
         $("#"+currentactive).removeClass("activeSection");
 
         if (triggerid=="addEditContentMenuAnchor")
+        {
             $("#addEditContentSection").addClass("activeSection");
-
+        }
         if (triggerid=="manageCategoriesMenuAnchor")
         {
             $("#categoriesSection").addClass("activeSection");
-            $("#categories-table td").remove();
+            /*$("#categories-table td").remove();*/
+            $("#categories-table").empty();
             $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
+                var tableheaders="<tr><th width='10%'>Category</th><th width='80%'>Description</th><th width='10%'></th></tr>";
+                $("#categories-table").append(tableheaders);
                 for (var i in contentData.CollectionContent) {
                     var currentObject=contentData.CollectionContent[i];
                     var currentDescription="No description available.";
                     var currentID=currentObject.ID;
                     var currentTitle=currentObject.Title ? currentObject.Title : "";
-                    var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentTitle + "</td>" +
-                            "<td style='text-transform:none !important;font-style:italic;'>" + currentDescription + "</td>"+
+                    var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;' class='fancyTextColor'>" + currentTitle + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;font-size: 12px;'>" + currentDescription + "</td>"+
                             "<td><a>Delete</a></td></tr>");
                     var $deleteCategory = $categoryTableData.find("a");
                     $deleteCategory.data("CategoryID", currentID);
@@ -1080,10 +1096,14 @@ $(document).ready(function(){
 
             })//ends getJson
         }
-        if (triggerid=="fileManagerMenuAnchor"){
+        if (triggerid=="fileManagerMenuAnchor")
+        {
             $("#fileManagerSection").addClass("activeSection");
-            $("#filemanager-table td").remove();
+            /*$("#filemanager-table td").remove();*/
+            $("#filemanager-table").empty();
             $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function(contentData) {
+                var tableheaders="<thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody></tbody>";
+                $("#filemanager-table").append(tableheaders);
                 for (var i in contentData.CollectionContent) {
                     var currentObject=contentData.CollectionContent[i];
                     var currentPreview=currentObject.Data.FileExt;
@@ -1102,10 +1122,13 @@ $(document).ready(function(){
                 }//ends FOR loop
             })//ends getJson
         }
-        if (triggerid=="collaboratorsMenuAnchor"){
+        if (triggerid=="collaboratorsMenuAnchor")
+        {
             $("#collaboratorsSection").addClass("activeSection");
-            $("#collaborators-table td").remove();
+            $("#collaborators-table").empty();
             $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
+                var tableheaders="<tr><th width='30%'>Name</th><th width='60%'>Role</th><th width='10%'></th></tr>";
+                $("#collaborators-table").append(tableheaders);
                 for (var i in contentData.Collaborators.CollectionContent) {
                     var currentObject=contentData.Collaborators.CollectionContent[i];
                     var currentID=currentObject.ID;
@@ -1122,9 +1145,11 @@ $(document).ready(function(){
             })//ends JSON
         }
         if (triggerid=="homePageEditingMenuAnchor")
+        {
             $("#homePageEditingSection").addClass("activeSection");
-
-        if (triggerid=="researchPageEditingMenuAnchor"){
+        }
+        if (triggerid=="researchPageEditingMenuAnchor")
+        {
             $("#researchPageEditingSection").addClass("activeSection");
             $.getJSON('../../AaltoGlobalImpact.OIP/PagesContent/Research.json', function(contentData) {
                 for (var i in contentData.CollectionContent)
@@ -1169,13 +1194,14 @@ $(document).ready(function(){
                 /*$caption1textarea.append(ImageSliderCaption1);*/
             })
         } //closes IF the research page editing was clicked
-
-
         if (triggerid=="businessPageEditingMenuAnchor")
+        {
             $("#businessPageEditingSection").addClass("activeSection");
-
+        }
         if (triggerid=="innovationsPageEditingMenuAnchor")
+        {
             $("#innovationsPageEditingSection").addClass("activeSection");
+        }
     }
 
     function populateWebsitesMenu_and_groupsTabTable (){
