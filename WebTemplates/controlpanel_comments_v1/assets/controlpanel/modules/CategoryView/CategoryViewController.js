@@ -35,10 +35,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         };
 
         CategoryViewController.prototype.ReInitialize = function () {
-            if (this.$currentModal)
+            if (this.$currentModal) {
                 this.$currentModal.remove();
-            else
-                alert("NO MODAL");
+            }
             var $hostDiv = $("#" + this.divID);
             $hostDiv.empty();
             var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);

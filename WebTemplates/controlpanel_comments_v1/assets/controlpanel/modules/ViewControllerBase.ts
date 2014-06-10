@@ -30,6 +30,7 @@ class ViewControllerBase implements IViewController{
 
 
         // The reason found - foundation MOVES the modal on reveal elsewhere on the element tree...
+        $hostDiv.off("click");
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });

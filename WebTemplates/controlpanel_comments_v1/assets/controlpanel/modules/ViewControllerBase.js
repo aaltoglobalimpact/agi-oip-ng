@@ -23,6 +23,7 @@ define(["require", "exports"], function(require, exports) {
             // ... FAILS TO FIRE on the modal again... => so we're back at direct div + class filter
             //$(document).on("click", "#" + this.divID + " .oip-controller-command", function(event) {
             // The reason found - foundation MOVES the modal on reveal elsewhere on the element tree...
+            $hostDiv.off("click");
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
