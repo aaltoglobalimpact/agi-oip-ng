@@ -51,8 +51,13 @@ class CategoryViewController extends ViewControllerBase {
         var objectName = $source.data("objectname");
 
         var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Deleting...</h2>' });
         this.currOPM.DeleteIndependentObject(domainName, objectName, id, function(responseData) {
-            me.ReInitialize();
+            setTimeout(function() {
+                jq.unblockUI();
+                me.ReInitialize();
+            }, 2500);
         });
         /*
          data-objectid="{ID}" data-objectname="{Name}" data-domainname="{SemanticDomainName}"
@@ -67,6 +72,8 @@ class CategoryViewController extends ViewControllerBase {
         var jsonData;
         jsonData = JSON.stringify(list.nestable('serialize'));
         var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Saving...</h2>' });
         $.ajax(
             { type: "POST",
                 url: "?operation=AaltoGlobalImpact.OIP.SetCategoryHierarchyAndOrderInNodeSummary",
@@ -74,9 +81,13 @@ class CategoryViewController extends ViewControllerBase {
                 contentType: "application/json",
                 data: jsonData,
                 success: function() {
-                    me.ReInitialize();
+                    setTimeout(function() {
+                        jq.unblockUI();
+                        me.ReInitialize();
+                    }, 2500);
                 },
                 error: function(){
+                    jq.unblockUI();
                     alert("Error Occurred at Save");
                     //window.location.reload(true);
                 }
@@ -92,10 +103,16 @@ class CategoryViewController extends ViewControllerBase {
             "Excerpt": excerpt,
         }
         var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Saving...</h2>' });
         this.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "Category", saveData, function(obj) {
-            $modal.foundation('reveal', 'close');
-            me.ReInitialize();
+            setTimeout(function() {
+                jq.unblockUI();
+                $modal.foundation('reveal', 'close');
+                me.ReInitialize();
+            }, 2500);
         }, function() {
+            jq.unblockUI();
             alert("Save failed!");
         });
     }

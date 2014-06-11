@@ -87,16 +87,20 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var me = this;
             var profileImageID = this.currentData.GroupProfile.ProfileImage.ID;
             var iconImageID = this.currentData.GroupProfile.IconImage.ID;
+            var jq = $;
 
             //alert(profileImageID);
             //alert(objectID);
             this.currOPM.AppendBinaryFileValuesToData(objectID, saveData, function () {
+                jq.blockUI({ message: '<h2>Saving...</h2>' });
+
                 //alert(JSON.stringify(saveData));
                 me.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData, function () {
-                    alert("Save succesful!");
+                    jq.unblockUI();
                     me.ReInitialize();
                 }, function () {
                     alert("Save failed!");
+                    jq.unblockUI();
                 }, function (keyName) {
                     if (keyName == "FileEmbedded_" + objectID + "_ProfileImage")
                         keyName = "FileEmbedded_" + profileImageID + "_ImageData";
