@@ -7,13 +7,22 @@
                     <div class="controls">
                         <div>Profile image</div>
                     </div>
+                    <div class="large-6 columns" style="padding-right: 0;">
+                        <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
+                            <input type="file" name="tmpProfileImage">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="clearfix" style="float: left;">
                 <div class="control-group"><label class="control-label">Group Icon Image</label>
-
                     <div class="controls">
                         <div>Icon image</div>
+                    </div>
+                    <div class="large-6 columns" style="padding-right: 0;">
+                        <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
+                            <input type="file" name="tmpIconImage">
+                        </div>
                     </div>
                 </div>
             </div>

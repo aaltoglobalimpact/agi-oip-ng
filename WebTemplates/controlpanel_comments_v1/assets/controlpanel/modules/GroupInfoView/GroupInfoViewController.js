@@ -39,6 +39,23 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var groupProfile = this.currentData.GroupProfile;
 
             //alert(JSON.stringify(groupProfile));
+            var $profileImageInput = this.$getNamedFieldWithin("tmpProfileImage");
+            if ($profileImageInput.length == 1) {
+                $profileImageInput.attr("data-oipfile-filegroupid", "groupProfileImage");
+                var currentObject = groupProfile.ProfileImage;
+                var imageSizeString = "256";
+                var currentImagePath = currentObject && currentObject.ImageData ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt : null;
+                this.currOPM.InitiateBinaryFileElementsAroundInput($profileImageInput, groupProfile.ID, "ProfileImage", currentImagePath, null);
+            }
+
+            var $iconImageInput = this.$getNamedFieldWithin("tmpIconImage");
+            if ($iconImageInput.length == 1) {
+                $iconImageInput.attr("data-oipfile-filegroupid", "groupIconImage");
+                currentObject = groupProfile.IconImage;
+                currentImagePath = currentObject && currentObject.ImageData ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt : null;
+                this.currOPM.InitiateBinaryFileElementsAroundInput($iconImageInput, groupProfile.ID, "IconImage", currentImagePath, null);
+            }
+
             this.$getNamedFieldWithin("GroupName").val(groupProfile.GroupName);
             this.$getNamedFieldWithin("Description").val(groupProfile.Description);
             this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val(groupProfile.OrganizationsAndGroupsLinkedToUs);
@@ -67,7 +84,27 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
                 WwwSiteToPublishTo: wwwSiteToPublishTo
             };
-            this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
+            var me = this;
+            var profileImageID = this.currentData.GroupProfile.ProfileImage.ID;
+            var iconImageID = this.currentData.GroupProfile.IconImage.ID;
+
+            //alert(profileImageID);
+            //alert(objectID);
+            this.currOPM.AppendBinaryFileValuesToData(objectID, saveData, function () {
+                alert(JSON.stringify(saveData));
+                me.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData, function () {
+                    alert("Save succesful!");
+                    me.ReInitialize();
+                }, function () {
+                    alert("Save failed!");
+                }, function (keyName) {
+                    if (keyName == "FileEmbedded_" + objectID + "_ProfileImage")
+                        keyName = "FileEmbedded_" + profileImageID + "_ImageData";
+                    if (keyName == "FileEmbedded_" + objectID + "_IconImage")
+                        keyName = "FileEmbedded_" + iconImageID + "_ImageData";
+                    return keyName;
+                });
+            });
         };
         return GroupInfoViewController;
     })(ViewControllerBase);
