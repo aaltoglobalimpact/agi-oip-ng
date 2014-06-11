@@ -40,6 +40,11 @@ class CategoryViewController extends ViewControllerBase {
         // alert("categories invisible renderer" + this.divID);
     }
 
+    OpenModalCategoryHierarchyModal() {
+        var $modal:any = this.$getNamedFieldWithin("CategoryHierarchyModal");
+        $modal.foundation('reveal', 'open');
+    }
+
     OpenModalAddCategoryModal() {
         var $modal:any = this.$getNamedFieldWithin("AddCategoryModal");
         $modal.foundation('reveal', 'open');
@@ -65,8 +70,8 @@ class CategoryViewController extends ViewControllerBase {
          */
     }
 
-    SaveCategoryHierarchy() {
-        var $nestableTree = this.$getNamedFieldWithin("nestableTree");
+    Modal_SaveCategoryHierarchy($modal) {
+        var $nestableTree = this.$getNamedFieldWithinModal($modal, "nestableTree");
         var list:any = $nestableTree.length ? $nestableTree : $($nestableTree);
         /*output = list.data('output');*/
         var jsonData;
@@ -83,6 +88,7 @@ class CategoryViewController extends ViewControllerBase {
                 success: function() {
                     setTimeout(function() {
                         jq.unblockUI();
+                        $modal.foundation('reveal', 'close');
                         me.ReInitialize();
                     }, 2500);
                 },

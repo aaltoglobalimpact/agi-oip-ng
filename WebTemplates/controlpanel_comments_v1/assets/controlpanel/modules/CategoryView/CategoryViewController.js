@@ -45,6 +45,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             // alert("categories invisible renderer" + this.divID);
         };
 
+        CategoryViewController.prototype.OpenModalCategoryHierarchyModal = function () {
+            var $modal = this.$getNamedFieldWithin("CategoryHierarchyModal");
+            $modal.foundation('reveal', 'open');
+        };
+
         CategoryViewController.prototype.OpenModalAddCategoryModal = function () {
             var $modal = this.$getNamedFieldWithin("AddCategoryModal");
             $modal.foundation('reveal', 'open');
@@ -70,8 +75,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             */
         };
 
-        CategoryViewController.prototype.SaveCategoryHierarchy = function () {
-            var $nestableTree = this.$getNamedFieldWithin("nestableTree");
+        CategoryViewController.prototype.Modal_SaveCategoryHierarchy = function ($modal) {
+            var $nestableTree = this.$getNamedFieldWithinModal($modal, "nestableTree");
             var list = $nestableTree.length ? $nestableTree : $($nestableTree);
 
             /*output = list.data('output');*/
@@ -89,6 +94,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 success: function () {
                     setTimeout(function () {
                         jq.unblockUI();
+                        $modal.foundation('reveal', 'close');
                         me.ReInitialize();
                     }, 2500);
                 },
