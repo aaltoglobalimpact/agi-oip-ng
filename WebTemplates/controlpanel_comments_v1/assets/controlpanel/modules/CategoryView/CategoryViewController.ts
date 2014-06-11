@@ -10,8 +10,6 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class CategoryViewController extends ViewControllerBase {
 
-    $currentModal:JQuery;
-
     ControllerInitialize():void {
         var me = this;
         require(["CategoryView/CategoryEditor_dust",
@@ -25,26 +23,11 @@ class CategoryViewController extends ViewControllerBase {
                     var $hostDiv = $("#" + me.divID);
                     $hostDiv.empty();
                     $hostDiv.html(output);
-                    me.$currentModal = me.$getNamedFieldWithin("AddCategoryModal");
                     me.ControllerInitializeDone();
                 });
             });
         });
     }
-
-
-
-    ReInitialize() {
-        if(this.$currentModal) {
-            this.$currentModal.remove();
-        }
-        var $hostDiv = $("#" + this.divID);
-        var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);
-        vc.Initialize(this.dataUrl);
-        vc.VisibleTemplateRender();
-    }
-
-
 
     public VisibleTemplateRender():void {
         $.when(this.DoneInitializedPromise()).then(() => {

@@ -8,6 +8,11 @@ define(["require", "exports"], function(require, exports) {
             this.currOPM = currOPM;
             this.currUDG = currUDG;
         }
+        ViewControllerBase.prototype.getClassConstructor = function (obj) {
+            //return obj.__proto__.constructor.name;
+            return obj.__proto__.constructor;
+        };
+
         ViewControllerBase.prototype.Initialize = function (dataUrl) {
             this.dataUrl = dataUrl;
             var $hostDiv = $("#" + this.divID);
@@ -33,7 +38,8 @@ define(["require", "exports"], function(require, exports) {
                 $me.foundation();
                 var wnd = window;
                 $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
-                $me.find(".oip-controller-modal").data("oip-controller-instance", me);
+                me.$myModals = $me.find(".oip-controller-modal");
+                me.$myModals.data("oip-controller-instance", me);
             });
         };
 
@@ -47,6 +53,18 @@ define(["require", "exports"], function(require, exports) {
 
         ViewControllerBase.prototype.ControllerInitializeDone = function () {
             this.$initialDeferred.resolve();
+        };
+
+        ViewControllerBase.prototype.ReInitialize = function () {
+            if (this.$myModals.length > 0) {
+                this.$myModals.remove();
+            }
+
+            //var $hostDiv = $("#" + this.divID);
+            var constructor = this.getClassConstructor(this);
+            var vc = new constructor(this.divID, this.currOPM, this.currUDG);
+            vc.Initialize(this.dataUrl);
+            vc.VisibleTemplateRender();
         };
 
         ViewControllerBase.prototype.ExecuteCommand = function (commandName) {

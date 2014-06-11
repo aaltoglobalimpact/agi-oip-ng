@@ -14,6 +14,12 @@ class ViewControllerBase implements IViewController{
     public dataUrl:string;
     $initialized:JQueryPromise<any>;
     $initialDeferred:JQueryDeferred<any>;
+    $myModals:JQuery;
+
+    getClassConstructor(obj) {
+        //return obj.__proto__.constructor.name;
+        return obj.__proto__.constructor;
+    }
 
     public Initialize(dataUrl:string) {
         this.dataUrl = dataUrl;
@@ -41,7 +47,8 @@ class ViewControllerBase implements IViewController{
             $me.foundation();
             var wnd:any=window;
             $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
-            $me.find(".oip-controller-modal").data("oip-controller-instance", me);
+            me.$myModals = $me.find(".oip-controller-modal");
+            me.$myModals.data("oip-controller-instance", me);
         });
     }
 
@@ -57,6 +64,17 @@ class ViewControllerBase implements IViewController{
 
     ControllerInitializeDone():void {
         this.$initialDeferred.resolve();
+    }
+
+    ReInitialize() {
+        if(this.$myModals.length > 0) {
+            this.$myModals.remove();
+        }
+        //var $hostDiv = $("#" + this.divID);
+        var constructor = this.getClassConstructor(this);
+        var vc:ViewControllerBase = new constructor(this.divID, this.currOPM, this.currUDG);
+        vc.Initialize(this.dataUrl);
+        vc.VisibleTemplateRender();
     }
 
     ExecuteCommand(commandName:string) {

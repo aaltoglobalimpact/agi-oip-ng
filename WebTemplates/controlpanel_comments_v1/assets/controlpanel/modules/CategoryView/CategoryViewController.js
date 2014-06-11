@@ -27,21 +27,10 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
-                        me.$currentModal = me.$getNamedFieldWithin("AddCategoryModal");
                         me.ControllerInitializeDone();
                     });
                 });
             });
-        };
-
-        CategoryViewController.prototype.ReInitialize = function () {
-            if (this.$currentModal) {
-                this.$currentModal.remove();
-            }
-            var $hostDiv = $("#" + this.divID);
-            var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);
-            vc.Initialize(this.dataUrl);
-            vc.VisibleTemplateRender();
         };
 
         CategoryViewController.prototype.VisibleTemplateRender = function () {
