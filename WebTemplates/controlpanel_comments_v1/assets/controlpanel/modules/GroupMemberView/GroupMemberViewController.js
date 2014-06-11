@@ -13,7 +13,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function GroupMemberViewController() {
             _super.apply(this, arguments);
         }
-        GroupMemberViewController.prototype.ControllerInitialize = function ($initialDeferred) {
+        GroupMemberViewController.prototype.ControllerInitialize = function () {
             var me = this;
             require([
                 "GroupMemberView/GroupMembers_dust",
@@ -24,7 +24,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "lib/dusts/textinput_singleline_dust",
                 "lib/dusts/modal_end_dust",
                 "lib/dusts/hiddeninput_dust"], function (template) {
-                $initialDeferred.resolve();
+                me.ControllerInitializeDone();
             });
         };
 
@@ -36,6 +36,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     //me.populateFromCurrentData();
                     dust.render("GroupMembers.dust", myData, function (error, output) {
                         var $hostDiv = $("#" + me.divID);
+                        $hostDiv.empty();
                         $hostDiv.html(output);
                     });
                 });

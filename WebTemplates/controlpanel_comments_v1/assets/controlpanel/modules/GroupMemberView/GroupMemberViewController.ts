@@ -12,7 +12,7 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupMemberViewController extends ViewControllerBase {
 
-    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
+    ControllerInitialize():void {
         var me = this;
         require(["GroupMemberView/GroupMembers_dust",
             "lib/dusts/command_button_begin_dust",
@@ -22,7 +22,7 @@ class GroupMemberViewController extends ViewControllerBase {
             "lib/dusts/textinput_singleline_dust",
             "lib/dusts/modal_end_dust",
             "lib/dusts/hiddeninput_dust"], (template) => {
-                $initialDeferred.resolve();
+                me.ControllerInitializeDone();
         });
     }
 
@@ -37,6 +37,7 @@ class GroupMemberViewController extends ViewControllerBase {
                 //me.populateFromCurrentData();
                 dust.render("GroupMembers.dust", myData, (error, output) => {
                     var $hostDiv = $("#" + me.divID);
+                    $hostDiv.empty();
                     $hostDiv.html(output);
                 });
             });

@@ -13,13 +13,14 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function GroupInfoViewController() {
             _super.apply(this, arguments);
         }
-        GroupInfoViewController.prototype.ControllerInitialize = function ($initialDeferred) {
+        GroupInfoViewController.prototype.ControllerInitialize = function () {
             var me = this;
             require(["GroupInfoView/GroupInfo_dust"], function (template) {
                 dust.render("GroupInfo.dust", {}, function (error, output) {
                     var $hostDiv = $("#" + me.divID);
+                    $hostDiv.empty();
                     $hostDiv.html(output);
-                    $initialDeferred.resolve();
+                    me.ControllerInitializeDone();
                 });
             });
         };
@@ -28,7 +29,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var me = this;
             this.currUDG.GetData(this.dataUrl, function (myData) {
                 me.currentData = myData;
-                $.when(me.$initialized).then(function () {
+                $.when(me.DoneInitializedPromise()).then(function () {
                     me.populateFromCurrentData();
                 });
             });

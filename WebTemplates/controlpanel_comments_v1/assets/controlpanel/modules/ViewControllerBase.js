@@ -14,8 +14,8 @@ define(["require", "exports"], function(require, exports) {
             $hostDiv.addClass("oip-controller-root");
             $hostDiv.data("oip-controller", this);
             var me = this;
-            var $initialDeferred = $.Deferred();
-            me.$initialized = $initialDeferred.promise();
+            me.$initialDeferred = $.Deferred();
+            me.$initialized = me.$initialDeferred.promise();
 
             // FOR SOME REASON - the $hostDiv element IS NOT covering all events within, for example a modal...
             //$hostDiv.on("click", ".oip-controller-command", function(event) {
@@ -27,8 +27,8 @@ define(["require", "exports"], function(require, exports) {
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
-            me.ControllerInitialize($initialDeferred);
-            $.when($initialDeferred.promise()).then(function () {
+            me.ControllerInitialize();
+            $.when(me.DoneInitializedPromise()).then(function () {
                 var $me = $hostDiv;
                 $me.foundation();
                 var wnd = window;
@@ -37,8 +37,16 @@ define(["require", "exports"], function(require, exports) {
             });
         };
 
-        ViewControllerBase.prototype.ControllerInitialize = function ($initialDeferred) {
+        ViewControllerBase.prototype.DoneInitializedPromise = function () {
+            return this.$initialized;
+        };
+
+        ViewControllerBase.prototype.ControllerInitialize = function () {
             throw "ControllerInitialize not implemented";
+        };
+
+        ViewControllerBase.prototype.ControllerInitializeDone = function () {
+            this.$initialDeferred.resolve();
         };
 
         ViewControllerBase.prototype.ExecuteCommand = function (commandName) {

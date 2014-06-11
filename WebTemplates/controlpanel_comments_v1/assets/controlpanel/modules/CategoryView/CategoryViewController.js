@@ -13,7 +13,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         function CategoryViewController() {
             _super.apply(this, arguments);
         }
-        CategoryViewController.prototype.ControllerInitialize = function ($initialDeferred) {
+        CategoryViewController.prototype.ControllerInitialize = function () {
             var me = this;
             require([
                 "CategoryView/CategoryEditor_dust",
@@ -28,7 +28,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         $hostDiv.empty();
                         $hostDiv.html(output);
                         me.$currentModal = me.$getNamedFieldWithin("AddCategoryModal");
-                        $initialDeferred.resolve();
+                        me.ControllerInitializeDone();
                     });
                 });
             });
@@ -39,7 +39,6 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 this.$currentModal.remove();
             }
             var $hostDiv = $("#" + this.divID);
-            $hostDiv.empty();
             var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);
             vc.Initialize(this.dataUrl);
             vc.VisibleTemplateRender();
@@ -47,7 +46,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
 
         CategoryViewController.prototype.VisibleTemplateRender = function () {
             var _this = this;
-            $.when(this.$initialized).then(function () {
+            $.when(this.DoneInitializedPromise()).then(function () {
                 var nestable = _this.$getNamedFieldWithin("nestableTree");
                 nestable.nestable({});
             });

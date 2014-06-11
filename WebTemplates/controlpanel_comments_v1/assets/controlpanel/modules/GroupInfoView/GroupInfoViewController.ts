@@ -11,14 +11,15 @@ import ViewControllerBase = require("../ViewControllerBase");
 
 class GroupInfoViewController extends ViewControllerBase {
 
-    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
+    ControllerInitialize():void {
         var me = this;
         require(["GroupInfoView/GroupInfo_dust"], (template) => {
             dust.render("GroupInfo.dust", {
             }, (error, output) =>  {
                 var $hostDiv = $("#" + me.divID);
+                $hostDiv.empty();
                 $hostDiv.html(output);
-                $initialDeferred.resolve();
+                me.ControllerInitializeDone();
             });
         });
     }
@@ -30,7 +31,7 @@ class GroupInfoViewController extends ViewControllerBase {
         var me = this;
         this.currUDG.GetData(this.dataUrl, myData => {
             me.currentData = myData;
-            $.when(me.$initialized).then(() => {
+            $.when(me.DoneInitializedPromise()).then(() => {
                 me.populateFromCurrentData();
             });
         });

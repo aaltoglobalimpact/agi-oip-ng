@@ -124,6 +124,7 @@ var TheBall;
                     $form.append(this.getHiddenInput("ObjectName", objectName));
                     $form.append(this.getHiddenInput("ObjectID", objectID));
                     $form.append(this.getHiddenInput("ExecuteOperation", "DeleteSpecifiedInformationObject"));
+                    $form.append(this.getHiddenInput("NORELOAD", ""));
 
                     //$form.submit();
                     $.ajax({
@@ -159,6 +160,7 @@ var TheBall;
                     $form.append(this.getHiddenInput("ObjectDomainName", domainName));
                     $form.append(this.getHiddenInput("ObjectName", objectName));
                     $form.append(this.getHiddenInput("ExecuteOperation", "CreateSpecifiedInformationObjectWithValues"));
+                    $form.append(this.getHiddenInput("NORELOAD", ""));
                     for (var key in dataContents) {
                         var $hiddenInput = this.getHiddenInput(key, dataContents[key]);
                         $form.append($hiddenInput);
@@ -189,6 +191,7 @@ var TheBall;
                         var $hiddenInput = this.getHiddenInput(key, operationParameters[key]);
                         $form.append($hiddenInput);
                     }
+                    $form.append(this.getHiddenInput("NORELOAD", ""));
 
                     //$form.submit();
                     $.ajax({

@@ -13,6 +13,7 @@ class ViewControllerBase implements IViewController{
 
     public dataUrl:string;
     $initialized:JQueryPromise<any>;
+    $initialDeferred:JQueryDeferred<any>;
 
     public Initialize(dataUrl:string) {
         this.dataUrl = dataUrl;
@@ -20,8 +21,8 @@ class ViewControllerBase implements IViewController{
         $hostDiv.addClass("oip-controller-root");
         $hostDiv.data("oip-controller", this);
         var me = this;
-        var $initialDeferred = $.Deferred();
-        me.$initialized = $initialDeferred.promise();
+        me.$initialDeferred = $.Deferred();
+        me.$initialized = me.$initialDeferred.promise();
         // FOR SOME REASON - the $hostDiv element IS NOT covering all events within, for example a modal...
         //$hostDiv.on("click", ".oip-controller-command", function(event) {
         // ... and FOR SOME OTHER REASON - the below (which narrows it down to this #div and its children)...
@@ -34,8 +35,8 @@ class ViewControllerBase implements IViewController{
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });
-        me.ControllerInitialize($initialDeferred);
-        $.when($initialDeferred.promise()).then(() => {
+        me.ControllerInitialize();
+        $.when(me.DoneInitializedPromise()).then(() => {
             var $me:any = $hostDiv;
             $me.foundation();
             var wnd:any=window;
@@ -44,8 +45,18 @@ class ViewControllerBase implements IViewController{
         });
     }
 
-    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
+    DoneInitializedPromise():JQueryPromise<any> {
+        return this.$initialized;
+    }
+
+
+    ControllerInitialize():void {
         throw "ControllerInitialize not implemented";
+    }
+
+
+    ControllerInitializeDone():void {
+        this.$initialDeferred.resolve();
     }
 
     ExecuteCommand(commandName:string) {

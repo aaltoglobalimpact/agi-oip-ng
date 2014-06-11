@@ -12,7 +12,7 @@ class CategoryViewController extends ViewControllerBase {
 
     $currentModal:JQuery;
 
-    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
+    ControllerInitialize():void {
         var me = this;
         require(["CategoryView/CategoryEditor_dust",
             "CategoryView/category_treeitem_dust",
@@ -26,7 +26,7 @@ class CategoryViewController extends ViewControllerBase {
                     $hostDiv.empty();
                     $hostDiv.html(output);
                     me.$currentModal = me.$getNamedFieldWithin("AddCategoryModal");
-                    $initialDeferred.resolve();
+                    me.ControllerInitializeDone();
                 });
             });
         });
@@ -39,7 +39,6 @@ class CategoryViewController extends ViewControllerBase {
             this.$currentModal.remove();
         }
         var $hostDiv = $("#" + this.divID);
-        $hostDiv.empty();
         var vc = new CategoryViewController(this.divID, this.currOPM, this.currUDG);
         vc.Initialize(this.dataUrl);
         vc.VisibleTemplateRender();
@@ -48,7 +47,7 @@ class CategoryViewController extends ViewControllerBase {
 
 
     public VisibleTemplateRender():void {
-        $.when(this.$initialized).then(() => {
+        $.when(this.DoneInitializedPromise()).then(() => {
             var nestable:any = this.$getNamedFieldWithin("nestableTree");
             nestable.nestable({});
         });
