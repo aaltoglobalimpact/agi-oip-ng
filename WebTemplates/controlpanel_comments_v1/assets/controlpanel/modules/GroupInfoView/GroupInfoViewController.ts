@@ -98,7 +98,7 @@ class GroupInfoViewController extends ViewControllerBase {
         //alert(profileImageID);
         //alert(objectID);
         this.currOPM.AppendBinaryFileValuesToData(objectID, saveData, function() {
-            alert(JSON.stringify(saveData));
+            //alert(JSON.stringify(saveData));
             me.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData, function() {
                 alert("Save succesful!");
                 me.ReInitialize();
