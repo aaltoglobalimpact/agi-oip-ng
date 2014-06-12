@@ -16,6 +16,7 @@ class CategoryViewController extends ViewControllerBase {
         var me = this;
         require(["CategoryView/CategoryEditor_dust",
             "CategoryView/category_treeitem_dust",
+            "CategoryView/category_rowitem_dust",
             "lib/dusts/objectdeleteicon_dust",
             "lib/dusts/command_button_dust",
             "lib/dusts/command_icon_dust",
