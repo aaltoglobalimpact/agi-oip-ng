@@ -20,6 +20,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "CategoryView/category_treeitem_dust",
                 "lib/dusts/objectdeleteicon_dust",
                 "lib/dusts/command_button_dust",
+                "lib/dusts/command_icon_dust",
                 "lib/dusts/insidemodal_button_dust",
                 "lib/dusts/openmodal_button_dust"], function () {
                 me.currUDG.GetData(me.dataUrl, function (callBackData) {
@@ -53,6 +54,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         CategoryViewController.prototype.OpenModalAddCategoryModal = function () {
             var $modal = this.$getNamedFieldWithin("AddCategoryModal");
             $modal.foundation('reveal', 'open');
+        };
+
+        CategoryViewController.prototype.EditCategory = function ($source) {
+            var id = $source.data("objectid");
+            alert(id);
         };
 
         CategoryViewController.prototype.DeleteObject = function ($source) {

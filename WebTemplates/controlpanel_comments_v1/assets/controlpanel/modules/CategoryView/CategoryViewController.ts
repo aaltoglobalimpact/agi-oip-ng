@@ -16,6 +16,7 @@ class CategoryViewController extends ViewControllerBase {
             "CategoryView/category_treeitem_dust",
             "lib/dusts/objectdeleteicon_dust",
             "lib/dusts/command_button_dust",
+            "lib/dusts/command_icon_dust",
             "lib/dusts/insidemodal_button_dust",
             "lib/dusts/openmodal_button_dust"], () => {
             me.currUDG.GetData(me.dataUrl, (callBackData) => {
@@ -48,6 +49,11 @@ class CategoryViewController extends ViewControllerBase {
     OpenModalAddCategoryModal() {
         var $modal:any = this.$getNamedFieldWithin("AddCategoryModal");
         $modal.foundation('reveal', 'open');
+    }
+
+    EditCategory($source) {
+        var id = $source.data("objectid");
+        alert(id);
     }
 
     DeleteObject($source) {
