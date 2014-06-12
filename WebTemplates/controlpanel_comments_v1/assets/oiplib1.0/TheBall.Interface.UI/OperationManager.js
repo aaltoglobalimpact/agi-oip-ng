@@ -201,11 +201,11 @@ var TheBall;
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
-                        dataType: "json",
+                        //dataType: "json",
                         success: function (responseData) {
                             successCallback(responseData);
                         },
-                        fail: function () {
+                        error: function () {
                             failureCallback();
                         }
                     });

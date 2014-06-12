@@ -101,6 +101,22 @@ class CategoryViewController extends ViewControllerBase {
         );
     }
 
+    AddNewCategories() {
+        var categoryList = this.$getNamedFieldWithin("addNewCategoriesTitles");
+        var operationData = {
+            "CategoryList": categoryList.val()
+        };
+        var me = this;
+        this.currOPM.ExecuteOperationWithForm("AddCategories", operationData,
+            function() {
+                alert("Categories added OK");
+                me.ReInitialize();
+            },
+            function() {
+                alert("Category add error!");
+            });
+    }
+
     Modal_SaveNew($modal, $source) {
         var title = this.$getNamedFieldWithinModal($modal, "title").val();
         var excerpt = this.$getNamedFieldWithinModal($modal, "excerpt").val();

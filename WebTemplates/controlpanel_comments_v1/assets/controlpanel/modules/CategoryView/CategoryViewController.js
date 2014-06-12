@@ -106,6 +106,20 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
+        CategoryViewController.prototype.AddNewCategories = function () {
+            var categoryList = this.$getNamedFieldWithin("addNewCategoriesTitles");
+            var operationData = {
+                "CategoryList": categoryList.val()
+            };
+            var me = this;
+            this.currOPM.ExecuteOperationWithForm("AddCategories", operationData, function () {
+                alert("Categories added OK");
+                me.ReInitialize();
+            }, function () {
+                alert("Category add error!");
+            });
+        };
+
         CategoryViewController.prototype.Modal_SaveNew = function ($modal, $source) {
             var title = this.$getNamedFieldWithinModal($modal, "title").val();
             var excerpt = this.$getNamedFieldWithinModal($modal, "excerpt").val();
