@@ -153,8 +153,10 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var jq = $;
             jq.blockUI({ message: '<h2>Saving...</h2>' });
             this.currOPM.ExecuteOperationWithForm("AddCategories", operationData, function () {
-                jq.unblockUI();
-                me.ReInitialize();
+                setTimeout(function () {
+                    jq.unblockUI();
+                    me.ReInitialize();
+                }, 2500);
             }, function () {
                 jq.unblockUI();
                 alert("Category add error!");
@@ -207,9 +209,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
 
                 //alert(JSON.stringify(saveData));
                 me.currOPM.SaveIndependentObject(id, objectRelativeLocation, eTag, saveData, function () {
-                    jq.unblockUI();
-                    $modal.foundation('reveal', 'close');
-                    me.ReInitialize();
+                    setTimeout(function () {
+                        jq.unblockUI();
+                        $modal.foundation('reveal', 'close');
+                        me.ReInitialize();
+                    }, 2500);
                 }, function () {
                     alert("Save failed!");
                     jq.unblockUI();
