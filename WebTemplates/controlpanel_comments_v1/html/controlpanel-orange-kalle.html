@@ -35,6 +35,18 @@
     <script src="../assets/oiplib1.0/TheBall.Interface.UI/UpdatingDataGetter.js"></script>
     <script src="../assets/controlpanel/modules/ModuleCustomGlue.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
+<script>
+    var wnd = window;
+    if(!wnd.ControllerCommon) {
+        wnd.ControllerCommon = { };
+    }
+    wnd.ControllerCommon.ModalButtonClick = function(event) {
+        var $owningModal = $(this).closest(".oip-controller-modal");
+        var controller = $owningModal.data("oip-controller-instance");
+        controller.handleModalEvent($owningModal, $(this), "click", event);
+    };
+
+</script>
     <script data-main="../assets/controlpanel/modules/config" type="text/javascript" src="../assets/controlpanel/modules/require.js"></script>
 </head>
 <body>
