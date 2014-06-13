@@ -379,7 +379,7 @@ div#cpOrangeTopRowSeparator{height:20px;}
 .viewModal-textInputField {background-color: #eeeeee !important; font-size: 12px !important;line-height: 19px !important; }
 .viewModal-commentContainer, .viewModal-commentContainer p, .viewModal-commentContainer a, .viewModal-commentContainer div, .viewModal-commentContainer div div
 {line-height: 21px;font-size: 13px;}
-
+.discreetBackgroundColor {background-color: #c7c7c7 !important;}
 
 .lineHeight45{
     line-height: 45px;

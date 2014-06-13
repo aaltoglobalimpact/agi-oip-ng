@@ -40,7 +40,8 @@
             <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
 
         <li><label>General Options</label></li>
-        <li><a href="#" id="collaboratorsMenuAnchor" class="offCanvasMenuAnchor">Collaborators</a></li>
+        <li><a href="#" id="groupSettingsMenuAnchor" class="offCanvasMenuAnchor">Group settings</a></li>
+        <li><a href="#" id="collaboratorsMenuAnchor" class="offCanvasMenuAnchor">Group members</a></li>
         <!--<li><a href="#">Meta</a></li>-->
     </ul>
 </aside>
@@ -746,6 +747,33 @@
     </div>
 </div>
 
+<div class="large-12 columns contentSwitchableSection" id="groupSettingsSection">
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Group Settings</h4></div>
+        <div class="small-6 medium-3 large-3 columns discreetTextColor" id="groupSettings-groupPictureDiv"><label class="boldieText darkTextColor">Image</label><img src="../assets/controlpanel/images/lightGray.jpg" style="width: auto;height:auto;"><input type ='file' name='myfile' id="groupSettings-groupImagefileInput"></div>
+        <div class="small-6 medium-3 large-3 columns discreetTextColor" id="groupSettings-groupIconDiv"><label class="boldieText darkTextColor">Icon</label><img src="../assets/controlpanel/images/lightGray.jpg" style="width: auto;height:auto;"><input type ='file' name='myfile' id="groupSettings-groupIconfileInput"></div>
+        <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupNameDiv"><label class="boldieText darkTextColor">Name<input type="text" class="pageEditingInputField" placeholder="Example: Workspace 2014 Dev Test" id="groupSettings-groupNametextInput"/></label></div>
+        <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupDescriptionDiv"><label class="boldieText darkTextColor">Description<textarea class="pageEditingTextArea" placeholder="Example: Workspace 2014 Dev Test" id="groupSettings-groupDescriptiontextArea" style="height:auto;min-height:195px;resize: none;"/></textarea></label></div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupSiteToPublishDiv"><label class="boldieText darkTextColor">WWWsite to publish content<input type="text" class="pageEditingInputField" placeholder="Example: Workspace 2014 Dev Test" id="groupSettings-groupWWWsiteToPublishtextInput"/></label></div>
+        <div class="small-12 medium-6 large-6 columns"></div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupLinkedOrganizationsDiv"><label class="boldieText darkTextColor">Linked organizations<textarea class="pageEditingTextArea" placeholder="Example: Workspace 2014 Dev Test" id="groupSettings-groupLinkedOrganizationstextArea" style="height:auto;resize: none;"/></textarea></label></div>
+        <div class="small-12 medium-6 large-6 columns"></div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns"><h4 class="boldieText"><a href="#">Add custom UI</a></h4></div>
+        <div class="small-12 medium-6 large-6 columns"></div>
+    </div>
+    <div class="row" id="groupSettings-buttonsRow">
+        <div class="small-8 medium-3 large-4 columns"><a class="button small" id="groupSettings-SaveCustomButton" style="float: right;">Save Changes</a></div>
+        <div class="small-4 medium-3 large-2 columns"><a class="button small" id="groupSettings-MyStuffCustomButton" style="float: right;">My Stuff!</a></div>
+        <div class="small-12 medium-6 large-6 columns"></div>
+    </div> <!--Closes categoriesSection-hierarchyModal-buttonsRow-->
+</div>
+
 </div> <!--Closes the Main Section Div, where the content (switchable) goes-->
 </section>
 <a class="exit-off-canvas"></a>
@@ -1201,6 +1229,10 @@ $(document).ready(function(){
         if (triggerid=="innovationsPageEditingMenuAnchor")
         {
             $("#innovationsPageEditingSection").addClass("activeSection");
+        }
+        if (triggerid=="groupSettingsMenuAnchor")
+        {
+            $("#groupSettingsSection").addClass("activeSection");
         }
     }
 
