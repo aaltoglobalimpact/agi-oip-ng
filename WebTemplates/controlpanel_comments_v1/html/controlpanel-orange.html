@@ -32,6 +32,7 @@
         <li><a href="#" id="addEditContentMenuAnchor" class="offCanvasMenuAnchor">Add or edit posts</a></li>
         <li><a href="#" id="manageCategoriesMenuAnchor" class="offCanvasMenuAnchor">Add or edit categories</a></li>
         <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">File Manager</a></li>
+        <li><a href="#" id="timelineMenuAnchor" class="offCanvasMenuAnchor">View data as timeline</a></li>
         <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
         <li><label>Manage Pages</label></li>
             <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
@@ -774,6 +775,11 @@
     </div> <!--Closes categoriesSection-hierarchyModal-buttonsRow-->
 </div>
 
+<div class="large-12 columns contentSwitchableSection" id="timelineSection">
+    <div class="row"><div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Timeline</h4></div></div>
+    <div class="row"><div class="small-12 medium-12 large-12 columns"><div id="my-timeline"></div></div></div>
+</div>
+
 </div> <!--Closes the Main Section Div, where the content (switchable) goes-->
 </section>
 <a class="exit-off-canvas"></a>
@@ -797,6 +803,7 @@
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js"></script>
 <link rel="stylesheet" href="../assets/controlpanel/css/redactor.css" />
 
+<script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
 
 <!--<script src="js/nicEdit.js"></script>-->
 <!--<script src="js/jquery-te-1.4.0.min.js"></script>-->
@@ -1234,6 +1241,101 @@ $(document).ready(function(){
         {
             $("#groupSettingsSection").addClass("activeSection");
         }
+        if (triggerid=="timelineMenuAnchor")
+        {
+            $("#timelineSection").addClass("activeSection");
+            $("#my-timeline").empty();
+            /*var myTimelineData={"timeline":{
+                    "headline":"The Main Timeline Headline Goes here",
+                    "type":"default",
+                    "text":"<p>Intro body text goes here, some HTML is ok</p>",
+                    "asset": {"media":"http://yourdomain_or_socialmedialink_goes_here.jpg","credit":"Credit Name Goes Here","caption":"Caption text goes here"
+                },
+                    "date": [
+                    {"startDate":"2011,12,10",
+                        "endDate":"2011,12,11",
+                        "headline":"Headline Goes Here",
+                        "text":"<p>Body text goes here, some HTML is OK</p>",
+                        "tag":"This is Optional",
+                        "classname":"optionaluniqueclassnamecanbeaddedhere",
+                        "asset": {"media":"http://twitter.com/ArjunaSoriano/status/164181156147900416",
+                            "thumbnail":"optional-32x32px.jpg",
+                            "credit":"Credit Name Goes Here",
+                            "caption":"Caption text goes here"}}
+                ], "era": [
+                    {"startDate":"2011,12,10",
+                     "endDate":"2011,12,11",
+                     "headline":"Headline Goes Here",
+                     "text":"<p>Body text goes here, some HTML is OK</p>",
+                     "tag":"This is Optional"}]}
+            }*///closes the var "options"
+           /*createStoryJS({ type:'timeline',width:'100%',height:'600',source: myTimelineData,embed_id:'my-timeline'});*/
+            $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function(contentData) {
+                /*var wholeTimelineData=new Array();*/
+                var wholeTimelineData={
+                    "timeline":
+                    {
+                        "headline":"Aalto New Global",
+                        "type":"default",
+                        "text":"Welcome to the timeline view",
+                        "startDate":"2014,1,1",
+                        "date":[]
+                    }
+                };
+                for (var i in contentData.CollectionContent) {
+                            var currentObject=contentData.CollectionContent[i];
+                            var currentID=currentObject.ID;
+                            var currentTitle=currentObject.Title ? currentObject.Title : "";
+                            var currentMainCategory;
+                            var currentExcerpt=currentObject.Excerpt;
+                            var currentAuthor=currentObject.Author;
+                            var currentPublishedDate=ParseRawTimestampToDateString(currentObject.Published);
+                            var imageSizeString="256";
+                            var dateSubString=currentPublishedDate.split(".");
+                            var timelineFormatedStartDate= dateSubString[2]+","+dateSubString[1]+","+dateSubString[0];
+                            var endDay=dateSubString[0]+1;
+                            var timelineFormatedEndDate= dateSubString[2]+","+dateSubString[1]+","+endDay;
+                            var currentImagePath=currentObject.ImageData
+                                    ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
+                                    : null;
+                            if(!currentObject.Categories|| !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
+                                currentMainCategory="NEWS";
+                            else currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
+                            //-----------------------------begins:Here we get the total number of comments for each update
+                            var numberOfComments=0;
+                            //-----------------------------ends:Here we get the total number of comments for each update
+                            /*var myTimelineData={
+                                "startDate":timelineFormatedStartDate,
+                                "headline":currentTitle,
+                                "text":currentExcerpt,
+                                "tag":currentMainCategory,
+                                "asset":
+                                {
+                                    "media":currentImagePath,
+                                    "credit":currentAuthor,
+                                    "caption":currentTitle
+                                }};*/
+                            var myTimelineData={
+                                "startDate":timelineFormatedStartDate,
+                                "headline":currentTitle,
+                                "text":currentExcerpt,
+                                "tag":currentMainCategory,
+                                "asset":
+                                    {
+                                    "media":currentImagePath,
+                                    "thumbnail":currentImagePath,
+                                    "credit":currentAuthor,
+                                    "caption":currentTitle
+                                    }
+
+                                };
+
+                            wholeTimelineData.timeline.date.push(myTimelineData);
+                        }//ends for loop
+                createStoryJS({ type:'timeline',width:'100%',height:'600',source:wholeTimelineData,embed_id:'my-timeline'});
+            })//closes getJSON
+
+        }//if (triggerid=="timelineSection")
     }
 
     function populateWebsitesMenu_and_groupsTabTable (){
