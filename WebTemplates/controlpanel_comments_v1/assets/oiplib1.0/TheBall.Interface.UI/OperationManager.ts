@@ -77,7 +77,9 @@ module TheBall.Interface.UI {
             $form.empty();
         }
 
-        SaveIndependentObject(objectID:string, objectRelativeLocation:string, objectETag:string, objectData:any)
+
+        SaveIndependentObject(objectID:string, objectRelativeLocation:string, objectETag:string, objectData:any, successCallback?:any, failureCallback?:any,
+            keyNameResolver?:any)
         {
             var $form = this.$submitForm;
             $form.empty();
@@ -94,10 +96,24 @@ module TheBall.Interface.UI {
                     realKey = key.replace("FileEmbedded_", "FileEmbedded_" + id + "_");
                 else
                     realKey = id + "_" + key;
+                if(keyNameResolver)
+                    realKey = keyNameResolver(realKey);
                 var $hiddenInput = this.getHiddenInput(realKey, objectData[key]);
                 $form.append($hiddenInput);
             }
-            $form.submit();
+            //$form.submit();
+            $.ajax({
+                type: "POST",
+                data: $form.serialize(),
+                success: function(responseData) {
+                    if(successCallback)
+                        successCallback(responseData);
+                },
+                error: function() {
+                    if(failureCallback)
+                        failureCallback();
+                }
+            });
             $form.empty();
         }
         SaveObject(objectID:string, objectETag:string, dataContents:any) {
@@ -109,7 +125,7 @@ module TheBall.Interface.UI {
             this.SaveIndependentObject(obj.ID, obj.RelativeLocation, obj.MasterETag, dataContents);
         }
 
-        DeleteIndependentObject(domainName:string, objectName:string, objectID:string)
+        DeleteIndependentObject(domainName:string, objectName:string, objectID:string, successCallback?:any, failureCallback?:any)
         {
             var $form = this.$submitForm;
             $form.empty();
@@ -117,7 +133,21 @@ module TheBall.Interface.UI {
             $form.append(this.getHiddenInput("ObjectName", objectName));
             $form.append(this.getHiddenInput("ObjectID", objectID));
             $form.append(this.getHiddenInput("ExecuteOperation", "DeleteSpecifiedInformationObject"));
-            $form.submit();
+            $form.append(this.getHiddenInput("NORELOAD", ""));
+            //$form.submit();
+            $.ajax({
+                type: "POST",
+                data: $form.serialize(),
+                //dataType: "json",
+                success: function(responseData) {
+                    if(successCallback)
+                        successCallback(responseData);
+                },
+                error: function() {
+                    if(failureCallback)
+                        failureCallback();
+                }
+            });
             $form.empty();
         }
 
@@ -132,7 +162,36 @@ module TheBall.Interface.UI {
             this.DeleteIndependentObject(domainName, objectName, objectID);
         }
 
-        ExecuteOperationWithForm(operationName:string, operationParameters:any) {
+        CreateObjectAjax(domainName:string, objectName:string, dataContents:any, successCallback?:any, failureCallback?:any) {
+            var $form = this.$submitForm;
+            $form.empty();
+            $form.append(this.getHiddenInput("ObjectDomainName", domainName));
+            $form.append(this.getHiddenInput("ObjectName", objectName));
+            $form.append(this.getHiddenInput("ExecuteOperation", "CreateSpecifiedInformationObjectWithValues"));
+            $form.append(this.getHiddenInput("NORELOAD", ""));
+            for(var key in dataContents) {
+                var $hiddenInput = this.getHiddenInput(key, dataContents[key]);
+                $form.append($hiddenInput);
+            }
+            //$form.submit();
+            $.ajax({
+                type: "POST",
+                data: $form.serialize(),
+                //dataType: "json",
+                success: function(responseData) {
+                    if(successCallback)
+                        successCallback(responseData);
+                },
+                error: function() {
+                    if(failureCallback)
+                        failureCallback();
+                }
+            });
+            $form.empty();
+        }
+
+
+        ExecuteOperationWithForm(operationName:string, operationParameters:any, successCallback?:any, failureCallback?:any) {
             var $form = this.$submitForm;
             $form.empty();
             $form.append(this.getHiddenInput("ExecuteOperation", operationName));
@@ -140,7 +199,19 @@ module TheBall.Interface.UI {
                 var $hiddenInput = this.getHiddenInput(key, operationParameters[key]);
                 $form.append($hiddenInput);
             }
-            $form.submit();
+            $form.append(this.getHiddenInput("NORELOAD", ""));
+            //$form.submit();
+            $.ajax({
+                type: "POST",
+                data: $form.serialize(),
+                //dataType: "json",
+                success: function(responseData) {
+                    successCallback(responseData);
+                },
+                error: function() {
+                    failureCallback();
+                }
+            });
             $form.empty();
         }
         ExecuteOperationWithAjax(operationFullName:string, contentObject:any, callBack?:any) {
@@ -230,7 +301,7 @@ module TheBall.Interface.UI {
             });
         }
 
-        InitiateBinaryFileElements(fileInputID:string, objectID:string, propertyName:string, initialPreviewUrl:string, noImageUrl:string) {
+        InitiateBinaryFileElementsAroundInput($fileInput:JQuery, objectID:string, propertyName:string, initialPreviewUrl:string, noImageUrl:string) {
             var jQueryClassSelector:string = this.BinaryFileSelectorBase;
             var inputFileSelector = "input" + jQueryClassSelector + "[type='file']";
             //var hiddenInputSelector = "input" + jQueryClassSelector + "[type='hidden']";
@@ -246,7 +317,6 @@ module TheBall.Interface.UI {
             var dataAttrPrefix = "data-";
             var imgPreviewNoImageUrlDataName = "oipfile-noimageurl";
 
-            var $fileInput = $("#" + fileInputID);
             $fileInput.addClass("oipfile");
             $fileInput.hide();
             $fileInput.width(0);
@@ -305,6 +375,11 @@ module TheBall.Interface.UI {
                 $removeButton.insertAfter($selectButton);
                 this.setRemoveFileButtonEvents($removeButton, $fileInput, $hiddenInput, $previevImg);
             }
+        }
+
+        InitiateBinaryFileElements(fileInputID:string, objectID:string, propertyName:string, initialPreviewUrl:string, noImageUrl:string) {
+            var $fileInput = $("#" + fileInputID);
+            this.InitiateBinaryFileElementsAroundInput($fileInput, objectID, propertyName, initialPreviewUrl, noImageUrl);
         }
 
         readFileFromInputAsync(fileInput:HTMLInputElement) : JQueryPromise<any> {

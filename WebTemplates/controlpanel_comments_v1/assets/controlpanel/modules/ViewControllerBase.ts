@@ -13,6 +13,13 @@ class ViewControllerBase implements IViewController{
 
     public dataUrl:string;
     $initialized:JQueryPromise<any>;
+    $initialDeferred:JQueryDeferred<any>;
+    $myModals:JQuery;
+
+    getClassConstructor(obj) {
+        //return obj.__proto__.constructor.name;
+        return obj.__proto__.constructor;
+    }
 
     public Initialize(dataUrl:string) {
         this.dataUrl = dataUrl;
@@ -20,8 +27,8 @@ class ViewControllerBase implements IViewController{
         $hostDiv.addClass("oip-controller-root");
         $hostDiv.data("oip-controller", this);
         var me = this;
-        var $initialDeferred = $.Deferred();
-        me.$initialized = $initialDeferred.promise();
+        me.$initialDeferred = $.Deferred();
+        me.$initialized = me.$initialDeferred.promise();
         // FOR SOME REASON - the $hostDiv element IS NOT covering all events within, for example a modal...
         //$hostDiv.on("click", ".oip-controller-command", function(event) {
         // ... and FOR SOME OTHER REASON - the below (which narrows it down to this #div and its children)...
@@ -30,21 +37,44 @@ class ViewControllerBase implements IViewController{
 
 
         // The reason found - foundation MOVES the modal on reveal elsewhere on the element tree...
+        $hostDiv.off("click");
         $hostDiv.on("click", ".oip-controller-command", function(event) {
             me.handleEvent($(this), "click", event);
         });
-        me.ControllerInitialize($initialDeferred);
-        $.when($initialDeferred.promise()).then(() => {
+        me.ControllerInitialize();
+        $.when(me.DoneInitializedPromise()).then(() => {
             var $me:any = $hostDiv;
             $me.foundation();
             var wnd:any=window;
             $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
-            $me.find(".oip-controller-modal").data("oip-controller-instance", me);
+            me.$myModals = $me.find(".oip-controller-modal");
+            me.$myModals.data("oip-controller-instance", me);
         });
     }
 
-    ControllerInitialize($initialDeferred:JQueryDeferred<any>):void {
+    DoneInitializedPromise():JQueryPromise<any> {
+        return this.$initialized;
+    }
+
+
+    ControllerInitialize():void {
         throw "ControllerInitialize not implemented";
+    }
+
+
+    ControllerInitializeDone():void {
+        this.$initialDeferred.resolve();
+    }
+
+    ReInitialize() {
+        if(this.$myModals.length > 0) {
+            this.$myModals.remove();
+        }
+        //var $hostDiv = $("#" + this.divID);
+        var constructor = this.getClassConstructor(this);
+        var vc:ViewControllerBase = new constructor(this.divID, this.currOPM, this.currUDG);
+        vc.Initialize(this.dataUrl);
+        vc.VisibleTemplateRender();
     }
 
     ExecuteCommand(commandName:string) {
@@ -66,7 +96,8 @@ class ViewControllerBase implements IViewController{
                 callBack.call(this);
             };
         }
-        this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+        //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+        this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
     }
 
     VisibleTemplateRender():void {
@@ -82,7 +113,7 @@ class ViewControllerBase implements IViewController{
         var commandFunction = this[commandName];
         if(!_.isFunction(commandFunction))
             throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;;
-        commandFunction.call(this);
+        commandFunction.call(this, $source, eventName, eventData);
     }
 
     handleModalEvent($modal, $source, eventName, eventData):void {

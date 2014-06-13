@@ -8,14 +8,19 @@ define(["require", "exports"], function(require, exports) {
             this.currOPM = currOPM;
             this.currUDG = currUDG;
         }
+        ViewControllerBase.prototype.getClassConstructor = function (obj) {
+            //return obj.__proto__.constructor.name;
+            return obj.__proto__.constructor;
+        };
+
         ViewControllerBase.prototype.Initialize = function (dataUrl) {
             this.dataUrl = dataUrl;
             var $hostDiv = $("#" + this.divID);
             $hostDiv.addClass("oip-controller-root");
             $hostDiv.data("oip-controller", this);
             var me = this;
-            var $initialDeferred = $.Deferred();
-            me.$initialized = $initialDeferred.promise();
+            me.$initialDeferred = $.Deferred();
+            me.$initialized = me.$initialDeferred.promise();
 
             // FOR SOME REASON - the $hostDiv element IS NOT covering all events within, for example a modal...
             //$hostDiv.on("click", ".oip-controller-command", function(event) {
@@ -23,21 +28,43 @@ define(["require", "exports"], function(require, exports) {
             // ... FAILS TO FIRE on the modal again... => so we're back at direct div + class filter
             //$(document).on("click", "#" + this.divID + " .oip-controller-command", function(event) {
             // The reason found - foundation MOVES the modal on reveal elsewhere on the element tree...
+            $hostDiv.off("click");
             $hostDiv.on("click", ".oip-controller-command", function (event) {
                 me.handleEvent($(this), "click", event);
             });
-            me.ControllerInitialize($initialDeferred);
-            $.when($initialDeferred.promise()).then(function () {
+            me.ControllerInitialize();
+            $.when(me.DoneInitializedPromise()).then(function () {
                 var $me = $hostDiv;
                 $me.foundation();
                 var wnd = window;
                 $me.find(".oip-modalbutton").on("click", wnd.ControllerCommon.ModalButtonClick);
-                $me.find(".oip-controller-modal").data("oip-controller-instance", me);
+                me.$myModals = $me.find(".oip-controller-modal");
+                me.$myModals.data("oip-controller-instance", me);
             });
         };
 
-        ViewControllerBase.prototype.ControllerInitialize = function ($initialDeferred) {
+        ViewControllerBase.prototype.DoneInitializedPromise = function () {
+            return this.$initialized;
+        };
+
+        ViewControllerBase.prototype.ControllerInitialize = function () {
             throw "ControllerInitialize not implemented";
+        };
+
+        ViewControllerBase.prototype.ControllerInitializeDone = function () {
+            this.$initialDeferred.resolve();
+        };
+
+        ViewControllerBase.prototype.ReInitialize = function () {
+            if (this.$myModals.length > 0) {
+                this.$myModals.remove();
+            }
+
+            //var $hostDiv = $("#" + this.divID);
+            var constructor = this.getClassConstructor(this);
+            var vc = new constructor(this.divID, this.currOPM, this.currUDG);
+            vc.Initialize(this.dataUrl);
+            vc.VisibleTemplateRender();
         };
 
         ViewControllerBase.prototype.ExecuteCommand = function (commandName) {
@@ -58,7 +85,9 @@ define(["require", "exports"], function(require, exports) {
                     callBack.call(this);
                 };
             }
-            this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+
+            //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
+            this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
         };
 
         ViewControllerBase.prototype.VisibleTemplateRender = function () {
@@ -75,7 +104,7 @@ define(["require", "exports"], function(require, exports) {
             if (!_.isFunction(commandFunction))
                 throw "Controller's command function not implemented: " + commandName + " on hostind div: " + this.divID;
             ;
-            commandFunction.call(this);
+            commandFunction.call(this, $source, eventName, eventData);
         };
 
         ViewControllerBase.prototype.handleModalEvent = function ($modal, $source, eventName, eventData) {
