@@ -25,7 +25,8 @@ class MainContentViewController extends ViewControllerBase {
             "lib/dusts/openmodal_button_dust",
             "lib/dusts/modal_begin_dust",
             "lib/dusts/modal_end_dust",
-            "MainContentView/ImportantLinks_dust"], (template) => {
+            "MainContentView/ImportantLinks_dust",
+            "MainContentView/MainContent"], (template) => {
                 me.currUDG.GetData(this.dataUrl, function(data) {
                     me.currData = data;
                     dust.render("MainContent.dust", {

@@ -26,7 +26,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "lib/dusts/openmodal_button_dust",
                 "lib/dusts/modal_begin_dust",
                 "lib/dusts/modal_end_dust",
-                "MainContentView/ImportantLinks_dust"], function (template) {
+                "MainContentView/ImportantLinks_dust",
+                "MainContentView/MainContent"], function (template) {
                 me.currUDG.GetData(_this.dataUrl, function (data) {
                     me.currData = data;
                     dust.render("MainContent.dust", {}, function (error, output) {
