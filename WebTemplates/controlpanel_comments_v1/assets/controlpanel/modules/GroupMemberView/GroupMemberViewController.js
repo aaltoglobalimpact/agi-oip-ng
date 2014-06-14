@@ -17,8 +17,6 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var me = this;
             require([
                 "GroupMemberView/GroupMembers_dust",
-                "lib/dusts/command_button_begin_dust",
-                "lib/dusts/command_button_end_dust",
                 "lib/dusts/command_button_dust",
                 "lib/dusts/modal_begin_dust",
                 "lib/dusts/textinput_singleline_dust",
