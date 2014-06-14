@@ -24,10 +24,14 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "lib/dusts/insidemodal_button_dust",
                 "lib/dusts/hiddeninput_dust",
                 "lib/dusts/openmodal_button_dust",
+                "lib/dusts/modal_begin_dust",
+                "lib/dusts/modal_end_dust",
                 "MainContentView/ImportantLinks_dust"], function (template) {
                 me.currUDG.GetData(_this.dataUrl, function (data) {
                     me.currData = data;
                     dust.render("MainContent.dust", {}, function (error, output) {
+                        if (error)
+                            alert("DUST ERROR: " + error);
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);

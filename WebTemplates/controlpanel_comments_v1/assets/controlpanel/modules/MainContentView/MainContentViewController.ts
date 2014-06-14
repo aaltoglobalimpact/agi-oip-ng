@@ -23,11 +23,15 @@ class MainContentViewController extends ViewControllerBase {
             "lib/dusts/insidemodal_button_dust",
             "lib/dusts/hiddeninput_dust",
             "lib/dusts/openmodal_button_dust",
+            "lib/dusts/modal_begin_dust",
+            "lib/dusts/modal_end_dust",
             "MainContentView/ImportantLinks_dust"], (template) => {
                 me.currUDG.GetData(this.dataUrl, function(data) {
                     me.currData = data;
                     dust.render("MainContent.dust", {
                     }, (error, output) => {
+                        if(error)
+                            alert("DUST ERROR: " + error);
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
