@@ -10,7 +10,7 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class GroupInfoViewController extends ViewControllerBase {
+class MainContentViewController extends ViewControllerBase {
 
     ControllerInitialize():void {
         var me = this;
@@ -21,6 +21,8 @@ class GroupInfoViewController extends ViewControllerBase {
                 $hostDiv.empty();
                 $hostDiv.html(output);
                 me.ControllerInitializeDone();
+                var wnd:any = window;
+                wnd.initializeAll();
             });
         });
 
@@ -37,4 +39,10 @@ class GroupInfoViewController extends ViewControllerBase {
         });*/
     }
 
+    VisibleTemplateRender() {
+
+    }
+
 }
+
+export = MainContentViewController;

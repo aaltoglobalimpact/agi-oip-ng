@@ -80,224 +80,58 @@
 <section class="main-section">
 <div class="row" id="canvasMainSectionRow">
 <div class="large-12 columns contentSwitchableSection activeSection" id="addEditContentSection">
-    <div class="row" id="cpOrangeTopRowSeparator"></div>
-    <div class="row" id="postAndimportantWrapperRow">
-    <div class="medium-3 large-3 columns noPaddingRight" style="height: 37px;">
-        <a><div id="postUpdateButton" class="orangeButton">Post an update</div></a></div>
-    <div class="medium-9 large-9 columns" style="height: 37px;">
-        <div id="importantLinksDiv" style="overflow:visible !important;">
-            <div id="importantLinksTitle" style="font-size: 13px;font-weight:bold;">Important links</div>
-            <div id="importantLinksDiv1"><a href="http://www.google.com/calendar/render?mode=day&date=20140218T071429" target="_blank" id="importantLinks1">Google Calendar</a></div>
-            <div id="importantLinksDiv2"><a href="http://asana.com/" target="_blank" id="importantLinks2">Asana</a></div>
-            <div id="importantLinksDiv3"><a href="http://docs.google.com/spreadsheet/ccc?key=0AqOpG-w_XEiodDFYOUlxRXNRX3QwZ3ZYdE9EMy0walE&usp=sharing#gid=0" target="_blank" id="importantLinks3">Touhutaulukko</a></div>
-            <div id="importantLinksDiv4"><a href="#" target="_blank" id="importantLinks4">Instructions</a></div>
-        </div>
-    </div>
-    <div class="row" id="newsAndImportantRow" style="margin-top:10px;margin-bottom: 10px;" data-equalizer>
-        <div class="medium-6 large-6 columns noPaddingRight" style="overflow: hidden;">
-            <div id="newsPanelDiv" data-equalizer-watch>
-                <div id="newsPanelTitle">News</div>
-                <div id="news1" class="newsDiv">
-                    <div id="news1date" class="newsDate"></div>
-                    <div id="news1text" class="newsText"></div>
-                </div>
-                <div id="news2" class="newsDiv">
-                    <div id="news2date" class="newsDate"></div>
-                    <div id="news2text" class="newsText"></div>
-                </div>
-                <div id="news3" class="newsDiv">
-                    <div id="news3date" class="newsDate"></div>
-                    <div id="news3text" class="newsText"></div>
-                </div>
-                <!--
-                <div style="width:100%;text-align:center;">
-                    <hr style="background-color:#FFF;color:#FFF;width:90%;border-color:#FFF;height:30px;display: inline-block;margin:0;padding:0;">
-                </div>
-                -->
-            </div>
-        </div>
-        <div class="medium-6 large-6 columns" style="overflow: hidden;">
-            <div id="importantPanelDiv" data-equalizer-watch>
-                <div id="importantPanelTitle">Important</div>
-                <div id="important1" class="newsDiv">
-                    <div id="important1date" class="newsDate"></div>
-                    <div id="important1text" class="newsText"></div>
-                    <div id="important2" class="newsDiv">
-                        <div id="important2date" class="newsDate"></div>
-                        <div id="important2text" class="newsText"></div>
-                    </div>
-                    <div id="important3" class="newsDiv">
-                        <div id="important3date" class="newsDate"></div>
-                        <div id="important3text" class="newsText"></div>
-                    </div>
-                    <!--
-                    <div style="width:100%;text-align:center;">
-                        <hr style="background-color:#FFF;color:#FFF;width:90%;border-color:#FFF;height:30px;display: inline-block;margin:0;padding:0;">
-                    </div>
-                    -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" id="isotope_content_row">
-            <div id="ModalsHolderDiv-Content">
-                <div id="addNewContentModal" class="reveal-modal medium" data-reveal>
-                    <h2>Adding a new update</h2>
-
-                    <div class="row">
-                        <div class="large-6 columns">
-                            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-                                <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#ccc;text-align: center;">
-                                    <input type="file" id="addNewContentModal-ImageData">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="large-6 columns">
-                            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-                                <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
-                                    <div class="title-field"><label>Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                                    <div class="published-field"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
-                                    <div class="excerpt-field"><label>Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
-                                    <div class="author-field"><label>Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
-                                    <div class="categories-field"><label>Category
-                                        <select id="addNewContentCategorySelect">
-                                        </select>
-                                    </label>
-                                    </div>
-                                    <!--<div class="categories-field"><label>Categories</label> <input type="text" id="addNewContentModal-categories"/></div>-->
-                                    <div class="hide"><label>ID</label><input type="text" class="hide" id="addNewContentModal-id"/></div>
-                                    <div class="hide"><label>Image Path</label>   <input type="text" class="hide" id="addNewContentModal-imagePath"/></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="large-12 columns right textAreaEditorDiv"><label>Content</label>
-                            <!--
-                                                                <textarea id="addNewContentModal-content" cols="50"style="height: 300px;"></textarea>
-                                                               <textarea cols="50" id="area4">HTML <b>content</b> <i>default</i> in textarea</textarea>
-                            -->
-                            <div id="addNewTextareaDivHolder"><textarea id="addNewContentModal-content" style="height: 300px;" name="content"></textarea></div>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="large-12 columns">
-                            <a class="button" id="cancelAddNewContentModal" style="float: right;">Cancel</a><div style="width: 10px;float: right;">&nbsp;</div>
-                            <a class="button" id="addNewContentModal-submit" style="float: right;">Submit</a>
-                        </div>
-                    </div>
-
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-                <div id="editContentModal" class="reveal-modal medium" data-reveal>
-                    <h2>Editing content</h2>
-                    <div class="row">
-                        <div class="large-6 columns" style="padding-right: 0;">
-                            <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
-                                <input type="file" id="editContentModal-ImageData">
-                            </div>
-                        </div>
-                        <div class="large-6 columns">
-                            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-                                <form id="form-editContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
-                                    <div class="title-field"><label>Title<input type="text" id="editContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                                    <div class="published-field"><label>Published<input type="text" id="editContentModal-published" required/></label><small class="error">A published date is required.</small></div>
-                                    <div class="excerpt-field"><label>Excerpt<input type="text" id="editContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
-                                    <div class="author-field"><label>Author<input type="text" id="editContentModal-author"></label></div>
-                                    <div class="categories-field"><label>Category <select id="editContentModal-categories"></select></label></div>
-                                    <input type="hidden" id="editContentModal-id"/>
-                                    <input type="hidden" id="editContentModal-etag"/>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row"><div class="large-12 columns right textAreaEditorDiv"><label>Content</label><div id="editTextareaDivHolder"></div></div></div>
-
-                    <div class="row" style="margin-top: 20px;"><div class="large-12 columns">
-                        <a class="button" id="cancelEditContentModal" style="float: right;">Cancel</a><div style="width: 10px;float: right;">&nbsp;</div>
-                        <a class="button" id="editContentModal-submit" style="float: right;">Submit</a></div>
-                    </div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-                <div id="viewContentModal" class="reveal-modal medium" data-reveal>
-                    <!--Begins contents of  div for the viewContentModal-->
-                    <div class="row">
-                        <div class="large-4 columns" id="viewContentModal-image"></div>
-                        <div class="large-8 columns">
-                            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><span id="viewContentModal-categories" class="fancyTagBig"></span></div>
-                            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i class='icon-pencil fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Author" class="discreetLinks"></span></div>
-                            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i class='icon-calendaralt-cronjobs fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Date" class="discreetLinks"></span></div>
-                        </div>
-                        <div class="large-8 columns" style="padding-right:0;padding-top: 0;padding-bottom:0;"><div class="content-card-line"><hr></div></div>
-                        <div class="large-8 columns" style="padding-bottom: 12px;padding-right:10px;padding-top:10px;"><strong><span id="viewContentModal-title" class="hugeTitleText"></span></strong><br></div>
-                        <div class="large-8 columns" style="padding-right:15px;"><span  id="viewContentModal-excerpt" class="contentCardExcerpt bigTitleText discreetTextColor"></span></div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns" style="height:20px;"></div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
-                    </div>
-
-                    <div class="row" id="viewModalcommentarea-row">
-                        <div class="large-12 columns">
-                            <div id="viewmodalcommentareaph"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12">
-                            <br>
-                            <a class="button" id="closeViewContentModal" style="float:right !important;">Close</a>
-                        </div>
-                    </div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div> <!--closes div for the viewContentModal-->
-                <div id="alert-contentUpdate-successful" class="reveal-modal medium" data-reveal>
-                    <h3>The content was updated successfully.
-                    </h3>
-                    <p id="alert-contentUpdate-successful-variables" style="font-size: 85%;"></p>
-                    <a id="close-alert-contentUpdate-successful" class="close-reveal-modal">&#215;</a>
-                </div>
-                <div id="alert-addNewContent-successful-modal" class="reveal-modal medium" data-reveal>
-                    <h3>The new content was sent successfully.
-                    </h3>
-                    <p id="alert-addNewContent-successful-variables" style="font-size: 85%;"></p>
-                    <a id="close-alert-addNewContent-successful" class="close-reveal-modal">&#215;</a>
-                </div>
-                <div id="alert-contentDelete-confirm" class="reveal-modal medium" data-reveal>
-                    <h3>Are you sure you want to delete this item?
-                    </h3>
-                    <div id="alert-contentDelete-confirm-ID"></div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="large-12 columns">
-                            <a class="button" id="cancel-deleteContentModal" style="float: right;">Cancel</a><div style="width: 10px;float: right;">&nbsp;</div>
-                            <a class="button" id="confirm-deleteModal-submit" style="float: right;">Confirm</a>
-                        </div>
-                    </div>
-                    <a id="close-alert-contentDelete-confirm" class="close-reveal-modal">&#215;</a>
-                </div>
-
-            </div>
-            <!-- +++Isotope content starts +++++++++++++++++++++++++++++++++++++++++++++ -->
-            <div class="portfolioFilter" id="portfolioFilterDivContainer"></div>
-            <div class="large-12 columns" id="contentDivContainer" style="width:100%; margin: auto !important;"></div>
-            <!-- +++Isotope content ends +++++++++++++++++++++++++++++++++++++++++++++ -->
-        </div>
-    </div> <!--Closes div addEditContentSection large12colums-->
-
+    <p>placeholder...</p>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="categoriesSection">
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
-    <h3>File Manager</h3>
-    <p>Set in the year 0 F.E. ("Foundation Era"), The Psychohistorians opens on Trantor, the capital of the 12,000-year-old Galactic Empire. Though the empire appears stable and powerful, it is slowly decaying in ways that parallel the decline of the Western Roman Empire. Hari Seldon, a mathematician and psychologist, has developed psychohistory, a new field of science and psychology that equates all possibilities in large societies to mathematics, allowing for the prediction of future events. </p>
-    <p>Using psychohistory, Seldon has discovered the declining nature of the Empire, angering the aristocratic members of the Committee of Public Safety, the de facto rulers of the Empire. The Committee considers Seldon's views and statements treasonous, and he is arrested along with young mathematician Gaal Dornick, who has arrived on Trantor to meet Seldon. Seldon is tried by the Committee and defends his beliefs, explaining his theories and predictions, including his belief that the Empire will collapse in 500 years and enter a 30,000-year dark age, to the Committee's members.</p>
+    <h4 class="boldieText">Uploading images/files</h4>
+    <div class="row">
+        <div class="large-6 columns">
+            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                <form id="form-addNewfile-fileUpload" action='new_file.php' method='POST' enctype='multipart/form-data'>
+                    <div id="addNewfile-image" style="width: 100%; height: 300px; background-color:#d4d4d4; text-align: center;"></div>
+                    <div class="large-6 columns"><input type ='file' name='myfile' id="addNewfile-fileInput"><p></div>
+                    <!--<a class="button" id="addNewContentModal-imageUpload-submit">Upload Photo</a>-->
+                </form>
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                <form id="form-addNewFileForm" method='POST' enctype='multipart/form-data' data-abide="ajax">
+                    <label>Description
+                        <textarea id="form-addNewFileForm-description" placeholder="(optional)"></textarea>
+                    </label>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="large-12 columns">
+                            <a class="button" id="submitform-addNewFileForm" style="float: right;">Submit</a><div style="width: 10px;float: right;">&nbsp;</div>
+                            <a class="button" id="preview-addNewFileForm" style="float: right;">Preview (photo)</a>
+
+                        </div>
+                    </div>
+                    <div class="hide"><label>ID</label><input type="text" class="hide" id="form-addNewFileForm-id"/></div>
+                    <div class="hide"><label>Name</label><input type="text" class="hide" id="form-addNewFileForm-name"/></div>
+                    <div class="hide"><label>Upload Date</label><input type="text" class="hide" id="form-addNewFileForm-uploadDate"/></div>
+                    <div class="hide"><label>URL</label><input type="text" class="hide" id="form-addNewFileForm-URL"/></div>
+                    <div class="hide"><label>Extension</label><input type="text" class="hide" id="form-addNewFileForm-extension"/></div>
+                    <div class="hide"><label>Local Path</label><input type="text" class="hide" id="form-addNewFileForm-localPath"/></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns" id="fileTableDivContainer">
+            <table id="filemanager-table"style='table-layout:fixed;width:100%;'>
+                <thead><tr><th style='width:20%;max-width: 130px;'>Preview</th>
+                    <th class='breakwords'>URL</th>
+                    <th>Description</th>
+                    <th>Uploaded</th></tr></thead>
+                <tbody></tbody></table>
+        </div>
+    </div>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="groupSection">
@@ -681,18 +515,6 @@
     }
 
 
-    $(document).foundation(
-            {
-                reveal : {
-                    animation: 'fadeAndPop',
-                    animation_speed: 250,
-                    close_on_background_click: false
-                }
-
-            }
-    );
-
-
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
@@ -724,12 +546,29 @@
         vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
         vc.VisibleTemplateRender();
     });
+    require(["MainContentView/MainContentViewController"], function(vcClass) {
+        var vc = new vcClass("addEditContentSection", tOP, tUDG);
+        vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
+        vc.VisibleTemplateRender();
+    });
 
 
 </script>
 
 <script>
 var initializeAll = function(){
+
+    $(document).foundation(
+            {
+                reveal : {
+                    animation: 'fadeAndPop',
+                    animation_speed: 250,
+                    close_on_background_click: false
+                }
+
+            }
+    );
+
     $.ajaxSetup({cache: true});
 
     $('#addNewContentModal-content').redactor(
@@ -981,6 +820,7 @@ var initializeAll = function(){
         {
             $("#categoriesSection").addClass("activeSection");
             /*$("#categories-table td").remove();*/
+            /*
             $("#categories-table").empty();
             $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
                 var tableheaders="<tr><th width='10%'>Category</th><th width='80%'>Description</th><th width='10%'></th></tr>";
@@ -999,7 +839,7 @@ var initializeAll = function(){
                     $("#categories-table").append($categoryTableData);
                 }//ends FOR loop
 
-            })//ends getJson
+            })//ends getJson*/
         }
         if (triggerid=="fileManagerMenuAnchor")
         {
@@ -1030,6 +870,7 @@ var initializeAll = function(){
         if (triggerid=="collaboratorsMenuAnchor")
         {
             $("#collaboratorsSection").addClass("activeSection");
+            /*
             $("#collaborators-table").empty();
             $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
                 var tableheaders="<tr><th width='30%'>Name</th><th width='60%'>Role</th><th width='10%'></th></tr>";
@@ -1048,6 +889,7 @@ var initializeAll = function(){
                     $("#collaborators-table").append($collaboratorTableData);
                 }//ends FOR loop
             })//ends JSON
+            */
         }
         if (triggerid=="homePageEditingMenuAnchor")
         {
@@ -2053,7 +1895,7 @@ var initializeAll = function(){
 
 
 };
-$(document).ready(initializeAll);
+//$(document).ready(initializeAll);
 </script>
 
 </body>

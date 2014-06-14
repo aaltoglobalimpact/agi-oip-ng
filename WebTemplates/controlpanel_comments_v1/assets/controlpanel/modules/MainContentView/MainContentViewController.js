@@ -8,12 +8,12 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var GroupInfoViewController = (function (_super) {
-        __extends(GroupInfoViewController, _super);
-        function GroupInfoViewController() {
+    var MainContentViewController = (function (_super) {
+        __extends(MainContentViewController, _super);
+        function MainContentViewController() {
             _super.apply(this, arguments);
         }
-        GroupInfoViewController.prototype.ControllerInitialize = function () {
+        MainContentViewController.prototype.ControllerInitialize = function () {
             var me = this;
             require(["MainContentView/MainContent_dust"], function (template) {
                 dust.render("MainContent.dust", {}, function (error, output) {
@@ -21,6 +21,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     $hostDiv.empty();
                     $hostDiv.html(output);
                     me.ControllerInitializeDone();
+                    var wnd = window;
+                    wnd.initializeAll();
                 });
             });
             /*
@@ -34,6 +36,12 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
             });*/
         };
-        return GroupInfoViewController;
+
+        MainContentViewController.prototype.VisibleTemplateRender = function () {
+        };
+        return MainContentViewController;
     })(ViewControllerBase);
+
+    
+    return MainContentViewController;
 });
