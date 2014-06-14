@@ -10,7 +10,8 @@ define(["require", "exports"], function(require, exports) {
         }
         ViewControllerBase.prototype.getClassConstructor = function (obj) {
             //return obj.__proto__.constructor.name;
-            return obj.__proto__.constructor;
+            //return obj.__proto__.constructor;
+            return obj.constructor;
         };
 
         ViewControllerBase.prototype.Initialize = function (dataUrl) {

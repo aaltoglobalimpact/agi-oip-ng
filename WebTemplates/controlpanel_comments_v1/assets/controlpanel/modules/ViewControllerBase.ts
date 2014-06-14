@@ -16,9 +16,10 @@ class ViewControllerBase implements IViewController{
     $initialDeferred:JQueryDeferred<any>;
     $myModals:JQuery;
 
-    getClassConstructor(obj) {
+    getClassConstructor(obj):any {
         //return obj.__proto__.constructor.name;
-        return obj.__proto__.constructor;
+        //return obj.__proto__.constructor;
+        return obj.constructor;
     }
 
     public Initialize(dataUrl:string) {
