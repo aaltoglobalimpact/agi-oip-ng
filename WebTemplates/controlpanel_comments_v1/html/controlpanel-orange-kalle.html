@@ -729,7 +729,7 @@
 </script>
 
 <script>
-$(document).ready(function(){
+var initializeAll = function(){
     $.ajaxSetup({cache: true});
 
     $('#addNewContentModal-content').redactor(
@@ -807,16 +807,72 @@ $(document).ready(function(){
     $("#addNewContentModal-imageUpload-submit2").on('click', upload_editedContentModalForm_picture);
     $("#preview-addNewFileForm").on('click', upload_newFile);
     $("#submitform-addNewFileForm").on('click',upload_newFile);
-    /*$("#submitform-addNewFileForm").on('click', upload_newFile);*/
+    $("#researchPageEditing-saveAllButton").on('click',submitResearchPageData);
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#editContentModal-submit").on('click', submit_EditedContent_to_Server);
     $("#cancelEditContentModal").click(function () {$('#editContentModal').foundation('reveal', 'close');});
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
+    $("#close-alert-pageSave-successful-a").click(function () { $('#alert-pageSave-successful').foundation('reveal', 'close');});
     $("#create-group-button").click(function () {$('#create-group-modal').foundation('reveal', 'open');});
+    $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
+    $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose",{ click: closeAlertDynamicNotification } );
+    $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
+    $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
 
+    var tUI = TheBall.Interface.UI;
+    var tDCM = new tUI.DataConnectionManager();
+    var tOP = new tUI.OperationManager(tDCM);
+    var global_uploaded_attachments=0;
 
     function test(){
         alert ("triggered!");
+    }
+
+    function closeAlertDynamicNotification (){
+
+        var $alertboxClicked = $(this).closest('.alert-box');
+        var alertboxClickedID=$alertboxClicked.attr('id')
+        /*$("#"+alertboxClickedID).foundation('alert-box', 'close');*/
+        $("#"+alertboxClickedID).removeClass("alert-box").removeClass("secondary").removeClass("articleText2").addClass("hide");
+        /*console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+$alertboxClicked.attr('id'));*/
+        console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+alertboxClickedID);
+
+    }
+
+    function submit_New_Binary_Form(){
+        /*var new_binary_title = $('#addNewBinaryModal-title').val();*/
+        var new_binary_title=$("#addNewContentModal-title").val();
+        /*var new_binary_description = $("#addNewBinaryModal-description").val();*/
+        var new_binary_description=$("#addNewContentModal-excerpt").val();
+        /*var new_binary_categories = $("#addNewBinaryCategorySelect option:selected").val();*/
+        var new_binary_categories= $("#addNewContentCategorySelect option:selected").val();
+        var saveData =
+        {
+            Title: new_binary_title,
+            Description: new_binary_description,
+            Object_Categories: new_binary_categories
+        };
+        tOP.AppendBinaryFileValuesToData("000", saveData, function() {
+            tOP.CreateObject("AaltoGlobalImpact.OIP", "BinaryFile", saveData);
+            /*$('#addNewBinaryModal').foundation('reveal', 'close');
+             setTimeout(function() {
+             $('#alert-addNewContent-successful-modal').foundation('reveal', 'open');
+             setTimeout(function() {
+             location.reload();
+             return false;
+             }, 2500);
+             return false;
+             }, 2500);*/
+        });
+        /*$('#addNewBinaryModal-title').val("");
+         $("#addNewBinaryModal-description").val("");*/
+        //clearing the fileInput
+        var newupdatefileinputID = $("#addNewBinaryModal-Data");
+        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        //here the "cleaning" or resetting of the input fields ends.
+        global_uploaded_attachments++;
+        var notify="<div data-alert class='alert-box secondary articleText2' id='addNewContent-attachment-alert"+global_uploaded_attachments+"'>Attachment "+global_uploaded_attachments+" uploaded successfully.<a class='close alertAnchorClose'>&times;</a></div>";
+        $("#addNewContentAttachmentAlertHOLDER").append(notify);
     }
 
     var saveNewComment = function(commentText, parentTextContentID) {
@@ -911,8 +967,6 @@ $(document).ready(function(){
         });
     };
 
-
-
     function switchActiveCanvasSection (event){
         var triggerid= event.target.id;
         var currentactive=$(".activeSection").attr("id");
@@ -920,31 +974,238 @@ $(document).ready(function(){
         $("#"+currentactive).removeClass("activeSection");
 
         if (triggerid=="addEditContentMenuAnchor")
+        {
             $("#addEditContentSection").addClass("activeSection");
-
+        }
         if (triggerid=="manageCategoriesMenuAnchor")
+        {
             $("#categoriesSection").addClass("activeSection");
+            /*$("#categories-table td").remove();*/
+            $("#categories-table").empty();
+            $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
+                var tableheaders="<tr><th width='10%'>Category</th><th width='80%'>Description</th><th width='10%'></th></tr>";
+                $("#categories-table").append(tableheaders);
+                for (var i in contentData.CollectionContent) {
+                    var currentObject=contentData.CollectionContent[i];
+                    var currentDescription="No description available.";
+                    var currentID=currentObject.ID;
+                    var currentTitle=currentObject.Title ? currentObject.Title : "";
+                    var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;' class='fancyTextColor'>" + currentTitle + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;font-size: 12px;'>" + currentDescription + "</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteCategory = $categoryTableData.find("a");
+                    $deleteCategory.data("CategoryID", currentID);
+                    $deleteCategory.on("click", deleteComment);
+                    $("#categories-table").append($categoryTableData);
+                }//ends FOR loop
 
+            })//ends getJson
+        }
         if (triggerid=="fileManagerMenuAnchor")
+        {
             $("#fileManagerSection").addClass("activeSection");
+            /*$("#filemanager-table td").remove();*/
+            $("#filemanager-table").empty();
+            $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function(contentData) {
+                var tableheaders="<thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody></tbody>";
+                $("#filemanager-table").append(tableheaders);
+                for (var i in contentData.CollectionContent) {
+                    var currentObject=contentData.CollectionContent[i];
+                    var currentPreview=currentObject.Data.FileExt;
+                    var currentURL=currentObject.Data.RelativeLocation;
+                    var currentDescription=currentObject.Description ? currentObject.Description:"No description available.";
+                    var currentID=currentObject.ID;
 
-        if (triggerid=="groupMenuAnchor")
-            $("#groupSection").addClass("activeSection");
-
-        if (triggerid=="groupMembersMenuAnchor")
-            $("#groupMembersSection").addClass("activeSection");
-
+                    var $fileTableData=$("<tr><td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>" + currentPreview + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;font-size:11px;'>" + currentURL + "</td>"+
+                            "<td>"+currentDescription+"</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteFile = $fileTableData.find("a");
+                    $deleteFile.data("FileID", currentID);
+                    $deleteFile.on("click", deleteComment);
+                    $("#filemanager-table").append($fileTableData);
+                }//ends FOR loop
+            })//ends getJson
+        }
+        if (triggerid=="collaboratorsMenuAnchor")
+        {
+            $("#collaboratorsSection").addClass("activeSection");
+            $("#collaborators-table").empty();
+            $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
+                var tableheaders="<tr><th width='30%'>Name</th><th width='60%'>Role</th><th width='10%'></th></tr>";
+                $("#collaborators-table").append(tableheaders);
+                for (var i in contentData.Collaborators.CollectionContent) {
+                    var currentObject=contentData.Collaborators.CollectionContent[i];
+                    var currentID=currentObject.ID;
+                    var currentCollaboratorName=currentObject.CollaboratorName ? currentObject.CollaboratorName : "";
+                    var currentRole=currentObject.Role ? currentObject.Role : "";
+                    var $collaboratorTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentCollaboratorName + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;'>" + currentRole + "</td>"+
+                            "<td><a>Delete</a></td></tr>");
+                    var $deleteMember = $collaboratorTableData.find("a");
+                    $deleteMember.data("MemberID", currentID);
+                    $deleteMember.on("click", deleteComment);
+                    $("#collaborators-table").append($collaboratorTableData);
+                }//ends FOR loop
+            })//ends JSON
+        }
         if (triggerid=="homePageEditingMenuAnchor")
+        {
             $("#homePageEditingSection").addClass("activeSection");
-
+        }
         if (triggerid=="researchPageEditingMenuAnchor")
+        {
             $("#researchPageEditingSection").addClass("activeSection");
+            $.getJSON('../../AaltoGlobalImpact.OIP/PagesContent/Research.json', function(contentData) {
+                for (var i in contentData.CollectionContent)
+                {
+                    var $caption1textarea = $("#researchPageEditingCarCaption1-textarea");
+                    var $caption2textarea = $("#researchPageEditingCarCaption2-textarea");
+                    var $nametextarea = $("#researchPageEditingContactName-input");
+                    var $jobtextarea = $("#researchPageEditingContactJobTitle-input");
+                    var $emailtextarea = $("#researchPageEditingContactEmail-input");
+                    var $contenttextarea = $("#researchPageEditingContent-redactortextarea");
+                    var currItem = contentData.CollectionContent[i];
+                    var caption1=currItem.SliderCaption1;
+                    var caption2=currItem.SliderCaption2;
+                    var name=currItem.ContactName;
+                    var job=currItem.ContactTitle;
+                    var email=currItem.ContactEmail;
+                    var content=currItem.Body;
 
+                    $caption1textarea.val(caption1);
+                    $caption2textarea.val(caption2);
+                    $nametextarea.val(name);
+                    $jobtextarea.val(job);
+                    $emailtextarea.val(email);
+
+                    $('#researchPageEditingContent-textareaDIV').empty();
+                    var textareaResearch = $("<textarea id='researchPageEditingContent-redactortextarea' style='height: 300px;'>");
+                    $('#researchPageEditingContent-textareaDIV').append(textareaResearch);
+                    $('#researchPageEditingContent-redactortextarea').val(content);
+                    $('#researchPageEditingContent-redactortextarea').redactor(
+                            {   minHeight: 300,
+                                maxHeight: 350,
+                                autoresize: false,
+                                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                            });
+                    /*if ((contentData.CollectionContent[i].Title===null)||(!contentData.CollectionContent[i].Title)||(currItem.Categories===null))
+                     {}else {then do stuff}*/
+                    /*if (contentData.CollectionContent[i].ImageData===null){var currentImage= "images/preview.jpg";}
+                     else { var imgID = contentData.CollectionContent[i].ImageData.ID;var imgExtension = contentData.CollectionContent[i].ImageData.AdditionalFormatFileExt;var currentImage= "livedata/MediaContent/"+imgID+"_320x240_crop"+imgExtension;}*/
+                    /*if ((contentData.CollectionContent[i].Author===null)||(!contentData.CollectionContent[i].Author) ) var currentAuthor="Aalto Global Impact";
+                     else var currentAuthor=contentData.CollectionContent[i].Author;*/
+                }//ends for loop
+                /*$caption1textarea.append(ImageSliderCaption1);*/
+            })
+        } //closes IF the research page editing was clicked
         if (triggerid=="businessPageEditingMenuAnchor")
+        {
             $("#businessPageEditingSection").addClass("activeSection");
-
+        }
         if (triggerid=="innovationsPageEditingMenuAnchor")
+        {
             $("#innovationsPageEditingSection").addClass("activeSection");
+        }
+        if (triggerid=="groupSettingsMenuAnchor")
+        {
+            $("#groupSettingsSection").addClass("activeSection");
+        }
+        if (triggerid=="timelineMenuAnchor")
+        {
+            $("#timelineSection").addClass("activeSection");
+            $("#my-timeline").empty();
+            /*var myTimelineData={"timeline":{
+             "headline":"The Main Timeline Headline Goes here",
+             "type":"default",
+             "text":"<p>Intro body text goes here, some HTML is ok</p>",
+             "asset": {"media":"http://yourdomain_or_socialmedialink_goes_here.jpg","credit":"Credit Name Goes Here","caption":"Caption text goes here"
+             },
+             "date": [
+             {"startDate":"2011,12,10",
+             "endDate":"2011,12,11",
+             "headline":"Headline Goes Here",
+             "text":"<p>Body text goes here, some HTML is OK</p>",
+             "tag":"This is Optional",
+             "classname":"optionaluniqueclassnamecanbeaddedhere",
+             "asset": {"media":"http://twitter.com/ArjunaSoriano/status/164181156147900416",
+             "thumbnail":"optional-32x32px.jpg",
+             "credit":"Credit Name Goes Here",
+             "caption":"Caption text goes here"}}
+             ], "era": [
+             {"startDate":"2011,12,10",
+             "endDate":"2011,12,11",
+             "headline":"Headline Goes Here",
+             "text":"<p>Body text goes here, some HTML is OK</p>",
+             "tag":"This is Optional"}]}
+             }*///closes the var "options"
+            /*createStoryJS({ type:'timeline',width:'100%',height:'600',source: myTimelineData,embed_id:'my-timeline'});*/
+            $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function(contentData) {
+                /*var wholeTimelineData=new Array();*/
+                var wholeTimelineData={
+                    "timeline":
+                    {
+                        "headline":"Aalto New Global",
+                        "type":"default",
+                        "text":"Welcome to the timeline view",
+                        "startDate":"2014,1,1",
+                        "date":[]
+                    }
+                };
+                for (var i in contentData.CollectionContent) {
+                    var currentObject=contentData.CollectionContent[i];
+                    var currentID=currentObject.ID;
+                    var currentTitle=currentObject.Title ? currentObject.Title : "";
+                    var currentMainCategory;
+                    var currentExcerpt=currentObject.Excerpt;
+                    var currentAuthor=currentObject.Author;
+                    var currentPublishedDate=ParseRawTimestampToDateString(currentObject.Published);
+                    var imageSizeString="256";
+                    var dateSubString=currentPublishedDate.split(".");
+                    var timelineFormatedStartDate= dateSubString[2]+","+dateSubString[1]+","+dateSubString[0];
+                    var endDay=dateSubString[0]+1;
+                    var timelineFormatedEndDate= dateSubString[2]+","+dateSubString[1]+","+endDay;
+                    var currentImagePath=currentObject.ImageData
+                            ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
+                            : null;
+                    if(!currentObject.Categories|| !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
+                        currentMainCategory="NEWS";
+                    else currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
+                    //-----------------------------begins:Here we get the total number of comments for each update
+                    var numberOfComments=0;
+                    //-----------------------------ends:Here we get the total number of comments for each update
+                    /*var myTimelineData={
+                     "startDate":timelineFormatedStartDate,
+                     "headline":currentTitle,
+                     "text":currentExcerpt,
+                     "tag":currentMainCategory,
+                     "asset":
+                     {
+                     "media":currentImagePath,
+                     "credit":currentAuthor,
+                     "caption":currentTitle
+                     }};*/
+                    var myTimelineData={
+                        "startDate":timelineFormatedStartDate,
+                        "headline":currentTitle,
+                        "text":currentExcerpt,
+                        "tag":currentMainCategory,
+                        "asset":
+                        {
+                            "media":currentImagePath,
+                            "thumbnail":currentImagePath,
+                            "credit":currentAuthor,
+                            "caption":currentTitle
+                        }
+
+                    };
+
+                    wholeTimelineData.timeline.date.push(myTimelineData);
+                }//ends for loop
+                createStoryJS({ type:'timeline',width:'100%',height:'600',source:wholeTimelineData,embed_id:'my-timeline'});
+            })//closes getJSON
+
+        }//if (triggerid=="timelineSection")
     }
 
     function populateWebsitesMenu_and_groupsTabTable (){
@@ -965,7 +1226,6 @@ $(document).ready(function(){
             $("#site-dropdown-list").append(output);
         })
     }//--ends: Populating the list of websites TopLeft Navbar and Populates the GroupTables on the Groups TAB
-
 
     function submit_EditedContent_to_Server() {
         var edited_content_id = $("#editContentModal-id").val();
@@ -1264,12 +1524,10 @@ $(document).ready(function(){
         })//ends getJson
     }//Ends Function LaunchCommentModal
 
-
     function reLayout_isotope() {
         var $container = $('#contentDivContainer');
         $container.isotope( 'reLayout');
     }
-
     //--begins: Function get_content
     function get_content(){
         $("#contentDivContainer").empty();
@@ -1493,8 +1751,13 @@ $(document).ready(function(){
                     buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
                 });
         //clearing the fileInput
-        var newupdatefileinputID = $("#addNewContentModal-ImageData");
+        var newupdatefileinputID = $("#addNewContent-fileInput");
         newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        //here the "cleaning" or reseting of the input fields ends.
+        $("#addNewContentAttachmentAlertHOLDER").empty();
+        global_uploaded_attachments=0;
+        var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
+        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
         //here the "cleaning" or resetting of the input fields ends.
 
 
@@ -1539,17 +1802,17 @@ $(document).ready(function(){
     }
 
     function reveal_addNewContentModal () {
-        //$('#form-addNewContentModal-imageUpload').ajaxForm();//initializes the Image Upload Form
-        //$("#tooltip-choosePhotoHere").trigger("mouseover");
-
         getAndPopulateCategoryOptions();
         $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
         var currentPublished = ParseRawTimestampToISOString(null);
         $("#addNewContentModal-published").val(currentPublished);
         tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000" ,"ImageData", null);
         $('#addNewContentModal').foundation('reveal', 'open');
-        //getAndPopulate_Isotope_Filter_Categories ();
-        //$.when($('#addNewContentModal').foundation('reveal', 'open')).then(function(){$("#tooltip-choosePhotoHere").trigger("mouseover");}).fail(function(){console.log( "Couldn't reveal the addNewContentModal." );});
+
+        //***************initializing the inputfile elment for the attachments on the "add new content" modal
+        $("#addNewBinaryModal-Data").attr("data-oipfile-filegroupid", "addNewBinaryModal");
+        tOP.InitiateBinaryFileElements("addNewBinaryModal-Data", "000" ,"Data", null);
+        //***************ends the inputfile elment for the attachments on the "add new content" modal
     }
 
     function close_NewContent_Modal_Form(){
@@ -1576,6 +1839,11 @@ $(document).ready(function(){
         var newupdatefileinputID = $("#addNewContent-fileInput");
         newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
         //here the "cleaning" or reseting of the input fields ends.
+        $("#addNewContentAttachmentAlertHOLDER").empty();
+        global_uploaded_attachments=0;
+        var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
+        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
+        //here the "cleaning" or resetting of the input fields ends.
 
         $('#addNewContentModal').foundation('reveal', 'close');
     }
@@ -1589,7 +1857,6 @@ $(document).ready(function(){
             return false;
         }, 3000);
     }
-
 
     function close_contentDelete_confirm() {
         $('#alert-contentDelete-confirm').foundation('reveal', 'close');
@@ -1736,8 +2003,57 @@ $(document).ready(function(){
         $('#alert-groupadded-successful').foundation('reveal', 'open');
     };
 
+    function submitResearchPageData(){
+        var ImageSliderCaption1=$("#researchPageEditingCarCaption1-textarea").val();
+        var ImageSliderCaption2=$("#researchPageEditingCarCaption2-textarea").val();
+        var researchContactName=$("#researchPageEditingContactName-input").val();
+        var researchContactJobTitle=$("#researchPageEditingContactJobTitle-input").val();
+        var researchContactEmail=$("#researchPageEditingContactEmail-input").val();
 
-});
+        var researchMainContent=$("#researchPageEditingContent-redactortextarea").val();
+
+        /*alert("ImageSliderCaption1: " +ImageSliderCaption1);*/
+        var multihandlerResponse = $.ajax({
+            url: "multihandler.php",
+            type: "POST",
+            data: ({action: "saveResearchPageData",
+                caption1: ImageSliderCaption1,
+                caption2: ImageSliderCaption2,
+                contactName: researchContactName,
+                contactTitle: researchContactJobTitle,
+                contactEmail: researchContactEmail,
+                mainContent: researchMainContent
+            }),
+            async: false
+        }).responseText;
+        console.log("Response from ajax call to multihandler.php (called from SubmitResearchPageData Function): "+multihandlerResponse);
+        /*alert("PHP response: " +multihandlerResponse);*/
+        /*$("#addNewfile-image").empty();*/
+        /*$("#form-addNewFileForm-description").empty();*/
+
+        /*$("#researchPageEditingCarCaption1-textarea").val("");
+         $("#researchPageEditingCarCaption2-textarea").val("");
+         $("#researchPageEditingContactName-input").val("");
+         $("#researchPageEditingContactJobTitle-input").val("");
+         $("#researchPageEditingContactEmail-input").val("");
+
+         $('#researchPageEditingContent-textareaDIV').empty();
+         var textareaResearch = $("<textarea id='researchPageEditingContent-redactortextarea' style='height: 300px;'>");
+         $('#researchPageEditingContent-textareaDIV').append(textareaResearch);
+         $('#researchPageEditingContent-redactortextarea').val("");
+         $('#researchPageEditingContent-redactortextarea').redactor(
+         {   minHeight: 300,
+         maxHeight: 350,
+         autoresize: false,
+         buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+         });*/
+        $('#alert-pageSave-successful').foundation('reveal', 'open');
+
+    }
+
+
+};
+$(document).ready(initializeAll);
 </script>
 
 </body>

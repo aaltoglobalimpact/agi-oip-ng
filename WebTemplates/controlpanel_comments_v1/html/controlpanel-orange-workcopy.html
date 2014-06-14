@@ -860,7 +860,7 @@
 </script>
 
 <script>
-$(document).ready(function(){
+var initializeAll = function(){
     $.ajaxSetup({cache: true});
 
     $('#addNewContentModal-content').redactor(
@@ -2183,7 +2183,11 @@ $(document).ready(function(){
     }
 
 
-});
+}
+
+$(document).ready(
+    initializeAll
+);
 </script>
 
 </body>
