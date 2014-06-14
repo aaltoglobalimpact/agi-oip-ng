@@ -91,6 +91,15 @@ define(["require", "exports"], function(require, exports) {
             this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
         };
 
+        ViewControllerBase.prototype.getObjectByID = function (collection, id) {
+            for (var i = 0; i < collection.length; i++) {
+                var currObj = collection[i];
+                if (currObj.ID === id)
+                    return currObj;
+            }
+            return null;
+        };
+
         ViewControllerBase.prototype.VisibleTemplateRender = function () {
             throw "VisibleTemplateRender not implemented";
         };

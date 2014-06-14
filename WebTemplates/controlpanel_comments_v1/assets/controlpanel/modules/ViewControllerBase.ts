@@ -101,6 +101,15 @@ class ViewControllerBase implements IViewController{
         this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
     }
 
+    getObjectByID(collection:any, id:string):any {
+        for(var i = 0; i < collection.length; i++) {
+            var currObj = collection[i];
+            if(currObj.ID === id)
+                return currObj;
+        }
+        return null;
+    }
+
     VisibleTemplateRender():void {
         throw "VisibleTemplateRender not implemented";
     }
