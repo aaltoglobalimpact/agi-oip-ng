@@ -14,6 +14,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             _super.apply(this, arguments);
         }
         GroupMemberViewController.prototype.ControllerInitialize = function () {
+            var _this = this;
             var me = this;
             require([
                 "GroupMemberView/GroupMembers_dust",
@@ -23,59 +24,68 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "lib/dusts/modal_begin_dust",
                 "lib/dusts/textinput_singleline_dust",
                 "lib/dusts/modal_end_dust",
-                "lib/dusts/hiddeninput_dust"], function (template) {
-                me.ControllerInitializeDone();
-            });
-        };
-
-        GroupMemberViewController.prototype.VisibleTemplateRender = function () {
-            var me = this;
-            this.currUDG.GetData(this.dataUrl, function (myData) {
-                me.currentData = myData;
-                $.when(me.$initialized).then(function () {
-                    //me.populateFromCurrentData();
+                "lib/dusts/hiddeninput_dust",
+                "lib/dusts/openmodal_button_dust",
+                "lib/dusts/insidemodal_button_dust"
+            ], function (template) {
+                _this.currUDG.GetData(_this.dataUrl, function (myData) {
+                    me.currentData = myData;
                     dust.render("GroupMembers.dust", myData, function (error, output) {
+                        if (error)
+                            alert("Dust error: " + error);
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
+                        me.ControllerInitializeDone();
                     });
                 });
             });
         };
 
-        GroupMemberViewController.prototype.populateFromCurrentData = function () {
-            var groupProfile = this.currentData.GroupProfile;
-
-            //alert(JSON.stringify(groupProfile));
-            this.$getNamedFieldWithin("GroupName").val(groupProfile.GroupName);
-            this.$getNamedFieldWithin("Description").val(groupProfile.Description);
-            this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val(groupProfile.OrganizationsAndGroupsLinkedToUs);
-            this.$getNamedFieldWithin("WwwSiteToPublishTo").val(groupProfile.WwwSiteToPublishTo);
+        GroupMemberViewController.prototype.VisibleTemplateRender = function () {
         };
 
         GroupMemberViewController.prototype.InvisibleTemplateRender = function () {
         };
 
-        GroupMemberViewController.prototype.myFunc = function () {
-            alert("My stuff to do!");
+        GroupMemberViewController.prototype.InviteNewMember = function () {
+            var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
+            alert(emailAddress);
         };
 
-        GroupMemberViewController.prototype.Save = function () {
-            var objectID = this.currentData.ID;
-            var objectRelativeLocation = this.currentData.RelativeLocation;
-            var eTag = this.currentData.MasterETag;
-            var groupName = this.$getNamedFieldWithin("GroupName").val();
-            var description = this.$getNamedFieldWithin("Description").val();
-            var organizationsAndGroupsLinkedToUs = this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val();
-            var wwwSiteToPublishTo = this.$getNamedFieldWithin("WwwSiteToPublishTo").val();
+        GroupMemberViewController.prototype.OpenModalRemoveMemberModal = function ($source) {
+            var accountID = $source.attr("data-accountid");
+            var collaborators = this.currentData.Collaborators.CollectionContent;
+            var collaboratorToRemove = null;
+            for (var i = 0; i < collaborators.length; i++) {
+                var currItem = collaborators[i];
+                if (currItem.AccountID == accountID) {
+                    collaboratorToRemove = currItem;
+                    break;
+                }
+            }
+            if (!collaboratorToRemove)
+                throw "Cannot find matching collaborator, that was there before!";
+            var $removeMemberModal = this.$getNamedFieldWithin("RemoveMemberModal");
+            var $collaboratorNameField = this.$getNamedFieldWithinModal($removeMemberModal, "CollaboratorName");
+            $collaboratorNameField.html(collaboratorToRemove.CollaboratorName);
+            var $accountIDField = this.$getNamedFieldWithinModal($removeMemberModal, "AccountID");
+            $accountIDField.val(accountID);
+            $removeMemberModal.foundation("reveal", "open");
+        };
 
+        GroupMemberViewController.prototype.Modal_RemoveCollaborator = function ($modal) {
+            var accountID = this.$getNamedFieldWithinModal($modal, "AccountID").val();
+            alert(accountID);
+            /*
             var saveData = {
-                GroupName: groupName,
-                Description: description,
-                OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
-                WwwSiteToPublishTo: wwwSiteToPublishTo
+            GroupName: groupName,
+            Description: description,
+            OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
+            WwwSiteToPublishTo: wwwSiteToPublishTo
             };
             this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
+            */
         };
         return GroupMemberViewController;
     })(ViewControllerBase);
