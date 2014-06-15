@@ -50,9 +50,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
 
         GroupMemberViewController.prototype.InviteNewMember = function () {
             var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
-            this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup", { "EmailAddress": emailAddress }, function () {
-                alert("Invitation sent OK!");
-            }, this.CommonErrorHandler);
+            this.CommonWaitForOperation("Inviting new member...");
+            this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup", { "EmailAddress": emailAddress }, this.CommonSuccessHandler, this.CommonErrorHandler);
         };
 
         GroupMemberViewController.prototype.OpenModalRemoveMemberModal = function ($source) {
@@ -79,8 +78,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         GroupMemberViewController.prototype.Modal_RemoveCollaborator = function ($modal) {
             var accountID = this.$getNamedFieldWithinModal($modal, "AccountID").val();
             var wnd = window;
-            this.currOPM.ExecuteOperationWithForm("RemoveCollaboratorFromGroup", { "AccountID": accountID }, function () {
-            }, this.CommonErrorHandler);
+            this.CommonWaitForOperation("Removing member...");
+            this.currOPM.ExecuteOperationWithForm("RemoveCollaboratorFromGroup", { "AccountID": accountID }, this.CommonSuccessHandler, this.CommonErrorHandler);
             /*
             var saveData = {
             GroupName: groupName,

@@ -57,13 +57,21 @@ class ViewControllerBase implements IViewController{
         return this.$initialized;
     }
 
+    CommonWaitForOperation(waitingText:string) {
+        var jq:any = $;
+        jq.blockUI({ message: "<h3>" + waitingText + "</h3>"});
+    }
+
     CommonErrorHandler(jqXhr, textStatus, errorThrown) {
         var errorObject = JSON.parse(jqXhr.responseText);
         var wnd:any = window;
         wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
     }
 
-
+    CommonSuccessHandler() {
+        var jq:any = $;
+        jq.unblockUI();
+    }
 
     ControllerInitialize():void {
         throw "ControllerInitialize not implemented";

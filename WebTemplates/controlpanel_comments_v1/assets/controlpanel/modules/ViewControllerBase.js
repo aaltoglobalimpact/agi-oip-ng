@@ -48,10 +48,20 @@ define(["require", "exports"], function(require, exports) {
             return this.$initialized;
         };
 
+        ViewControllerBase.prototype.CommonWaitForOperation = function (waitingText) {
+            var jq = $;
+            jq.blockUI({ message: "<h3>" + waitingText + "</h3>" });
+        };
+
         ViewControllerBase.prototype.CommonErrorHandler = function (jqXhr, textStatus, errorThrown) {
             var errorObject = JSON.parse(jqXhr.responseText);
             var wnd = window;
             wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
+        };
+
+        ViewControllerBase.prototype.CommonSuccessHandler = function () {
+            var jq = $;
+            jq.unblockUI();
         };
 
         ViewControllerBase.prototype.ControllerInitialize = function () {
