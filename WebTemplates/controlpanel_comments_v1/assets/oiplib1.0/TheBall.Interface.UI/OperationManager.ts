@@ -201,32 +201,34 @@ module TheBall.Interface.UI {
             }
             $form.append(this.getHiddenInput("NORELOAD", ""));
             //$form.submit();
+            if(!failureCallback)
+                failureCallback = function() {};
             $.ajax({
                 type: "POST",
                 data: $form.serialize(),
                 //dataType: "json",
                 success: function(responseData) {
-                    successCallback(responseData);
+                    if(successCallback != null)
+                        successCallback(responseData);
                 },
-                error: function() {
-                    failureCallback();
-                }
+                error: failureCallback
             });
             $form.empty();
         }
-        ExecuteOperationWithAjax(operationFullName:string, contentObject:any, callBack?:any) {
+        ExecuteOperationWithAjax(operationFullName:string, contentObject:any, successCallback?:any, failureCallback?:any) {
             var jsonData = JSON.stringify(contentObject);
-            if(!callBack)
-                callBack = function() {};
+            if(!successCallback)
+                successCallback = function() {};
+            if(!failureCallback)
+                failureCallback = function() {};
             $.ajax(
                 { type: "POST",
                     url: "?operation=" + operationFullName,
                     dataType: "json",
                     contentType: "application/json",
                     data: jsonData,
-                    success: callBack,
-                    error: function(){
-                    }
+                    success: successCallback,
+                    error: failureCallback
                 }
             );
         }

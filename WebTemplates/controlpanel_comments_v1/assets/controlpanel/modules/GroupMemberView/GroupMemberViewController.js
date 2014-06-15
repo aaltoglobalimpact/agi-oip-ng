@@ -50,7 +50,15 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
 
         GroupMemberViewController.prototype.InviteNewMember = function () {
             var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
-            alert(emailAddress);
+            var errorHandler = function (jqXhr, textStatus, errorThrown) {
+                var errorObject = JSON.parse(jqXhr.responseText);
+
+                //alert(textStatus + ": " + errorThrown + ": " + JSON.stringify(jqXhr));
+                alert("Error: " + errorObject.ErrorText);
+            };
+            this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup", { "EmailAddress": emailAddress }, function () {
+                alert("Saved OK!");
+            }, errorHandler);
         };
 
         GroupMemberViewController.prototype.OpenModalRemoveMemberModal = function ($source) {

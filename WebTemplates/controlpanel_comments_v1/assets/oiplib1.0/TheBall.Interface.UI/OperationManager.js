@@ -198,23 +198,28 @@ var TheBall;
                     $form.append(this.getHiddenInput("NORELOAD", ""));
 
                     //$form.submit();
+                    if (!failureCallback)
+                        failureCallback = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
                         //dataType: "json",
                         success: function (responseData) {
-                            successCallback(responseData);
+                            if (successCallback != null)
+                                successCallback(responseData);
                         },
-                        error: function () {
-                            failureCallback();
-                        }
+                        error: failureCallback
                     });
                     $form.empty();
                 };
-                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, callBack) {
+                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, successCallback, failureCallback) {
                     var jsonData = JSON.stringify(contentObject);
-                    if (!callBack)
-                        callBack = function () {
+                    if (!successCallback)
+                        successCallback = function () {
+                        };
+                    if (!failureCallback)
+                        failureCallback = function () {
                         };
                     $.ajax({
                         type: "POST",
@@ -222,9 +227,8 @@ var TheBall;
                         dataType: "json",
                         contentType: "application/json",
                         data: jsonData,
-                        success: callBack,
-                        error: function () {
-                        }
+                        success: successCallback,
+                        error: failureCallback
                     });
                 };
 
