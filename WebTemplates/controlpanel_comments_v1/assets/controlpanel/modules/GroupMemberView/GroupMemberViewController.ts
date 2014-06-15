@@ -50,15 +50,10 @@ class GroupMemberViewController extends ViewControllerBase {
 
     InviteNewMember() {
         var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
-        var errorHandler = function (jqXhr, textStatus, errorThrown) {
-            var errorObject = JSON.parse(jqXhr.responseText);
-            //alert(textStatus + ": " + errorThrown + ": " + JSON.stringify(jqXhr));
-            alert("Error: " + errorObject.ErrorText);
-        };
         this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup",
             { "EmailAddress": emailAddress}, function() {
-                alert("Saved OK!");
-            }, errorHandler);
+                alert("Invitation sent OK!");
+            }, this.CommonErrorHandler);
     }
 
     OpenModalRemoveMemberModal($source)
@@ -85,8 +80,11 @@ class GroupMemberViewController extends ViewControllerBase {
 
     Modal_RemoveCollaborator($modal) {
         var accountID = this.$getNamedFieldWithinModal($modal, "AccountID").val();
-        alert(accountID);
+        var wnd:any = window;
+        this.currOPM.ExecuteOperationWithForm("RemoveCollaboratorFromGroup",
+            {"AccountID": accountID}, function() {
 
+            }, this.CommonErrorHandler);
         /*
         var saveData = {
             GroupName: groupName,

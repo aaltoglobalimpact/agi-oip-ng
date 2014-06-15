@@ -48,6 +48,12 @@ define(["require", "exports"], function(require, exports) {
             return this.$initialized;
         };
 
+        ViewControllerBase.prototype.CommonErrorHandler = function (jqXhr, textStatus, errorThrown) {
+            var errorObject = JSON.parse(jqXhr.responseText);
+            var wnd = window;
+            wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
+        };
+
         ViewControllerBase.prototype.ControllerInitialize = function () {
             throw "ControllerInitialize not implemented";
         };

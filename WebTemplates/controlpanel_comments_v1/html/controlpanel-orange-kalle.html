@@ -1,15 +1,15 @@
 <html>
 <head>
     <title></title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Control Panel | Welcome</title>
-    <link rel="stylesheet" href="../assets/controlpanel/css/foundation.orange.css" />
+    <link rel="stylesheet" href="../assets/controlpanel/css/foundation.orange.css"/>
     <link rel="stylesheet" href="../assets/controlpanel/css/style.orange.css">
     <link rel="stylesheet" href="../assets/controlpanel/css/jquery-te-1.4.0.css">
-    <link rel="stylesheet" type="text/css" media="all" href="../assets/controlpanel/css/whhg.css" />
-    <link rel="stylesheet" href="../assets/controlpanel/css/redactor.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../assets/controlpanel/css/whhg.css"/>
+    <link rel="stylesheet" href="../assets/controlpanel/css/redactor.css"/>
 
     <script src="../assets/controlpanel/js/modernizr.js"></script>
     <script src="../assets/controlpanel/js/jquery.js"></script>
@@ -21,7 +21,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.0.0/dust-core.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.underscore.min.js"></script>
     <script src="../assets/controlpanel/modules/lib/jquery-nestable/jquery.nestable.js"></script>
-    <link rel="stylesheet" href="../assets/controlpanel/modules/lib/jquery-nestable/jquery-nestable.css" />
+    <link rel="stylesheet" href="../assets/controlpanel/modules/lib/jquery-nestable/jquery-nestable.css"/>
 
     <script src="../assets/controlpanel/js/markdowndeep/MarkdownDeepLib.min.js"></script>
     <script src="../assets/oiplib1.0/TheBall.Interface.UI/TemplateModuleManager.js"></script>
@@ -32,27 +32,51 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
     <script src="//cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
 
-<script>
-    var wnd = window;
-    if(!wnd.ControllerCommon) {
-        wnd.ControllerCommon = { };
-    }
-    wnd.ControllerCommon.ModalButtonClick = function(event) {
-        var $owningModal = $(this).closest(".oip-controller-modal");
-        var controller = $owningModal.data("oip-controller-instance");
-        controller.handleModalEvent($owningModal, $(this), "click", event);
-    };
+    <script>
+        var wnd = window;
+        if (!wnd.ControllerCommon) {
+            wnd.ControllerCommon = { };
+        }
+        wnd.ControllerCommon.ModalButtonClick = function (event) {
+            var $owningModal = $(this).closest(".oip-controller-modal");
+            var controller = $owningModal.data("oip-controller-instance");
+            controller.handleModalEvent($owningModal, $(this), "click", event);
+        };
 
-</script>
-    <script data-main="../assets/controlpanel/modules/config" type="text/javascript" src="../assets/controlpanel/modules/require.js"></script>
+        wnd.DisplayErrorDialog = function(errorCaptionText, errorTypeText, errorMessageText, callbackAfterError) {
+            var $errorModal = $("#CommonErrorModal");
+            var $errorCaption = $("#CommonErrorLabel");
+            var $errorType = $("#CommonErrorType");
+            var $errorMessage = $("#CommonErrorMessage");
+            $errorCaption.empty();
+            $errorCaption.html(errorCaptionText);
+            $errorType.empty();
+            $errorType.html(errorTypeText);
+            $errorMessage.empty();
+            $errorMessage.html(errorMessageText);
+            //$errorModal.foundation("reveal", "open");
+            var $errorOKButton = $("#CommonErrorOKButton");
+            $errorOKButton.off("click").on("click", function() {
+                $.unblockUI();
+                /*
+                if(callbackAfterError)
+                    setTimeout(callbackAfterError, 1000);*/
+                return false;
+            });
+            $.blockUI({ message: $errorModal, onUnblock:callbackAfterError });
+        };
+
+    </script>
+    <script data-main="../assets/controlpanel/modules/config" type="text/javascript"
+            src="../assets/controlpanel/modules/require.js"></script>
 </head>
 <body>
 
 <div class="off-canvas-wrap" data-offcanvas>
 <div class="inner-wrap">
 <nav class="tab-bar">
-    <section class="left-small"><a class="left-off-canvas-toggle menu-icon" ><span></span></a></section>
-    <section class="middle tab-bar-section"> <h1 class="title">Aalto New Global</h1> </section>
+    <section class="left-small"><a class="left-off-canvas-toggle menu-icon"><span></span></a></section>
+    <section class="middle tab-bar-section"><h1 class="title">Aalto New Global</h1></section>
 </nav>
 <aside class="left-off-canvas-menu">
     <ul class="off-canvas-list">
@@ -62,10 +86,10 @@
         <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">Upload files</a></li>
         <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
         <li><label>Manage Pages</label></li>
-            <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
-            <li><a href="#" id="researchPageEditingMenuAnchor" class="offCanvasMenuAnchor">Research</a></li>
-            <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
-            <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
+        <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
+        <li><a href="#" id="researchPageEditingMenuAnchor" class="offCanvasMenuAnchor">Research</a></li>
+        <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
+        <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
 
         <li><label>General Options</label></li>
         <li><a href="#" id="groupInfoMenuAnchor" class="offCanvasMenuAnchor">Group</a></li>
@@ -85,12 +109,16 @@
 
 <div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
     <h4 class="boldieText">Uploading images/files</h4>
+
     <div class="row">
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <form id="form-addNewfile-fileUpload" action='new_file.php' method='POST' enctype='multipart/form-data'>
-                    <div id="addNewfile-image" style="width: 100%; height: 300px; background-color:#d4d4d4; text-align: center;"></div>
-                    <div class="large-6 columns"><input type ='file' name='myfile' id="addNewfile-fileInput"><p></div>
+                    <div id="addNewfile-image"
+                         style="width: 100%; height: 300px; background-color:#d4d4d4; text-align: center;"></div>
+                    <div class="large-6 columns"><input type='file' name='myfile' id="addNewfile-fileInput">
+
+                        <p></div>
                     <!--<a class="button" id="addNewContentModal-imageUpload-submit">Upload Photo</a>-->
                 </form>
             </div>
@@ -101,19 +129,28 @@
                     <label>Description
                         <textarea id="form-addNewFileForm-description" placeholder="(optional)"></textarea>
                     </label>
+
                     <div class="row" style="margin-top: 20px;">
                         <div class="large-12 columns">
-                            <a class="button" id="submitform-addNewFileForm" style="float: right;">Submit</a><div style="width: 10px;float: right;">&nbsp;</div>
+                            <a class="button" id="submitform-addNewFileForm" style="float: right;">Submit</a>
+
+                            <div style="width: 10px;float: right;">&nbsp;</div>
                             <a class="button" id="preview-addNewFileForm" style="float: right;">Preview (photo)</a>
 
                         </div>
                     </div>
-                    <div class="hide"><label>ID</label><input type="text" class="hide" id="form-addNewFileForm-id"/></div>
-                    <div class="hide"><label>Name</label><input type="text" class="hide" id="form-addNewFileForm-name"/></div>
-                    <div class="hide"><label>Upload Date</label><input type="text" class="hide" id="form-addNewFileForm-uploadDate"/></div>
-                    <div class="hide"><label>URL</label><input type="text" class="hide" id="form-addNewFileForm-URL"/></div>
-                    <div class="hide"><label>Extension</label><input type="text" class="hide" id="form-addNewFileForm-extension"/></div>
-                    <div class="hide"><label>Local Path</label><input type="text" class="hide" id="form-addNewFileForm-localPath"/></div>
+                    <div class="hide"><label>ID</label><input type="text" class="hide" id="form-addNewFileForm-id"/>
+                    </div>
+                    <div class="hide"><label>Name</label><input type="text" class="hide" id="form-addNewFileForm-name"/>
+                    </div>
+                    <div class="hide"><label>Upload Date</label><input type="text" class="hide"
+                                                                       id="form-addNewFileForm-uploadDate"/></div>
+                    <div class="hide"><label>URL</label><input type="text" class="hide" id="form-addNewFileForm-URL"/>
+                    </div>
+                    <div class="hide"><label>Extension</label><input type="text" class="hide"
+                                                                     id="form-addNewFileForm-extension"/></div>
+                    <div class="hide"><label>Local Path</label><input type="text" class="hide"
+                                                                      id="form-addNewFileForm-localPath"/></div>
                 </form>
             </div>
         </div>
@@ -122,11 +159,16 @@
     <div class="row">
         <div class="large-12 columns" id="fileTableDivContainer">
             <table id="filemanager-table" style='table-layout:fixed;width:100%;'>
-                <thead><tr><th style='width:20%;max-width: 130px;'>Preview</th>
+                <thead>
+                <tr>
+                    <th style='width:20%;max-width: 130px;'>Preview</th>
                     <th class='breakwords'>URL</th>
                     <th>Description</th>
-                    <th>Uploaded</th></tr></thead>
-                <tbody></tbody></table>
+                    <th>Uploaded</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -142,23 +184,29 @@
 
 <div class="large-12 columns contentSwitchableSection" id="homePageEditingSection">
     <h5 class="boldieText fancyTextColor">Homepage editing</h5>
-    <div class="small-12 medium-6 large-6 columns" id="homePageEditingFormDiv" style="background-color: #FFF;padding:20px 0 0 0;">
+
+    <div class="small-12 medium-6 large-6 columns" id="homePageEditingFormDiv"
+         style="background-color: #FFF;padding:20px 0 0 0;">
         <form>
-                <div class="small-12 medium-12 large-12 columns">
-                    <label><span class="boldieText">Carousel Caption 1</span>
-                        <textarea id="homePageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
-                    </label>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                    <a href="#" id="homePageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                    <a href="#" id="homePageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-                </div>
+            <div class="small-12 medium-12 large-12 columns">
+                <label><span class="boldieText">Carousel Caption 1</span>
+                    <textarea id="homePageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
+                </label>
+            </div>
+            <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
+                <a href="#" id="homePageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
+            </div>
+            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
+                <a href="#" id="homePageEditingCarCaption1-saveButton" class="button tiny">Save</a>
+            </div>
 
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText">Carousel Caption 2</span>
-                    <textarea id="homePageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="homePageEditingCarCaption2-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -176,12 +224,16 @@
 
 <div class="large-12 columns contentSwitchableSection" id="researchPageEditingSection">
     <h5 class="boldieText fancyTextColor">Research page editing</h5>
-    <div class="small-12 medium-6 large-6 columns" id="researchPageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
+
+    <div class="small-12 medium-6 large-6 columns" id="researchPageEditingFormDiv"
+         style="background-color: #FFF;padding:20px 0 20px 0;">
         <form>
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="researchPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="researchPageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -193,7 +245,9 @@
 
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 2</span>
-                    <textarea id="researchPageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="researchPageEditingCarCaption2-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -204,25 +258,32 @@
             </div>-->
 
 
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Research contact information</h5></div>
+            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Research contact information</h5>
+            </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Name</span></label>
-                    <input type="text" id="researchPageEditingContactName-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="researchPageEditingContactName-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="researchPageEditingContactJobTitle-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="researchPageEditingContactJobTitle-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="researchPageEditingContactEmail-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="researchPageEditingContactEmail-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
 
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-                <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                    <div id="researchPageEditingContent-textareaDIV"><textarea id="researchPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
-                </div>
+            <div class="small-12 medium-12 large-12 columns">
+                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+                <div id="researchPageEditingContent-textareaDIV"><textarea
+                        id="researchPageEditingContent-redactortextarea" style="height: 300px;"
+                        name="content"></textarea></div>
+            </div>
 
 
             <div id="researchPageSave&PreviewAllDIV">
@@ -232,24 +293,31 @@
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
                     <a href="#" id="researchPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
-            </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
+            </div>
+            <!--Closes the div researchPageSave&PreviewAllDIV-->
 
         </form>
-    </div> <!--Closes the div researchPageEditingFormDiv-->
+    </div>
+    <!--Closes the div researchPageEditingFormDiv-->
 
     <div class="small-12 medium-6 large-6 columns" id="researchPageEditingTemplateImageSection">
         <img src="../assets/controlpanel/images/template.png">
     </div>
-</div><!--Closes the div researchPageEditingSection-->
+</div>
+<!--Closes the div researchPageEditingSection-->
 
 <div class="large-12 columns contentSwitchableSection" id="businessPageEditingSection">
     <h5 class="boldieText fancyTextColor">Business page editing</h5>
-    <div class="small-12 medium-6 large-6 columns" id="businessPageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
+
+    <div class="small-12 medium-6 large-6 columns" id="businessPageEditingFormDiv"
+         style="background-color: #FFF;padding:20px 0 20px 0;">
         <form>
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="businessPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="businessPageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -261,7 +329,9 @@
 
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 2</span>
-                    <textarea id="businessPageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="businessPageEditingCarCaption2-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -272,24 +342,31 @@
             </div>-->
 
 
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Business contact information</h5></div>
+            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Business contact information</h5>
+            </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="businessPageEditingContactName-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="businessPageEditingContactName-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="businessPageEditingContactJobTitle-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="businessPageEditingContactJobTitle-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="businessPageEditingContactEmail-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="businessPageEditingContactEmail-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
 
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="businessPageEditingContent-textareaDIV"><textarea id="businessPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+            <div class="small-12 medium-12 large-12 columns">
+                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+                <div id="businessPageEditingContent-textareaDIV"><textarea
+                        id="businessPageEditingContent-redactortextarea" style="height: 300px;"
+                        name="content"></textarea></div>
             </div>
 
 
@@ -300,10 +377,12 @@
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
                     <a href="#" id="businessPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
-            </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
+            </div>
+            <!--Closes the div researchPageSave&PreviewAllDIV-->
 
         </form>
-    </div> <!--Closes the div researchPageEditingFormDiv-->
+    </div>
+    <!--Closes the div researchPageEditingFormDiv-->
 
     <div class="small-12 medium-6 large-6 columns" id="businessPageEditingTemplateImageSection">
         <img src="../assets/controlpanel/images/template.png">
@@ -312,13 +391,17 @@
 
 <div class="large-12 columns contentSwitchableSection" id="innovationsPageEditingSection">
     <h5 class="boldieText fancyTextColor">Innovation Platform page editing</h5>
-    <div class="small-12 medium-6 large-6 columns" id="innovationPageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
+
+    <div class="small-12 medium-6 large-6 columns" id="innovationPageEditingFormDiv"
+         style="background-color: #FFF;padding:20px 0 20px 0;">
         <form>
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText fancyTextColor">Mexico</h5></div>
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationMexicoPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="innovationMexicoPageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -331,32 +414,40 @@
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationMexicoPageEditingContactName-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationMexicoPageEditingContactName-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationMexicoEditingContactJobTitle-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationMexicoEditingContactJobTitle-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationMexicoEditingContactEmail-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationMexicoEditingContactEmail-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
 
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationMexicoPageEditingContent-textareaDIV"><textarea id="innovationMexicoPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+            <div class="small-12 medium-12 large-12 columns">
+                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+                <div id="innovationMexicoPageEditingContent-textareaDIV"><textarea
+                        id="innovationMexicoPageEditingContent-redactortextarea" style="height: 300px;"
+                        name="content"></textarea></div>
             </div>
 
 
             <div id="innovationMexicoPageSave&PreviewAllDIV">
                 <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationMexicoPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
+                    <a href="#" id="innovationMexicoPageEditing-previewAllButton"
+                       class="button tiny secondary">Preview</a>
                 </div>
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
                     <a href="#" id="innovationMexicoPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
-            </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
+            </div>
+            <!--Closes the div researchPageSave&PreviewAllDIV-->
 
         </form>
 
@@ -365,7 +456,9 @@
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationTanzaniaPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="innovationTanzaniaPageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -378,21 +471,27 @@
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationTanzaniaPageEditingContactName-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationTanzaniaPageEditingContactName-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationTanzaniaEditingContactJobTitle-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationTanzaniaEditingContactJobTitle-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationTanzaniaEditingContactEmail-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationTanzaniaEditingContactEmail-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
 
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationTanzaniaPageEditingContent-textareaDIV"><textarea id="innovationTanzaniaPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+            <div class="small-12 medium-12 large-12 columns">
+                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+                <div id="innovationTanzaniaPageEditingContent-textareaDIV"><textarea
+                        id="innovationTanzaniaPageEditingContent-redactortextarea" style="height: 300px;"
+                        name="content"></textarea></div>
             </div>
 
 
@@ -403,7 +502,8 @@
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
                     <a href="#" id="innovationTanzaniaPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
-            </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
+            </div>
+            <!--Closes the div researchPageSave&PreviewAllDIV-->
 
         </form>
 
@@ -412,7 +512,9 @@
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationIndiaPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
+                    <textarea id="innovationIndiaPageEditingCarCaption1-textarea"
+                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
+                              style="height: 75px;  "></textarea>
                 </label>
             </div>
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
@@ -425,46 +527,70 @@
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationIndiaPageEditingContactName-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationIndiaPageEditingContactName-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationIndiaEditingContactJobTitle-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationIndiaEditingContactJobTitle-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-4 columns">
                 <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationIndiaEditingContactEmail-input" placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
+                <input type="text" id="innovationIndiaEditingContactEmail-input"
+                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
             </div>
 
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationIndiaPageEditingContent-textareaDIV"><textarea id="innovationIndiaPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+            <div class="small-12 medium-12 large-12 columns">
+                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+                <div id="innovationIndiaPageEditingContent-textareaDIV"><textarea
+                        id="innovationIndiaPageEditingContent-redactortextarea" style="height: 300px;"
+                        name="content"></textarea></div>
             </div>
 
 
             <div id="innovationIndiaPageSave&PreviewAllDIV">
                 <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationIndiaPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
+                    <a href="#" id="innovationIndiaPageEditing-previewAllButton"
+                       class="button tiny secondary">Preview</a>
                 </div>
                 <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
                     <a href="#" id="innovationIndiaPageEditing-saveAllButton" class="button tiny">Save</a>
                 </div>
-            </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
+            </div>
+            <!--Closes the div researchPageSave&PreviewAllDIV-->
 
         </form>
-    </div> <!--Closes the div researchPageEditingFormDiv-->
+    </div>
+    <!--Closes the div researchPageEditingFormDiv-->
 
     <div class="small-12 medium-6 large-6 columns" id="innovationIndiaPageEditingTemplateImageSection">
         <img src="../assets/controlpanel/images/template.png">
     </div>
 </div>
 
-</div> <!--Closes the Main Section Div, where the content (switchable) goes-->
+</div>
+<!--Closes the Main Section Div, where the content (switchable) goes-->
 </section>
 <a class="exit-off-canvas"></a>
 </div>
 </div>
+
+<div id="CommonErrorModal" style="display:none; cursor: default">
+    <h3 id="CommonErrorLabel"></h3>
+    <div class="row">
+        <div class="large-12 columns"><label id="CommonErrorType"></label>
+            <h4 id="CommonErrorMessage"></h4>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="large-12 columns"><button id="CommonErrorOKButton">OK</button>
+        </div>
+    </div>
+</div>
+
 
 <!-- Footer -->
 <!-- End Footer -->
@@ -472,25 +598,25 @@
 <script>
 
 
-    var parseRawTimestampToDate = function(value) {
+    var parseRawTimestampToDate = function (value) {
         var timestamp;
-        if(!value)
+        if (!value)
             timestamp = new Date();
         else {
             timestamp = new Date(value);
-            if(isNaN(timestamp))
+            if (isNaN(timestamp))
                 timestamp = new Date(parseInt(value.substr(6)));
         }
         return timestamp;
     };
 
-    var ParseRawTimestampToDateString = function(value) {
+    var ParseRawTimestampToDateString = function (value) {
         //return timestamp.toISOString();
         var timestamp = parseRawTimestampToDate(value);
         return timestamp.getDate() + "." + (timestamp.getMonth() + 1) + "." + timestamp.getFullYear();
     };
 
-    var ParseRawTimestampToDateTimeString = function(value) {
+    var ParseRawTimestampToDateTimeString = function (value) {
         var timestamp = parseRawTimestampToDate(value);
         var day = timestamp.getDate();
         var month = timestamp.getMonth() + 1;
@@ -502,7 +628,7 @@
                 + " " + hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
     };
 
-    var ParseRawTimestampToISOString = function(value) {
+    var ParseRawTimestampToISOString = function (value) {
         var timestamp = parseRawTimestampToDate(value);
         return timestamp.toISOString();
     }
@@ -513,17 +639,17 @@
     var tOP = new tUI.OperationManager(tDCM);
     var tUDG = new tUI.UpdatingDataGetter();
 
-    tUDG.RegisterDataURL("CATEGORYTREE", function(args) {
+    tUDG.RegisterDataURL("CATEGORYTREE", function (args) {
         var nodeSummaryContainer = args[0];
         var categoriesWithChildren = AppScripts.Common.ConvertCategoriesFromParentToChildren(nodeSummaryContainer.NodeSourceCategories.CollectionContent);
         return { CategoriesWithChildren: categoriesWithChildren};
     }, [ "../../AaltoGlobalImpact.OIP/NodeSummaryContainer/default.json" ]);
 
-    tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/GroupContainer/default.json", function(args) {
+    tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/GroupContainer/default.json", function (args) {
         alert("Kau!");
     });
 
-    tUDG.RegisterDataURL("MAINCONTENT", function(args) {
+    tUDG.RegisterDataURL("MAINCONTENT", function (args) {
         var textContentCollection = args[0][0];
         var categoryCollection = args[1][0];
         var commentCollection = args[2][0];
@@ -535,26 +661,26 @@
     }, [ "../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json"
-        ]);
+    ]);
 
 
-    require(["GroupInfoView/GroupInfoViewController"], function(vcClass) {
+    require(["GroupInfoView/GroupInfoViewController"], function (vcClass) {
         var vc = new vcClass("groupSection", tOP, tUDG);
         vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
         vc.VisibleTemplateRender();
     });
-    require(["CategoryView/CategoryViewController"], function(vcClass) {
+    require(["CategoryView/CategoryViewController"], function (vcClass) {
         var vc = new vcClass("categoriesSection", tOP, tUDG);
         vc.Initialize("CATEGORYTREE");
         vc.VisibleTemplateRender();
     });
-    require(["GroupMemberView/GroupMemberViewController"], function(vcClass) {
+    require(["GroupMemberView/GroupMemberViewController"], function (vcClass) {
         var vc = new vcClass("groupMembersSection", tOP, tUDG);
         vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
         vc.VisibleTemplateRender();
     });
 
-    require(["MainContentView/MainContentViewController"], function(vcClass) {
+    require(["MainContentView/MainContentViewController"], function (vcClass) {
         var vc = new vcClass("addEditContentSection", tOP, tUDG);
         vc.Initialize("MAINCONTENT");
         vc.VisibleTemplateRender();
@@ -564,11 +690,11 @@
 </script>
 
 <script>
-window.initializeAll = function(){
+window.initializeAll = function () {
 
     $(document).foundation(
             {
-                reveal : {
+                reveal: {
                     animation: 'fadeAndPop',
                     animation_speed: 250,
                     close_on_background_click: false
@@ -583,67 +709,67 @@ window.initializeAll = function(){
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
 
     $('#researchPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
 
     $('#businessPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
 
     $('#innovationMexicoPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
 
     $('#innovationTanzaniaPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
     $('#innovationIndiaPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
                 autoresize: false,
-                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
             });
     /*
-    $.when(get_content()).then(function(){populateWebsitesMenu_and_groupsTabTable ();start_isotope();setInterval(reLayout_isotope, 2000);
-        $('img').each(function() {
-            $(this).error(function() {
-                $(this).attr({
-                    //src: '../assets/images/preview.png',
-                    alt: 'Sorry! This image is still caching!',
-                    class:"hide"
-                });
-            });
-            this.src = this.src;
-        });
-        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
-    */
-    $("#postAndimportantWrapperRow").delegate("#postUpdateButton",{ click: reveal_addNewContentModal } );
-    $("#contentDivContainer").delegate(".editContentButton",{ click: editContent_PopulateModal} );
+     $.when(get_content()).then(function(){populateWebsitesMenu_and_groupsTabTable ();start_isotope();setInterval(reLayout_isotope, 2000);
+     $('img').each(function() {
+     $(this).error(function() {
+     $(this).attr({
+     //src: '../assets/images/preview.png',
+     alt: 'Sorry! This image is still caching!',
+     class:"hide"
+     });
+     });
+     this.src = this.src;
+     });
+     console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+     */
+    $("#postAndimportantWrapperRow").delegate("#postUpdateButton", { click: reveal_addNewContentModal });
+    $("#contentDivContainer").delegate(".editContentButton", { click: editContent_PopulateModal});
     /////// Kalle refactored $("#contentDivContainer").delegate(".viewContentButton",{ click: viewContent } );
-    $("#contentDivContainer").delegate(".commentContentButton",{ click: launchContentModal } );
-    $("#contentDivContainer").delegate(".commentContentButton .icon-pencil",{ click: launchContentModal } );
-    $("#contentDivContainer").delegate(".trashContentButton",{ click: launchDeleteConfirmation } );
-    $("#portfolioFilterDivContainer").delegate("a",{ click: filter_isotope_items } );
+    $("#contentDivContainer").delegate(".commentContentButton", { click: launchContentModal });
+    $("#contentDivContainer").delegate(".commentContentButton .icon-pencil", { click: launchContentModal });
+    $("#contentDivContainer").delegate(".trashContentButton", { click: launchDeleteConfirmation });
+    $("#portfolioFilterDivContainer").delegate("a", { click: filter_isotope_items });
     //$("#addNewContent-fileInput ").change(function (){ triggerToolTipUploadPhoto(); });
     /*$("input:file").change(function (){ triggerToolTipUploadPhoto(); });*/
-    $(document).on('close','[data-reveal]', reLayout_isotope);
-    $("#contentPanelTab").on('click mouseover',setTimeout('reLayout_isotope', 2000));
+    $(document).on('close', '[data-reveal]', reLayout_isotope);
+    $("#contentPanelTab").on('click mouseover', setTimeout('reLayout_isotope', 2000));
     $("#addNewContentModal-submit").on('click', submit_New_Content_Form);
     $(".offCanvasMenuAnchor").on('click', switchActiveCanvasSection);
     $("#fileTab").on('click', get_files);
@@ -654,53 +780,65 @@ window.initializeAll = function(){
     $("#addNewContentModal-imageUpload-submit").on('click', upload_addNewContentModalForm_picture);
     $("#addNewContentModal-imageUpload-submit2").on('click', upload_editedContentModalForm_picture);
     $("#preview-addNewFileForm").on('click', upload_newFile);
-    $("#submitform-addNewFileForm").on('click',upload_newFile);
-    $("#researchPageEditing-saveAllButton").on('click',submitResearchPageData);
-    $("#contentDivContainer").on('mouseover',reLayout_isotope);
+    $("#submitform-addNewFileForm").on('click', upload_newFile);
+    $("#researchPageEditing-saveAllButton").on('click', submitResearchPageData);
+    $("#contentDivContainer").on('mouseover', reLayout_isotope);
     $("#editContentModal-submit").on('click', submit_EditedContent_to_Server);
-    $("#cancelEditContentModal").click(function () {$('#editContentModal').foundation('reveal', 'close');});
-    $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
-    $("#close-alert-pageSave-successful-a").click(function () { $('#alert-pageSave-successful').foundation('reveal', 'close');});
-    $("#create-group-button").click(function () {$('#create-group-modal').foundation('reveal', 'open');});
+    $("#cancelEditContentModal").click(function () {
+        $('#editContentModal').foundation('reveal', 'close');
+    });
+    $("#closeViewContentModal").click(function () {
+        $('#viewContentModal').foundation('reveal', 'close');
+    });
+    $("#close-alert-pageSave-successful-a").click(function () {
+        $('#alert-pageSave-successful').foundation('reveal', 'close');
+    });
+    $("#create-group-button").click(function () {
+        $('#create-group-modal').foundation('reveal', 'open');
+    });
     $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
-    $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose",{ click: closeAlertDynamicNotification } );
-    $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
-    $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
+    $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose", { click: closeAlertDynamicNotification });
+    $("#categoriesSection-hierarchyModal-launchModalButton").click(function () {
+        $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');
+    });
+    $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () {
+        $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');
+    });
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
-    var global_uploaded_attachments=0;
+    var global_uploaded_attachments = 0;
 
-    function test(){
-        alert ("triggered!");
+    function test() {
+        alert("triggered!");
     }
 
-    function closeAlertDynamicNotification (){
+    function closeAlertDynamicNotification() {
 
         var $alertboxClicked = $(this).closest('.alert-box');
-        var alertboxClickedID=$alertboxClicked.attr('id')
+        var alertboxClickedID = $alertboxClicked.attr('id')
         /*$("#"+alertboxClickedID).foundation('alert-box', 'close');*/
-        $("#"+alertboxClickedID).removeClass("alert-box").removeClass("secondary").removeClass("articleText2").addClass("hide");
+        $("#" + alertboxClickedID).removeClass("alert-box").removeClass("secondary").removeClass("articleText2").addClass("hide");
         /*console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+$alertboxClicked.attr('id'));*/
-        console.log("You just clicked the closing button of the foundation alert!.Clicked id: "+alertboxClickedID);
+        console.log("You just clicked the closing button of the foundation alert!.Clicked id: " + alertboxClickedID);
 
     }
 
-    function submit_New_Binary_Form(){
+    function submit_New_Binary_Form() {
         /*var new_binary_title = $('#addNewBinaryModal-title').val();*/
-        var new_binary_title=$("#addNewContentModal-title").val();
+        var new_binary_title = $("#addNewContentModal-title").val();
         /*var new_binary_description = $("#addNewBinaryModal-description").val();*/
-        var new_binary_description=$("#addNewContentModal-excerpt").val();
+        var new_binary_description = $("#addNewContentModal-excerpt").val();
         /*var new_binary_categories = $("#addNewBinaryCategorySelect option:selected").val();*/
-        var new_binary_categories= $("#addNewContentCategorySelect option:selected").val();
+        var new_binary_categories = $("#addNewContentCategorySelect option:selected").val();
         var saveData =
         {
             Title: new_binary_title,
             Description: new_binary_description,
             Object_Categories: new_binary_categories
         };
-        tOP.AppendBinaryFileValuesToData("000", saveData, function() {
+        tOP.AppendBinaryFileValuesToData("000", saveData, function () {
             tOP.CreateObject("AaltoGlobalImpact.OIP", "BinaryFile", saveData);
             /*$('#addNewBinaryModal').foundation('reveal', 'close');
              setTimeout(function() {
@@ -716,14 +854,14 @@ window.initializeAll = function(){
          $("#addNewBinaryModal-description").val("");*/
         //clearing the fileInput
         var newupdatefileinputID = $("#addNewBinaryModal-Data");
-        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
         //here the "cleaning" or resetting of the input fields ends.
         global_uploaded_attachments++;
-        var notify="<div data-alert class='alert-box secondary articleText2' id='addNewContent-attachment-alert"+global_uploaded_attachments+"'>Attachment "+global_uploaded_attachments+" uploaded successfully.<a class='close alertAnchorClose'>&times;</a></div>";
+        var notify = "<div data-alert class='alert-box secondary articleText2' id='addNewContent-attachment-alert" + global_uploaded_attachments + "'>Attachment " + global_uploaded_attachments + " uploaded successfully.<a class='close alertAnchorClose'>&times;</a></div>";
         $("#addNewContentAttachmentAlertHOLDER").append(notify);
     }
 
-    var saveNewComment = function(commentText, parentTextContentID) {
+    var saveNewComment = function (commentText, parentTextContentID) {
         var saveData =
         {
             CommentText: commentText,
@@ -732,13 +870,13 @@ window.initializeAll = function(){
             TargetObjectName: "TextContent"
         };
         tOP.CreateObject("AaltoGlobalImpact.OIP", "Comment", saveData);
-        setTimeout(function() {
+        setTimeout(function () {
             ReConnectComments(parentTextContentID);
             return false;
         }, 4000);
     };
 
-    var runKeyPress = function(e) {
+    var runKeyPress = function (e) {
         var $newCommentField = $("#addNewCommentField");
         var parentObjectID = $newCommentField.data("ParentObjectID");
         var commentText = $newCommentField.val();
@@ -754,38 +892,37 @@ window.initializeAll = function(){
          return true;*/
     }
 
-    var deleteComment = function() {
+    var deleteComment = function () {
         var commentID = $(this).data("CommentID");
         var parentObjectID = $(this).data("ParentObjectID");
         tOP.DeleteIndependentObject("AaltoGlobalImpact.OIP", "Comment", commentID);
-        setTimeout(function() {
+        setTimeout(function () {
             ReConnectComments(parentObjectID);
             return false;
         }, 4000);
         return false;
     };
 
-    var ReConnectComments = function(parentItemID) {
+    var ReConnectComments = function (parentItemID) {
         var $commentPh = $("#viewmodalcommentareaph");
         $commentPh.empty();
-        $.getJSON("../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json", function(allComments) {
-            var myComments = allComments.CollectionContent.filter(function(item)
-            {
+        $.getJSON("../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json", function (allComments) {
+            var myComments = allComments.CollectionContent.filter(function (item) {
                 return item.TargetObjectID === parentItemID;
             });
-            if(myComments.length > 0) {
-                myComments.sort(function(comment1, comment2) {
+            if (myComments.length > 0) {
+                myComments.sort(function (comment1, comment2) {
                     var c1 = comment1.Created;
                     var c2 = comment2.Created;
-                    if(c1 < c2)
+                    if (c1 < c2)
                         return -1;
-                    if(c1 > c2)
+                    if (c1 > c2)
                         return 1;
                     return 0;
                 });
                 $commentPh.append("<div id='viewModal-allCommentsDiv'></div>");
                 var $allcommentsHTML = $("#viewModal-allCommentsDiv");
-                for(var i = 0; i < myComments.length; i++) {
+                for (var i = 0; i < myComments.length; i++) {
                     var currComment = myComments[i];
                     var commentText = currComment.CommentText;
                     var lastAuthorName = currComment.LastAuthorName;
@@ -811,63 +948,60 @@ window.initializeAll = function(){
             $commentInputField.data("ParentObjectID", parentItemID);
             /*alert("ParentObjectID: "+parentItemID);*/
             /*$newCommentField.keypress(runKeyPress);*/
-            $("#viewModal-SendNewComment-Button").on("click",runKeyPress );
+            $("#viewModal-SendNewComment-Button").on("click", runKeyPress);
         });
     };
 
-    function switchActiveCanvasSection (event){
-        var triggerid= event.target.id;
-        var currentactive=$(".activeSection").attr("id");
+    function switchActiveCanvasSection(event) {
+        var triggerid = event.target.id;
+        var currentactive = $(".activeSection").attr("id");
 
-        $("#"+currentactive).removeClass("activeSection");
+        $("#" + currentactive).removeClass("activeSection");
 
-        if (triggerid=="addEditContentMenuAnchor")
-        {
+        if (triggerid == "addEditContentMenuAnchor") {
             $("#addEditContentSection").addClass("activeSection");
         }
-        if (triggerid=="manageCategoriesMenuAnchor")
-        {
+        if (triggerid == "manageCategoriesMenuAnchor") {
             $("#categoriesSection").addClass("activeSection");
             /*$("#categories-table td").remove();*/
             /*
-            $("#categories-table").empty();
-            $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
-                var tableheaders="<tr><th width='10%'>Category</th><th width='80%'>Description</th><th width='10%'></th></tr>";
-                $("#categories-table").append(tableheaders);
-                for (var i in contentData.CollectionContent) {
-                    var currentObject=contentData.CollectionContent[i];
-                    var currentDescription="No description available.";
-                    var currentID=currentObject.ID;
-                    var currentTitle=currentObject.Title ? currentObject.Title : "";
-                    var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;' class='fancyTextColor'>" + currentTitle + "</td>" +
-                            "<td style='text-transform:none !important;font-style:italic;font-size: 12px;'>" + currentDescription + "</td>"+
-                            "<td><a>Delete</a></td></tr>");
-                    var $deleteCategory = $categoryTableData.find("a");
-                    $deleteCategory.data("CategoryID", currentID);
-                    $deleteCategory.on("click", deleteComment);
-                    $("#categories-table").append($categoryTableData);
-                }//ends FOR loop
+             $("#categories-table").empty();
+             $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
+             var tableheaders="<tr><th width='10%'>Category</th><th width='80%'>Description</th><th width='10%'></th></tr>";
+             $("#categories-table").append(tableheaders);
+             for (var i in contentData.CollectionContent) {
+             var currentObject=contentData.CollectionContent[i];
+             var currentDescription="No description available.";
+             var currentID=currentObject.ID;
+             var currentTitle=currentObject.Title ? currentObject.Title : "";
+             var $categoryTableData=$("<tr><td style='text-transform:capitalize !important;' class='fancyTextColor'>" + currentTitle + "</td>" +
+             "<td style='text-transform:none !important;font-style:italic;font-size: 12px;'>" + currentDescription + "</td>"+
+             "<td><a>Delete</a></td></tr>");
+             var $deleteCategory = $categoryTableData.find("a");
+             $deleteCategory.data("CategoryID", currentID);
+             $deleteCategory.on("click", deleteComment);
+             $("#categories-table").append($categoryTableData);
+             }//ends FOR loop
 
-            })//ends getJson*/
+             })//ends getJson*/
         }
-        if (triggerid=="fileManagerMenuAnchor")
-        {
+        if (triggerid == "fileManagerMenuAnchor") {
             $("#fileManagerSection").addClass("activeSection");
             /*$("#filemanager-table td").remove();*/
             $("#filemanager-table").empty();
-            $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function(contentData) {
-                var tableheaders="<thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody></tbody>";
+            $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function (contentData) {
+                var tableheaders = "<thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody></tbody>";
                 $("#filemanager-table").append(tableheaders);
                 for (var i in contentData.CollectionContent) {
-                    var currentObject=contentData.CollectionContent[i];
-                    var currentPreview=currentObject.Data.FileExt;
-                    var currentURL=currentObject.Data.RelativeLocation;
-                    var currentDescription=currentObject.Description ? currentObject.Description:"No description available.";
-                    var currentID=currentObject.ID;
+                    var currentObject = contentData.CollectionContent[i];
+                    var currentPreview = currentObject.Data.FileExt;
+                    var currentURL = currentObject.Data.RelativeLocation;
+                    var currentDescription = currentObject.Description ? currentObject.Description : "No description available.";
+                    var currentID = currentObject.ID;
 
-                    var $fileTableData=$("<tr><td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>" + currentPreview + "</td>" +
-                            "<td style='text-transform:none !important;font-style:italic;font-size:11px;'>" + currentURL + "</td>"+
-                            "<td>"+currentDescription+"</td>"+
+                    var $fileTableData = $("<tr><td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>" + currentPreview + "</td>" +
+                            "<td style='text-transform:none !important;font-style:italic;font-size:11px;'>" + currentURL + "</td>" +
+                            "<td>" + currentDescription + "</td>" +
                             "<td><a>Delete</a></td></tr>");
                     var $deleteFile = $fileTableData.find("a");
                     $deleteFile.data("FileID", currentID);
@@ -876,40 +1010,36 @@ window.initializeAll = function(){
                 }//ends FOR loop
             })//ends getJson
         }
-        if (triggerid=="collaboratorsMenuAnchor")
-        {
+        if (triggerid == "collaboratorsMenuAnchor") {
             $("#collaboratorsSection").addClass("activeSection");
             /*
-            $("#collaborators-table").empty();
-            $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
-                var tableheaders="<tr><th width='30%'>Name</th><th width='60%'>Role</th><th width='10%'></th></tr>";
-                $("#collaborators-table").append(tableheaders);
-                for (var i in contentData.Collaborators.CollectionContent) {
-                    var currentObject=contentData.Collaborators.CollectionContent[i];
-                    var currentID=currentObject.ID;
-                    var currentCollaboratorName=currentObject.CollaboratorName ? currentObject.CollaboratorName : "";
-                    var currentRole=currentObject.Role ? currentObject.Role : "";
-                    var $collaboratorTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentCollaboratorName + "</td>" +
-                            "<td style='text-transform:none !important;font-style:italic;'>" + currentRole + "</td>"+
-                            "<td><a>Delete</a></td></tr>");
-                    var $deleteMember = $collaboratorTableData.find("a");
-                    $deleteMember.data("MemberID", currentID);
-                    $deleteMember.on("click", deleteComment);
-                    $("#collaborators-table").append($collaboratorTableData);
-                }//ends FOR loop
-            })//ends JSON
-            */
+             $("#collaborators-table").empty();
+             $.getJSON('../../AaltoGlobalImpact.OIP/GroupContainer/default.json', function(contentData) {
+             var tableheaders="<tr><th width='30%'>Name</th><th width='60%'>Role</th><th width='10%'></th></tr>";
+             $("#collaborators-table").append(tableheaders);
+             for (var i in contentData.Collaborators.CollectionContent) {
+             var currentObject=contentData.Collaborators.CollectionContent[i];
+             var currentID=currentObject.ID;
+             var currentCollaboratorName=currentObject.CollaboratorName ? currentObject.CollaboratorName : "";
+             var currentRole=currentObject.Role ? currentObject.Role : "";
+             var $collaboratorTableData=$("<tr><td style='text-transform:capitalize !important;'>" + currentCollaboratorName + "</td>" +
+             "<td style='text-transform:none !important;font-style:italic;'>" + currentRole + "</td>"+
+             "<td><a>Delete</a></td></tr>");
+             var $deleteMember = $collaboratorTableData.find("a");
+             $deleteMember.data("MemberID", currentID);
+             $deleteMember.on("click", deleteComment);
+             $("#collaborators-table").append($collaboratorTableData);
+             }//ends FOR loop
+             })//ends JSON
+             */
         }
-        if (triggerid=="homePageEditingMenuAnchor")
-        {
+        if (triggerid == "homePageEditingMenuAnchor") {
             $("#homePageEditingSection").addClass("activeSection");
         }
-        if (triggerid=="researchPageEditingMenuAnchor")
-        {
+        if (triggerid == "researchPageEditingMenuAnchor") {
             $("#researchPageEditingSection").addClass("activeSection");
-            $.getJSON('../../AaltoGlobalImpact.OIP/PagesContent/Research.json', function(contentData) {
-                for (var i in contentData.CollectionContent)
-                {
+            $.getJSON('../../AaltoGlobalImpact.OIP/PagesContent/Research.json', function (contentData) {
+                for (var i in contentData.CollectionContent) {
                     var $caption1textarea = $("#researchPageEditingCarCaption1-textarea");
                     var $caption2textarea = $("#researchPageEditingCarCaption2-textarea");
                     var $nametextarea = $("#researchPageEditingContactName-input");
@@ -917,12 +1047,12 @@ window.initializeAll = function(){
                     var $emailtextarea = $("#researchPageEditingContactEmail-input");
                     var $contenttextarea = $("#researchPageEditingContent-redactortextarea");
                     var currItem = contentData.CollectionContent[i];
-                    var caption1=currItem.SliderCaption1;
-                    var caption2=currItem.SliderCaption2;
-                    var name=currItem.ContactName;
-                    var job=currItem.ContactTitle;
-                    var email=currItem.ContactEmail;
-                    var content=currItem.Body;
+                    var caption1 = currItem.SliderCaption1;
+                    var caption2 = currItem.SliderCaption2;
+                    var name = currItem.ContactName;
+                    var job = currItem.ContactTitle;
+                    var email = currItem.ContactEmail;
+                    var content = currItem.Body;
 
                     $caption1textarea.val(caption1);
                     $caption2textarea.val(caption2);
@@ -938,7 +1068,7 @@ window.initializeAll = function(){
                             {   minHeight: 300,
                                 maxHeight: 350,
                                 autoresize: false,
-                                buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
                             });
                     /*if ((contentData.CollectionContent[i].Title===null)||(!contentData.CollectionContent[i].Title)||(currItem.Categories===null))
                      {}else {then do stuff}*/
@@ -950,24 +1080,19 @@ window.initializeAll = function(){
                 /*$caption1textarea.append(ImageSliderCaption1);*/
             })
         } //closes IF the research page editing was clicked
-        if (triggerid=="businessPageEditingMenuAnchor")
-        {
+        if (triggerid == "businessPageEditingMenuAnchor") {
             $("#businessPageEditingSection").addClass("activeSection");
         }
-        if (triggerid=="innovationsPageEditingMenuAnchor")
-        {
+        if (triggerid == "innovationsPageEditingMenuAnchor") {
             $("#innovationsPageEditingSection").addClass("activeSection");
         }
-        if (triggerid=="groupMembersMenuAnchor")
-        {
+        if (triggerid == "groupMembersMenuAnchor") {
             $("#groupMembersSection").addClass("activeSection");
         }
-        if (triggerid=="groupInfoMenuAnchor")
-        {
+        if (triggerid == "groupInfoMenuAnchor") {
             $("#groupSection").addClass("activeSection");
         }
-        if (triggerid=="timelineMenuAnchor")
-        {
+        if (triggerid == "timelineMenuAnchor") {
             $("#timelineSection").addClass("activeSection");
             $("#my-timeline").empty();
             /*var myTimelineData={"timeline":{
@@ -995,39 +1120,38 @@ window.initializeAll = function(){
              "tag":"This is Optional"}]}
              }*///closes the var "options"
             /*createStoryJS({ type:'timeline',width:'100%',height:'600',source: myTimelineData,embed_id:'my-timeline'});*/
-            $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function(contentData) {
+            $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function (contentData) {
                 /*var wholeTimelineData=new Array();*/
-                var wholeTimelineData={
-                    "timeline":
-                    {
-                        "headline":"Aalto New Global",
-                        "type":"default",
-                        "text":"Welcome to the timeline view",
-                        "startDate":"2014,1,1",
-                        "date":[]
+                var wholeTimelineData = {
+                    "timeline": {
+                        "headline": "Aalto New Global",
+                        "type": "default",
+                        "text": "Welcome to the timeline view",
+                        "startDate": "2014,1,1",
+                        "date": []
                     }
                 };
                 for (var i in contentData.CollectionContent) {
-                    var currentObject=contentData.CollectionContent[i];
-                    var currentID=currentObject.ID;
-                    var currentTitle=currentObject.Title ? currentObject.Title : "";
+                    var currentObject = contentData.CollectionContent[i];
+                    var currentID = currentObject.ID;
+                    var currentTitle = currentObject.Title ? currentObject.Title : "";
                     var currentMainCategory;
-                    var currentExcerpt=currentObject.Excerpt;
-                    var currentAuthor=currentObject.Author;
-                    var currentPublishedDate=ParseRawTimestampToDateString(currentObject.Published);
-                    var imageSizeString="256";
-                    var dateSubString=currentPublishedDate.split(".");
-                    var timelineFormatedStartDate= dateSubString[2]+","+dateSubString[1]+","+dateSubString[0];
-                    var endDay=dateSubString[0]+1;
-                    var timelineFormatedEndDate= dateSubString[2]+","+dateSubString[1]+","+endDay;
-                    var currentImagePath=currentObject.ImageData
+                    var currentExcerpt = currentObject.Excerpt;
+                    var currentAuthor = currentObject.Author;
+                    var currentPublishedDate = ParseRawTimestampToDateString(currentObject.Published);
+                    var imageSizeString = "256";
+                    var dateSubString = currentPublishedDate.split(".");
+                    var timelineFormatedStartDate = dateSubString[2] + "," + dateSubString[1] + "," + dateSubString[0];
+                    var endDay = dateSubString[0] + 1;
+                    var timelineFormatedEndDate = dateSubString[2] + "," + dateSubString[1] + "," + endDay;
+                    var currentImagePath = currentObject.ImageData
                             ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                             : null;
-                    if(!currentObject.Categories|| !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
-                        currentMainCategory="NEWS";
-                    else currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
+                    if (!currentObject.Categories || !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
+                        currentMainCategory = "NEWS";
+                    else currentMainCategory = currentObject.Categories.CollectionContent[0].Title;
                     //-----------------------------begins:Here we get the total number of comments for each update
-                    var numberOfComments=0;
+                    var numberOfComments = 0;
                     //-----------------------------ends:Here we get the total number of comments for each update
                     /*var myTimelineData={
                      "startDate":timelineFormatedStartDate,
@@ -1040,42 +1164,41 @@ window.initializeAll = function(){
                      "credit":currentAuthor,
                      "caption":currentTitle
                      }};*/
-                    var myTimelineData={
-                        "startDate":timelineFormatedStartDate,
-                        "headline":currentTitle,
-                        "text":currentExcerpt,
-                        "tag":currentMainCategory,
-                        "asset":
-                        {
-                            "media":currentImagePath,
-                            "thumbnail":currentImagePath,
-                            "credit":currentAuthor,
-                            "caption":currentTitle
+                    var myTimelineData = {
+                        "startDate": timelineFormatedStartDate,
+                        "headline": currentTitle,
+                        "text": currentExcerpt,
+                        "tag": currentMainCategory,
+                        "asset": {
+                            "media": currentImagePath,
+                            "thumbnail": currentImagePath,
+                            "credit": currentAuthor,
+                            "caption": currentTitle
                         }
 
                     };
 
                     wholeTimelineData.timeline.date.push(myTimelineData);
                 }//ends for loop
-                createStoryJS({ type:'timeline',width:'100%',height:'600',source:wholeTimelineData,embed_id:'my-timeline'});
+                createStoryJS({ type: 'timeline', width: '100%', height: '600', source: wholeTimelineData, embed_id: 'my-timeline'});
             })//closes getJSON
 
         }//if (triggerid=="timelineSection")
     }
 
-    function populateWebsitesMenu_and_groupsTabTable (){
+    function populateWebsitesMenu_and_groupsTabTable() {
         // This was previously called "populate_groups_table"...first we initialize (clear) the table:
         $("#groups-table td").remove();
         //--begins: Populating the list of websites TopLeft Navbar and Populates the GroupTables on the Groups TAB
-        $.getJSON('json/site_settings.json', function(data) {
-            var output="";
-            var output2="";
+        $.getJSON('json/site_settings.json', function (data) {
+            var output = "";
+            var output2 = "";
             for (var i in data.sites) {
                 //noinspection JSUnfilteredForInLoop
-                output+="<li><a href='" + data.sites[i].url + "' target='_blank' style='text-transform:capitalize !important;'>" +
+                output += "<li><a href='" + data.sites[i].url + "' target='_blank' style='text-transform:capitalize !important;'>" +
                         data.sites[i].name + "</a></li>";
-                output2+="<tr><td style='text-transform:capitalize !important;'>" + data.sites[i].name + "</td>" +
-                        "<td style='text-transform:lowercase !important;'>" + data.sites[i].url+"</td></tr>";
+                output2 += "<tr><td style='text-transform:capitalize !important;'>" + data.sites[i].name + "</td>" +
+                        "<td style='text-transform:lowercase !important;'>" + data.sites[i].url + "</td></tr>";
             }//ends for loop
             $("#groups-table").append(output2);
             $("#site-dropdown-list").append(output);
@@ -1101,10 +1224,10 @@ window.initializeAll = function(){
             "Object_Categories": edited_content_categories,
             Author: edited_content_author
         };
-        tOP.AppendBinaryFileValuesToData(edited_content_id, saveData, function() {
+        tOP.AppendBinaryFileValuesToData(edited_content_id, saveData, function () {
             tOP.SaveObject(edited_content_id, edited_content_etag, saveData);
             $('#editContentModal').foundation('reveal', 'close');
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#alert-contentUpdate-successful').foundation('reveal', 'open');
                 location.reload();
                 return false;
@@ -1112,50 +1235,50 @@ window.initializeAll = function(){
         });
     }
 
-    function editContent_PopulateModal(editEvent)   {
-        var clickedEditID= editEvent.target.id.replace("editContentButton-dataID-", '');
-        $.getJSON('../../AaltoGlobalImpact.OIP/TextContent/'+clickedEditID+".json", function(contentData) {
+    function editContent_PopulateModal(editEvent) {
+        var clickedEditID = editEvent.target.id.replace("editContentButton-dataID-", '');
+        $.getJSON('../../AaltoGlobalImpact.OIP/TextContent/' + clickedEditID + ".json", function (contentData) {
             tDCM.SetObjectInStorage(contentData);
-            var queryValue="";
-            var currentObject=contentData;
-            var currentID=currentObject.ID;
-            var currentETag=currentObject.MasterETag;
-            var currentTitle=currentObject.Title;
-            var currentExcerpt=currentObject.Excerpt;
-            var currentAuthor=currentObject.Author;
-            var currentPublishedDate=ParseRawTimestampToISOString(currentObject.Published);
+            var queryValue = "";
+            var currentObject = contentData;
+            var currentID = currentObject.ID;
+            var currentETag = currentObject.MasterETag;
+            var currentTitle = currentObject.Title;
+            var currentExcerpt = currentObject.Excerpt;
+            var currentAuthor = currentObject.Author;
+            var currentPublishedDate = ParseRawTimestampToISOString(currentObject.Published);
 
             // Image support content initiation
-            var imageSizeString="256";
-            var currentImagePath=currentObject.ImageData
+            var imageSizeString = "256";
+            var currentImagePath = currentObject.ImageData
                     ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                     : null;
             // Initiate binary file elements for image
             $("#editContentModal-ImageData").attr("data-oipfile-filegroupid", "editModal");
-            tOP.InitiateBinaryFileElements("editContentModal-ImageData", currentID ,"ImageData", currentImagePath);
+            tOP.InitiateBinaryFileElements("editContentModal-ImageData", currentID, "ImageData", currentImagePath);
 
 
-            if(currentObject.RawHtmlContent) {
+            if (currentObject.RawHtmlContent) {
                 currentObject.BodyRendered = currentObject.RawHtmlContent;
-            } else if(currentObject.Body){
+            } else if (currentObject.Body) {
                 markdown = new MarkdownDeep.Markdown();
                 markdown.SafeMode = true;
                 currentObject.BodyRendered = markdown.Transform(currentObject.Body);
             } else
                 currentObject.BodyRendered = "";
 
-            var currentArticleBody=currentObject.BodyRendered;
+            var currentArticleBody = currentObject.BodyRendered;
             // Kalle's contemplate fix to Hugo's raw management =>
             // the raw html is at BodyRendered as is, the current markdown rendering is as well now
             // previous problem: if there was markdown-entered data in the article it wasn't working in rawhtml
-            var rawbody=currentArticleBody;
+            var rawbody = currentArticleBody;
 
-            var currentMainCategory="News";
+            var currentMainCategory = "News";
 
 
-            queryValue=currentID;
+            queryValue = currentID;
             $('#editContentModal-id').val(queryValue);
-            queryValue=currentETag;
+            queryValue = currentETag;
             $('#editContentModal-etag').val(queryValue);
             $('#editContentModal-title').val(currentTitle);
             $('#editContentModal-published').val(currentPublishedDate);
@@ -1166,19 +1289,19 @@ window.initializeAll = function(){
 
             //check if the "field" Author exists in the JSON file
             /*queryValue=contentData.content[i].Author;*/
-            if(currentAuthor == false || currentAuthor ===null || currentAuthor ==="undefined" || currentAuthor ===undefined)
-                queryValue="Empty";
+            if (currentAuthor == false || currentAuthor === null || currentAuthor === "undefined" || currentAuthor === undefined)
+                queryValue = "Empty";
             else
-                queryValue=currentAuthor;
+                queryValue = currentAuthor;
 
             $('#editContentModal-author').val(queryValue);
 
             //suggested Content rendering by Kalle:  queryValue=currentArticleBody;
             //My suggestion: cleaning the "old" articles with markdown and extra styling
-            rawbody=rawbody.replace(new RegExp("div", "g"), 'p');
-            rawbody=rawbody.replace(new RegExp("<span>", "g"), '');
-            rawbody=rawbody.replace(new RegExp("</span>", "g"), '');
-            var currentArticleBodyVHugo =$.htmlClean(rawbody, {format:true});
+            rawbody = rawbody.replace(new RegExp("div", "g"), 'p');
+            rawbody = rawbody.replace(new RegExp("<span>", "g"), '');
+            rawbody = rawbody.replace(new RegExp("</span>", "g"), '');
+            var currentArticleBodyVHugo = $.htmlClean(rawbody, {format: true});
             //ends cleaning the "old" articles with markdown and extra styling
             $('#editTextareaDivHolder').empty();
             var textarea = $("<textarea id='editContentModal-content' style='min-height: 300px;'>");
@@ -1188,51 +1311,55 @@ window.initializeAll = function(){
                     {   minHeight: 300,
                         maxHeight: 350,
                         autoresize: false,
-                        buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                        buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
                     });
 
-            queryValue=currentImagePath;
+            queryValue = currentImagePath;
             $('#editContentModal-imagePath').val(queryValue);
 
             //send the correspondent image to the placeholder, but clean its containing div first
             $("#editContentModal-image").empty(); //clean the image Placeholder in the form
-            queryValue = "<img src='"+currentImagePath+"' style='width:auto;height:auto;max-height:300px;margin-left:auto;margin-right:auto;'>";
+            queryValue = "<img src='" + currentImagePath + "' style='width:auto;height:auto;max-height:300px;margin-left:auto;margin-right:auto;'>";
             $("#editContentModal-image").append(queryValue);
             $('#editContentModal').foundation('reveal', 'open');
         }); //ends getJson
     }//ends function editContent
 
     function launchDeleteConfirmation(editEvent) {
-        var clickedEditID= editEvent.target.id.replace("trashContentButton-dataID-", '');
+        var clickedEditID = editEvent.target.id.replace("trashContentButton-dataID-", '');
         $("#alert-contentDelete-confirm-ID").empty();
-        $("#alert-contentDelete-confirm-ID").append("<p>"+clickedEditID+"</p>");
+        $("#alert-contentDelete-confirm-ID").append("<p>" + clickedEditID + "</p>");
         $("#alert-contentDelete-confirm-ID").data("DeleteID", clickedEditID);
 
         $('#alert-contentDelete-confirm').foundation('reveal', 'open');
     }
 
     function launchContentModal(editEvent) {
-        var clickedEditID= editEvent.target.id.replace("contentAddCommentButton-dataID-", '');
-        $.getJSON('../../AaltoGlobalImpact.OIP/TextContent/'+clickedEditID+".json", function(contentData) {
-            var queryValue="";
-            var currentObject=contentData;
-            var currentID=currentObject.ID;
-            var currentTitle=currentObject.Title;
-            var currentExcerpt=currentObject.Excerpt;
-            var currentAuthor=currentObject.Author;
-            var imageSizeString="256";
+        var clickedEditID = editEvent.target.id.replace("contentAddCommentButton-dataID-", '');
+        $.getJSON('../../AaltoGlobalImpact.OIP/TextContent/' + clickedEditID + ".json", function (contentData) {
+            var queryValue = "";
+            var currentObject = contentData;
+            var currentID = currentObject.ID;
+            var currentTitle = currentObject.Title;
+            var currentExcerpt = currentObject.Excerpt;
+            var currentAuthor = currentObject.Author;
+            var imageSizeString = "256";
             var currentMainCategory;
-            var currentPublishedDate=ParseRawTimestampToDateString(currentObject.Published);
+            var currentPublishedDate = ParseRawTimestampToDateString(currentObject.Published);
             var recordedJsonDate;
             var pattern;
             var extractedDate;
             /*var rawbody=currentObject.Body;*/
-            var currentImagePath=currentObject.ImageData
+            var currentImagePath = currentObject.ImageData
                     ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                     : null;
 
-            if ((currentObject.Author===null)||(!currentObject.Author)){currentAuthor="Aalto Global Impact";}
-            else {currentAuthor=currentObject.Author;}
+            if ((currentObject.Author === null) || (!currentObject.Author)) {
+                currentAuthor = "Aalto Global Impact";
+            }
+            else {
+                currentAuthor = currentObject.Author;
+            }
 
             /*if(currentObject.RawHtmlContent)
              {
@@ -1257,14 +1384,14 @@ window.initializeAll = function(){
             $("#viewContentModal-Date").empty();
             $('#viewContentModal-Date').append(currentPublishedDate);
 
-            queryValue="<p>"+currentExcerpt+"</p>";
+            queryValue = "<p>" + currentExcerpt + "</p>";
             $("#viewContentModal-excerpt").empty();
             $('#viewContentModal-excerpt').append(queryValue);
 
-            if(!currentObject.Categories || !currentObject.Categories.CollectionContent)
-                currentMainCategory="NEWS";
+            if (!currentObject.Categories || !currentObject.Categories.CollectionContent)
+                currentMainCategory = "NEWS";
             else
-                currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
+                currentMainCategory = currentObject.Categories.CollectionContent[0].Title;
             $("#viewContentModal-categories").empty();
             $('#viewContentModal-categories').append(currentMainCategory);
 
@@ -1273,7 +1400,7 @@ window.initializeAll = function(){
 
             //send the correspondent image to the placeholder, but clean its containing div first
             $("#viewContentModal-image").empty(); //clean the image Placeholder in the form
-            queryValue = "<img src='"+currentImagePath+"' style='width:auto;height:auto;max-width:350;max-height:450px;margin-left:auto;margin-right:auto;'>";
+            queryValue = "<img src='" + currentImagePath + "' style='width:auto;height:auto;max-width:350;max-height:450px;margin-left:auto;margin-right:auto;'>";
             $("#viewContentModal-image").append(queryValue);
             ReConnectComments(currentID);
             $('#viewContentModal').foundation('reveal', 'open');
@@ -1282,35 +1409,35 @@ window.initializeAll = function(){
 
     //--begins: Function get_content
     //--ends function get_content();
-    function get_files(){
+    function get_files() {
         $("#fileTableDivContainer").empty();
         $('#form-addNewfile-fileUpload').ajaxForm();//initializes the FILE Upload Form
-        return $.getJSON('json/files.json', function(contentData) {
-            var file_table="";
-            file_table+="<table style='table-layout:fixed;width:100%;'><thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody>";
+        return $.getJSON('json/files.json', function (contentData) {
+            var file_table = "";
+            file_table += "<table style='table-layout:fixed;width:100%;'><thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody>";
             for (var i in contentData.fileRepository) {
                 //noinspection JSUnfilteredForInLoop
-                if( (contentData.fileRepository[i].extension=="jpg") ||
-                        (contentData.fileRepository[i].extension=="jpeg")||
-                        (contentData.fileRepository[i].extension=="png") ||
-                        (contentData.fileRepository[i].extension=="tiff")||
-                        (contentData.fileRepository[i].extension=="gif")) {
-                    file_table+="<tr><td style='width:20%;max-width: 130px;'><div style='width: 100%;'><img src='"+contentData.fileRepository[i].local_path+"' style='max-width:120px;width:100%;height:auto;'></div></td>";
+                if ((contentData.fileRepository[i].extension == "jpg") ||
+                        (contentData.fileRepository[i].extension == "jpeg") ||
+                        (contentData.fileRepository[i].extension == "png") ||
+                        (contentData.fileRepository[i].extension == "tiff") ||
+                        (contentData.fileRepository[i].extension == "gif")) {
+                    file_table += "<tr><td style='width:20%;max-width: 130px;'><div style='width: 100%;'><img src='" + contentData.fileRepository[i].local_path + "' style='max-width:120px;width:100%;height:auto;'></div></td>";
                 }
                 else
-                    file_table+="<tr><td class='breakwords' style='width:20%;max-width: 130px;'><a href='"+contentData.fileRepository[i].URL+"' style='font-size: 150%;' target='_blank'>"+contentData.fileRepository[i].extension+"</a></td>";
+                    file_table += "<tr><td class='breakwords' style='width:20%;max-width: 130px;'><a href='" + contentData.fileRepository[i].URL + "' style='font-size: 150%;' target='_blank'>" + contentData.fileRepository[i].extension + "</a></td>";
 
-                file_table+="<td class='breakwords' style='width:150px;vertical-align: top;'>"+contentData.fileRepository[i].URL+"</td>";
-                file_table+="<td style='vertical-align: top;'>"+contentData.fileRepository[i].description+"</td>";
-                file_table+="<td style='vertical-align: top;'>"+contentData.fileRepository[i].upload_date+"</td></tr>";
+                file_table += "<td class='breakwords' style='width:150px;vertical-align: top;'>" + contentData.fileRepository[i].URL + "</td>";
+                file_table += "<td style='vertical-align: top;'>" + contentData.fileRepository[i].description + "</td>";
+                file_table += "<td style='vertical-align: top;'>" + contentData.fileRepository[i].upload_date + "</td></tr>";
             }//ends for loop
-            file_table+="</tbody></table>";
+            file_table += "</tbody></table>";
             $("#fileTableDivContainer").append(file_table);
             $(".breakwords").css('word-wrap', 'break-word');
         })
     }
 
-    function filter_isotope_items(){
+    function filter_isotope_items() {
         $('.portfolioFilter .current').removeClass('current');
         $(this).addClass('current');
         var $container = $("#contentDivContainer");
@@ -1327,12 +1454,12 @@ window.initializeAll = function(){
         console.log("Entered 'filter_isotope_items' Function alright.");
     }
 
-    function triggerToolTipUploadPhoto(){
+    function triggerToolTipUploadPhoto() {
         $("#tooltip-choosePhotoHere").trigger("mouseout");
         $("#tooltip-uploadphoto").trigger("mouseover");
     }
 
-    function submit_New_Content_Form(){
+    function submit_New_Content_Form() {
         var new_content_content = $('#addNewContentModal-content').val();
         var new_content_title = $("#addNewContentModal-title").val();
         var new_content_published = $("#addNewContentModal-published").val();
@@ -1351,12 +1478,12 @@ window.initializeAll = function(){
             Author: new_content_author
         };
 
-        tOP.AppendBinaryFileValuesToData("000", saveData, function() {
+        tOP.AppendBinaryFileValuesToData("000", saveData, function () {
             tOP.CreateObject("AaltoGlobalImpact.OIP", "TextContent", saveData);
             $('#addNewContentModal').foundation('reveal', 'close');
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#alert-addNewContent-successful-modal').foundation('reveal', 'open');
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload();
                     return false;
                 }, 2500);
@@ -1377,34 +1504,34 @@ window.initializeAll = function(){
                 {   minHeight: 300,
                     maxHeight: 350,
                     autoresize: false,
-                    buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                    buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
                 });
         //clearing the fileInput
         var newupdatefileinputID = $("#addNewContent-fileInput");
-        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
         //here the "cleaning" or reseting of the input fields ends.
         $("#addNewContentAttachmentAlertHOLDER").empty();
-        global_uploaded_attachments=0;
+        global_uploaded_attachments = 0;
         var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
-        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
+        newupdatefileinputATTACHMENTID.replaceWith(newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone(true));
         //here the "cleaning" or resetting of the input fields ends.
 
 
         return;
         //more stuff to do after the ajax call
         var new_content_id = "123";
-        var new_Content="";
+        var new_Content = "";
         var new_content_image = "";
-        new_Content+="<div class='content-card "+new_content_categories+"' id='contentCardDataId-"+new_content_id+"'>";
-        new_Content+="<img src='"+new_content_image+"' alt='image' id='contentCardImage-dataID-"+new_content_id+"'/>";
-        new_Content+="<div class='content-card-title' id='contentCardTitle-dataID-"+new_content_id+"'><span style='font-size: 120%;'><strong>"+new_content_title+"</strong></span></div>";
-        new_Content+="<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-"+new_content_id+"'>Edit&nbsp;</a><a class='viewContentButton' id='viewContentButton-dataID-"+new_content_id+"'>&nbsp;View&nbsp;</a><a id='trashContentButton-dataID-"+new_content_id+"'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right' id='toggleVisibilityContentButton-dataID-"+new_content_id+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
-        new_Content+="<div class='content-card-line'><hr></div>";
-        new_Content+="<div class='content-card-options'><a><i class='icon-pencil'></i>&nbsp;</a><a id='contentAddCommentButton-dataID-"+new_content_id+"'>&nbsp;Comment&nbsp;</a><a class='content-card-options-right' id='contentNumberOfComments-dataID-"+new_content_id+"'><i class='icon-commentround'></i></a></div>";
-        new_Content+="</div>";
+        new_Content += "<div class='content-card " + new_content_categories + "' id='contentCardDataId-" + new_content_id + "'>";
+        new_Content += "<img src='" + new_content_image + "' alt='image' id='contentCardImage-dataID-" + new_content_id + "'/>";
+        new_Content += "<div class='content-card-title' id='contentCardTitle-dataID-" + new_content_id + "'><span style='font-size: 120%;'><strong>" + new_content_title + "</strong></span></div>";
+        new_Content += "<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-" + new_content_id + "'>Edit&nbsp;</a><a class='viewContentButton' id='viewContentButton-dataID-" + new_content_id + "'>&nbsp;View&nbsp;</a><a id='trashContentButton-dataID-" + new_content_id + "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right' id='toggleVisibilityContentButton-dataID-" + new_content_id + "'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
+        new_Content += "<div class='content-card-line'><hr></div>";
+        new_Content += "<div class='content-card-options'><a><i class='icon-pencil'></i>&nbsp;</a><a id='contentAddCommentButton-dataID-" + new_content_id + "'>&nbsp;Comment&nbsp;</a><a class='content-card-options-right' id='contentNumberOfComments-dataID-" + new_content_id + "'><i class='icon-commentround'></i></a></div>";
+        new_Content += "</div>";
         var $container = $('#contentDivContainer');
         var $newItems = $(new_Content);
-        $container.isotope( 'insert', $newItems );
+        $container.isotope('insert', $newItems);
 
         //clearing the fields of the New Content Modal Form
         $('#addNewContentModal-content').val("");
@@ -1421,30 +1548,30 @@ window.initializeAll = function(){
                 {   minHeight: 300,
                     maxHeight: 350,
                     autoresize: false,
-                    buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                    buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
                 });
         //clearing the fileInput
         var newupdatefileinputID = $("#addNewContent-fileInput");
-        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
         //here the "cleaning" or resetting of the input fields ends.
 
     }
 
-    function reveal_addNewContentModal () {
+    function reveal_addNewContentModal() {
         getAndPopulateCategoryOptions();
         $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
         var currentPublished = ParseRawTimestampToISOString(null);
         $("#addNewContentModal-published").val(currentPublished);
-        tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000" ,"ImageData", null);
+        tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000", "ImageData", null);
         $('#addNewContentModal').foundation('reveal', 'open');
 
         //***************initializing the inputfile elment for the attachments on the "add new content" modal
         $("#addNewBinaryModal-Data").attr("data-oipfile-filegroupid", "addNewBinaryModal");
-        tOP.InitiateBinaryFileElements("addNewBinaryModal-Data", "000" ,"Data", null);
+        tOP.InitiateBinaryFileElements("addNewBinaryModal-Data", "000", "Data", null);
         //***************ends the inputfile elment for the attachments on the "add new content" modal
     }
 
-    function close_NewContent_Modal_Form(){
+    function close_NewContent_Modal_Form() {
         $("#tooltip-uploadphoto").trigger("mouseout");
         $("#tooltip-choosePhotoHere").trigger("mouseout");
         //clearing the fields of the New Content Modal Form
@@ -1462,16 +1589,16 @@ window.initializeAll = function(){
                 {   minHeight: 300,
                     maxHeight: 350,
                     autoresize: false,
-                    buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
+                    buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
                 });
         //clearing the fileInput
         var newupdatefileinputID = $("#addNewContent-fileInput");
-        newupdatefileinputID.replaceWith( newupdatefileinputID = newupdatefileinputID.clone( true ) );
+        newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
         //here the "cleaning" or reseting of the input fields ends.
         $("#addNewContentAttachmentAlertHOLDER").empty();
-        global_uploaded_attachments=0;
+        global_uploaded_attachments = 0;
         var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
-        newupdatefileinputATTACHMENTID.replaceWith( newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone( true ) );
+        newupdatefileinputATTACHMENTID.replaceWith(newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone(true));
         //here the "cleaning" or resetting of the input fields ends.
 
         $('#addNewContentModal').foundation('reveal', 'close');
@@ -1480,7 +1607,7 @@ window.initializeAll = function(){
     function submit_contentDelete_confirm() {
         var objectID = $("#alert-contentDelete-confirm-ID").data("DeleteID");
         tOP.DeleteIndependentObject("AaltoGlobalImpact.OIP", "TextContent", objectID);
-        setTimeout(function() {
+        setTimeout(function () {
             $('#alert-contentDelete-confirm').foundation('reveal', 'close');
             location.reload();
             return false;
@@ -1494,10 +1621,10 @@ window.initializeAll = function(){
     function upload_addNewContentModalForm_picture() {
         var options = {
             type: "POST",
-            url:'uploadphoto.php',
-            success:    function(phpresponse) {
+            url: 'uploadphoto.php',
+            success: function (phpresponse) {
                 $("#addNewContentModal-image").empty();
-                var imageTag ="<img src='"+phpresponse+"' style='height: 100%; width: auto;'>";
+                var imageTag = "<img src='" + phpresponse + "' style='height: 100%; width: auto;'>";
                 $("#addNewContentModal-image").append(imageTag);
                 //var time_id= $.now();
                 $("#addNewContentModal-imagePath").val(phpresponse);
@@ -1513,10 +1640,10 @@ window.initializeAll = function(){
     function upload_editedContentModalForm_picture() {
         var options = {
             type: "POST",
-            url:'uploadphoto.php',
-            success:    function(phpresponse) {
+            url: 'uploadphoto.php',
+            success: function (phpresponse) {
                 $("#editContentModal-image").empty();
-                var imageTag ="<img src='"+phpresponse+"' style='height: 100%; width: auto;'>";
+                var imageTag = "<img src='" + phpresponse + "' style='height: 100%; width: auto;'>";
                 $("#editContentModal-image").append(imageTag);
                 //var time_id= $.now();
                 $("#editContentModal-imagePath").val(phpresponse);
@@ -1532,13 +1659,13 @@ window.initializeAll = function(){
     function upload_newFile() {
         //check if the hidden idFile is already populated... if it's empty it means no file have been selected
         //#form-addNewFileForm-id
-        if( !$("#form-addNewFileForm-URL").val() ) {
+        if (!$("#form-addNewFileForm-URL").val()) {
             var options = {
                 type: "POST",
-                url:'uploadfile.php',
-                success:    function(phpresponse) {
+                url: 'uploadfile.php',
+                success: function (phpresponse) {
                     $("#addNewfile-image").empty();
-                    var imageTag ="<img src='"+phpresponse+"' style='height: 100%; width: auto;'>";
+                    var imageTag = "<img src='" + phpresponse + "' style='height: 100%; width: auto;'>";
                     $("#addNewfile-image").append(imageTag);
                     //var time_id= $.now();
                     $("#form-addNewFileForm-URL").val(phpresponse);
@@ -1549,11 +1676,11 @@ window.initializeAll = function(){
             return false;
         }
         //else, means that the file was already Previewd and uploaded, so we send the rest of the form (description)
-        else{
+        else {
             var filedescription = $("#form-addNewFileForm-description").val();
-            var status ="complete";
-            var url= $("#form-addNewFileForm-URL").val();
-            console.log ("Entered Upload_newFile...Else section. Image URL: "+url+".File description:"+filedescription);
+            var status = "complete";
+            var url = $("#form-addNewFileForm-URL").val();
+            console.log("Entered Upload_newFile...Else section. Image URL: " + url + ".File description:" + filedescription);
 
             /*$.ajax({
              global: false,
@@ -1579,10 +1706,10 @@ window.initializeAll = function(){
                 data: ({action: "updateUploadedFileData",
                     filedescription: filedescription,
                     status: status,
-                    urltosearch:url}),
+                    urltosearch: url}),
                 async: false
             }).responseText;
-            console.log("Response from ajax call to multihandler.php: "+multihandlerResponse);
+            console.log("Response from ajax call to multihandler.php: " + multihandlerResponse);
             $("#addNewfile-image").empty();
             /*$("#form-addNewFileForm-description").empty();*/
             $("#form-addNewFileForm-description").val("");
@@ -1593,13 +1720,13 @@ window.initializeAll = function(){
     }
 
     function getAndPopulateCategoryOptions() {
-        $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function(contentData) {
-            var categoryoptions="";
+        $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function (contentData) {
+            var categoryoptions = "";
             for (var i in contentData.CollectionContent) {
-                var currentObject=contentData.CollectionContent[i];
-                var currentID=currentObject.ID;
-                var currentTitle=currentObject.Title ? currentObject.Title : "";
-                categoryoptions+="<option value='"+currentID+"'>"+currentTitle+"</option>";
+                var currentObject = contentData.CollectionContent[i];
+                var currentID = currentObject.ID;
+                var currentTitle = currentObject.Title ? currentObject.Title : "";
+                categoryoptions += "<option value='" + currentID + "'>" + currentTitle + "</option>";
             }//ends FOR loop
             $("#addNewContentCategorySelect").empty();
             $("#addNewContentCategorySelect").append(categoryoptions);
@@ -1609,7 +1736,7 @@ window.initializeAll = function(){
         })//ends getJson
     }
 
-    function submit_New_Group () {
+    function submit_New_Group() {
         var new_group_name = $("#form_new_group_name").val();
         var new_group_url = $("#form_new_group_url").val();
         $.ajax({
@@ -1624,22 +1751,22 @@ window.initializeAll = function(){
             url: 'read-write.php'
         });
         //populate_groups_table();
-        var new_site="<li><a href='" + new_group_url + "' target='_blank' style='text-transform:capitalize !important;'>" +
+        var new_site = "<li><a href='" + new_group_url + "' target='_blank' style='text-transform:capitalize !important;'>" +
                 new_group_name + "</a></li>";
 
-        $('#groups-table tr:last').after('<tr><td>'+new_group_name+'</td><td>'+new_group_url+'</td></tr>');
+        $('#groups-table tr:last').after('<tr><td>' + new_group_name + '</td><td>' + new_group_url + '</td></tr>');
         $("#site-dropdown-list").append(new_site);
         $('#alert-groupadded-successful').foundation('reveal', 'open');
     };
 
-    function submitResearchPageData(){
-        var ImageSliderCaption1=$("#researchPageEditingCarCaption1-textarea").val();
-        var ImageSliderCaption2=$("#researchPageEditingCarCaption2-textarea").val();
-        var researchContactName=$("#researchPageEditingContactName-input").val();
-        var researchContactJobTitle=$("#researchPageEditingContactJobTitle-input").val();
-        var researchContactEmail=$("#researchPageEditingContactEmail-input").val();
+    function submitResearchPageData() {
+        var ImageSliderCaption1 = $("#researchPageEditingCarCaption1-textarea").val();
+        var ImageSliderCaption2 = $("#researchPageEditingCarCaption2-textarea").val();
+        var researchContactName = $("#researchPageEditingContactName-input").val();
+        var researchContactJobTitle = $("#researchPageEditingContactJobTitle-input").val();
+        var researchContactEmail = $("#researchPageEditingContactEmail-input").val();
 
-        var researchMainContent=$("#researchPageEditingContent-redactortextarea").val();
+        var researchMainContent = $("#researchPageEditingContent-redactortextarea").val();
 
         /*alert("ImageSliderCaption1: " +ImageSliderCaption1);*/
         var multihandlerResponse = $.ajax({
@@ -1655,7 +1782,7 @@ window.initializeAll = function(){
             }),
             async: false
         }).responseText;
-        console.log("Response from ajax call to multihandler.php (called from SubmitResearchPageData Function): "+multihandlerResponse);
+        console.log("Response from ajax call to multihandler.php (called from SubmitResearchPageData Function): " + multihandlerResponse);
         /*alert("PHP response: " +multihandlerResponse);*/
         /*$("#addNewfile-image").empty();*/
         /*$("#form-addNewFileForm-description").empty();*/

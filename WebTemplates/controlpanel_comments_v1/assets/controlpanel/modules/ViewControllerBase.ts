@@ -57,6 +57,13 @@ class ViewControllerBase implements IViewController{
         return this.$initialized;
     }
 
+    CommonErrorHandler(jqXhr, textStatus, errorThrown) {
+        var errorObject = JSON.parse(jqXhr.responseText);
+        var wnd:any = window;
+        wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
+    }
+
+
 
     ControllerInitialize():void {
         throw "ControllerInitialize not implemented";
