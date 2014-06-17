@@ -151,8 +151,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 });
                 this.src = this.src;
             });
+            wnd.ReConnectComments(currentID);
 
-            //ReConnectComments(currentID);
             $modal.foundation('reveal', 'open');
         };
         return MainContentViewController;

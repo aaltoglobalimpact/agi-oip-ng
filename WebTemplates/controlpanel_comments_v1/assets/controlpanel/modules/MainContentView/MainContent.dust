@@ -1,7 +1,7 @@
 <div class="row" id="cpOrangeTopRowSeparator"></div>
 <div class="row" id="postAndimportantWrapperRow">
     <div class="medium-3 large-3 columns noPaddingRight" style="height: 37px;">
-        {>"openmodal_button.dust" modal_name="AddNewContentModal" button_label="Post a new update" icon_class_name="icon-plus-sign" /}
+        <a class="oip-controller-command" data-oip-command="OpenModalAddNewContentModal"><div class="orangeButton">Post an update</div></a>
     </div>
     {>"ImportantLinks.dust" /}
 </div>

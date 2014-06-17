@@ -159,7 +159,7 @@ class MainContentViewController extends ViewControllerBase {
             });
             this.src = this.src;
         });
-        //ReConnectComments(currentID);
+        wnd.ReConnectComments(currentID);
 
         $modal.foundation('reveal', 'open');
     }
