@@ -313,7 +313,7 @@ var saveNewComment = function (commentText, parentTextContentID) {
         setTimeout(function () {
             ReConnectComments(parentTextContentID);
             $.unblockUI();
-        }, 2500);
+        }, 4000);
     }, function()
     {
         $.unblockUI();
@@ -346,7 +346,7 @@ var deleteComment = function () {
         setTimeout(function () {
             ReConnectComments(parentObjectID);
             $.unblockUI();
-        }, 2500);
+        }, 4000);
     }, function()
     {
         $.unblockUI();
