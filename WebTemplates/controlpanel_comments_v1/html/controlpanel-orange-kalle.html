@@ -657,6 +657,14 @@
 
     tUDG.RegisterDataURL("MAINCONTENT", function (args) {
         var textContentCollection = args[0][0];
+        textContentCollection.CollectionContent.sort(function(a, b) {
+            if(a.Published == b.Published)
+                return 0;
+            // Bigger comes first (latest first)
+            if(a.Published < b.Published)
+                return 1;
+            return -1;
+        });
         var categoryCollection = args[1][0];
         var commentCollection = args[2][0];
         return {
