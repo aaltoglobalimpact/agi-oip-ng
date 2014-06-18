@@ -90,7 +90,7 @@ var initializeContent = function(contentData, commentData) {
             $("#news"+newscounter+"text").append(currentnewstext);
             newscounter++;
         }
-        var isImportant = currentMainCategory=="Important";
+        var isImportant = currentMainCategory=="Events";
         if (isImportant && importantcounter<4){
             $("#important"+importantcounter+"date").empty();
             $("#important"+importantcounter+"date").append(currentPublishedDate);

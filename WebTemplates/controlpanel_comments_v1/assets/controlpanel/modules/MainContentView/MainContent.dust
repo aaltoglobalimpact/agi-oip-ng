@@ -30,7 +30,7 @@
     </div>
     <div class="medium-6 large-6 columns" style="overflow: hidden;">
         <div id="importantPanelDiv" data-equalizer-watch>
-            <div id="importantPanelTitle">Important</div>
+            <div id="importantPanelTitle">Events</div>
             <div id="important1" class="newsDiv">
                 <div id="important1date" class="newsDate"></div>
                 <div id="important1text" class="newsText"></div>
