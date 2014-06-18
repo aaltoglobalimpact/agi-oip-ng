@@ -2,7 +2,17 @@
  * Created by kalle on 14.6.2014.
  */
 
-var initializeContent = function(contentData) {
+
+var CommentCollection;
+var GetCommentCountForItemID = function(itemID) {
+    var itemComments = $.grep(CommentCollection.CollectionContent, function(elem, index) {
+        return elem.TargetObjectID === itemID;
+    });
+    return itemComments.length;
+};
+
+var initializeContent = function(contentData, commentData) {
+    CommentCollection = commentData;
     var user_content="";
     /*user_content+="<div class='addNewContent' id='addNewContentDiv'><div class='content-card-options'><span style='font-size:1100%;color:#ffffff;font-weight:900; line-height:100px;'>+</span></div>";
      user_content+="<div class='content-card-options'><span class='addNewContentTitle'>Add update</span></div>";
@@ -55,7 +65,7 @@ var initializeContent = function(contentData) {
 
         //-----------------------------begins:Here we get the total number of comments for each update
 
-        var numberOfComments=0;
+        var numberOfComments=GetCommentCountForItemID(currentID);
         //-----------------------------ends:Here we get the total number of comments for each update
 
 
@@ -359,6 +369,7 @@ var ReConnectComments = function (parentItemID) {
     var $commentPh = $("#viewmodalcommentareaph");
     $commentPh.empty();
     $.getJSON("../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json", function (allComments) {
+        CommentCollection = allComments;
         var myComments = allComments.CollectionContent.filter(function (item) {
             return item.TargetObjectID === parentItemID;
         });

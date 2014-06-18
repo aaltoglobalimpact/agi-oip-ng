@@ -61,7 +61,7 @@ class MainContentViewController extends ViewControllerBase {
             $(document).ready(function() {
                 var wnd:any = window;
                 wnd.initializeAll();
-                wnd.initializeContent(me.currData.TextContents);
+                wnd.initializeContent(me.currData.TextContents, me.currData.Comments);
                 wnd.start_isotope();
                 wnd.reLayout_isotope();
                 setInterval(wnd.reLayout_isotope, 2000)
