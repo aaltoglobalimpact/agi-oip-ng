@@ -544,7 +544,8 @@ function switchActiveCanvasSection(event) {
     if (triggerid == "groupInfoMenuAnchor") {
         $("#groupSection").addClass("activeSection");
     }
-    if (triggerid == "timelineMenuAnchor") {
+    if (triggerid=="timelineMenuAnchor")
+    {
         $("#timelineSection").addClass("activeSection");
         $("#my-timeline").empty();
         /*var myTimelineData={"timeline":{
@@ -572,38 +573,39 @@ function switchActiveCanvasSection(event) {
          "tag":"This is Optional"}]}
          }*///closes the var "options"
         /*createStoryJS({ type:'timeline',width:'100%',height:'600',source: myTimelineData,embed_id:'my-timeline'});*/
-        $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function (contentData) {
+        $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function(contentData) {
             /*var wholeTimelineData=new Array();*/
-            var wholeTimelineData = {
-                "timeline": {
-                    "headline": "Aalto New Global",
-                    "type": "default",
-                    "text": "Welcome to the timeline view",
-                    "startDate": "2014,1,1",
-                    "date": []
+            var wholeTimelineData={
+                "timeline":
+                {
+                    "headline":"Aalto New Global",
+                    "type":"default",
+                    "text":"Welcome to the timeline view",
+                    "startDate":"2014,1,1",
+                    "date":[]
                 }
             };
             for (var i in contentData.CollectionContent) {
-                var currentObject = contentData.CollectionContent[i];
-                var currentID = currentObject.ID;
-                var currentTitle = currentObject.Title ? currentObject.Title : "";
+                var currentObject=contentData.CollectionContent[i];
+                var currentID=currentObject.ID;
+                var currentTitle=currentObject.Title ? currentObject.Title : "";
                 var currentMainCategory;
-                var currentExcerpt = currentObject.Excerpt;
-                var currentAuthor = currentObject.Author;
-                var currentPublishedDate = ParseRawTimestampToDateString(currentObject.Published);
-                var imageSizeString = "256";
-                var dateSubString = currentPublishedDate.split(".");
-                var timelineFormatedStartDate = dateSubString[2] + "," + dateSubString[1] + "," + dateSubString[0];
-                var endDay = dateSubString[0] + 1;
-                var timelineFormatedEndDate = dateSubString[2] + "," + dateSubString[1] + "," + endDay;
-                var currentImagePath = currentObject.ImageData
+                var currentExcerpt=currentObject.Excerpt;
+                var currentAuthor=currentObject.Author;
+                var currentPublishedDate=ParseRawTimestampToDateString(currentObject.Published);
+                var imageSizeString="256";
+                var dateSubString=currentPublishedDate.split(".");
+                var timelineFormatedStartDate= dateSubString[2]+","+dateSubString[1]+","+dateSubString[0];
+                var endDay=dateSubString[0]+1;
+                var timelineFormatedEndDate= dateSubString[2]+","+dateSubString[1]+","+endDay;
+                var currentImagePath=currentObject.ImageData
                     ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                     : null;
-                if (!currentObject.Categories || !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
-                    currentMainCategory = "NEWS";
-                else currentMainCategory = currentObject.Categories.CollectionContent[0].Title;
+                if(!currentObject.Categories|| !currentObject.Categories.CollectionContent || !currentObject.Categories.CollectionContent.length)
+                    currentMainCategory="NEWS";
+                else currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
                 //-----------------------------begins:Here we get the total number of comments for each update
-                var numberOfComments = 0;
+                var numberOfComments=0;
                 //-----------------------------ends:Here we get the total number of comments for each update
                 /*var myTimelineData={
                  "startDate":timelineFormatedStartDate,
@@ -616,23 +618,24 @@ function switchActiveCanvasSection(event) {
                  "credit":currentAuthor,
                  "caption":currentTitle
                  }};*/
-                var myTimelineData = {
-                    "startDate": timelineFormatedStartDate,
-                    "headline": currentTitle,
-                    "text": currentExcerpt,
-                    "tag": currentMainCategory,
-                    "asset": {
-                        "media": currentImagePath,
-                        "thumbnail": currentImagePath,
-                        "credit": currentAuthor,
-                        "caption": currentTitle
+                var myTimelineData={
+                    "startDate":timelineFormatedStartDate,
+                    "headline":currentTitle,
+                    "text":currentExcerpt,
+                    "tag":currentMainCategory,
+                    "asset":
+                    {
+                        "media":currentImagePath,
+                        "thumbnail":currentImagePath,
+                        "credit":currentAuthor,
+                        "caption":currentTitle
                     }
 
                 };
 
                 wholeTimelineData.timeline.date.push(myTimelineData);
             }//ends for loop
-            createStoryJS({ type: 'timeline', width: '100%', height: '600', source: wholeTimelineData, embed_id: 'my-timeline'});
+            createStoryJS({ type:'timeline',width:'100%',height:'600',source:wholeTimelineData,embed_id:'my-timeline'});
         })//closes getJSON
 
     }//if (triggerid=="timelineSection")
