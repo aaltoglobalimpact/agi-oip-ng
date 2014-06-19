@@ -147,7 +147,7 @@ class MainContentViewController extends ViewControllerBase {
 
         //send the correspondent image to the placeholder, but clean its containing div first
         $("#viewContentModal-image").empty(); //clean the image Placeholder in the form
-        queryValue = "<img src='"+currentImagePath+"' style='width:auto;height:auto;max-width:350;max-height:450px;margin-left:auto;margin-right:auto;'>";
+        queryValue = "<img src='"+currentImagePath+"' style='width:auto;height:auto;max-height:450px;margin-left:auto;margin-right:auto;'>";
         $("#viewContentModal-image").append(queryValue);
         $('#viewContentModal-image img').each(function() {
             $(this).error(function() {
