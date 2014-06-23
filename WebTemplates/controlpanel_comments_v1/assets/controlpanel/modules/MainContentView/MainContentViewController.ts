@@ -212,6 +212,22 @@ class MainContentViewController extends ViewControllerBase {
         $modal.foundation('reveal', 'open');
     }
 
+    DeleteContent($this)
+    {
+        var id = $this.attr("data-objectid");
+        var domainName = "AaltoGlobalImpact.OIP";
+        var objectName = "TextContent";
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Deleting Content...</h2>' });
+        this.currOPM.DeleteIndependentObject(domainName, objectName, id, function(responseData) {
+            setTimeout(function() {
+                jq.unblockUI();
+                me.ReInitialize();
+            }, 2500);
+        });
+    }
+
     Modal_SaveNewContent($modal) {
         var title = this.$getNamedFieldWithinModal($modal, "Title").val();
         var published = this.$getNamedFieldWithinModal($modal, "Published").val();

@@ -74,7 +74,7 @@ var initializeContent = function(contentData, commentData) {
         if(currentImagePath)
             user_content+="<img src='"+currentImagePath+"' alt='image' id='contentCardImage-dataID-"+currentID+"'/>";
         user_content+="<div class='content-card-title' style='font-size:95%; font-weight:bold; color:#000000;' id='contentCardTitle-dataID-"+currentID+"'>"+currentTitle+"</div>";
-        user_content+="<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-"+currentID+"'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='trashContentButton' id='trashContentButton-dataID-"+currentID+"'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
+        user_content+="<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-"+currentID+"'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='oip-controller-command' data-oip-command='DeleteContent' data-objectid='" +currentID+ "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
         user_content+="<div class='content-card-line'><hr></div>";
         user_content+="<div class='content-card-options'><a class='commentContentButton' id='contentAddCommentButton-dataID-"+currentID+"'><i class='icon-pencil'></i>&nbsp;Comment&nbsp;</a><span class='content-card-options-right' id='contentNumberOfComments-dataID-"+currentID+"'>"+numberOfComments+"&nbsp;<i class='icon-commentround'></i></span></div>";
         user_content+="</div>";
@@ -221,7 +221,6 @@ var initializeAll = function () {
     /*$("input:file").change(function (){ triggerToolTipUploadPhoto(); });*/
     $(document).on('close', '[data-reveal]', reLayout_isotope);
     $("#contentPanelTab").on('click mouseover', setTimeout('reLayout_isotope', 2000));
-    $("#addNewContentModal-submit").on('click', submit_New_Content_Form);
     $(".offCanvasMenuAnchor").on('click', switchActiveCanvasSection);
     $("#fileTab").on('click', get_files);
     $("#cancel-deleteContentModal").on('click', close_contentDelete_confirm);
@@ -921,104 +920,6 @@ function filter_isotope_items() {
 function triggerToolTipUploadPhoto() {
     $("#tooltip-choosePhotoHere").trigger("mouseout");
     $("#tooltip-uploadphoto").trigger("mouseover");
-}
-
-function submit_New_Content_Form() {
-    var new_content_content = $('#addNewContentModal-content').val();
-    var new_content_title = $("#addNewContentModal-title").val();
-    var new_content_published = $("#addNewContentModal-published").val();
-    var new_content_excerpt = $("#addNewContentModal-excerpt").val();
-    var new_content_categories = $("#addNewContentCategorySelect option:selected").val();
-    var new_content_author = $("#addNewContentModal-author").val();
-
-    new_content_content = $('<div/>').text(new_content_content).html();
-    var saveData =
-    {
-        Title: new_content_title,
-        Published: new_content_published,
-        Excerpt: new_content_excerpt,
-        "ENC.RawHtmlContent": new_content_content,
-        Object_Categories: new_content_categories,
-        Author: new_content_author
-    };
-
-    tOP.AppendBinaryFileValuesToData("000", saveData, function () {
-        tOP.CreateObject("AaltoGlobalImpact.OIP", "TextContent", saveData);
-        $('#addNewContentModal').foundation('reveal', 'close');
-        setTimeout(function () {
-            $('#alert-addNewContent-successful-modal').foundation('reveal', 'open');
-            setTimeout(function () {
-                location.reload();
-                return false;
-            }, 2500);
-            return false;
-        }, 2500);
-    });
-
-    $('#addNewContentModal-content').val("");
-    $("#addNewContentModal-title").val("");
-    $("#addNewContentModal-excerpt").val("");
-    $("#addNewContentModal-author").val("");
-
-    $('#addNewTextareaDivHolder').empty();
-    var textarea = $("<textarea id='addNewContentModal-content' style='height: 300px;'>");
-    $('#addNewTextareaDivHolder').append(textarea);
-    $('#addNewContentModal-content').val("");
-    $('#addNewContentModal-content').redactor(
-        {   minHeight: 300,
-            maxHeight: 350,
-            autoresize: false,
-            buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
-        });
-    //clearing the fileInput
-    var newupdatefileinputID = $("#addNewContent-fileInput");
-    newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
-    //here the "cleaning" or reseting of the input fields ends.
-    $("#addNewContentAttachmentAlertHOLDER").empty();
-    global_uploaded_attachments = 0;
-    var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
-    newupdatefileinputATTACHMENTID.replaceWith(newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone(true));
-    //here the "cleaning" or resetting of the input fields ends.
-
-
-    return;
-    //more stuff to do after the ajax call
-    var new_content_id = "123";
-    var new_Content = "";
-    var new_content_image = "";
-    new_Content += "<div class='content-card " + new_content_categories + "' id='contentCardDataId-" + new_content_id + "'>";
-    new_Content += "<img src='" + new_content_image + "' alt='image' id='contentCardImage-dataID-" + new_content_id + "'/>";
-    new_Content += "<div class='content-card-title' id='contentCardTitle-dataID-" + new_content_id + "'><span style='font-size: 120%;'><strong>" + new_content_title + "</strong></span></div>";
-    new_Content += "<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-" + new_content_id + "'>Edit&nbsp;</a><a class='viewContentButton' id='viewContentButton-dataID-" + new_content_id + "'>&nbsp;View&nbsp;</a><a id='trashContentButton-dataID-" + new_content_id + "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right' id='toggleVisibilityContentButton-dataID-" + new_content_id + "'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
-    new_Content += "<div class='content-card-line'><hr></div>";
-    new_Content += "<div class='content-card-options'><a><i class='icon-pencil'></i>&nbsp;</a><a id='contentAddCommentButton-dataID-" + new_content_id + "'>&nbsp;Comment&nbsp;</a><a class='content-card-options-right' id='contentNumberOfComments-dataID-" + new_content_id + "'><i class='icon-commentround'></i></a></div>";
-    new_Content += "</div>";
-    var $container = $('#contentDivContainer');
-    var $newItems = $(new_Content);
-    $container.isotope('insert', $newItems);
-
-    //clearing the fields of the New Content Modal Form
-    $('#addNewContentModal-content').val("");
-    $("#addNewContentModal-title").val("");
-    $("#addNewContentModal-excerpt").val("");
-    $("#addNewContentModal-author").val("");
-    $("#addNewContentModal-imagePath").val("");
-    $("#addNewContentModal-id").val("");
-    $('#addNewTextareaDivHolder').empty();
-    var textarea = $("<textarea id='addNewContentModal-content' style='height: 300px;'>");
-    $('#addNewTextareaDivHolder').append(textarea);
-    $('#addNewContentModal-content').val("");
-    $('#addNewContentModal-content').redactor(
-        {   minHeight: 300,
-            maxHeight: 350,
-            autoresize: false,
-            buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
-        });
-    //clearing the fileInput
-    var newupdatefileinputID = $("#addNewContent-fileInput");
-    newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
-    //here the "cleaning" or resetting of the input fields ends.
-
 }
 
 function submit_contentDelete_confirm() {

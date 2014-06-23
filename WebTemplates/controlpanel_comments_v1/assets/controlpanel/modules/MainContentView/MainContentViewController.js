@@ -202,6 +202,21 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $modal.foundation('reveal', 'open');
         };
 
+        MainContentViewController.prototype.DeleteContent = function ($this) {
+            var id = $this.attr("data-objectid");
+            var domainName = "AaltoGlobalImpact.OIP";
+            var objectName = "TextContent";
+            var me = this;
+            var jq = $;
+            jq.blockUI({ message: '<h2>Deleting Content...</h2>' });
+            this.currOPM.DeleteIndependentObject(domainName, objectName, id, function (responseData) {
+                setTimeout(function () {
+                    jq.unblockUI();
+                    me.ReInitialize();
+                }, 2500);
+            });
+        };
+
         MainContentViewController.prototype.Modal_SaveNewContent = function ($modal) {
             var title = this.$getNamedFieldWithinModal($modal, "Title").val();
             var published = this.$getNamedFieldWithinModal($modal, "Published").val();
