@@ -211,7 +211,6 @@ var initializeAll = function () {
      });
      console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
      */
-    $("#postAndimportantWrapperRow").delegate("#postUpdateButton", { click: reveal_addNewContentModal });
     $("#contentDivContainer").delegate(".editContentButton", { click: editContent_PopulateModal});
     /////// Kalle refactored $("#contentDivContainer").delegate(".viewContentButton",{ click: viewContent } );
     $("#contentDivContainer").delegate(".commentContentButton", { click: launchContentModal });
@@ -225,7 +224,6 @@ var initializeAll = function () {
     $("#addNewContentModal-submit").on('click', submit_New_Content_Form);
     $(".offCanvasMenuAnchor").on('click', switchActiveCanvasSection);
     $("#fileTab").on('click', get_files);
-    $("#cancelAddNewContentModal").on('click', close_NewContent_Modal_Form);
     $("#cancel-deleteContentModal").on('click', close_contentDelete_confirm);
     $("#confirm-deleteModal-submit").on('click', submit_contentDelete_confirm);
     $("#create-group-submit").on('click', submit_New_Group);
@@ -1021,53 +1019,6 @@ function submit_New_Content_Form() {
     newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
     //here the "cleaning" or resetting of the input fields ends.
 
-}
-
-function reveal_addNewContentModal() {
-    getAndPopulateCategoryOptions();
-    $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
-    var currentPublished = ParseRawTimestampToISOString(null);
-    $("#addNewContentModal-published").val(currentPublished);
-    tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000", "ImageData", null);
-    $('#addNewContentModal').foundation('reveal', 'open');
-
-    //***************initializing the inputfile elment for the attachments on the "add new content" modal
-    $("#addNewBinaryModal-Data").attr("data-oipfile-filegroupid", "addNewBinaryModal");
-    tOP.InitiateBinaryFileElements("addNewBinaryModal-Data", "000", "Data", null);
-    //***************ends the inputfile elment for the attachments on the "add new content" modal
-}
-
-function close_NewContent_Modal_Form() {
-    $("#tooltip-uploadphoto").trigger("mouseout");
-    $("#tooltip-choosePhotoHere").trigger("mouseout");
-    //clearing the fields of the New Content Modal Form
-    $('#addNewContentModal-content').val("");
-    $("#addNewContentModal-title").val("");
-    $("#addNewContentModal-excerpt").val("");
-    $("#addNewContentModal-author").val("");
-    $("#addNewContentModal-imagePath").val("");
-    $("#addNewContentModal-id").val("");
-    $('#addNewTextareaDivHolder').empty();
-    var textarea = $("<textarea id='addNewContentModal-content' style='height: 300px;'>");
-    $('#addNewTextareaDivHolder').append(textarea);
-    $('#addNewContentModal-content').val("");
-    $('#addNewContentModal-content').redactor(
-        {   minHeight: 300,
-            maxHeight: 350,
-            autoresize: false,
-            buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
-        });
-    //clearing the fileInput
-    var newupdatefileinputID = $("#addNewContent-fileInput");
-    newupdatefileinputID.replaceWith(newupdatefileinputID = newupdatefileinputID.clone(true));
-    //here the "cleaning" or reseting of the input fields ends.
-    $("#addNewContentAttachmentAlertHOLDER").empty();
-    global_uploaded_attachments = 0;
-    var newupdatefileinputATTACHMENTID = $("#addNewBinaryModal-Data");
-    newupdatefileinputATTACHMENTID.replaceWith(newupdatefileinputATTACHMENTID = newupdatefileinputATTACHMENTID.clone(true));
-    //here the "cleaning" or resetting of the input fields ends.
-
-    $('#addNewContentModal').foundation('reveal', 'close');
 }
 
 function submit_contentDelete_confirm() {

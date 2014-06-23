@@ -71,6 +71,54 @@ class MainContentViewController extends ViewControllerBase {
 
     OpenModalAddNewContentModal() {
         var $modal:any = this.$getNamedFieldWithin("AddNewContentModal");
+
+        //clearing the fields of the New Content Modal Form
+        this.$getNamedFieldWithinModal($modal, "Content").val();
+        this.$getNamedFieldWithinModal($modal, "Title").val();
+        this.$getNamedFieldWithinModal($modal, "Excerpt").val();
+        this.$getNamedFieldWithinModal($modal, "Author").val();
+        this.$getNamedFieldWithinModal($modal, "Content").val();
+        this.$getNamedFieldWithinModal($modal, "textareaDivHolder").empty();
+        var textarea = $("<textarea name='Content' style='height: 300px;'>");
+        this.$getNamedFieldWithinModal($modal,"textareaDivHolder").append(textarea);
+
+        var contentJQ:any = this.$getNamedFieldWithinModal($modal, "Content");
+        contentJQ.redactor(
+            {   minHeight: 300,
+                maxHeight: 350,
+                autoresize: false,
+                buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
+            });
+        //clearing the fileInput
+        var $newupdatefileinput = this.$getNamedFieldWithinModal($modal, "ImageData");
+        $newupdatefileinput.replaceWith($newupdatefileinput = $newupdatefileinput.clone(true));
+        //here the "cleaning" or reseting of the input fields ends.
+        this.$getNamedFieldWithinModal($modal, "AttachmentAlertHolder").empty();
+        var wnd:any = window;
+        wnd.global_uploaded_attachments = 0;
+
+
+        wnd.getAndPopulateCategoryOptions();
+        $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
+        var currentPublished = wnd.ParseRawTimestampToISOString(null);
+        this.$getNamedFieldWithinModal($modal, "Published").val(currentPublished);
+
+        var $imageDataInput = this.$getNamedFieldWithinModal($modal, "ImageData");
+        $imageDataInput.attr("data-oipfile-filegroupid", "imageDataImage");
+        this.currOPM.InitiateBinaryFileElementsAroundInput($imageDataInput, "000", "ImageData", null,
+            "../assets/controlpanel/images/lightGray.jpg");
+
+        var $imageDataInput = this.$getNamedFieldWithinModal($modal, "ImageData");
+        $imageDataInput.attr("data-oipfile-filegroupid", "imageDataImage");
+        this.currOPM.InitiateBinaryFileElementsAroundInput($imageDataInput, "000", "ImageData", null,
+            "../assets/controlpanel/images/lightGray.jpg");
+
+        var $attachmentBinaryDataInput = this.$getNamedFieldWithinModal($modal, "AttachmentBinaryData");
+        $attachmentBinaryDataInput.attr("data-oipfile-filegroupid", "attachmentBinaryData");
+        this.currOPM.InitiateBinaryFileElementsAroundInput($attachmentBinaryDataInput, "000", "AttachmentBinaryData", null,
+            "../assets/controlpanel/images/lightGray.jpg");
+        //***************ends the inputfile elment for the attachments on the "add new content" modal
+
         $modal.foundation('reveal', 'open');
     }
 
@@ -162,6 +210,41 @@ class MainContentViewController extends ViewControllerBase {
         wnd.ReConnectComments(currentID);
 
         $modal.foundation('reveal', 'open');
+    }
+
+    Modal_SaveNewContent($modal) {
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var published = this.$getNamedFieldWithinModal($modal, "Published").val();
+        var excerpt = this.$getNamedFieldWithinModal($modal, "Excerpt").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
+        var author = this.$getNamedFieldWithinModal($modal, "Author").val();
+        var content = this.$getNamedFieldWithinModal($modal, "Content").val();
+        content = $('<div/>').text(content).html();
+
+        var saveData =
+        {
+            Title: title,
+            Published: published,
+            Excerpt: excerpt,
+            "ENC.RawHtmlContent": content,
+            Object_Categories: categories,
+            Author: author
+        };
+
+        var me = this;
+        var jq:any = $;
+        this.currOPM.AppendBinaryFileValuesToData("000", saveData, function () {
+            jq.blockUI({ message: '<h2>Adding new content...</h2>' });
+            me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "TextContent", saveData, function() {
+                setTimeout(function () {
+                    jq.unblockUI();
+                    $modal.foundation('reveal', 'close');
+                    me.ReInitialize();
+                }, 2500);
+            }, function() {
+                alert("Error saving new object");
+            });
+        });
     }
 }
 

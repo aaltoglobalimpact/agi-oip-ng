@@ -5,25 +5,23 @@
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#ccc;text-align: center;">
-                    <input type="file" id="addNewContentModal-ImageData">
+                    <input type="file" name="ImageData">
                 </div>
             </div>
         </div>
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
-                    <div class="title-field"><label>Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                    <div class="published-field hide"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
-                    <div class="excerpt-field"><label>Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
-                    <div class="author-field"><label>Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
+                    <div class="title-field"><label>Title<input type="text" name="Title" required/></label><small class="error">A title to this update is required.</small></div>
+                    <div class="published-field hide"><label>Published<input type="text" name="Published" required/></label><small class="error">Published date this update is required.</small></div>
+                    <div class="author-field"><label>Author<input type="text" name="Author" required/></label><small class="error">Please type the author of this update.</small></div>
+                    <div class="excerpt-field"><label>Excerpt<input type="text" name="Excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
                     <div class="categories-field"><label>Category
-                        <select id="addNewContentCategorySelect">
+                        <select name="Categories">
                         </select>
                     </label>
                     </div>
                     <!--<div class="categories-field"><label>Categories</label> <input type="text" id="addNewContentModal-categories"/></div>-->
-                    <div class="hide"><label>ID</label><input type="text" class="hide" id="addNewContentModal-id"/></div>
-                    <div class="hide"><label>Image Path</label>   <input type="text" class="hide" id="addNewContentModal-imagePath"/></div>
                 </form>
             </div>
         </div>
@@ -35,21 +33,21 @@
                                                 <textarea id="addNewContentModal-content" cols="50"style="height: 300px;"></textarea>
                                                <textarea cols="50" id="area4">HTML <b>content</b> <i>default</i> in textarea</textarea>
             -->
-            <div id="addNewTextareaDivHolder"><textarea id="addNewContentModal-content" style="height: 300px;" name="content"></textarea></div>
+            <div name="textareaDivHolder"><textarea name="Content" style="height: 300px;"></textarea></div>
         </div>
     </div>
 
-    <div class="row" id="addNewPost-attachmenRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
+    <div class="row" name="attachmentRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
         <div class="small-6 medium-6 large-6 columns">
-            <div><label>Attachment</label><input type="file" id="addNewBinaryModal-Data"></div>
+            <div><label>Attachment</label><input type="file" name="AttachmentBinaryData"></div>
         </div>
         <div class="small-6 medium-6 large-6 columns" style="vertical-align: middle; display: inline-block;">
-            <a class="button secondary tiny" id="addNewContentModal-uploadFile1" style="margin-top:5%;">Upload</a>
+            {>"insidemodal_button.dust" command="NewContentUploadAttachment" style="margin-top:5%;" button_label="Upload" /}
         </div>
     </div> <!--Closes addNewPost-attachmenRow-->
 
-    <div class="row" style="margin-top: 10px;" id="addNewContentAttachmentAlertRow">
-        <div class="large-12 columns" id="addNewContentAttachmentAlertHOLDER">
+    <div class="row" style="margin-top: 10px;" name="attachmentAlertRow">
+        <div class="large-12 columns" name="attachmentAlertHOLDER">
         </div>
     </div> <!--Closes addNewContentAttachmentAlertRow-->
 
