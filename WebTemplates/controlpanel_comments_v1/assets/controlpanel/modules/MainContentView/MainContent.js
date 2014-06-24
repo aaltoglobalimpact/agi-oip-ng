@@ -74,7 +74,7 @@ var initializeContent = function(contentData, commentData) {
         if(currentImagePath)
             user_content+="<img src='"+currentImagePath+"' alt='image' id='contentCardImage-dataID-"+currentID+"'/>";
         user_content+="<div class='content-card-title' style='font-size:95%; font-weight:bold; color:#000000;' id='contentCardTitle-dataID-"+currentID+"'>"+currentTitle+"</div>";
-        user_content+="<div class='content-card-options'><a class='editContentButton' id='editContentButton-dataID-"+currentID+"'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='oip-controller-command' data-oip-command='DeleteContent' data-objectid='" +currentID+ "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
+        user_content+="<div class='content-card-options'><a class='editContentButton oip-controller-command' id='editContentButton-dataID-"+currentID+"' data-oip-command='EditContent' data-objectid='" + currentID + "'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='oip-controller-command' data-oip-command='DeleteContent' data-objectid='" +currentID+ "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
         user_content+="<div class='content-card-line'><hr></div>";
         user_content+="<div class='content-card-options'><a class='commentContentButton' id='contentAddCommentButton-dataID-"+currentID+"'><i class='icon-pencil'></i>&nbsp;Comment&nbsp;</a><span class='content-card-options-right' id='contentNumberOfComments-dataID-"+currentID+"'>"+numberOfComments+"&nbsp;<i class='icon-commentround'></i></span></div>";
         user_content+="</div>";
@@ -157,20 +157,6 @@ var initializeAll = function () {
 
     $.ajaxSetup({cache: true});
 
-    $('#addNewContentModal-content').redactor(
-        {   minHeight: 300,
-            maxHeight: 350,
-            autoresize: false,
-            buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
-        });
-
-    $('#researchPageEditingContent-redactortextarea').redactor(
-        {   minHeight: 300,
-            maxHeight: 350,
-            autoresize: false,
-            buttons: ['bold', 'italic', 'alignment', 'unorderedlist', 'orderedlist', 'image', 'video', "link"]
-        });
-
     $('#businessPageEditingContent-redactortextarea').redactor(
         {   minHeight: 300,
             maxHeight: 350,
@@ -211,11 +197,9 @@ var initializeAll = function () {
      });
      console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
      */
-    $("#contentDivContainer").delegate(".editContentButton", { click: editContent_PopulateModal});
     /////// Kalle refactored $("#contentDivContainer").delegate(".viewContentButton",{ click: viewContent } );
     $("#contentDivContainer").delegate(".commentContentButton", { click: launchContentModal });
     $("#contentDivContainer").delegate(".commentContentButton .icon-pencil", { click: launchContentModal });
-    $("#contentDivContainer").delegate(".trashContentButton", { click: launchDeleteConfirmation });
     $("#portfolioFilterDivContainer").delegate("a", { click: filter_isotope_items });
     //$("#addNewContent-fileInput ").change(function (){ triggerToolTipUploadPhoto(); });
     /*$("input:file").change(function (){ triggerToolTipUploadPhoto(); });*/
@@ -787,15 +771,6 @@ function editContent_PopulateModal(editEvent) {
         $('#editContentModal').foundation('reveal', 'open');
     }); //ends getJson
 }//ends function editContent
-
-function launchDeleteConfirmation(editEvent) {
-    var clickedEditID = editEvent.target.id.replace("trashContentButton-dataID-", '');
-    $("#alert-contentDelete-confirm-ID").empty();
-    $("#alert-contentDelete-confirm-ID").append("<p>" + clickedEditID + "</p>");
-    $("#alert-contentDelete-confirm-ID").data("DeleteID", clickedEditID);
-
-    $('#alert-contentDelete-confirm').foundation('reveal', 'open');
-}
 
 function launchContentModal(editEvent) {
     var clickedEditID = editEvent.target.id.replace("contentAddCommentButton-dataID-", '');

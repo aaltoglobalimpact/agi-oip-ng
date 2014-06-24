@@ -64,26 +64,27 @@
     <div class="row">
         <div class="large-6 columns" style="padding-right: 0;">
             <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
-                <input type="file" id="editContentModal-ImageData">
+                <input type="file" name="ImageDataFileInput">
             </div>
         </div>
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <form id="form-editContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
-                    <div class="title-field"><label>Title<input type="text" id="editContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                    <div class="published-field"><label>Published<input type="text" id="editContentModal-published" required/></label><small class="error">A published date is required.</small></div>
-                    <div class="excerpt-field"><label>Excerpt<input type="text" id="editContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
-                    <div class="author-field"><label>Author<input type="text" id="editContentModal-author"></label></div>
-                    <div class="categories-field"><label>Category <select id="editContentModal-categories"></select></label></div>
-                    <input type="hidden" id="editContentModal-id"/>
-                    <input type="hidden" id="editContentModal-etag"/>
+                    <div class="title-field"><label>Title<input type="text" name="Title"required/></label><small class="error">A title to this update is required.</small></div>
+                    <div class="published-field"><label>Published<input type="text" name="Published" required/></label><small class="error">A published date is required.</small></div>
+                    <div class="excerpt-field"><label>Excerpt<input type="text" name="Excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
+                    <div class="author-field"><label>Author<input type="text" name="Author"></label></div>
+                    <div class="categories-field"><label>Category <select name="Categories"></select></label></div>
+                    <input type="hidden" name="ID"/>
+                    <input type="hidden" name="ETag"/>
+                    <input type="hidden" name="RelativeLocation"/>
                 </form>
 
             </div>
         </div>
     </div>
 
-    <div class="row"><div class="large-12 columns right textAreaEditorDiv"><label>Content</label><div id="editTextareaDivHolder"></div></div></div>
+    <div class="row"><div class="large-12 columns right textAreaEditorDiv"><label>Content</label><div name="TextAreaDivHolder"></div></div></div>
 
     <div class="row" style="margin-top: 20px;"><div class="large-12 columns">
         {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
