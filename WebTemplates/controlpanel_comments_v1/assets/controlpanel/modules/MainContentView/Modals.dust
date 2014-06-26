@@ -17,7 +17,7 @@
                     <div class="author-field"><label>Author<input type="text" name="Author" required/></label><small class="error">Please type the author of this update.</small></div>
                     <div class="excerpt-field"><label>Excerpt<input type="text" name="Excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
                     <div class="categories-field"><label>Category
-                        <select name="Categories">
+                        <select name="Categories" multiple size="8">
                         </select>
                     </label>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="published-field"><label>Published<input type="text" name="Published" required/></label><small class="error">A published date is required.</small></div>
                     <div class="excerpt-field"><label>Excerpt<input type="text" name="Excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
                     <div class="author-field"><label>Author<input type="text" name="Author"></label></div>
-                    <div class="categories-field"><label>Category <select name="Categories"></select></label></div>
+                    <div class="categories-field"><label>Category <select name="Categories" multiple size="8"></select></label></div>
                     <input type="hidden" name="ID"/>
                     <input type="hidden" name="ETag"/>
                     <input type="hidden" name="RelativeLocation"/>

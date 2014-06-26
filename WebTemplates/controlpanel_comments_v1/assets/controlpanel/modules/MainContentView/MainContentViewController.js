@@ -66,8 +66,26 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
+        /*
+        function getAndPopulateCategoryOptions() {
+        $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function (contentData) {
+        var categoryoptions = "";
+        for (var i in contentData.CollectionContent) {
+        var currentObject = contentData.CollectionContent[i];
+        var currentID = currentObject.ID;
+        var currentTitle = currentObject.Title ? currentObject.Title : "";
+        categoryoptions += "<option value='" + currentID + "'>" + currentTitle + "</option>";
+        }//ends FOR loop
+        $("#addNewContentCategorySelect").empty();
+        $("#addNewContentCategorySelect").append(categoryoptions);
+        $("#editContentModal-categories").empty();
+        $("#editContentModal-categories").append(categoryoptions);
+        return false;
+        })//ends getJson
+        }*/
         MainContentViewController.prototype.OpenModalAddNewContentModal = function () {
             var $modal = this.$getNamedFieldWithin("AddNewContentModal");
+            var me = this;
 
             //clearing the fields of the New Content Modal Form
             this.$getNamedFieldWithinModal($modal, "Content").val();
@@ -78,6 +96,17 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             this.$getNamedFieldWithinModal($modal, "textareaDivHolder").empty();
             var textarea = $("<textarea name='Content' style='height: 300px;'>");
             this.$getNamedFieldWithinModal($modal, "textareaDivHolder").append(textarea);
+
+            var categoryoptions = "<option value=''>(None)</option>";
+            for (var i in this.currData.Categories.CollectionContent) {
+                var categoryObject = me.currData.Categories.CollectionContent[i];
+                var categoryID = categoryObject.ID;
+                var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+            }
+            var $categoriesSelect = this.$getNamedFieldWithinModal($modal, "Categories");
+            $categoriesSelect.empty();
+            $categoriesSelect.append(categoryoptions);
 
             var contentJQ = this.$getNamedFieldWithinModal($modal, "Content");
             contentJQ.redactor({
@@ -96,7 +125,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var wnd = window;
             wnd.global_uploaded_attachments = 0;
 
-            wnd.getAndPopulateCategoryOptions();
+            //wnd.getAndPopulateCategoryOptions();
             $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
             var currentPublished = wnd.ParseRawTimestampToISOString(null);
             this.$getNamedFieldWithinModal($modal, "Published").val(currentPublished);
@@ -134,6 +163,28 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 var currentExcerpt = currentObject.Excerpt;
                 var currentAuthor = currentObject.Author;
                 var currentPublishedDate = wnd.ParseRawTimestampToISOString(currentObject.Published);
+
+                var selectedCategories = [];
+                if (currentObject.Categories && currentObject.Categories.CollectionContent) {
+                    for (var categoryIX = 0; categoryIX < currentObject.Categories.CollectionContent.length; categoryIX++) {
+                        var item = currentObject.Categories.CollectionContent[categoryIX];
+
+                        //me.CategoriesListed += item.ID + ",";
+                        selectedCategories.push(item.ID);
+                    }
+                }
+
+                var categoryoptions = "<option value=''>(None)</option>";
+                for (var i in me.currData.Categories.CollectionContent) {
+                    var categoryObject = me.currData.Categories.CollectionContent[i];
+                    var categoryID = categoryObject.ID;
+                    var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                    categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+                }
+                var $categoriesSelect = me.$getNamedFieldWithinModal($modal, "Categories");
+                $categoriesSelect.empty();
+                $categoriesSelect.append(categoryoptions);
+                $categoriesSelect.val(selectedCategories);
 
                 // Image support content initiation
                 var imageSizeString = "256";

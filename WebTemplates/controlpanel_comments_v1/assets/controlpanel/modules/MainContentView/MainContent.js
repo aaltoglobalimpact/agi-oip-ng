@@ -59,7 +59,7 @@ var initializeContent = function(contentData, commentData) {
 
         if(!currentObject.Categories|| !currentObject.Categories.CollectionContent ||
             !currentObject.Categories.CollectionContent.length)
-            currentMainCategory="NEWS";
+            currentMainCategory="";
         else
             currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
 
@@ -231,12 +231,6 @@ var initializeAll = function () {
     });
     $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
     $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose", { click: closeAlertDynamicNotification });
-    $("#categoriesSection-hierarchyModal-launchModalButton").click(function () {
-        $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');
-    });
-    $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () {
-        $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');
-    });
 }
 
 var tUI = TheBall.Interface.UI;
@@ -1010,23 +1004,6 @@ function upload_newFile() {
         $("#form-addNewFileForm-URL").val("");
         return false;
     }
-}
-
-function getAndPopulateCategoryOptions() {
-    $.getJSON('../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json', function (contentData) {
-        var categoryoptions = "";
-        for (var i in contentData.CollectionContent) {
-            var currentObject = contentData.CollectionContent[i];
-            var currentID = currentObject.ID;
-            var currentTitle = currentObject.Title ? currentObject.Title : "";
-            categoryoptions += "<option value='" + currentID + "'>" + currentTitle + "</option>";
-        }//ends FOR loop
-        $("#addNewContentCategorySelect").empty();
-        $("#addNewContentCategorySelect").append(categoryoptions);
-        $("#editContentModal-categories").empty();
-        $("#editContentModal-categories").append(categoryoptions);
-        return false;
-    })//ends getJson
 }
 
 function submit_New_Group() {
