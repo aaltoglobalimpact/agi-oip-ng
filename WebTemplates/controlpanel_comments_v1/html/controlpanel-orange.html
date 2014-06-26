@@ -40,9 +40,13 @@
             <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
             <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
 
-        <li><label>General Options</label></li>
+        <li><label>Group Options</label></li>
         <li><a href="#" id="groupSettingsMenuAnchor" class="offCanvasMenuAnchor">Group settings</a></li>
         <li><a href="#" id="collaboratorsMenuAnchor" class="offCanvasMenuAnchor">Group members</a></li>
+
+        <li><label>Personal Options</label></li>
+        <li><a href="#" id="myIdentityMenuAnchor" class="offCanvasMenuAnchor">My identity</a></li>
+        <li><a href="#" id="myGroupsMenuAnchor" class="offCanvasMenuAnchor">My groups</a></li>
         <!--<li><a href="#">Meta</a></li>-->
     </ul>
 </aside>
@@ -53,10 +57,16 @@
 <div class="large-12 columns contentSwitchableSection activeSection" id="addEditContentSection">
     <div class="row" id="cpOrangeTopRowSeparator"></div>
     <div class="row" id="postAndimportantWrapperRow">
-    <div class="medium-3 large-3 columns noPaddingRight" style="height: 37px;">
-        <a><div id="postUpdateButton" class="orangeButton">Post an update</div></a></div>
-    <div class="medium-9 large-9 columns" style="height: 37px;">
-        <div id="importantLinksDiv" style="overflow:visible !important;">
+    <div class="medium-3 large-3 columns noPaddingRight" style="float:none !important; display:inline-block !important;" id="PostUpdateDiv"> <!--style="height: 37px;"-->
+        <!--<a><div id="postUpdateButton" class="orangeButton">Post an update</div></a>-->
+        <a href="#" class="button split expand" style="margin-bottom: 0 !important;"><div id="postUpdateButtonB">Post and update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
+        <ul id="drop-PostAndUpdate" class="f-dropdown" data-dropdown-content>
+            <li><a href="#">Preview changes</a></li>
+            <li><a href="#">Publish changes</a></li>
+        </ul>
+    </div>
+    <div class="medium-9 large-9 columns"  style="line-height: 21px !important;">
+        <div id="importantLinksDiv" style="overflow:visible !important;"><!--style="height: 37px;"-->
             <div id="importantLinksTitle" style="font-size: 13px;font-weight:bold;">Important links</div>
             <div id="importantLinksDiv1"><a href="http://www.google.com/calendar/render?mode=day&date=20140218T071429" target="_blank" id="importantLinks1">Google Calendar</a></div>
             <div id="importantLinksDiv2"><a href="http://asana.com/" target="_blank" id="importantLinks2">Asana</a></div>
@@ -127,11 +137,11 @@
                         <div class="large-6 columns">
                             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                                 <form id="form-addNewContentModal" method='POST' enctype='multipart/form-data' data-abide="ajax">
-                                    <div class="title-field"><label>Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
-                                    <div class="published-field hide"><label>Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
-                                    <div class="excerpt-field"><label>Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
-                                    <div class="author-field"><label>Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
-                                    <div class="categories-field"><label>Category
+                                    <div class="title-field"><label class="boldieText">Title<input type="text" id="addNewContentModal-title" required/></label><small class="error">A title to this update is required.</small></div>
+                                    <div class="published-field hide"><label class="boldieText">Published<input type="text" id="addNewContentModal-published" required/></label><small class="error">Published date this update is required.</small></div>
+                                    <div class="excerpt-field"><label class="boldieText">Excerpt<input type="text" id="addNewContentModal-excerpt" required/></label><small class="error">An excerpt to this update is required.</small></div>
+                                    <div class="author-field"><label class="boldieText">Author<input type="text" id="addNewContentModal-author" required/></label><small class="error">Please type the author of this update.</small></div>
+                                    <div class="categories-field"><label class="boldieText">Category
                                         <select id="addNewContentCategorySelect">
                                         </select>
                                     </label>
@@ -145,7 +155,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="large-12 columns right textAreaEditorDiv"><label>Content</label>
+                        <div class="large-12 columns right textAreaEditorDiv"><label class="boldieText">Content</label>
                             <!--
                                                                 <textarea id="addNewContentModal-content" cols="50"style="height: 300px;"></textarea>
                                                                <textarea cols="50" id="area4">HTML <b>content</b> <i>default</i> in textarea</textarea>
@@ -154,12 +164,17 @@
                         </div>
                     </div>
 
-                   <div class="row" id="addNewPost-attachmenRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
-                       <div class="small-6 medium-6 large-6 columns">
-                           <div><label>Attachment</label><input type="file" id="addNewBinaryModal-Data"></div>
+                   <div class="row" id="addNewPost-attachmentRow" style="margin:10px auto 0 auto;padding-left: 15px;">
+                       <div class="small-12 medium-12 large-12 columns"  style="padding-left: 0 !important;"><label class="boldieText">Attachment</label>
+                           <!--<input type="file" id="addNewBinaryModal-Data">-->
                        </div>
-                       <div class="small-6 medium-6 large-6 columns" style="vertical-align: middle; display: inline-block;">
-                           <a class="button secondary tiny" id="addNewContentModal-uploadFile1" style="margin-top:5%;">Upload</a>
+                       <div class="small-4 medium-2 large-2 columns" style="background-color: rgb(244, 244, 244);height:80px;">
+
+                       </div>
+                       <div class="small-8 medium-10 large-10 columns" style="vertical-align: middle; display: inline-block;padding-top:22px;">
+                           <!--<a class="button secondary tiny" id="addNewContentModal-uploadFile1" style="margin-top:5%;">Upload</a>-->
+                               <a class="button secondary tiny">Select</a>
+                               <a class="button secondary tiny">Remove</a>
                        </div>
                    </div> <!--Closes addNewPost-attachmenRow-->
 
@@ -227,6 +242,12 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
+                    </div>
+
+                    <div class="row" id="viewModalattachments-row">
+                        <div class="large-12 columns">
+                            <div id="viewModalatachmentsDiv"></div>
+                        </div>
                     </div>
 
                     <div class="row" id="viewModalcommentarea-row">
@@ -431,32 +452,36 @@
 <div class="large-12 columns contentSwitchableSection" id="homePageEditingSection">
     <h5 class="boldieText fancyTextColor">Homepage editing</h5>
     <div class="small-12 medium-6 large-6 columns" id="homePageEditingFormDiv" style="background-color: #FFF;padding:20px 0 0 0;">
-        <form>
-                <div class="small-12 medium-12 large-12 columns">
-                    <label><span class="boldieText">Carousel Caption 1</span>
-                        <textarea id="homePageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
-                    </label>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                    <a href="#" id="homePageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                    <a href="#" id="homePageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-                </div>
 
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText">Carousel Caption 2</span>
-                    <textarea id="homePageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="homePageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="homePageEditingCarCaption2-saveButton" class="button tiny">Save</a>
-            </div>
-        </form>
+    <div class="row" id="carouselImage1-rowDiv" style="padding: 0 15px 0 15px;">
+        <div class="small-6 medium-6 large-6 columns"><div class="discreetBackgroundColor" id="carouselImage1-previewDiv" style="height:100%;min-height:150px;padding:0 0 0 15px;"></div></div>
+        <div class="small-6 medium-6 large-6 columns"><div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                <form id="carouselImage1-imageUploadForm" action='new_content.php' method='POST' enctype='multipart/form-data'>
+                    <label><span class="boldieText">Carousel Image 1</span><input type ='file' name='myfile' id="carouselImage1-PhotoFileInput"></label>
+                    <a class="button tiny secondary uploadPictureSubmitButton" id="carouselImage1-imageUpload-submit" data-imageformid="carouselImage1-imageUploadForm" data-imagedivcontainerid="carouselImage1-previewDiv" data-imagefileinputid="carouselImage1-PhotoFileInput" data-imagefilepath="carouselImage1-imagePath">Upload Photo</a>
+                </form></div>
+        </div>
+        <div class="small-12 medium-12 large-12 columns hide"><div><label>Image Path<input type="text" id="carouselImage1-imagePath"/></label></div></div>
+        <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText">Carousel Caption 1</span><textarea id="homePageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
     </div>
+                <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;"><a href="#" id="homePageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a></div>
+                <div class="small-6 medium-6 large-6 columns" style="text-align:right;"><a href="#" id="homePageEditingCarCaption1-saveButton" class="button tiny">Save</a></div>-->
+    <div class="row" id="carouselImage2-rowDiv" style="padding: 0 15px 0 15px;">
+        <div class="small-6 medium-6 large-6 columns"><div class="discreetBackgroundColor" id="carouselImage2-previewDiv" style="height:100%;min-height:150px;padding:0 0 0 15px;"></div></div>
+        <div class="small-6 medium-6 large-6 columns"><div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+            <form id="carouselImage2-imageUploadForm" action='new_content.php' method='POST' enctype='multipart/form-data'>
+                <label><span class="boldieText">Carousel Image 2</span><input type ='file' name='myfile' id="carouselImage2-PhotoFileInput"></label>
+                <a class="button tiny secondary uploadPictureSubmitButton" id="carouselImage2-imageUpload-submit" data-imageformid="carouselImage2-imageUploadForm" data-imagedivcontainerid="carouselImage2-previewDiv" data-imagefileinputid="carouselImage2-PhotoFileInput" data-imagefilepath="carouselImage2-imagePath">Upload Photo</a>
+            </form></div>
+        </div>
+        <div class="small-12 medium-12 large-12 columns hide"><div><label>Image Path<input type="text" id="carouselImage2-imagePath"/></label></div></div>
+        <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText">Carousel Caption 2</span><textarea id="homePageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
+    </div>
+
+            <div class="small-6 medium-6 large-6 columns" style="text-align:left;"><a href="#" id="homePageEditingCarCaption2-previewButton" class="button tiny secondary previewButton" data-pagetobepreviewed="homepage">Preview</a></div>
+            <div class="small-6 medium-6 large-6 columns" style="text-align:right;"><a href="#" id="homePageEditingCarCaption2-saveButton" class="button tiny savePageButton" data-pagetobesaved="homepage">Save</a></div>
+    </div>
+
     <div class="small-12 medium-6 large-6 columns" id="homePageEditingTemplateImageSection">
         <img src="../assets/controlpanel/images/template.png">
     </div>
@@ -472,25 +497,12 @@
                     <textarea id="researchPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
             </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
 
             <div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 2</span>
                     <textarea id="researchPageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
             </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption2-saveButton" class="button tiny">Save</a>
-            </div>-->
-
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Research contact information</h5></div>
             <div class="small-12 medium-12 large-4 columns">
@@ -780,6 +792,13 @@
     <div class="row"><div class="small-12 medium-12 large-12 columns"><div id="my-timeline"></div></div></div>
 </div>
 
+<div class="large-12 columns contentSwitchableSection" id="myIdentitySection">
+    <div class="row"><div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">My identity</h4></div></div>
+    <div class="row"><div class="small-12 medium-6 large-6 columns"><label class="boldieText darkTextColor">Profile image<input type="file" id="myIdentity-profilePictureFileInput"></label></div></div>
+    <div class="row"><div class="small-12 medium-6 large-6 columns"><label class="boldieText darkTextColor">Name <input type="text" class="pageEditingInputField" placeholder="Name" id="myIdentity-nameTextInput"/></label></div></div>
+    <div class="row"><div class="small-12 medium-6 large-6 columns"><label class="boldieText darkTextColor">Last name <input type="text" class="pageEditingInputField" placeholder="Name" id="myIdentity-lastNameTextInput"/></label></div></div>
+</div>
+
 </div> <!--Closes the Main Section Div, where the content (switchable) goes-->
 </section>
 <a class="exit-off-canvas"></a>
@@ -803,7 +822,9 @@
 <script src="../assets/oiplib1.0/TheBall.Interface.UI/OperationManager.js"></script>
 <link rel="stylesheet" href="../assets/controlpanel/css/redactor.css" />
 
-<script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
+<!--<script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>-->
+<script type="text/javascript" src="https://s3.amazonaws.com/cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
+
 
 <!--<script src="js/nicEdit.js"></script>-->
 <!--<script src="js/jquery-te-1.4.0.min.js"></script>-->
@@ -896,6 +917,7 @@ $(document).ready(function(){
                 autoresize: false,
                 buttons: ['bold', 'italic','alignment','unorderedlist', 'orderedlist','image', 'video', "link"]
             });
+
     $('#innovationIndiaPageEditingContent-redactortextarea').redactor(
             {   minHeight: 300,
                 maxHeight: 350,
@@ -914,8 +936,10 @@ $(document).ready(function(){
             });
             this.src = this.src;
         });
+        equalize();
         console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#postAndimportantWrapperRow").delegate("#postUpdateButton",{ click: reveal_addNewContentModal } );
+    $("#postAndimportantWrapperRow").delegate("#postUpdateButtonB",{ click: reveal_addNewContentModal } );
     $("#contentDivContainer").delegate(".editContentButton",{ click: editContent_PopulateModal} );
     $("#contentDivContainer").delegate(".viewContentButton",{ click: viewContent } );
     $("#contentDivContainer").delegate(".commentContentButton",{ click: launchContentModal } );
@@ -934,6 +958,7 @@ $(document).ready(function(){
     $("#confirm-deleteModal-submit").on('click', submit_contentDelete_confirm);
     $("#create-group-submit").on('click', submit_New_Group);
     $("#addNewContentModal-imageUpload-submit").on('click', upload_addNewContentModalForm_picture);
+    $(".uploadPictureSubmitButton").on('click', upload_image);
     $("#addNewContentModal-imageUpload-submit2").on('click', upload_editedContentModalForm_picture);
     $("#preview-addNewFileForm").on('click', upload_newFile);
     $("#submitform-addNewFileForm").on('click',upload_newFile);
@@ -948,11 +973,18 @@ $(document).ready(function(){
     $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose",{ click: closeAlertDynamicNotification } );
     $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
     $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
+    $(".savePageButton").on('click', savePageData);
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
     var global_uploaded_attachments=0;
+
+    function equalize(){
+        var PostUpdateHeight= $( "#postAndimportantWrapperRow" ).height();
+        /*console.log("Post Update - Div height: "+PostUpdateHeight);*/
+        $( "#importantLinksDiv" ).height(PostUpdateHeight-20);
+    }
 
     function test(){
         alert ("triggered!");
@@ -1065,6 +1097,7 @@ $(document).ready(function(){
                         return 1;
                     return 0;
                 });
+                $commentPh.append("<h5 class='boldieText'>Comments</h5>");
                 $commentPh.append("<div id='viewModal-allCommentsDiv'></div>");
                 var $allcommentsHTML = $("#viewModal-allCommentsDiv");
                 for(var i = 0; i < myComments.length; i++) {
@@ -1336,6 +1369,10 @@ $(document).ready(function(){
             })//closes getJSON
 
         }//if (triggerid=="timelineSection")
+        if (triggerid=="myIdentityMenuAnchor")
+        {
+            $("#myIdentitySection").addClass("activeSection");
+        }
     }
 
     function populateWebsitesMenu_and_groupsTabTable (){
@@ -1580,6 +1617,7 @@ $(document).ready(function(){
                 });
                 this.src = this.src;
             });
+            getAttachments_dummy();
             ReConnectComments(currentID);
             $('#viewContentModal').foundation('reveal', 'open');
         })//ends getJson
@@ -1933,7 +1971,6 @@ $(document).ready(function(){
 
     function reveal_addNewContentModal () {
         getAndPopulateCategoryOptions();
-        $("#addNewContentModal-ImageData").attr("data-oipfile-filegroupid", "addModal");
         var currentPublished = ParseRawTimestampToISOString(null);
         $("#addNewContentModal-published").val(currentPublished);
         tOP.InitiateBinaryFileElements("addNewContentModal-ImageData", "000" ,"ImageData", null);
@@ -2181,7 +2218,87 @@ $(document).ready(function(){
 
     }
 
+    function upload_image(event) {
+        var triggerid= event.target.id;
+        var imageDivContainer= $("#"+triggerid).attr("data-imagedivcontainerid");
+        var imageFileInput= $("#"+triggerid).attr( "data-imagefileinputid" );
+        var imagePath=$("#"+triggerid).attr( "data-imagefilepath" );
+        var imageForm=$("#"+triggerid).attr("data-imageformid");
+        var imageClass=$("#"+triggerid).attr("class");
 
+        /*console.log("Upload image function. Button: "+triggerid+", Div Container: "+imageDivContainer+", File Input: "+imageFileInput+", Image Path: "+imagePath+", FormID: "+imageForm+"Button class: "+imageClass);*/
+
+        var options = {
+            type: "POST",
+            url:'uploadphoto.php',
+            success:    function(phpresponse) {
+                $("#"+imageDivContainer).empty();
+                var imageTag ="<img src='"+phpresponse+"' style='height:auto; width: auto;max-height:150px;margin-left:auto;margin-right:auto;'>";
+                $("#"+imageDivContainer).append(imageTag);
+                $("#"+imagePath).val(phpresponse);
+                $("#"+imageFileInput).val("");
+            }
+        };
+        $("#"+imageForm).ajaxSubmit(options);
+        /*$("#tooltip-uploadphoto").trigger("mouseout");*/
+        return false;
+    }
+
+    function savePageData(event) {
+        var triggerid= event.target.id;
+        var PageToBeSaved= $("#"+triggerid).attr("data-pagetobesaved");
+        console.log("Entered -savePageData- jquery function. Button pressed : "+triggerid);
+
+        if (PageToBeSaved=="homepage")
+        {
+            console.log("---Page to be saved is *homepage*");
+            var ImageSliderCaption1=$("#homePageEditingCarCaption1-textarea").val();
+            var ImageSliderCaption2=$("#homePageEditingCarCaption2-textarea").val();
+            var ImagePath1=$("#carouselImage1-imagePath").val();
+            var ImagePath2=$("#carouselImage2-imagePath").val();
+            var multihandlerResponse = $.ajax({
+                url: "multihandler.php",
+                type: "POST",
+                data: ({action: "saveHomePageData",
+                    caption1: ImageSliderCaption1,
+                    caption2: ImageSliderCaption2,
+                    imagepath1: ImagePath1,
+                    imagepath2: ImagePath2
+                }),
+                async: false
+            }).responseText;
+            console.log("Response from ajax call to multihandler.php (called from -saveHomePageData- Function): "+multihandlerResponse);
+            $('#alert-pageSave-successful').foundation('reveal', 'open');
+        }
+
+        if (PageToBeSaved=="homepage")
+        {
+            var ImageSliderCaption1=$("#researchPageEditingCarCaption1-textarea").val();
+            var ImageSliderCaption2=$("#researchPageEditingCarCaption2-textarea").val();
+            var researchContactName=$("#researchPageEditingContactName-input").val();
+            var researchContactJobTitle=$("#researchPageEditingContactJobTitle-input").val();
+            var researchContactEmail=$("#researchPageEditingContactEmail-input").val();
+            var researchMainContent=$("#researchPageEditingContent-redactortextarea").val();
+            /*alert("ImageSliderCaption1: " +ImageSliderCaption1);*/
+            var multihandlerResponse = $.ajax({
+                url: "multihandler.php", type: "POST",
+                data: ({action: "saveResearchPageData",caption1: ImageSliderCaption1,caption2: ImageSliderCaption2,contactName: researchContactName,contactTitle: researchContactJobTitle,contactEmail: researchContactEmail,mainContent: researchMainContent}),
+                async: false
+            }).responseText;
+            console.log("Response from ajax call to multihandler.php (called from SubmitResearchPageData Function): "+multihandlerResponse);
+            $('#alert-pageSave-successful').foundation('reveal', 'open');
+        }
+
+    }
+
+    function getAttachments_dummy(){
+        $("#viewModalatachmentsDiv").empty();
+        $("#viewModalatachmentsDiv").append("<h5 class='boldieText'>Attachments</h5>");
+        $("#viewModalatachmentsDiv").append("<div data-alert class='alert-box secondary attachmentAlertBox'><div class='attachmentIconDiv'><img src='../assets/controlpanel/images/icons/pdf.png' class='attachmentIconImg'></div><div class='attachmentLinkDiv'><a class='attachmentLink'>This is number one.pdf</a></div></div>");
+        $("#viewModalatachmentsDiv").append("<div data-alert class='alert-box secondary attachmentAlertBox'><div class='attachmentIconDiv'><img src='../assets/controlpanel/images/icons/ppt.png' class='attachmentIconImg'></div><div class='attachmentLinkDiv'><a class='attachmentLink'>My Keynote presentation at Tavastia-2014b jnkjdnfksjdbfksbdfkhbsdhfbskdisdfskjdkfskdjfbksdjbfksjdbfksjbdfksjdbfksjdbfksjbfkjsdbfkjsdbfksdfhsdkjfhsdkfhksdhfkhsdf.pdf</a></div></div>");
+
+        return false;
+    }
 });
 </script>
 

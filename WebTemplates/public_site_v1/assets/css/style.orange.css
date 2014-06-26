@@ -311,7 +311,7 @@ div.articleText,
 }
 .content-card-line {width:100%; float:left;padding-top:5px;padding-bottom:5px;margin: 0px;line-height: 1px !important;font-size: 1px;height:auto;}
 .content-card-line hr {width:100%;padding: 0px;margin: 0px;line-height: 1px !important;}
-
+.thickOrangeLine {width:100%; padding:0; margin:0; height:10px;color:#F17D1F; background-color:#F17D1F;}
 .content-card-options a {float: left;font-size: 70%;}
 a.content-card-options-right {float: right; font-size: 70%;}
 
@@ -528,7 +528,7 @@ div#cpOrangeTopRowSeparator{height:20px;}
 }
 
 #importantLinksDiv1,#importantLinksDiv2,#importantLinksDiv3,#importantLinksDiv4, #importantLinksDiv5 {font-size: 13px;}
-
+.businessSpecialArticleDiv{padding:20px;}
 .subMenuItem{
     width: 14%;
     display: inline-block;
@@ -596,6 +596,8 @@ div#cpOrangeTopRowSeparator{height:20px;}
 .blackTextColor{
     color: #000 !important;
 }
+
+.mediumBlackTextColor{color: #5d5d5d !important;}
 
 .fancyTag{
     font-size: 60%;

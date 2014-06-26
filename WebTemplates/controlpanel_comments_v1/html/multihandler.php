@@ -16,6 +16,7 @@ $categories = $_POST["categories"];
         case 'getMainCategories' : getMainCategories();break;
         case 'updateUploadedFileData' : updateUploadedFileData();break;
         case 'saveResearchPageData' : saveResearchPageData();break;
+        case 'saveHomePageData' : saveHomePageData();break;
         case "apple": echo "This is the php. Apple, Hello?"; break;
         case "null": echo "Php says it was null, tssssssss sooooorry."; break;
     }
@@ -125,7 +126,34 @@ function updateUploadedFileData()
             $data["CollectionContent"][0]["Body"]=$mainContent;
             $data["CollectionContent"][0]["RawHtmlContent"]=$mainContent;
            file_put_contents($file, json_encode($data));
-           echo "Entered the php function SaveResearchPageData";
+           echo "Entered the php function -saveResearchPageData-";
+        }
+
+
+    function saveHomePageData()
+        {
+                    $caption1= $_POST["caption1"];
+                    $caption1= stripslashes($caption1);
+                    $caption2= $_POST["caption2"];
+                    $caption2= stripslashes($caption2);
+                    $simpleImagePath1=$_POST["imagepath1"];
+                    $simpleImagePath2=$_POST["imagepath2"];
+
+
+                    $file = "../../AaltoGlobalImpact.OIP/PagesContent/Homepage.json";
+                    $data = json_decode(file_get_contents($file), true);
+
+                    foreach ($data["CollectionContent"] as $value) {
+                                    $value["SliderCaption1"]=$caption1;
+                                 }
+
+                    $data["CollectionContent"][0]["SliderCaption1"]=$caption1;
+                    $data["CollectionContent"][0]["SliderCaption2"]=$caption2;
+                    $data["CollectionContent"][0]["SimpleImagePath1"]=$simpleImagePath1;
+                    $data["CollectionContent"][0]["SimpleImagePath2"]=$simpleImagePath2;
+
+                   file_put_contents($file, json_encode($data));
+                   echo "Entered the php function -SaveHomePageData-";
         }
 
 ?>

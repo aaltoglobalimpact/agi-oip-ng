@@ -260,6 +260,17 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
 }
 #postAndimportantWrapperRow{magin-top:20px;}
 .active {font-weight: bold;}
+.attachmentIconDiv {max-width:40px;display:inline-block;}
+.attachmentAlertBox{padding-bottom: 3px !important;padding-top: 3px !important; margin-bottom: 5px !important;}
+.attachmentIconImg{height:40px;width:auto;}
+a.attachmentLink {color: #1A2228; text-decoration: underline;font-size:11px;}
+a.attachmentLink:hover {color: #F17D1F; text-decoration: underline;}
+.attachmentLinkDiv {display:inline-block;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;}
+
 #postUpdateButton{padding-right: 10px;}
 .orangeButton
 {
@@ -465,7 +476,7 @@ div.articleText,
 
 .content-card-line {width:100%; float:left;padding-top:5px;padding-bottom:5px;margin: 0px;line-height: 1px !important;font-size: 1px;height:auto;}
 .content-card-line hr {width:100%;padding: 0px;margin: 0px;line-height: 1px !important;}
-
+.thickOrangeLine hr {width:100%; padding:0; margin:0; height:5px;color:#F17D1F;}
 .content-card-options a {float: left;font-size: 70%;}
 a.content-card-options-right, span.content-card-options-right {float: right; font-size: 70%;}
 span.content-card-options-right,  span.content-card-options-right i,  span.content-card-options-right p {color:#F17D1F;}
