@@ -49,7 +49,8 @@ class GroupInfoViewController extends ViewControllerBase {
             var currentImagePath = currentObject && currentObject.ImageData
                 ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                 : null;
-            this.currOPM.InitiateBinaryFileElementsAroundInput($profileImageInput, groupProfile.ID, "ProfileImage", currentImagePath, null);
+            this.currOPM.InitiateBinaryFileElementsAroundInput($profileImageInput, groupProfile.ID, "ProfileImage", currentImagePath,
+                "../assets/controlpanel/images/lightGray.jpg");
         }
 
         var $iconImageInput = this.$getNamedFieldWithin("tmpIconImage");
@@ -59,7 +60,8 @@ class GroupInfoViewController extends ViewControllerBase {
             currentImagePath = currentObject && currentObject.ImageData
                 ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                 : null;
-            this.currOPM.InitiateBinaryFileElementsAroundInput($iconImageInput, groupProfile.ID, "IconImage", currentImagePath, null);
+            this.currOPM.InitiateBinaryFileElementsAroundInput($iconImageInput, groupProfile.ID, "IconImage", currentImagePath,
+                "../assets/controlpanel/images/lightGray.jpg");
         }
 
         this.$getNamedFieldWithin("GroupName").val(groupProfile.GroupName);

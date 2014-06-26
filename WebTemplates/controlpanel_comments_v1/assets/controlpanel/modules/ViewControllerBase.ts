@@ -16,9 +16,10 @@ class ViewControllerBase implements IViewController{
     $initialDeferred:JQueryDeferred<any>;
     $myModals:JQuery;
 
-    getClassConstructor(obj) {
+    getClassConstructor(obj):any {
         //return obj.__proto__.constructor.name;
-        return obj.__proto__.constructor;
+        //return obj.__proto__.constructor;
+        return obj.constructor;
     }
 
     public Initialize(dataUrl:string) {
@@ -56,6 +57,21 @@ class ViewControllerBase implements IViewController{
         return this.$initialized;
     }
 
+    CommonWaitForOperation(waitingText:string) {
+        var jq:any = $;
+        jq.blockUI({ message: "<h3>" + waitingText + "</h3>"});
+    }
+
+    CommonErrorHandler(jqXhr, textStatus, errorThrown) {
+        var errorObject = JSON.parse(jqXhr.responseText);
+        var wnd:any = window;
+        wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
+    }
+
+    CommonSuccessHandler() {
+        var jq:any = $;
+        jq.unblockUI();
+    }
 
     ControllerInitialize():void {
         throw "ControllerInitialize not implemented";
@@ -98,6 +114,15 @@ class ViewControllerBase implements IViewController{
         }
         //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
         this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
+    }
+
+    getObjectByID(collection:any, id:string):any {
+        for(var i = 0; i < collection.length; i++) {
+            var currObj = collection[i];
+            if(currObj.ID === id)
+                return currObj;
+        }
+        return null;
     }
 
     VisibleTemplateRender():void {

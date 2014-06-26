@@ -10,7 +10,8 @@ define(["require", "exports"], function(require, exports) {
         }
         ViewControllerBase.prototype.getClassConstructor = function (obj) {
             //return obj.__proto__.constructor.name;
-            return obj.__proto__.constructor;
+            //return obj.__proto__.constructor;
+            return obj.constructor;
         };
 
         ViewControllerBase.prototype.Initialize = function (dataUrl) {
@@ -45,6 +46,22 @@ define(["require", "exports"], function(require, exports) {
 
         ViewControllerBase.prototype.DoneInitializedPromise = function () {
             return this.$initialized;
+        };
+
+        ViewControllerBase.prototype.CommonWaitForOperation = function (waitingText) {
+            var jq = $;
+            jq.blockUI({ message: "<h3>" + waitingText + "</h3>" });
+        };
+
+        ViewControllerBase.prototype.CommonErrorHandler = function (jqXhr, textStatus, errorThrown) {
+            var errorObject = JSON.parse(jqXhr.responseText);
+            var wnd = window;
+            wnd.DisplayErrorDialog("Error", errorObject.ErrorType, errorObject.ErrorText);
+        };
+
+        ViewControllerBase.prototype.CommonSuccessHandler = function () {
+            var jq = $;
+            jq.unblockUI();
         };
 
         ViewControllerBase.prototype.ControllerInitialize = function () {
@@ -88,6 +105,15 @@ define(["require", "exports"], function(require, exports) {
 
             //this.currOPM.ExecuteOperationWithAjax(operationName, parameters, callBack);
             this.currOPM.ExecuteOperationWithForm(operationName, parameters, callBack);
+        };
+
+        ViewControllerBase.prototype.getObjectByID = function (collection, id) {
+            for (var i = 0; i < collection.length; i++) {
+                var currObj = collection[i];
+                if (currObj.ID === id)
+                    return currObj;
+            }
+            return null;
         };
 
         ViewControllerBase.prototype.VisibleTemplateRender = function () {

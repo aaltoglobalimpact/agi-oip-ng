@@ -198,23 +198,28 @@ var TheBall;
                     $form.append(this.getHiddenInput("NORELOAD", ""));
 
                     //$form.submit();
+                    if (!failureCallback)
+                        failureCallback = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
                         //dataType: "json",
                         success: function (responseData) {
-                            successCallback(responseData);
+                            if (successCallback != null)
+                                successCallback(responseData);
                         },
-                        error: function () {
-                            failureCallback();
-                        }
+                        error: failureCallback
                     });
                     $form.empty();
                 };
-                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, callBack) {
+                OperationManager.prototype.ExecuteOperationWithAjax = function (operationFullName, contentObject, successCallback, failureCallback) {
                     var jsonData = JSON.stringify(contentObject);
-                    if (!callBack)
-                        callBack = function () {
+                    if (!successCallback)
+                        successCallback = function () {
+                        };
+                    if (!failureCallback)
+                        failureCallback = function () {
                         };
                     $.ajax({
                         type: "POST",
@@ -222,9 +227,8 @@ var TheBall;
                         dataType: "json",
                         contentType: "application/json",
                         data: jsonData,
-                        success: callBack,
-                        error: function () {
-                        }
+                        success: successCallback,
+                        error: failureCallback
                     });
                 };
 
@@ -353,7 +357,7 @@ var TheBall;
                     var $selectButton = $(selectButtonSelector);
                     if ($selectButton.length === 0) {
                         // Create select button
-                        $selectButton = $("<a class='button oipfile'>Select</a>");
+                        $selectButton = $("<a class='button small oipfile'>Select</a>");
                         $selectButton.attr(dataAttrPrefix + fileGroupIDDataName, currentGroupID);
                         $selectButton.attr(dataAttrPrefix + buttonTypeDataName, buttonTypeSelect);
                         this.setSelectFileButtonEvents($selectButton, $fileInput);
@@ -363,7 +367,7 @@ var TheBall;
                     var $removeButton = $(removeButtonSelector);
                     if ($removeButton.length === 0) {
                         // Create remove button
-                        $removeButton = $("<a class='button oipfile'>Remove</a>");
+                        $removeButton = $("<a class='button small oipfile'>Remove</a>");
                         $removeButton.attr(dataAttrPrefix + fileGroupIDDataName, currentGroupID);
                         $removeButton.attr(dataAttrPrefix + buttonTypeDataName, buttonTypeRemove);
                         $removeButton.insertAfter($selectButton);

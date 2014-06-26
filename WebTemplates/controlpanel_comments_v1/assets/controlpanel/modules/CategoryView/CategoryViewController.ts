@@ -22,6 +22,8 @@ class CategoryViewController extends ViewControllerBase {
             "lib/dusts/command_icon_dust",
             "lib/dusts/insidemodal_button_dust",
             "lib/dusts/hiddeninput_dust",
+            "lib/dusts/modal_begin_dust",
+            "lib/dusts/modal_end_dust",
             "lib/dusts/openmodal_button_dust"], () => {
             me.currUDG.GetData(me.dataUrl, (callBackData) => {
                 me.currentData = callBackData;

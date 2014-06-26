@@ -1,37 +1,83 @@
+<div class="row">
+    <div class="small-12 medium-6 large-6 columns">
+        <h4 class="boldieText"> Current members: </h4>
+        <div>
+            <table id="collaborators-table" style="text-align: left;">
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Remove</th>
+                </tr>
 {#Collaborators}
-    <div id="gallery-5" class="gallery" style="clear: both;">
-        {#CollectionContent}
-            <div class="cards cards-profile pull-left">
-                <span class="label pull-right"><a data-toggle="modal" role="button" href="#edit-collaborator-role">{Role}</a></span>
-                <header>{CollaboratorName}
-                </header>
-                <section>
-                    <p class="info-text">{?EmailAddress}Email: {EmailAddress}{/EmailAddress}</p>
-                    <div class="clearfix"></div>
-                </section>
-                <footer>
-                <span class="pull-right">
-                    {>"command_button_begin.dust" form_name="removecollaborator" /}
-                    data-accountid="{AccountID}"
-                    {>"command_button_end.dust" icon_class_name="icon-remove-sign" /}
-                </span>
-                    <span class="pull-right"><a data-toggle="modal" role="button" href="#view-collaborator-profile"><i class="icon-eye-open"></i></a></span>
-                </footer>
-            </div>
-        {/CollectionContent}
-
-        <div class="clearfix"></div>
-    </div>
+    {#CollectionContent}
+                <tr>
+                    <td style="text-transform: none !important;">{CollaboratorName}</td>
+                    <td style="text-transform: none !important; font-style: italic;">{Role}</td>
+                    <td>{>"command_button_begin.dust" nobutton="true" command="OpenModalRemoveMemberModal" /}
+                        data-accountid="{AccountID}"
+                        {>"command_button_end.dust" icon_class_name="icon-remove-sign" /}
+                    </td>
+                </tr>
+    {/CollectionContent}
 {/Collaborators}
+            </table>
+        </div>
+    </div>
+    <div class="small-12 medium-6 large-6 columns show-for-medium-up"></div>
+</div>
 
-{>"command_button.dust" form_name="invitemember" button_label="Invite New Member" icon_class_name="icon-plus-sign" /}
+<div class="row">
+    <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Add a new member:</h4></div>
+</div>
+<div class="row">
+    <div class="small-12 medium-3 large-3 columns"><label>Email Address<input type="text" placeholder="Example: someone@somewhere.com" name="InviteNewMemberEmail"/></label></div>
+    {!
+    <div class="small-12 medium-3 large-3 columns"><label>Role<select class="discreetTextColor" style="font-size: 12px;">
+        <option value="moderator">Moderator</option>
+        <option value="collaborator">Collaborator</option>
+        <option value="viewer">Viewer</option></select></label>
+    </div>
+    !}
+    <div class="small-12 medium-6 large-6 columns show-for-medium-up"></div>
+</div>
 
-{>"modal_begin.dust" form_name="invitemember" header_title="Invite New Member" operation_name="InviteMemberToGroup" /}
-{>"textinput_singleline.dust" field_id="InviteMember_EmailAddress"
-field_name="EmailAddress" field_label="Member Email Address" /}
-{>"modal_end.dust" cancel_button_label="Cancel" accept_button_label="Send Invitation Email" /}
+<div class="row">
+    <div class="small-12 medium-6 large-6 columns">
+        {>"command_button.dust" command="InviteNewMember" button_label="Send Invitation!" style="float:right !important;" /}
+    </div>
+</div>
 
-{>"modal_begin.dust" form_name="removecollaborator" header_title="Remove Collaborator"
-operation_name="RemoveCollaboratorFromGroup" map_data_values="AccountID" /}
+{>"modal_begin.dust" modal_name="RemoveMemberModal" /}
+<h2>Remove Collaborator?</h2>
 {>"hiddeninput.dust" field_name="AccountID" /}
-{>"modal_end.dust" cancel_button_label="Cancel" accept_button_label="Remove!" /}
+<div class="row">
+    <div class="large-12 columns"><label>Collaborator to remove</label>
+        <div name="CollaboratorName" />
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="large-12 columns">
+        {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
+        {>"insidemodal_button.dust" command="RemoveCollaborator" button_label="Remove!" style="float:right;" /}
+    </div>
+</div>
+
+{>"modal_end.dust" /}
+
+
+{!
+{>"openmodal_button.dust" modal_name="InviteNewCollaborator" button_label="Invite New Member" icon_class_name="icon-plus-sign" /}
+
+{>"modal_begin.dust" modal_name="InviteNewCollaborator" /}
+    <h2>Invite Collaborator</h2>
+<div class="row">
+    <div class="large-12 columns">
+        {>"textinput_singleline.dust" field_name="EmailAddress" field_label="Member Email Address" /}
+    </div>
+</div>
+{>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
+{>"insidemodal_button.dust" command="InviteNewCollaborator" button_label="Send Invitation!" style="float:right; font-color:Green" /}
+{>"modal_end.dust" /}
+
+!}

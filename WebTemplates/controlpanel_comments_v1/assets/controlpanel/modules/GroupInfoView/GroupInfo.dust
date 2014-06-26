@@ -1,60 +1,40 @@
-<fieldset id="profile"><!-- group profile image and group icon image -->
-    <div class="control-group">
-        <div style="float: left;">
-            <div class="control-group"><label class="control-label">Group Profile Image</label>
-                <div class="large-6 columns" style="padding-right: 0;">
-                    <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
-                        <input type="file" name="tmpProfileImage">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix" style="float: left;">
-            <div class="control-group"><label class="control-label">Group Icon Image</label>
-                <div class="large-6 columns" style="padding-right: 0;">
-                    <div style="width: 100%;margin: 0px;padding: 0px;text-align: center;">
-                        <input type="file" name="tmpIconImage">
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Group Settings</h4></div>
+    <div class="small-6 medium-3 large-3 columns discreetTextColor" id="groupSettings-groupPictureDiv">
+        <label class="boldieText darkTextColor">Image</label>
+        <img class="oipfile" data-oipfile-filegroupid="groupProfileImage" data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg" style="width: auto;height:auto;">
+        <input type="file" name="tmpProfileImage">
     </div>
-    <!-- end group profile image and group icon image -->
-    <div class="control-group">
-        <label class="control-label">Group name</label>
-        <div class="controls"><input name="GroupName" type="text"></div>
+    <div class="small-6 medium-3 large-3 columns discreetTextColor" id="groupSettings-groupIconDiv">
+        <label class="boldieText darkTextColor">Icon</label>
+        <img class="oipfile" data-oipfile-filegroupid="groupIconImage" data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg" style="width: auto;height:auto;">
+        <input type ="file" name="tmpIconImage">
     </div>
-    <div class="control-group">
-        <label class="control-label">Description</label>
-        <div class="controls">
-            <textarea name="Description" rows="6"></textarea>
-        </div>
+    <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupNameDiv">
+        <label class="boldieText darkTextColor">Name<input type="text" class="pageEditingInputField" name="GroupName" /></label>
     </div>
-    <div class="control-group">
-        <label class="control-label">Organisations and groups linked to us</label>
-
-        <div class="controls">
-            <textarea name="OrganizationsAndGroupsLinkedToUs"rows="6"></textarea>
-        </div>
+    <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupDescriptionDiv">
+        <label class="boldieText darkTextColor">Description<textarea class="pageEditingTextArea" name="Description" style="height:auto;min-height:195px;resize: none;"/></label>
     </div>
-    <div class="control-group">
-        <label class="control-label">Www site name to publish content</label>
-        <div class="controls">
-            <input name="WwwSiteToPublishTo" type="text" value="">
-        </div>
+</div>
+<div class="row">
+    <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupSiteToPublishDiv">
+        <label class="boldieText darkTextColor">WWW site to publish content<input type="text" class="pageEditingInputField" name="WwwSiteToPublishTo"/></label>
     </div>
-    <a class="open-IdentityCreateOrUpdateCustomUI" role="button" href="#" data-toggle="modal"><i
-            class="icon-plus-sign"></i>Add Custom UI</a>
-    <footer>
-        <div class="control-group controls pull-right">
-            <div class="form-actions"
-                 style="margin: 0px; padding: 0px; border-top-color: currentColor; border-top-width: 0px; border-top-style: none; background-color: transparent;">
-                <button class="btn btn-primary oip-controller-command" data-oip-command="Save" type="button">Save changes</button>
-                <button class="btn btn-primary oip-controller-command" data-oip-command="myFunc" type="button">My stuff!</button>
-            </div>
-        </div>
-    </footer>
-</fieldset>
+    <div class="small-12 medium-6 large-6 columns"></div>
+</div>
+<div class="row">
+    <div class="small-12 medium-6 large-6 columns" id="groupSettings-groupLinkedOrganizationsDiv"><label class="boldieText darkTextColor">Linked organizations<textarea class="pageEditingTextArea" name="OrganizationsAndGroupsLinkedToUs" style="height:auto;resize: none;"/></textarea></label></div>
+    <div class="small-12 medium-6 large-6 columns"></div>
+</div>
+<div class="row">
+    <div class="small-12 medium-6 large-6 columns"><h4 class="boldieText"><a href="#">Add custom UI</a></h4></div>
+    <div class="small-12 medium-6 large-6 columns"></div>
+</div>
+<div class="row" id="groupSettings-buttonsRow">
+    <div class="small-8 medium-3 large-4 columns"><a class="button oip-controller-command" data-oip-command="Save" style="float: right;">Save Changes</a></div>
+    <div class="small-12 medium-6 large-6 columns"></div>
+</div> <!--Closes categoriesSection-hierarchyModal-buttonsRow-->
 
 <div class="modal hide fade" id="execute-IdentityDeleteCustomUI">
     <div class="modal-header">
