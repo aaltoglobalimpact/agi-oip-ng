@@ -57,9 +57,9 @@
 <div class="large-12 columns contentSwitchableSection activeSection" id="addEditContentSection">
     <div class="row" id="cpOrangeTopRowSeparator"></div>
     <div class="row" id="postAndimportantWrapperRow">
-    <div class="medium-3 large-3 columns noPaddingRight" style="float:none !important; display:inline-block !important;" id="PostUpdateDiv"> <!--style="height: 37px;"-->
+    <div class="small-12-5 medium-2-5 large-2-5 columns noPaddingRight" style="float:none !important; display:inline-block !important;" id="PostUpdateDiv"> <!--style="height: 37px;"-->
         <!--<a><div id="postUpdateButton" class="orangeButton">Post an update</div></a>-->
-        <a href="#" class="button split expand" style="margin-bottom: 0 !important;"><div id="postUpdateButtonB">Post and update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
+        <a href="#" class="button split expand" style="margin-bottom: 0 !important;"><div id="postUpdateButtonB">Post an update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
         <ul id="drop-PostAndUpdate" class="f-dropdown" data-dropdown-content>
             <li><a href="#">Preview changes</a></li>
             <li><a href="#">Publish changes</a></li>
@@ -974,6 +974,7 @@ $(document).ready(function(){
     $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
     $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
     $(".savePageButton").on('click', savePageData);
+    $(window).on('resize', equalize);
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
@@ -981,9 +982,14 @@ $(document).ready(function(){
     var global_uploaded_attachments=0;
 
     function equalize(){
-        var PostUpdateHeight= $( "#postAndimportantWrapperRow" ).height();
-        /*console.log("Post Update - Div height: "+PostUpdateHeight);*/
-        $( "#importantLinksDiv" ).height(PostUpdateHeight-20);
+
+        /*var PostUpdateHeight= $( "#postAndimportantWrapperRow" ).height();PostUpdateHeight=PostUpdateHeight-20;*/
+        var PostUpdateHeight= $( "#PostUpdateDiv" ).height();PostUpdateHeight=PostUpdateHeight-20;
+
+        if (PostUpdateHeight<96){
+            $("#importantLinksDiv" ).height(0);
+            $("#importantLinksDiv" ).height(PostUpdateHeight);
+            /*$("#importantLinksDiv" ).height(PostUpdateHeight+'px');*/}
     }
 
     function test(){

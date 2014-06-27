@@ -265,6 +265,7 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
 .attachmentIconImg{height:40px;width:auto;}
 a.attachmentLink {color: #1A2228; text-decoration: underline;font-size:11px;}
 a.attachmentLink:hover {color: #F17D1F; text-decoration: underline;}
+.large-2-5 {width: 24.5%;}
 .attachmentLinkDiv {display:inline-block;
     width: 80%;
     white-space: nowrap;
@@ -596,13 +597,23 @@ div#contentPanel.content.active {
     -o-transition-duration: 0s;
     transition-duration: 0s;
 }
-@media only screen and (max-width: 64em) {
-    #postUpdateButton{padding-right: 0;}
-}
-@media only screen and (max-width: 40em) {
+
+/************* Media queries!!!!!!!!!!!! media-------------------------------------------------***********/
+/************* Media queries!!!!!!!!!!!! media-------------------------------------------------***********/
+/************* Media queries!!!!!!!!!!!! media-------------------------------------------------***********/
+
+@media only screen and (max-width: 64em) { /*this is foundation- medium*/
 
     #postUpdateButton{padding-right: 0;}
+    .medium-2-5 {width: 24%;}
+}
+@media only screen and (max-width: 40em) {/*foundation small*/
+    .small-12-5 {
+        width: 100%; }
+    #postUpdateButton{padding-right: 0;}
     .noPaddingRight{padding-right: 0 !important;padding-left: 0 !important; }
+    #importantLinksTitle {display: none;}
+    #importantLinksDiv1, #importantLinksDiv2, #importantLinksDiv3, #importantLinksDiv4 {width: 23%;}
 }
 /*
 @media only screen and (min-width: 40.063em) {
