@@ -261,6 +261,75 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             }); //ends getJson
         };
 
+        MainContentViewController.prototype.Modal_EditContentUploadAttachment = function ($modal) {
+            var $fileInput = this.$getNamedFieldWithinModal($modal, "AttachmentBinaryData");
+            var currContentID = this.$getNamedFieldWithinModal($modal, "ID").val();
+            var me = this;
+
+            var input = $fileInput[0];
+            if (input.files && input.files[0]) {
+                var firstFile = input.files[0];
+                var fileName = firstFile.name;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var fileContent = e.target.result;
+                    var originalFilename = fileName;
+                    var binaryFileSaveData = {
+                        "FileEmbedded_Data": fileContent,
+                        "Title": originalFilename,
+                        "OriginalFileName": originalFilename
+                    };
+                    me.SaveAsBinaryAttachment("AaltoGlobalImpact.OIP", "TextContent", currContentID, binaryFileSaveData, $modal);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        MainContentViewController.prototype.RefreshAttachments = function ($modal, objectDomain, objectName, objectID) {
+            $.getJSON("../../AaltoGlobalImpact.OIP/AttachedToObjectCollection/MasterCollection.json", function (attachments) {
+                for (var i = 0; i < attachments.CollectionContent.length; i++) {
+                    var currAttachment = attachments.CollectionContent[i];
+                    if (currAttachment.TargetObjectDomain != objectDomain || currAttachment.TargetObjectName != objectName || currAttachment.TargetObjectID != objectID)
+                        continue;
+                    alert("At least one attachment!");
+                }
+            });
+        };
+
+        MainContentViewController.prototype.SaveAsBinaryAttachment = function (objectDomain, objectName, objectID, attachmentBinarySaveData, $modalToRefreshAttachmentsAfter) {
+            var me = this;
+            var jq = $;
+            jq.blockUI({ message: '<h2>Uploading Attachment File...</h2>' });
+            me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "BinaryFile", attachmentBinarySaveData, function (dataResponse) {
+                //jq.unblockUI();
+                var binaryID = dataResponse.ID;
+                jq.blockUI({ message: '<h2>Attaching file to this content...</h2>' });
+                var attachedToData = {
+                    SourceObjectID: binaryID,
+                    SourceObjectName: "BinaryFile",
+                    SourceObjectDomain: "AaltoGlobalImpact.OIP",
+                    TargetObjectID: objectID,
+                    TargetObjectName: objectName,
+                    TargetObjectDomain: objectDomain
+                };
+                me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "AttachedToObject", attachedToData, function (attachedDataResponse) {
+                    if ($modalToRefreshAttachmentsAfter) {
+                        setTimeout(function () {
+                            jq.unblockUI();
+                            me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
+                        }, 2500);
+                    } else
+                        jq.unblockUI();
+                }, function () {
+                    jq.unblockUI();
+                    alert("ERROR DIALOG HERE!");
+                });
+            }, function () {
+                jq.unblockUI();
+                alert("ERROR DIALOG HERE!");
+            });
+        };
+
         MainContentViewController.prototype.ViewContent = function ($source) {
             var id = $source.attr("data-oip-command-args");
             var $modal = this.$getNamedFieldWithin("ViewContentModal");
