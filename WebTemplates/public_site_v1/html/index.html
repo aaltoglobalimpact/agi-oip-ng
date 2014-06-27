@@ -124,6 +124,16 @@
                 <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
             </div>
             <div class="row">
+                <div id="viewContentModal-iframes"></div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <br>
+                    <label class="discreetTextColor">Share:</label>
+                    <input type="text" placeholder="" id="articleShareURLinput"/>
+                </div>
+            </div>
+            <div class="row">
                 <div class="large-12">
                     <br>
                     <a class="button" id="closeViewContentModal" style="float:right !important;">Close</a>
@@ -604,7 +614,7 @@ $(document).ready(function(){
             var lastSlashIndex = articleUrl.lastIndexOf("/");
             var lastExtIndex = articleUrl.lastIndexOf(".json");
             var articleIDFromArticleUrl = articleUrl.substring(lastSlashIndex + 1, lastExtIndex);
-            var currentURL = "http://www.aaltoglobalimpact.org/html/index.html?type=text&id="+ articleIDFromArticleUrl;
+            var currentURL = "http://newglobal.aalto.fi/html/index.html?type=text&id="+ articleIDFromArticleUrl;
             $("#articleShareURLinput").attr("placeholder",currentURL);
             $("#articleShareURLinput").val(currentURL);
             /*$("#articleShareURLinput").attr("disabled", true);*/
