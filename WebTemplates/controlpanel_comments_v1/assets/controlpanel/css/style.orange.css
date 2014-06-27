@@ -200,14 +200,19 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
     vertical-align: middle !important;
 }
 
+#contentDivContainer{
+    padding:10px 0 10px 21px !important;
+    max-width: 1280px;
+}
 .content-card
 {
     background-color:#ffffff !important;
-    margin: 10px;
+    /*margin: 10px;*/
+    margin: 0.8% 0.65% 0.8% 0.8%;
     padding: 10px;
-    width:210px;
+    /*width:230px;*/
+    width:18.1%;
     float:left;
-    /*min-height:210px;*/
     overflow: hidden !important;
     border-bottom-color: #1A2228 !important;
     border-bottom-style: none !important;
@@ -226,8 +231,6 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
     border-top-color: #1A2228 !important;
     border-top-style: none !important;
     border-top-width: 1px !important;
-    margin: 10px;
-    padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 2px 0px;
     -moz-box-shadow:rgba(0, 0, 0, 0.2) 1px 1px 2px 0px;
     -webkit-box-shadow:rgba(0, 0, 0, 0.2) 1px 1px 2px 0px;
@@ -265,7 +268,7 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
 .attachmentIconImg{height:40px;width:auto;}
 a.attachmentLink {color: #1A2228; text-decoration: underline;font-size:11px;}
 a.attachmentLink:hover {color: #F17D1F; text-decoration: underline;}
-.large-2-5 {width: 24.5%;}
+.large-2-5 {width: 24.6%;}
 .attachmentLinkDiv {display:inline-block;
     width: 80%;
     white-space: nowrap;
@@ -606,18 +609,46 @@ div#contentPanel.content.active {
 
     #postUpdateButton{padding-right: 0;}
     .medium-2-5 {width: 24%;}
+    .content-card{width:22.75%;}
+    #contentDivContainer{
+        float: none !important;
+        padding: 10px 0 25px 20px !important;
+    }
+    #isotope_content_row {padding-left:3px;}
+}
+
+@media only screen and (max-width: 52em) {/*832px --- custom made for better viewing of the isotope items. */
+    .content-card{width:30.33%;}
+    #contentDivContainer{
+        float: none !important;
+        padding: 10px 0 30px 20px !important;
+    }
+    #isotope_content_row{padding-left: 5px;}
 }
 @media only screen and (max-width: 40em) {/*foundation small*/
     .small-12-5 {
         width: 100%; }
     #postUpdateButton{padding-right: 0;}
-    .noPaddingRight{padding-right: 0 !important;padding-left: 0 !important; }
+    /*.noPaddingRight{padding-right: 0 !important;padding-left: 0 !important; }*/
     #importantLinksTitle {display: none;}
     #importantLinksDiv1, #importantLinksDiv2, #importantLinksDiv3, #importantLinksDiv4 {width: 23%;}
-}
-/*
-@media only screen and (min-width: 40.063em) {
-    div#ModalsHolderDiv-Content{
-        margin-top: 10px;
+    #importantPanelDiv, #newsPanelDiv{padding-bottom: 30px;}
+    #newsPanelWholeDiv{padding-left:15px;padding-right: 15px !important;}
+    #PostUpdateDiv{padding-right: 15px !important;}
+    .content-card{width:45%;}
+    #contentDivContainer{
+        float: none !important;
+        padding: 10px 0 30px 20px !important;
     }
-}*/
+    #isotope_content_row{padding-left: 5px;}
+    .content-card img
+    {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 28.250em) {/*452px ---> 28.250em 832px --- custom made for better viewing of the isotope items. */
+    /*.content-card{width:89%;}*/
+    .content-card{width:43.5%;}
+}
