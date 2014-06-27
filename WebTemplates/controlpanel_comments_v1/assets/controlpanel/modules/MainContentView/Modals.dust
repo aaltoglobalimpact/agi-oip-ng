@@ -39,17 +39,9 @@
 
     <div class="row" name="attachmentRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
         <div class="small-6 medium-6 large-6 columns">
-            <div><label>Attachment</label><input type="file" name="AttachmentBinaryData"></div>
-        </div>
-        <div class="small-6 medium-6 large-6 columns" style="vertical-align: middle; display: inline-block;">
-            {>"insidemodal_button.dust" command="NewContentUploadAttachment" style="margin-top:5%;" button_label="Upload" /}
+            <div>Attachments can be added after post is initially saved and opened for edit.</div>
         </div>
     </div> <!--Closes addNewPost-attachmenRow-->
-
-    <div class="row" style="margin-top: 10px;" name="attachmentAlertRow">
-        <div class="large-12 columns" name="attachmentAlertHOLDER">
-        </div>
-    </div> <!--Closes addNewContentAttachmentAlertRow-->
 
     <div class="row" style="margin-top: 20px;">
         <div class="large-12 columns">
@@ -85,6 +77,19 @@
     </div>
 
     <div class="row"><div class="large-12 columns right textAreaEditorDiv"><label>Content</label><div name="TextAreaDivHolder"></div></div></div>
+
+
+    <div class="row" name="attachmentRow" style="margin:10px auto 0 auto;background-color: rgb(244, 244, 244); width:95% !important;">
+        <div class="large-12 columns" name="AttachmentListDiv">
+        </div>
+        <div class="small-6 medium-6 large-6 columns">
+            <div><label>Attachment</label><input type="file" name="AttachmentBinaryData"></div>
+        </div>
+        <div class="small-6 medium-6 large-6 columns" style="vertical-align: middle; display: inline-block;">
+            {>"insidemodal_button.dust" command="EditContentUploadAttachment" style="margin-top:5%;" button_label="Upload" /}
+        </div>
+    </div> <!--Closes addNewPost-attachmenRow-->
+
 
     <div class="row" style="margin-top: 20px;"><div class="large-12 columns">
         {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
