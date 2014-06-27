@@ -257,6 +257,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 //$("#editContentModal-image").empty(); //clean the image Placeholder in the form
                 //queryValue = "<img src='" + currentImagePath + "' style='width:auto;height:auto;max-height:300px;margin-left:auto;margin-right:auto;'>";
                 //$("#editContentModal-image").append(queryValue);
+                me.RefreshAttachments($modal, "AaltoGlobalImpact.OIP", "TextContent", currentID);
                 $modal.foundation('reveal', 'open');
             }); //ends getJson
         };
@@ -286,12 +287,17 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         };
 
         MainContentViewController.prototype.RefreshAttachments = function ($modal, objectDomain, objectName, objectID) {
+            var me = this;
+            var $attachmentFile = me.$getNamedFieldWithinModal($modal, "AttachmentBinaryData");
+            me.currOPM.reset_field($attachmentFile);
+            var $attachmentListDiv = me.$getNamedFieldWithinModal($modal, "AttachmentListDiv");
+            $attachmentListDiv.empty();
             $.getJSON("../../AaltoGlobalImpact.OIP/AttachedToObjectCollection/MasterCollection.json", function (attachments) {
                 for (var i = 0; i < attachments.CollectionContent.length; i++) {
                     var currAttachment = attachments.CollectionContent[i];
                     if (currAttachment.TargetObjectDomain != objectDomain || currAttachment.TargetObjectName != objectName || currAttachment.TargetObjectID != objectID)
                         continue;
-                    alert("At least one attachment!");
+                    $attachmentListDiv.append("<div>" + currAttachment.SourceObjectDomain + "/" + currAttachment.SourceObjectName + "/" + currAttachment.SourceObjectID + "</div>");
                 }
             });
         };
