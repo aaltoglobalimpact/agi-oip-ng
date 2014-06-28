@@ -667,14 +667,17 @@
         });
         var categoryCollection = args[1][0];
         var commentCollection = args[2][0];
+        var binaryFileCollection = args[3][0];
         return {
             TextContents: textContentCollection,
             Categories: categoryCollection,
-            Comments: commentCollection
+            Comments: commentCollection,
+            BinaryFiles : binaryFileCollection
         };
     }, [ "../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json",
-        "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json"
+        "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json",
+        "../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json"
     ]);
 
 

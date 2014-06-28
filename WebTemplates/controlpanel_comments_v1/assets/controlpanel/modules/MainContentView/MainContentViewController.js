@@ -297,7 +297,17 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     var currAttachment = attachments.CollectionContent[i];
                     if (currAttachment.TargetObjectDomain != objectDomain || currAttachment.TargetObjectName != objectName || currAttachment.TargetObjectID != objectID)
                         continue;
-                    $attachmentListDiv.append("<div>" + currAttachment.SourceObjectDomain + "/" + currAttachment.SourceObjectName + "/" + currAttachment.SourceObjectID + "</div>");
+                    var binaryFile = me.getObjectByID(me.currData.BinaryFiles.CollectionContent, currAttachment.SourceObjectID);
+                    if (binaryFile) {
+                        $attachmentListDiv.append("<div>" + binaryFile.OriginalFileName + "</div>");
+                    } else {
+                        /*
+                        $attachmentListDiv.append("<div>" + currAttachment.SourceObjectDomain + "/"
+                        + currAttachment.SourceObjectName + "/"
+                        + currAttachment.SourceObjectID + "</div>");
+                        */
+                        $attachmentListDiv.append("<div style='font-weight: bolder;color: Red'>Save content to refresh attachment details</div>");
+                    }
                 }
             });
         };
