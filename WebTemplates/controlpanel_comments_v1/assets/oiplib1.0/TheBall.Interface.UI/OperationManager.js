@@ -81,6 +81,7 @@ var TheBall;
                     var id = objectID;
                     var contentSourceInfo = objectRelativeLocation + ":" + objectETag;
                     $form.append(this.getHiddenInput("ContentSourceInfo", contentSourceInfo));
+                    $form.append(this.getHiddenInput("NORELOAD", ""));
                     var realKey;
                     for (var key in objectData) {
                         if (key.startsWith("File_"))
@@ -98,6 +99,9 @@ var TheBall;
                     }
 
                     //$form.submit();
+                    if (!failureCallback)
+                        failureCallback = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
@@ -105,10 +109,7 @@ var TheBall;
                             if (successCallback)
                                 successCallback(responseData);
                         },
-                        error: function () {
-                            if (failureCallback)
-                                failureCallback();
-                        }
+                        error: failureCallback
                     });
                     $form.empty();
                 };
@@ -131,6 +132,9 @@ var TheBall;
                     $form.append(this.getHiddenInput("NORELOAD", ""));
 
                     //$form.submit();
+                    if (!failureCallback)
+                        failureCallback = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
@@ -139,10 +143,7 @@ var TheBall;
                             if (successCallback)
                                 successCallback(responseData);
                         },
-                        error: function () {
-                            if (failureCallback)
-                                failureCallback();
-                        }
+                        error: failureCallback
                     });
                     $form.empty();
                 };
@@ -171,6 +172,9 @@ var TheBall;
                     }
 
                     //$form.submit();
+                    if (!failureCallback)
+                        failureCallback = function () {
+                        };
                     $.ajax({
                         type: "POST",
                         data: $form.serialize(),
@@ -179,10 +183,7 @@ var TheBall;
                             if (successCallback)
                                 successCallback(responseData);
                         },
-                        error: function () {
-                            if (failureCallback)
-                                failureCallback();
-                        }
+                        error: failureCallback
                     });
                     $form.empty();
                 };

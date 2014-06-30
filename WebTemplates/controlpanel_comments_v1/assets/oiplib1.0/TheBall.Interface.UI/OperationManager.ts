@@ -86,6 +86,7 @@ module TheBall.Interface.UI {
             var id = objectID;
             var contentSourceInfo = objectRelativeLocation + ":" + objectETag;
             $form.append(this.getHiddenInput("ContentSourceInfo", contentSourceInfo));
+            $form.append(this.getHiddenInput("NORELOAD", ""));
             var realKey;
             for(var key in objectData) {
                 if(key.startsWith("File_"))
@@ -102,6 +103,8 @@ module TheBall.Interface.UI {
                 $form.append($hiddenInput);
             }
             //$form.submit();
+            if(!failureCallback)
+                failureCallback = function() {};
             $.ajax({
                 type: "POST",
                 data: $form.serialize(),
@@ -109,10 +112,7 @@ module TheBall.Interface.UI {
                     if(successCallback)
                         successCallback(responseData);
                 },
-                error: function() {
-                    if(failureCallback)
-                        failureCallback();
-                }
+                error: failureCallback
             });
             $form.empty();
         }
@@ -135,6 +135,8 @@ module TheBall.Interface.UI {
             $form.append(this.getHiddenInput("ExecuteOperation", "DeleteSpecifiedInformationObject"));
             $form.append(this.getHiddenInput("NORELOAD", ""));
             //$form.submit();
+            if(!failureCallback)
+                failureCallback = function() {};
             $.ajax({
                 type: "POST",
                 data: $form.serialize(),
@@ -143,10 +145,7 @@ module TheBall.Interface.UI {
                     if(successCallback)
                         successCallback(responseData);
                 },
-                error: function() {
-                    if(failureCallback)
-                        failureCallback();
-                }
+                error: failureCallback
             });
             $form.empty();
         }
@@ -174,6 +173,8 @@ module TheBall.Interface.UI {
                 $form.append($hiddenInput);
             }
             //$form.submit();
+            if(!failureCallback)
+                failureCallback = function() {};
             $.ajax({
                 type: "POST",
                 data: $form.serialize(),
@@ -182,10 +183,7 @@ module TheBall.Interface.UI {
                     if(successCallback)
                         successCallback(responseData);
                 },
-                error: function() {
-                    if(failureCallback)
-                        failureCallback();
-                }
+                error: failureCallback
             });
             $form.empty();
         }

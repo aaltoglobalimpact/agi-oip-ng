@@ -304,6 +304,7 @@ class MainContentViewController extends ViewControllerBase {
         me.currOPM.reset_field($attachmentFile);
         var $attachmentListDiv = me.$getNamedFieldWithinModal($modal, "AttachmentListDiv");
         $attachmentListDiv.empty();
+        var wnd:any = window;
         $.getJSON("../../AaltoGlobalImpact.OIP/AttachedToObjectCollection/MasterCollection.json", function(attachments) {
             for(var i = 0; i < attachments.CollectionContent.length; i++) {
                 var currAttachment = attachments.CollectionContent[i];
@@ -313,7 +314,18 @@ class MainContentViewController extends ViewControllerBase {
                     continue;
                 var binaryFile = me.getObjectByID(me.currData.BinaryFiles.CollectionContent, currAttachment.SourceObjectID);
                 if(binaryFile) {
-                    $attachmentListDiv.append("<div>" + binaryFile.OriginalFileName + "</div>");
+                    var $deleteButton = $("<a class='oip-modalbutton' data-oip-command='RemoveAndDeleteAttachment' " +
+                        "data-attachmentid='" + currAttachment.ID  + "' " +
+                        "data-sourceid='" + currAttachment.SourceObjectID + "' " +
+                        "data-objectid='" + objectID + "' " +
+                        "data-objectname='" + objectName + "' " +
+                        "data-objectdomain='" + objectDomain + "' " +
+                        "><i class='icon-remove-sign'></i></a>");
+                    $deleteButton.on("click", wnd.ControllerCommon.ModalButtonClick);
+                    $attachmentListDiv.append("<div>" + binaryFile.OriginalFileName +
+                        "</div>");
+                    $attachmentListDiv.append($deleteButton);
+                    $attachmentListDiv.append("<br>");
                 } else {
                     /*
                     $attachmentListDiv.append("<div>" + currAttachment.SourceObjectDomain + "/"
@@ -325,6 +337,29 @@ class MainContentViewController extends ViewControllerBase {
                 }
             }
         });
+    }
+
+    Modal_RemoveAndDeleteAttachment($modal, $source)
+    {
+        var attachmentID = $source.attr("data-attachmentid");
+        var sourceID = $source.attr("data-sourceid");
+        var objectID = $source.attr("data-objectid");
+        var objectName = $source.attr("data-objectname");
+        var objectDomain = $source.attr("data-objectdomain");
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Detaching attachment...</h2>' });
+        me.currOPM.DeleteIndependentObject("AaltoGlobalImpact.OIP", "AttachedToObject", attachmentID,
+            function() {
+                jq.blockUI({ message: '<h2>Removing attached content...</h2>' });
+                me.currOPM.DeleteIndependentObject("AaltoGlobalImpact.OIP", "BinaryFile", sourceID,
+                    function() {
+                        setTimeout(function() {
+                            jq.unblockUI();
+                            me.RefreshAttachments($modal, objectDomain, objectName, objectID);
+                        }, 4000);
+                    }, me.CommonErrorHandler);
+            }, me.CommonErrorHandler);
     }
 
     SaveAsBinaryAttachment(objectDomain:string, objectName:string, objectID:string, attachmentBinarySaveData:any, $modalToRefreshAttachmentsAfter?:any)
@@ -352,17 +387,11 @@ class MainContentViewController extends ViewControllerBase {
                             setTimeout(function() {
                                 jq.unblockUI();
                                 me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
-                            }, 2500);
+                            }, 4000);
                         } else
                             jq.unblockUI();
-                    }, function() {
-                        jq.unblockUI();
-                        alert("ERROR DIALOG HERE!");
-                    });
-            }, function() {
-                jq.unblockUI();
-                alert("ERROR DIALOG HERE!");
-            });
+                    }, me.CommonErrorHandler);
+            }, me.CommonErrorHandler);
     }
 
 
@@ -504,9 +533,7 @@ class MainContentViewController extends ViewControllerBase {
                     $modal.foundation('reveal', 'close');
                     me.ReInitialize();
                 }, 2500);
-            }, function() {
-                alert("Error saving new object");
-            });
+            }, me.CommonErrorHandler);
         });
     }
 
@@ -540,9 +567,7 @@ class MainContentViewController extends ViewControllerBase {
                     $modal.foundation('reveal', 'close');
                     me.ReInitialize();
                 }, 2500);
-            }, function() {
-                alert("Error saving new object");
-            });
+            }, me.CommonErrorHandler);
         });
     }
 }

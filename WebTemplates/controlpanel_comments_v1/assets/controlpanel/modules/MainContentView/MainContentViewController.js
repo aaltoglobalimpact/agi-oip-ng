@@ -292,6 +292,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             me.currOPM.reset_field($attachmentFile);
             var $attachmentListDiv = me.$getNamedFieldWithinModal($modal, "AttachmentListDiv");
             $attachmentListDiv.empty();
+            var wnd = window;
             $.getJSON("../../AaltoGlobalImpact.OIP/AttachedToObjectCollection/MasterCollection.json", function (attachments) {
                 for (var i = 0; i < attachments.CollectionContent.length; i++) {
                     var currAttachment = attachments.CollectionContent[i];
@@ -299,7 +300,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         continue;
                     var binaryFile = me.getObjectByID(me.currData.BinaryFiles.CollectionContent, currAttachment.SourceObjectID);
                     if (binaryFile) {
+                        var $deleteButton = $("<a class='oip-modalbutton' data-oip-command='RemoveAndDeleteAttachment' " + "data-attachmentid='" + currAttachment.ID + "' " + "data-sourceid='" + currAttachment.SourceObjectID + "' " + "data-objectid='" + objectID + "' " + "data-objectname='" + objectName + "' " + "data-objectdomain='" + objectDomain + "' " + "><i class='icon-remove-sign'></i></a>");
+                        $deleteButton.on("click", wnd.ControllerCommon.ModalButtonClick);
                         $attachmentListDiv.append("<div>" + binaryFile.OriginalFileName + "</div>");
+                        $attachmentListDiv.append($deleteButton);
+                        $attachmentListDiv.append("<br>");
                     } else {
                         /*
                         $attachmentListDiv.append("<div>" + currAttachment.SourceObjectDomain + "/"
@@ -310,6 +315,26 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     }
                 }
             });
+        };
+
+        MainContentViewController.prototype.Modal_RemoveAndDeleteAttachment = function ($modal, $source) {
+            var attachmentID = $source.attr("data-attachmentid");
+            var sourceID = $source.attr("data-sourceid");
+            var objectID = $source.attr("data-objectid");
+            var objectName = $source.attr("data-objectname");
+            var objectDomain = $source.attr("data-objectdomain");
+            var me = this;
+            var jq = $;
+            jq.blockUI({ message: '<h2>Detaching attachment...</h2>' });
+            me.currOPM.DeleteIndependentObject("AaltoGlobalImpact.OIP", "AttachedToObject", attachmentID, function () {
+                jq.blockUI({ message: '<h2>Removing attached content...</h2>' });
+                me.currOPM.DeleteIndependentObject("AaltoGlobalImpact.OIP", "BinaryFile", sourceID, function () {
+                    setTimeout(function () {
+                        jq.unblockUI();
+                        me.RefreshAttachments($modal, objectDomain, objectName, objectID);
+                    }, 4000);
+                }, me.CommonErrorHandler);
+            }, me.CommonErrorHandler);
         };
 
         MainContentViewController.prototype.SaveAsBinaryAttachment = function (objectDomain, objectName, objectID, attachmentBinarySaveData, $modalToRefreshAttachmentsAfter) {
@@ -333,17 +358,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         setTimeout(function () {
                             jq.unblockUI();
                             me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
-                        }, 2500);
+                        }, 4000);
                     } else
                         jq.unblockUI();
-                }, function () {
-                    jq.unblockUI();
-                    alert("ERROR DIALOG HERE!");
-                });
-            }, function () {
-                jq.unblockUI();
-                alert("ERROR DIALOG HERE!");
-            });
+                }, me.CommonErrorHandler);
+            }, me.CommonErrorHandler);
         };
 
         MainContentViewController.prototype.ViewContent = function ($source) {
@@ -477,9 +496,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         $modal.foundation('reveal', 'close');
                         me.ReInitialize();
                     }, 2500);
-                }, function () {
-                    alert("Error saving new object");
-                });
+                }, me.CommonErrorHandler);
             });
         };
 
@@ -511,9 +528,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         $modal.foundation('reveal', 'close');
                         me.ReInitialize();
                     }, 2500);
-                }, function () {
-                    alert("Error saving new object");
-                });
+                }, me.CommonErrorHandler);
             });
         };
         return MainContentViewController;
