@@ -485,6 +485,15 @@ class MainContentViewController extends ViewControllerBase {
         $modal.foundation('reveal', 'open');
     }
 
+    PublishToWww()
+    {
+        this.CommonWaitForOperation("Publishing content... please wait");
+        this.currOPM.ExecuteOperationWithForm("PublishGroupToWww",
+            { },
+            this.CommonSuccessHandler,
+            this.CommonErrorHandler);
+    }
+
     DeleteContent($this)
     {
         var id = $this.attr("data-objectid");

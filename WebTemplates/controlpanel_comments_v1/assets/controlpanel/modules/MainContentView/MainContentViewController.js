@@ -450,6 +450,11 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $modal.foundation('reveal', 'open');
         };
 
+        MainContentViewController.prototype.PublishToWww = function () {
+            this.CommonWaitForOperation("Publishing content... please wait");
+            this.currOPM.ExecuteOperationWithForm("PublishGroupToWww", {}, this.CommonSuccessHandler, this.CommonErrorHandler);
+        };
+
         MainContentViewController.prototype.DeleteContent = function ($this) {
             var id = $this.attr("data-objectid");
             var domainName = "AaltoGlobalImpact.OIP";
