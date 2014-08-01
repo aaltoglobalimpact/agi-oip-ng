@@ -141,11 +141,6 @@ class MainContentViewController extends ViewControllerBase {
         this.currOPM.InitiateBinaryFileElementsAroundInput($imageDataInput, "000", "ImageData", null,
             "../assets/controlpanel/images/lightGray.jpg");
 
-        var $imageDataInput = this.$getNamedFieldWithinModal($modal, "ImageData");
-        $imageDataInput.attr("data-oipfile-filegroupid", "imageDataImage");
-        this.currOPM.InitiateBinaryFileElementsAroundInput($imageDataInput, "000", "ImageData", null,
-            "../assets/controlpanel/images/lightGray.jpg");
-
         var $attachmentBinaryDataInput = this.$getNamedFieldWithinModal($modal, "AttachmentBinaryData");
         $attachmentBinaryDataInput.attr("data-oipfile-filegroupid", "attachmentBinaryData");
         this.currOPM.InitiateBinaryFileElementsAroundInput($attachmentBinaryDataInput, "000", "AttachmentBinaryData", null,

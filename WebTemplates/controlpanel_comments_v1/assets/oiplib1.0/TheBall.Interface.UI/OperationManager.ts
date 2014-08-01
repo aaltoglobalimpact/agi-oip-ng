@@ -360,9 +360,9 @@ module TheBall.Interface.UI {
                 $selectButton = $("<a class='button small oipfile'>Select</a>");
                 $selectButton.attr(dataAttrPrefix + fileGroupIDDataName, currentGroupID);
                 $selectButton.attr(dataAttrPrefix + buttonTypeDataName, buttonTypeSelect);
-                this.setSelectFileButtonEvents($selectButton, $fileInput);
                 $selectButton.insertAfter($fileInput);
             }
+            this.setSelectFileButtonEvents($selectButton, $fileInput);
             var removeButtonSelector = ".oipfile"
                 + currentGroupDataSelectorString
                 + "[data-" + buttonTypeDataName + "='" + buttonTypeRemove + "']";
@@ -373,8 +373,8 @@ module TheBall.Interface.UI {
                 $removeButton.attr(dataAttrPrefix + fileGroupIDDataName, currentGroupID);
                 $removeButton.attr(dataAttrPrefix + buttonTypeDataName, buttonTypeRemove);
                 $removeButton.insertAfter($selectButton);
-                this.setRemoveFileButtonEvents($removeButton, $fileInput, $hiddenInput, $previevImg);
             }
+            this.setRemoveFileButtonEvents($removeButton, $fileInput, $hiddenInput, $previevImg);
         }
 
         InitiateBinaryFileElements(fileInputID:string, objectID:string, propertyName:string, initialPreviewUrl:string, noImageUrl:string) {
