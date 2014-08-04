@@ -425,7 +425,7 @@ function switchActiveCanvasSection(event) {
     }
     if (triggerid == "fileManagerMenuAnchor") {
         $("#fileManagerSection").addClass("activeSection");
-        /*$("#filemanager-table td").remove();*/
+        /*
         $("#filemanager-table").empty();
         $.getJSON('../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json', function (contentData) {
             var tableheaders = "<thead><tr><th style='width:20%;max-width: 130px;'>Preview</th><th class='breakwords'>URL</th><th>Description</th><th>Uploaded</th></tr></thead><tbody></tbody>";
@@ -447,6 +447,7 @@ function switchActiveCanvasSection(event) {
                 $("#filemanager-table").append($fileTableData);
             }//ends FOR loop
         })//ends getJson
+        */
     }
     if (triggerid == "collaboratorsMenuAnchor") {
         $("#collaboratorsSection").addClass("activeSection");

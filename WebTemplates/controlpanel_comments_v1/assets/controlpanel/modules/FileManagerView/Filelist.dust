@@ -1,0 +1,54 @@
+<table id="filemanager-table" style='table-layout:fixed;width:100%;'>
+    <thead>
+        <tr>
+            <th style='width:20%;max-width: 130px;'>Preview</th>
+            <th class='breakwords'>URL</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+    {#BinaryFiles}
+        {#CollectionContent}
+        <tr>
+            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>currentPreview</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Data.RelativeLocation}</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Title}</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Description}</td>
+        </tr>
+        {/CollectionContent}
+    {/BinaryFiles}
+    {#ImageFiles.CollectionContent}
+        <tr>
+            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>currentPreview</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{ImageData.RelativeLocation}</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Title}</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Description}</td>
+        </tr>
+    {/ImageFiles.CollectionContent}
+    </tbody>
+</table>
+{!
+
+        {#ImageFiles.CollectionContent}
+        <tr>
+            <td>IMG: {ID}</td>
+        </tr>
+        {/ImageFiles.CollectionContent}
+
+                var currentObject = contentData.CollectionContent[i];
+                var currentPreview = currentObject.Data.FileExt;
+                var currentURL = currentObject.Data.RelativeLocation;
+                var currentDescription = currentObject.Description ? currentObject.Description : "No description available.";
+                var currentID = currentObject.ID;
+
+                var $fileTableData = $("<tr><td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>" + currentPreview + "</td>" +
+                    "<td style='text-transform:none !important;font-style:italic;font-size:11px;'>" + currentURL + "</td>" +
+                    "<td>" + currentDescription + "</td>" +
+                    "<td><a>Delete</a></td></tr>");
+                var $deleteFile = $fileTableData.find("a");
+                $deleteFile.data("FileID", currentID);
+                $deleteFile.on("click", deleteComment);
+                $("#filemanager-table").append($fileTableData);
+
+!}
