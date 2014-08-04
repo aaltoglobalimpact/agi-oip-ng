@@ -106,6 +106,7 @@
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="categoriesSection">
+    <p>Loading Categories...</p>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
@@ -696,13 +697,11 @@
         vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
         vc.VisibleTemplateRender();
     });
-
     require(["MainContentView/MainContentViewController"], function (vcClass) {
         var vc = new vcClass("addEditContentSection", tOP, tUDG);
         vc.Initialize("MAINCONTENT");
         vc.VisibleTemplateRender();
     });
-
 
 </script>
 

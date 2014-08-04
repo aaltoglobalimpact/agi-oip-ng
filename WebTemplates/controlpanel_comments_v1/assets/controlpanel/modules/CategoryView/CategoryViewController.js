@@ -33,6 +33,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
+                        $(window).trigger("resize");
                         me.ControllerInitializeDone();
                     });
                 });

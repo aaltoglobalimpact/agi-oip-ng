@@ -31,6 +31,7 @@ class CategoryViewController extends ViewControllerBase {
                     var $hostDiv = $("#" + me.divID);
                     $hostDiv.empty();
                     $hostDiv.html(output);
+                    $(window).trigger("resize");
                     me.ControllerInitializeDone();
                 });
             });

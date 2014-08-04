@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-6 columns">
+        <div class="large-12 columns">
             <div class="excerpt-field">
                 <label>Excerpt
                     <textarea rows="5" name="Excerpt"/>
