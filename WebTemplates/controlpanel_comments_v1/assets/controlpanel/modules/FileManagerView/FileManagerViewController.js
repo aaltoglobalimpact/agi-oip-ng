@@ -36,6 +36,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
+                        var $fileInput = me.$getNamedFieldWithin("FileInput");
+                        me.setFileInputEvent($fileInput);
                         me.ControllerInitializeDone();
                     });
                 });
@@ -50,6 +52,36 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             me.ControllerInitializeDone();
             });
             });*/
+        };
+
+        FileManagerViewController.prototype.setFileInputEvent = function ($fileInput) {
+            var me = this;
+            var changeEventName = "change";
+            $fileInput.off(changeEventName).on(changeEventName, function () {
+                var input = this;
+                if (input.files && input.files[0]) {
+                    var totalCount = input.files.length;
+                    var totalReadCount = 0;
+                    for (var i = 0; i < input.files.length; i++) {
+                        (function (index) {
+                            //var currFile = input.files[i];
+                            var reader = new FileReader();
+                            var fileName = input.files[index].name;
+                            reader.onload = function (e) {
+                                //alert(input.files[0].name);
+                                var currReadCount = ++totalReadCount;
+                                me.UploadFile(fileName, e.target.result, currReadCount, totalCount);
+                                //me.setPreviewImageSrc($imagePreview, e.target.result);
+                            };
+                            reader.readAsDataURL(input.files[index]);
+                        })(i);
+                    }
+                }
+            });
+        };
+
+        FileManagerViewController.prototype.UploadFile = function (fileName, fileContent, currentReadCount, totalCount) {
+            alert(fileName + " " + currentReadCount + " " + totalCount);
         };
 
         FileManagerViewController.prototype.VisibleTemplateRender = function () {
@@ -110,10 +142,10 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             }, me.CommonErrorHandler);
         };
 
-        FileManagerViewController.prototype.DeleteContent = function ($this) {
+        FileManagerViewController.prototype.DeleteObject = function ($this) {
             var id = $this.attr("data-objectid");
-            var domainName = "AaltoGlobalImpact.OIP";
-            var objectName = "TextContent";
+            var domainName = $this.attr("data-domainname");
+            var objectName = $this.attr("data-objectname");
             var me = this;
             var jq = $;
             jq.blockUI({ message: '<h2>Deleting Content...</h2>' });

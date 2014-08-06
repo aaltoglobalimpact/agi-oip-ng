@@ -5,6 +5,7 @@
             <th class='breakwords'>URL</th>
             <th>Title</th>
             <th>Description</th>
+            <th style="width: 40px">Act</th>
         </tr>
     </thead>
     <tbody>
@@ -12,18 +13,22 @@
         {#CollectionContent}
         <tr>
             <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>currentPreview</td>
-            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Data.RelativeLocation}</td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>../../AaltoGlobalImpact.OIP/MediaContent/{Data.ID}{Data.FileExt}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Title}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Description}</td>
+            <td>{>"command_icon.dust" command="EditBinaryFile" command_args="{ID}" icon_class_name="icon-edit" /}<br><br>{>"objectdeleteicon.dust" object_delete_title="{Title}" /}</td>
         </tr>
         {/CollectionContent}
     {/BinaryFiles}
     {#ImageFiles.CollectionContent}
         <tr>
-            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>currentPreview</td>
-            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{ImageData.RelativeLocation}</td>
+            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>
+                <img src="../../AaltoGlobalImpact.OIP/MediaContent/{ImageData.ID}_64x64_crop{ImageData.FileExt}">
+            </td>
+            <td style='text-transform:none !important;font-style:italic;font-size:11px;'>../../AaltoGlobalImpact.OIP/MediaContent/{ImageData.ID}{ImageData.FileExt}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Title}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Description}</td>
+            <td>{>"command_icon.dust" command="EditImageFile" command_args="{ID}" icon_class_name="icon-edit" /}<br><br>{>"objectdeleteicon.dust" object_delete_title="{Title}" /}</td>
         </tr>
     {/ImageFiles.CollectionContent}
     </tbody>
