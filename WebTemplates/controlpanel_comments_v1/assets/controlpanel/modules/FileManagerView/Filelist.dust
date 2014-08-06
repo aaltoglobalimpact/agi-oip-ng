@@ -12,7 +12,7 @@
     {#BinaryFiles}
         {#CollectionContent}
         <tr>
-            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>currentPreview</td>
+            <td style='text-transform:uppercase !important;font-size: 18px;' class='boldieText fancyTextColor'>{Data.FileExt}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>../../AaltoGlobalImpact.OIP/MediaContent/{Data.ID}{Data.FileExt}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Title}</td>
             <td style='text-transform:none !important;font-style:italic;font-size:11px;'>{Description}</td>

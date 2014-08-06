@@ -55,12 +55,15 @@ class FileManagerViewController extends ViewControllerBase {
          });*/
     }
 
-
+    currUploaded = 0;
     setFileInputEvent($fileInput) {
         var me = this;
         var changeEventName = "change";
         $fileInput.off(changeEventName).on(changeEventName, function() {
             var input:HTMLInputElement = <HTMLInputElement>this;
+            me.currUploaded = 0;
+            var jq:any = $;
+            jq.blockUI({ message: '<h2>Uploading Files...</h2>' });
             if (input.files && input.files[0]) {
                 var totalCount = input.files.length;
                 var totalReadCount = 0;
@@ -83,9 +86,64 @@ class FileManagerViewController extends ViewControllerBase {
         });
     }
 
-    UploadFile(fileName:string, fileContent:string, currentReadCount:number, totalCount:number ) {
-        alert(fileName + " " + currentReadCount + " " + totalCount);
+    endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
     }
+
+    UploadFile(fileName:string, fileContent:string, currentReadCount:number, totalCount:number ) {
+        var me = this;
+        var fileNameLC = fileName.toLowerCase();
+        var fileSaveData = {};
+        var domainName = "AaltoGlobalImpact.OIP";
+        var objectName:string = "";
+        if(me.endsWith(fileNameLC, ".jpg") ||
+            me.endsWith(fileNameLC, ".gif") ||
+            me.endsWith(fileNameLC, ".png") ||
+            me.endsWith(fileNameLC, ".jpeg")) {
+            objectName = "Image";
+            fileSaveData = {
+                "FileEmbedded_ImageData": fileName + ":" + fileContent,
+                "Title": fileName,
+            };
+        } else {
+            fileSaveData = {
+                "FileEmbedded_Data": fileName + ":" + fileContent,
+                "Title": fileName,
+                "OriginalFileName": fileName
+            };
+            objectName = "BinaryFile";
+
+        }
+        //alert(fileName + " " + currentReadCount + " " + totalCount);
+        var jq:any = $;
+        me.currOPM.CreateObjectAjax(domainName, objectName, fileSaveData,
+            function() {
+                //alert("Created: " + fileName + " " + currentReadCount + " " + totalCount);
+                me.currUploaded++;
+                if(me.currUploaded == totalCount) {
+                    setTimeout(function() {
+                        jq.unblockUI();
+                        me.ReInitialize();
+                    }, 2500);
+                }
+            }, me.CommonErrorHandler);
+    }
+
+    /*
+
+     me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "AttachedToObject", attachedToData,
+     function(attachedDataResponse)
+     {
+     if($modalToRefreshAttachmentsAfter) {
+     setTimeout(function() {
+     jq.unblockUI();
+     //me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
+     }, 4000);
+     } else
+     jq.unblockUI();
+     }, me.CommonErrorHandler);
+
+     */
 
 
     VisibleTemplateRender() {

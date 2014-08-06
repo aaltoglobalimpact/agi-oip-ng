@@ -12,6 +12,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         __extends(FileManagerViewController, _super);
         function FileManagerViewController() {
             _super.apply(this, arguments);
+            this.currUploaded = 0;
         }
         FileManagerViewController.prototype.ControllerInitialize = function () {
             var _this = this;
@@ -59,6 +60,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var changeEventName = "change";
             $fileInput.off(changeEventName).on(changeEventName, function () {
                 var input = this;
+                me.currUploaded = 0;
+                var jq = $;
+                jq.blockUI({ message: '<h2>Uploading Files...</h2>' });
                 if (input.files && input.files[0]) {
                     var totalCount = input.files.length;
                     var totalReadCount = 0;
@@ -80,10 +84,60 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
-        FileManagerViewController.prototype.UploadFile = function (fileName, fileContent, currentReadCount, totalCount) {
-            alert(fileName + " " + currentReadCount + " " + totalCount);
+        FileManagerViewController.prototype.endsWith = function (str, suffix) {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
         };
 
+        FileManagerViewController.prototype.UploadFile = function (fileName, fileContent, currentReadCount, totalCount) {
+            var me = this;
+            var fileNameLC = fileName.toLowerCase();
+            var fileSaveData = {};
+            var domainName = "AaltoGlobalImpact.OIP";
+            var objectName = "";
+            if (me.endsWith(fileNameLC, ".jpg") || me.endsWith(fileNameLC, ".gif") || me.endsWith(fileNameLC, ".png") || me.endsWith(fileNameLC, ".jpeg")) {
+                objectName = "Image";
+                fileSaveData = {
+                    "FileEmbedded_ImageData": fileName + ":" + fileContent,
+                    "Title": fileName
+                };
+            } else {
+                fileSaveData = {
+                    "FileEmbedded_Data": fileName + ":" + fileContent,
+                    "Title": fileName,
+                    "OriginalFileName": fileName
+                };
+                objectName = "BinaryFile";
+            }
+
+            //alert(fileName + " " + currentReadCount + " " + totalCount);
+            var jq = $;
+            me.currOPM.CreateObjectAjax(domainName, objectName, fileSaveData, function () {
+                //alert("Created: " + fileName + " " + currentReadCount + " " + totalCount);
+                me.currUploaded++;
+                if (me.currUploaded == totalCount) {
+                    setTimeout(function () {
+                        jq.unblockUI();
+                        me.ReInitialize();
+                    }, 2500);
+                }
+            }, me.CommonErrorHandler);
+        };
+
+        /*
+        
+        me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "AttachedToObject", attachedToData,
+        function(attachedDataResponse)
+        {
+        if($modalToRefreshAttachmentsAfter) {
+        setTimeout(function() {
+        jq.unblockUI();
+        //me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
+        }, 4000);
+        } else
+        jq.unblockUI();
+        }, me.CommonErrorHandler);
+        
+        */
         FileManagerViewController.prototype.VisibleTemplateRender = function () {
             var me = this;
             $.when(this.DoneInitializedPromise()).then(function () {
