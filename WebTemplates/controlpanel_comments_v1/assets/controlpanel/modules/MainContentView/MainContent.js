@@ -68,12 +68,24 @@ var initializeContent = function(contentData, commentData) {
         var numberOfComments=GetCommentCountForItemID(currentID);
         //-----------------------------ends:Here we get the total number of comments for each update
 
+        var isInternal = false;
+        var backgroundColorStyle = "";
 
+        if(currentObject.Categories && currentObject.Categories.CollectionContent) {
+            var internalArray = $.grep(currentObject.Categories.CollectionContent, function(internalCandidate) {
+                return internalCandidate.Title == "INTERNAL";
+            });
+            isInternal = internalArray.length > 0;
+            if(isInternal) {
+                console.log("Internal filter: " + currentTitle);
+                backgroundColorStyle = "background-color: #d3d3d3;";
+            }
+        }
 
         user_content+="<div class='content-card "+currentMainCategory+"' id='contentCardDataId-"+currentID+"'>";
         if(currentImagePath)
             user_content+="<img src='"+currentImagePath+"' alt='image' id='contentCardImage-dataID-"+currentID+"'/>";
-        user_content+="<div class='content-card-title' style='font-size:95%; font-weight:bold; color:#000000;' id='contentCardTitle-dataID-"+currentID+"'>"+currentTitle+"</div>";
+        user_content+="<div class='content-card-title' style='font-size:95%; font-weight:bold; column-rule: #000000;" + backgroundColorStyle + "' id='contentCardTitle-dataID-"+currentID+"'>"+currentTitle+"</div>";
         user_content+="<div class='content-card-options'><a class='editContentButton oip-controller-command' id='editContentButton-dataID-"+currentID+"' data-oip-command='EditContent' data-objectid='" + currentID + "'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='oip-controller-command' data-oip-command='DeleteContent' data-objectid='" +currentID+ "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
         user_content+="<div class='content-card-line'><hr></div>";
         user_content+="<div class='content-card-options'><a class='commentContentButton' id='contentAddCommentButton-dataID-"+currentID+"'><i class='icon-pencil'></i>&nbsp;Comment&nbsp;</a><span class='content-card-options-right' id='contentNumberOfComments-dataID-"+currentID+"'>"+numberOfComments+"&nbsp;<i class='icon-commentround'></i></span></div>";
