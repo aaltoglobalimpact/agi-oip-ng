@@ -202,6 +202,16 @@
                 <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
             </div>
             <div class="row">
+                <div id="viewContentModal-iframes"></div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <br>
+                    <label class="discreetTextColor">Share:</label>
+                    <input type="text" placeholder="" id="articleShareURLinput"/>
+                </div>
+            </div>
+            <div class="row">
                 <div class="large-12">
                     <br>
                     <a class="button" id="closeViewContentModal" style="float:right !important;">Close</a>
@@ -328,7 +338,18 @@ $(document).ready(function(){
     $.ajaxSetup({cache: true});
 
     getAndPopulate_Isotope_Filter_Categories();
-    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    /*src: '../assets/images/preview.png',*/
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#contentDivContainer").delegate(".cardClickableWrapper",{ click: viewContent } );
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});

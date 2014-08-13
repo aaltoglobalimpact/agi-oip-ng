@@ -235,7 +235,18 @@ $(document).ready(function(){
     $.ajaxSetup({cache: true});
 
     getAndPopulate_Isotope_Filter_Categories();
-    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    /*src: '../assets/images/preview.png',*/
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#contentDivContainer").delegate(".cardClickableWrapper",{ click: viewContent } );
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});

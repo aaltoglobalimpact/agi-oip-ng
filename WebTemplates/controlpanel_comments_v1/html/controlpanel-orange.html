@@ -39,6 +39,8 @@
             <li><a href="#" id="researchPageEditingMenuAnchor" class="offCanvasMenuAnchor">Research</a></li>
             <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
             <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
+            <li><a href="#" id="peoplePageEditingMenuAnchor" class="offCanvasMenuAnchor">People</a></li>
+
 
         <li><label>Group Options</label></li>
         <li><a href="#" id="groupSettingsMenuAnchor" class="offCanvasMenuAnchor">Group settings</a></li>
@@ -478,6 +480,18 @@
         <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText">Carousel Caption 2</span><textarea id="homePageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
     </div>
 
+        <div class="row" id="carouselImage3-rowDiv" style="padding: 0 15px 0 15px;">
+            <div class="small-6 medium-6 large-6 columns"><div class="discreetBackgroundColor" id="carouselImage3-previewDiv" style="height:100%;min-height:150px;padding:0 0 0 15px;"></div></div>
+            <div class="small-6 medium-6 large-6 columns"><div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                <form id="carouselImage3-imageUploadForm" action='new_content.php' method='POST' enctype='multipart/form-data'>
+                    <label><span class="boldieText">Carousel Image 3</span><input type ='file' name='myfile' id="carouselImage3-PhotoFileInput"></label>
+                    <a class="button tiny secondary uploadPictureSubmitButton" id="carouselImage3-imageUpload-submit" data-imageformid="carouselImage3-imageUploadForm" data-imagedivcontainerid="carouselImage3-previewDiv" data-imagefileinputid="carouselImage3-PhotoFileInput" data-imagefilepath="carouselImage3-imagePath">Upload Photo</a>
+                </form></div>
+            </div>
+            <div class="small-12 medium-12 large-12 columns hide"><div><label>Image Path<input type="text" id="carouselImage3-imagePath"/></label></div></div>
+            <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText">Carousel Caption 3</span><textarea id="homePageEditingCarCaption3-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
+        </div>
+
             <div class="small-6 medium-6 large-6 columns" style="text-align:left;"><a href="#" id="homePageEditingCarCaption2-previewButton" class="button tiny secondary previewButton" data-pagetobepreviewed="homepage">Preview</a></div>
             <div class="small-6 medium-6 large-6 columns" style="text-align:right;"><a href="#" id="homePageEditingCarCaption2-saveButton" class="button tiny savePageButton" data-pagetobesaved="homepage">Save</a></div>
     </div>
@@ -492,7 +506,21 @@
     <div class="small-12 medium-6 large-6 columns" id="researchPageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
         <form>
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
+
+            <div class="row" id="researchImage1-rowDiv" style="padding: 0 15px 0 15px;">
+                <div class="small-6 medium-6 large-6 columns"><div class="discreetBackgroundColor" id="researchImage1-previewDiv" style="height:100%;min-height:150px;padding:0 0 0 15px;"></div></div>
+                <div class="small-6 medium-6 large-6 columns"><div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                    <form id="researchImage1-imageUploadForm" action='new_content.php' method='POST' enctype='multipart/form-data'>
+                        <label><span class="boldieText">Research Carousel Image 1</span><input type ='file' name='myfile' id="researchImage1-PhotoFileInput"></label>
+                        <a class="button tiny secondary uploadPictureSubmitButton" id="researchImage1-imageUpload-submit" data-imageformid="researchImage1-imageUploadForm" data-imagedivcontainerid="researchImage1-previewDiv" data-imagefileinputid="researchImage1-PhotoFileInput" data-imagefilepath="researchImage1-imagePath">Upload Photo</a>
+                    </form></div>
+                </div>
+                <div class="small-12 medium-12 large-12 columns hide"><div><label>Image Path<input type="text" id="researchImage1-imagePath"/></label></div></div>
+                <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText">Research Image 1 (Caption)</span><textarea id="researchCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
+            </div>
+
+
+            <!--<div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
                     <textarea id="researchPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
@@ -502,7 +530,7 @@
                 <label><span class="boldieText darkTextColor">Caption 2</span>
                     <textarea id="researchPageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
-            </div>
+            </div>-->
 
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Research contact information</h5></div>
             <div class="small-12 medium-12 large-4 columns">
@@ -545,13 +573,24 @@
 <div class="large-12 columns contentSwitchableSection" id="businessPageEditingSection">
     <h5 class="boldieText fancyTextColor">Business page editing</h5>
     <div class="small-12 medium-6 large-6 columns" id="businessPageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
-        <form>
+        <!--<form>-->
             <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
+        <div class="row" id="businessImage1-rowDiv" style="padding: 0 15px 0 15px;">
+            <div class="small-6 medium-6 large-6 columns"><div class="discreetBackgroundColor" id="businessImage1-previewDiv" style="height:100%;min-height:150px;padding:0 0 0 15px;"></div></div>
+            <div class="small-6 medium-6 large-6 columns"><div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+                <form id="businessImage1-imageUploadForm" action='new_content.php' method='POST' enctype='multipart/form-data'>
+                    <label><span class="boldieText darkTextColor">Business Image 1</span><input type ='file' name='myfile' id="businessImage1-PhotoFileInput"></label>
+                    <a class="button tiny secondary uploadPictureSubmitButton" id="businessImage1-imageUpload-submit" data-imageformid="businessImage1-imageUploadForm" data-imagedivcontainerid="businessImage1-previewDiv" data-imagefileinputid="businessImage1-PhotoFileInput" data-imagefilepath="businessImage1-imagePath">Upload Photo</a>
+                </form></div>
+            </div>
+            <div class="small-12 medium-12 large-12 columns hide"><div><label>Image Path<input type="text" id="businessImage1-imagePath"/></label></div></div>
+            <div class="small-12 medium-12 large-12 columns"><label><span class="boldieText darkTextColor">Business Image 1 (Caption)</span><textarea id="businessCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea></label></div>
+        </div>
+            <!--<div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 1</span>
                     <textarea id="businessPageEditingCarCaption1-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
-            </div>
+            </div>-->
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
                 <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
             </div>
@@ -559,11 +598,11 @@
                 <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
             </div>-->
 
-            <div class="small-12 medium-12 large-12 columns">
+            <!--<div class="small-12 medium-12 large-12 columns">
                 <label><span class="boldieText darkTextColor">Caption 2</span>
                     <textarea id="businessPageEditingCarCaption2-textarea" placeholder="Enter a description to the banner image here" class="pageEditingTextArea" style="height: 75px;  "></textarea>
                 </label>
-            </div>
+            </div>-->
             <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
                 <a href="#" id="researchPageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
             </div>
@@ -587,10 +626,113 @@
             </div>
 
 
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="businessPageEditingContent-textareaDIV"><textarea id="businessPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+
+
+            <!--Events section ---------------------------------------------------------->
+            <div class="small-12 medium-12 large-12 columns" style="padding-top: 15px;"><h5 class="boldieText">Events Section</h5></div>
+            <div class="small-12 medium-12 large-4 columns">
+                <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Event 1</h6></div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Date</span></label>
+                    <input type="text" id="businessPageEditingEventDate-1" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Title</span></label>
+                    <input type="text" id="businessPageEditingEventTitle-1" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Text</span></label>
+                    <input type="text" id="businessPageEditingEventText-1" placeholder="Short description of the event" class="pageEditingInputField"/>
+                </div>
             </div>
+
+            <div class="small-12 medium-12 large-4 columns">
+                <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Event 2</h6></div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Date</span></label>
+                    <input type="text" id="businessPageEditingEventDate-2" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Title</span></label>
+                    <input type="text" id="businessPageEditingEventTitle-2" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Text</span></label>
+                    <input type="text" id="businessPageEditingEventText-2" placeholder="Short description of the event" class="pageEditingInputField"/>
+                </div>
+            </div>
+
+            <div class="small-12 medium-12 large-4 columns">
+                <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Event 3</h6></div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Date</span></label>
+                    <input type="text" id="businessPageEditingEventDate-3" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Title</span></label>
+                    <input type="text" id="businessPageEditingEventTitle-3" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+                </div>
+                <div class="small-12 medium-12 large-12">
+                    <label><span class="boldieText darkTextColor">Text</span></label>
+                    <input type="text" id="businessPageEditingEventText-3" placeholder="Short description of the event" class="pageEditingInputField"/>
+                </div>
+            </div>
+        <!--Events section ---------------------------------------------------------->
+
+        <!--Schedules section ---------------------------------------------------------->
+        <div class="small-12 medium-12 large-12 columns" style="padding-top: 15px;"><h5 class="boldieText">Schedule Section</h5></div>
+        <div class="small-12 medium-12 large-4 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Schedule 1</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Date</span></label>
+                <input type="text" id="businessPageEditingScheduleDate-1" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="businessPageEditingScheduleTitle-1" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="businessPageEditingScheduleText-1" placeholder="Short description of the event" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-4 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Schedule 2</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Date</span></label>
+                <input type="text" id="businessPageEditingScheduleDate-2" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="businessPageEditingScheduleTitle-2" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="businessPageEditingScheduleText-2" placeholder="Short description of the event" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-4 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Schedule 3</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Date</span></label>
+                <input type="text" id="businessPageEditingScheduleDate-3" placeholder="e.g. 25.2 - 15.3.2014" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="businessPageEditingScheduleTitle-3" placeholder="e.g. Trip to tanzania" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="businessPageEditingScheduleText-3" placeholder="Short description of the event" class="pageEditingInputField"/>
+            </div>
+        </div> <!--Schedules section ---------------------------------------------------------->
+
+        <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
+        <div class="small-12 medium-12 large-12 columns"><!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
+            <div id="businessPageEditingContent-textareaDIV"><textarea id="businessPageEditingContent-redactortextarea" style="height: 300px;" name="content"></textarea></div>
+        </div>
 
 
             <div id="businessPageSave&PreviewAllDIV">
@@ -602,7 +744,7 @@
                 </div>
             </div> <!--Closes the div researchPageSave&PreviewAllDIV-->
 
-        </form>
+       <!-- </form>-->
     </div> <!--Closes the div researchPageEditingFormDiv-->
 
     <div class="small-12 medium-6 large-6 columns" id="businessPageEditingTemplateImageSection">
@@ -758,6 +900,149 @@
     <div class="small-12 medium-6 large-6 columns" id="innovationIndiaPageEditingTemplateImageSection">
         <img src="../assets/controlpanel/images/template.png">
     </div>
+</div>
+
+<div class="large-12 columns contentSwitchableSection" id="PeoplePageEditingSection">
+    <h5 class="boldieText fancyTextColor">People page editing</h5>
+    <div class="small-12 medium-6 large-6 columns" id="peoplePageEditingFormDiv" style="background-color: #FFF;padding:20px 0 20px 0;">
+
+        <!--Individuals section ---------------------------------------------------------->
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 1</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-1" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-1" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-1" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-1" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 2</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-2" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-2" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-2" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-2" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 3</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-3" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-3" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-3" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-3" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 4</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-4" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-4" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-4" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-4" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 5</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-5" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-5" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-5" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-5" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+
+        <div class="small-12 medium-12 large-6 columns">
+            <div class="small-12 medium-12 large-12"><h6 class="boldieText fancyTextColor">Associate 6</h6></div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Name</span></label>
+                <input type="text" id="peoplePageEditingAssociateName-6" placeholder="John Lennon" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateTitle-6" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Title</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-6" placeholder="Project Coordinator" class="pageEditingInputField"/>
+            </div>
+            <div class="small-12 medium-12 large-12">
+                <label><span class="boldieText darkTextColor">Text</span></label>
+                <input type="text" id="peoplePageEditingAssociateResume-6" placeholder="Brief resume or experience summary" class="pageEditingInputField"/>
+            </div>
+        </div>
+        <!--Individuals section ---------------------------------------------------------->
+
+        <div id="peoplePageSave&PreviewAllDIV">
+            <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
+                <a href="#" id="peoplePageEditing-previewAllButton" class="button tiny secondary">Preview</a>
+            </div>
+            <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
+                <a href="#" id="peoplePageEditing-saveAllButton" class="button tiny">Save</a>
+            </div>
+        </div> <!--Closes the div peoplePageSave&PreviewAllDIV-->
+
+    </div> <!--Closes the div peoplePageEditingFormDiv-->
+
+    <div class="small-12 medium-6 large-6 columns" id="peoplePageEditingTemplateImageSection">
+        <img src="../assets/controlpanel/images/template.png">
+    </div>
+
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="groupSettingsSection">
@@ -1271,6 +1556,11 @@ $(document).ready(function(){
         if (triggerid=="businessPageEditingMenuAnchor")
         {
             $("#businessPageEditingSection").addClass("activeSection");
+        }
+
+        if (triggerid=="peoplePageEditingMenuAnchor")
+        {
+            $("#PeoplePageEditingSection").addClass("activeSection");
         }
         if (triggerid=="innovationsPageEditingMenuAnchor")
         {

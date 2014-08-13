@@ -314,6 +314,27 @@ div.articleText,
 .thickOrangeLine {width:100%; padding:0; margin:0; height:10px;color:#F17D1F; background-color:#F17D1F;}
 .content-card-options a {float: left;font-size: 70%;}
 a.content-card-options-right {float: right; font-size: 70%;}
+.businessSpecialArticleDiv{padding:0 !important;}
+.businessArticleTitleDiv {padding:5px 10px 0 10px;}
+.businessArticleTitleDiv h5 {padding:0 !important; margin:0 !important;}
+.businessArticleExcerpt {padding:5px 10px 0 10px;}
+.businessArticleFeatImageDiv {padding:0 !important;}
+.businessArticleMainContent {padding:5px 10px 5px 10px;}
+.readMoreBusinessArticleDiv {padding:5px 10px 15px 10px !important;}
+input#articleShareURLinput[type="text"] {color: #7f7e7e !important;font-size:11px !important;}
+input#articleShareURLinput[type="text"]:focus {
+    -webkit-appearance: none !important;
+    background-color: white !important;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.75);
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out; }
 
 .content-card-spanExcerpt, .content-card-spanExcerpt p {
     color: #585757;
@@ -773,26 +794,19 @@ div#contentPanel.content.active {
 
 @media only screen and (max-width: 64em) { /*this is foundation- medium*/
     #postUpdateButton{padding-right: 0;}
-
     #divSection1{padding-left: 15px !important;}
-
     #relatedItemsDiv{padding-left: 15px !important; padding-right: 15px !important;}
-
     #submenuLinksDiv{padding: 0px !important;}
-
     .subMenuItem{
         width: 10%;
     }
-
     #divSection2container {margin:15px 15px 15px 15px;}
     .peoplephotoDiv {width: 31%;}
     .peopleinfoDiv {width:65%;}
-
     div#topbarDivSeparator2{height:20px;}
     #h3PeopleTitle, #h3articleTitle {padding-top:0}
     hr.peopleHR{margin-top:0.8rem;}
     #articlesTitleSection {padding-bottom: 10px;}
-
     .content-card
     {
         background-color:#ffffff !important;
@@ -831,6 +845,9 @@ div#contentPanel.content.active {
         max-width: 231px;
         height: auto;
     }
+    #BusinessIndustriesListDiv{padding-top: 45px !important;}
+    #BusinessdivSection2{padding-left: 15px !important;padding-right: 15px !important;}
+    #BusinessIndustriesListDiv{padding-top: 0 !important;}
 }
 @media only screen and (max-width: 40em) { /*foundation small*/
     #divSection1{padding-left: 15px !important;}

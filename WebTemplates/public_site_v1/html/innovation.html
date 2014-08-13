@@ -65,13 +65,13 @@
 <div class="row" id="homeContentArea">
     <div class="small-12 medium-12 large-9 columns" style="padding-left:0;padding-right:15px;" id="divSection1">
         <div id="submenuLinksDivInnovationPage" style="overflow:visible !important; padding:15px 0 15px 0;width:100%;">
-            <!--<div id="submenuLinksDiv1" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-overall" class="innovationPlatformSubmenuLink activeLink">Overall</a></div>-->
-            <div id="submenuLinksDiv2" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-mexico" class="innovationPlatformSubmenuLink activeLink">Mexico</a></div>
+            <div id="submenuLinksDiv1" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-overall" class="innovationPlatformSubmenuLink activeLink">Overall</a></div>
+            <div id="submenuLinksDiv2" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-mexico" class="innovationPlatformSubmenuLink inactiveLink">Mexico</a></div>
             <div id="submenuLinksDiv3" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-tanzania" class="innovationPlatformSubmenuLink inactiveLink">Tanzania</a></div>
             <div id="submenuLinksDiv4" class="subMenuItem"><a href="#" target="_blank" id="linkInnovationPlatform-india" class="innovationPlatformSubmenuLink inactiveLink">India</a></div>
         </div>
 
-        <div id="divInnovationPlatform-overall" class="contentSwitchableSection"> <!--Opens innovationPlatformOveral div ID-->
+        <div id="divInnovationPlatform-overall" class="contentSwitchableSection activeSection"> <!--Opens innovationPlatformOveral div ID-->
             <div id="divOverallimageOrbitSlider" style="padding:0;width:100%;">
                 <img src="../assets/images/top_banners/Country_all.png" style="width: 100%;">
             </div> <!--closes divClass "divSection1image"-->
@@ -101,7 +101,7 @@
             </div>
         </div> <!--Closes innovationPlatformOveral div ID-->
 
-        <div id="divInnovationPlatform-mexico" class="contentSwitchableSection activeSection"> <!--Opens innovationPlatformOveral div ID-->
+        <div id="divInnovationPlatform-mexico" class="contentSwitchableSection"> <!--Opens innovationPlatformOveral div ID-->
             <div id="divMexicoimageOrbitSlider" style="padding:0;width:100%;">
                 <ul class="example-orbit" data-orbit data-options="animation:fade;pause_on_hover:true;timer_speed:7000;animation_speed:500;navigation_arrows:false; bullets:false; timer:true; pause_on_hover: true; resume_on_mouseout:true;next_on_click: true;slide_number: false;">
                     <li>
@@ -350,6 +350,16 @@
                 <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
             </div>
             <div class="row">
+                <div id="viewContentModal-iframes"></div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <br>
+                    <label class="discreetTextColor">Share:</label>
+                    <input type="text" placeholder="" id="articleShareURLinput"/>
+                </div>
+            </div>
+            <div class="row">
                 <div class="large-12">
                     <br>
                     <a class="button" id="closeViewContentModal" style="float:right !important;">Close</a>
@@ -446,7 +456,6 @@ var getCategoriesBasedByNamesOrIDs = function(categoryCollection, nameShortTextC
     return filteredCategories;
 };
 
-
 var getCardContentFromNode = function (item, imageSizeString) {
     var authors = item.Authors;
     var authorText = "";
@@ -476,7 +485,18 @@ $(document).ready(function(){
     $.ajaxSetup({cache: true});
 
     getAndPopulate_Isotope_Filter_Categories();
-    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
+    $.when(get_limited_content()).then(function(){start_isotope();setInterval(reLayout_isotope, 500);
+        $('img').each(function() {
+            $(this).error(function() {
+                $(this).attr({
+                    /*src: '../assets/images/preview.png',*/
+                    alt: 'Sorry! This image is still caching!',
+                    class:"hide"
+                });
+            });
+            this.src = this.src;
+        });
+        console.log( "Isotope fired after getting content, succeed" );}).fail(function(){console.log( "something went wrong with getting the content" );});
     $("#contentDivContainer").on('mouseover',reLayout_isotope);
     $("#contentDivContainer").delegate(".cardClickableWrapper",{ click: viewContent } );
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
