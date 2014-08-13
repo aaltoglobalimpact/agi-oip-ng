@@ -205,9 +205,14 @@ ul#drop1.f-dropdown.open{overflow: visible !important;z-index: 1000!important;}
     padding:10px 0 10px 21px !important;
     max-width: 1280px;
 }
+
+.INTERNAL {
+    background-color: #d3d3d3 !important;
+}
+
 .content-card
 {
-    background-color:#ffffff !important;
+    background-color:#ffffff;
     /*margin: 10px;*/
     margin: 0.8% 0.65% 0.8% 0.8%;
     padding: 10px;

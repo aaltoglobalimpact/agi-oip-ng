@@ -22,6 +22,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "FileManagerView/Filelist_dust",
                 "FileManagerView/FileUploadPanel_dust",
                 "FileManagerView/Modals_dust",
+                "lib/dusts/objectdeleteicon_dust",
                 "lib/dusts/command_button_dust",
                 "lib/dusts/command_icon_dust",
                 "lib/dusts/insidemodal_button_dust",
