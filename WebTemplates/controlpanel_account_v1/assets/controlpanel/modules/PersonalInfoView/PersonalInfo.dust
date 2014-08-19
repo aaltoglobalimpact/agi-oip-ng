@@ -5,7 +5,7 @@
     <div class="small-6 medium-3 large-3 columns discreetTextColor">
         <label class="boldieText darkTextColor">Profile Image</label>
         <img class="oipfile" data-oipfile-filegroupid="personalProfileImage" data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg" style="width: auto;height:auto;">
-        <input type="file" name="tmpProfileImage">
+        <input type="file" name="tmpProfileImage" style="display: none">
     </div>
     <br>
     <div class="small-12 medium-6 large-6 columns">

@@ -48,47 +48,26 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         GroupsViewController.prototype.InvisibleTemplateRender = function () {
         };
 
-        GroupsViewController.prototype.InviteNewMember = function () {
-            var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
-            this.CommonWaitForOperation("Inviting new member...");
-            this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup", { "EmailAddress": emailAddress }, this.CommonSuccessHandler, this.CommonErrorHandler);
-        };
-
-        GroupsViewController.prototype.OpenModalRemoveMemberModal = function ($source) {
-            var accountID = $source.attr("data-accountid");
-            var collaborators = this.currentData.Collaborators.CollectionContent;
-            var collaboratorToRemove = null;
-            for (var i = 0; i < collaborators.length; i++) {
-                var currItem = collaborators[i];
-                if (currItem.AccountID == accountID) {
-                    collaboratorToRemove = currItem;
-                    break;
-                }
-            }
-            if (!collaboratorToRemove)
-                throw "Cannot find matching collaborator, that was there before!";
-            var $removeMemberModal = this.$getNamedFieldWithin("RemoveMemberModal");
-            var $collaboratorNameField = this.$getNamedFieldWithinModal($removeMemberModal, "CollaboratorName");
-            $collaboratorNameField.html(collaboratorToRemove.CollaboratorName);
-            var $accountIDField = this.$getNamedFieldWithinModal($removeMemberModal, "AccountID");
-            $accountIDField.val(accountID);
-            $removeMemberModal.foundation("reveal", "open");
-        };
-
-        GroupsViewController.prototype.Modal_RemoveCollaborator = function ($modal) {
-            var accountID = this.$getNamedFieldWithinModal($modal, "AccountID").val();
+        GroupsViewController.prototype.SetAsDefaultGroup = function ($source) {
+            var me = this;
+            var groupURL = $source.attr("data-groupurl");
+            var groupID = groupURL.substr(10, 36);
             var wnd = window;
-            this.CommonWaitForOperation("Removing member...");
-            this.currOPM.ExecuteOperationWithForm("RemoveCollaboratorFromGroup", { "AccountID": accountID }, this.CommonSuccessHandler, this.CommonErrorHandler);
-            /*
-            var saveData = {
-            GroupName: groupName,
-            Description: description,
-            OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
-            WwwSiteToPublishTo: wwwSiteToPublishTo
-            };
-            this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
-            */
+            this.CommonWaitForOperation("Making group as default...");
+            this.currOPM.ExecuteOperationWithForm("SetGroupAsDefaultForAccount", { "GroupID": groupID }, function () {
+                me.CommonSuccessHandler();
+                me.ReInitialize();
+            }, this.CommonErrorHandler);
+        };
+
+        GroupsViewController.prototype.ClearDefaultGroup = function ($source) {
+            var me = this;
+            var wnd = window;
+            this.CommonWaitForOperation("Clearing account's default group setting...");
+            this.currOPM.ExecuteOperationWithForm("ClearDefaultGroupFromAccount", {}, function () {
+                me.CommonSuccessHandler();
+                me.ReInitialize();
+            }, this.CommonErrorHandler);
         };
         return GroupsViewController;
     })(ViewControllerBase);

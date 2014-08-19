@@ -76,7 +76,7 @@
 <div class="inner-wrap">
 <nav class="tab-bar">
     <section class="left-small"><a class="left-off-canvas-toggle menu-icon"><span></span></a></section>
-    <section class="middle tab-bar-section"><h1 class="title">Aalto Global Impact</h1></section>
+    <section class="middle tab-bar-section"><h1 class="title">Open Innovation Platform from Aalto Global Impact</h1></section>
 </nav>
 <aside class="left-off-canvas-menu">
     <ul class="off-canvas-list">
@@ -90,7 +90,7 @@
 <section class="main-section">
 <div class="row" id="canvasMainSectionRow">
 <div class="large-12 columns contentSwitchableSection activeSection" id="groupsSection">
-    <p>Loading Group Content...</p>
+    <p>Loading Group List...</p>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="personalSection">
@@ -284,7 +284,22 @@
 
     tUDG.RegisterDataURL("GROUPS", function(args) {
         var accountContainer = args[0];
-        return accountContainer.AccountModule.Roles;
+        var accountProfile = accountContainer.AccountModule.Profile;
+        var defaultGroup = null;
+        var roles = accountContainer.AccountModule.Roles;
+        var defaultGroupID = accountProfile.SimplifiedAccountGroupID;
+        if(defaultGroupID) {
+            var moderatorIn = roles.ModeratorInGroups ? roles.ModeratorInGroups.CollectionContent : [];
+            var memberIn = roles.MemberInGroups ? roles.MemberInGroups.CollectionContent : [];
+            var mergedArray = $.merge(moderatorIn, memberIn);
+            defaultGroup = $.grep(mergedArray, function(item) {
+                return item.URL.substr(10,36) === defaultGroupID;
+            })[0];
+        }
+        return {
+            "DefaultGroup": defaultGroup,
+            "Roles": accountContainer.AccountModule.Roles
+        };
     }, [ "../../AaltoGlobalImpact.OIP/AccountContainer/default.json" ]);
 
     require(["GroupsView/GroupsViewController"], function (vcClass) {
