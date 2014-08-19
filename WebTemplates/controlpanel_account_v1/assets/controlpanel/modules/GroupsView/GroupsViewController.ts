@@ -10,11 +10,11 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class GroupMemberViewController extends ViewControllerBase {
+class GroupsViewController extends ViewControllerBase {
 
     ControllerInitialize():void {
         var me = this;
-        require(["GroupMemberView/GroupMembers_dust",
+        require(["GroupsView/Groups_dust",
             "lib/dusts/command_button_begin_dust",
             "lib/dusts/command_button_end_dust",
             "lib/dusts/command_button_dust",
@@ -27,7 +27,7 @@ class GroupMemberViewController extends ViewControllerBase {
         ], (template) => {
             this.currUDG.GetData(this.dataUrl, myData => {
                 me.currentData = myData;
-                dust.render("GroupMembers.dust", myData, (error, output) => {
+                dust.render("Groups.dust", myData, (error, output) => {
                     if(error)
                         alert("Dust error: " + error);
                     var $hostDiv = $("#" + me.divID);
@@ -99,4 +99,4 @@ class GroupMemberViewController extends ViewControllerBase {
     }
 }
 
-export = GroupMemberViewController;
+export = GroupsViewController;

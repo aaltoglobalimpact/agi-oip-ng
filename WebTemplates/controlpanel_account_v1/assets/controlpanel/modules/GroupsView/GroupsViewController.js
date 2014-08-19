@@ -8,16 +8,16 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var GroupMemberViewController = (function (_super) {
-        __extends(GroupMemberViewController, _super);
-        function GroupMemberViewController() {
+    var GroupsViewController = (function (_super) {
+        __extends(GroupsViewController, _super);
+        function GroupsViewController() {
             _super.apply(this, arguments);
         }
-        GroupMemberViewController.prototype.ControllerInitialize = function () {
+        GroupsViewController.prototype.ControllerInitialize = function () {
             var _this = this;
             var me = this;
             require([
-                "GroupMemberView/GroupMembers_dust",
+                "GroupsView/Groups_dust",
                 "lib/dusts/command_button_begin_dust",
                 "lib/dusts/command_button_end_dust",
                 "lib/dusts/command_button_dust",
@@ -30,7 +30,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             ], function (template) {
                 _this.currUDG.GetData(_this.dataUrl, function (myData) {
                     me.currentData = myData;
-                    dust.render("GroupMembers.dust", myData, function (error, output) {
+                    dust.render("Groups.dust", myData, function (error, output) {
                         if (error)
                             alert("Dust error: " + error);
                         var $hostDiv = $("#" + me.divID);
@@ -42,19 +42,19 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
-        GroupMemberViewController.prototype.VisibleTemplateRender = function () {
+        GroupsViewController.prototype.VisibleTemplateRender = function () {
         };
 
-        GroupMemberViewController.prototype.InvisibleTemplateRender = function () {
+        GroupsViewController.prototype.InvisibleTemplateRender = function () {
         };
 
-        GroupMemberViewController.prototype.InviteNewMember = function () {
+        GroupsViewController.prototype.InviteNewMember = function () {
             var emailAddress = this.$getNamedFieldWithin("InviteNewMemberEmail").val();
             this.CommonWaitForOperation("Inviting new member...");
             this.currOPM.ExecuteOperationWithForm("InviteMemberToGroup", { "EmailAddress": emailAddress }, this.CommonSuccessHandler, this.CommonErrorHandler);
         };
 
-        GroupMemberViewController.prototype.OpenModalRemoveMemberModal = function ($source) {
+        GroupsViewController.prototype.OpenModalRemoveMemberModal = function ($source) {
             var accountID = $source.attr("data-accountid");
             var collaborators = this.currentData.Collaborators.CollectionContent;
             var collaboratorToRemove = null;
@@ -75,7 +75,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             $removeMemberModal.foundation("reveal", "open");
         };
 
-        GroupMemberViewController.prototype.Modal_RemoveCollaborator = function ($modal) {
+        GroupsViewController.prototype.Modal_RemoveCollaborator = function ($modal) {
             var accountID = this.$getNamedFieldWithinModal($modal, "AccountID").val();
             var wnd = window;
             this.CommonWaitForOperation("Removing member...");
@@ -90,9 +90,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             this.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData);
             */
         };
-        return GroupMemberViewController;
+        return GroupsViewController;
     })(ViewControllerBase);
 
     
-    return GroupMemberViewController;
+    return GroupsViewController;
 });

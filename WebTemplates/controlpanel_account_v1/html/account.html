@@ -80,440 +80,21 @@
 </nav>
 <aside class="left-off-canvas-menu">
     <ul class="off-canvas-list">
-        <li><label>Manage Posts</label></li>
-        <li><a href="#" id="addEditContentMenuAnchor" class="offCanvasMenuAnchor">Add or edit posts</a></li>
-        <li><a href="#" id="manageCategoriesMenuAnchor" class="offCanvasMenuAnchor">Add or edit categories</a></li>
-        <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">File Manager</a></li>
-        <li><a href="#" id="timelineMenuAnchor" class="offCanvasMenuAnchor">View data as timeline</a></li>
-        <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
-        <li><label>Manage Pages</label></li>
-        <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
-        <li><a href="#" id="researchPageEditingMenuAnchor" class="offCanvasMenuAnchor">Research</a></li>
-        <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
-        <li><a href="#" id="innovationsPageEditingMenuAnchor" class="offCanvasMenuAnchor">Innovations</a></li>
-
-        <li><label>General Options</label></li>
-        <li><a href="#" id="groupInfoMenuAnchor" class="offCanvasMenuAnchor">Group</a></li>
-        <li><a href="#" id="groupMembersMenuAnchor" class="offCanvasMenuAnchor">Group Members</a></li>
-        <li><a href="#">Meta</a></li>
+        <li><label>Collaboration</label></li>
+        <li><a href="#" id="groupsMenuAnchor" data-section-id="groupsSection" class="offCanvasMenuAnchor">My Groups</a></li>
+        <li><label>Me</label></li>
+        <li><a href="#" id="personalMenuAnchor" data-section-id="personalSection" class="offCanvasMenuAnchor">Personal Identity</a></li>
     </ul>
 </aside>
 
 <section class="main-section">
 <div class="row" id="canvasMainSectionRow">
-<div class="large-12 columns contentSwitchableSection activeSection" id="addEditContentSection">
-    <p>Loading Content...</p>
+<div class="large-12 columns contentSwitchableSection activeSection" id="groupsSection">
+    <p>Loading Group Content...</p>
 </div>
 
-<div class="large-12 columns contentSwitchableSection" id="categoriesSection">
-    <p>Loading Categories...</p>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="fileManagerSection">
-    <h3>Loading Files...</h3>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="groupSection">
-    <h3>groupSection</h3>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="groupMembersSection">
-    <h3>groupMembersSection</h3>
-</div>
-
-
-<div class="large-12 columns contentSwitchableSection" id="homePageEditingSection">
-    <h5 class="boldieText fancyTextColor">Homepage editing</h5>
-
-    <div class="small-12 medium-6 large-6 columns" id="homePageEditingFormDiv"
-         style="background-color: #FFF;padding:20px 0 0 0;">
-        <form>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText">Carousel Caption 1</span>
-                    <textarea id="homePageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="homePageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="homePageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>
-
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText">Carousel Caption 2</span>
-                    <textarea id="homePageEditingCarCaption2-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="homePageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="homePageEditingCarCaption2-saveButton" class="button tiny">Save</a>
-            </div>
-        </form>
-    </div>
-    <div class="small-12 medium-6 large-6 columns" id="homePageEditingTemplateImageSection">
-        <img src="../assets/controlpanel/images/template.png">
-    </div>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="researchPageEditingSection">
-    <h5 class="boldieText fancyTextColor">Research page editing</h5>
-
-    <div class="small-12 medium-6 large-6 columns" id="researchPageEditingFormDiv"
-         style="background-color: #FFF;padding:20px 0 20px 0;">
-        <form>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="researchPageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 2</span>
-                    <textarea id="researchPageEditingCarCaption2-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption2-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Research contact information</h5>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="researchPageEditingContactName-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="researchPageEditingContactJobTitle-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="researchPageEditingContactEmail-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="researchPageEditingContent-textareaDIV"><textarea
-                        id="researchPageEditingContent-redactortextarea" style="height: 300px;"
-                        name="content"></textarea></div>
-            </div>
-
-
-            <div id="researchPageSave&PreviewAllDIV">
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="researchPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="researchPageEditing-saveAllButton" class="button tiny">Save</a>
-                </div>
-            </div>
-            <!--Closes the div researchPageSave&PreviewAllDIV-->
-
-        </form>
-    </div>
-    <!--Closes the div researchPageEditingFormDiv-->
-
-    <div class="small-12 medium-6 large-6 columns" id="researchPageEditingTemplateImageSection">
-        <img src="../assets/controlpanel/images/template.png">
-    </div>
-</div>
-<!--Closes the div researchPageEditingSection-->
-
-<div class="large-12 columns contentSwitchableSection" id="businessPageEditingSection">
-    <h5 class="boldieText fancyTextColor">Business page editing</h5>
-
-    <div class="small-12 medium-6 large-6 columns" id="businessPageEditingFormDiv"
-         style="background-color: #FFF;padding:20px 0 20px 0;">
-        <form>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="businessPageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 2</span>
-                    <textarea id="businessPageEditingCarCaption2-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption2-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption2-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Business contact information</h5>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="businessPageEditingContactName-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="businessPageEditingContactJobTitle-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="businessPageEditingContactEmail-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="businessPageEditingContent-textareaDIV"><textarea
-                        id="businessPageEditingContent-redactortextarea" style="height: 300px;"
-                        name="content"></textarea></div>
-            </div>
-
-
-            <div id="businessPageSave&PreviewAllDIV">
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="businessPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="businessPageEditing-saveAllButton" class="button tiny">Save</a>
-                </div>
-            </div>
-            <!--Closes the div researchPageSave&PreviewAllDIV-->
-
-        </form>
-    </div>
-    <!--Closes the div researchPageEditingFormDiv-->
-
-    <div class="small-12 medium-6 large-6 columns" id="businessPageEditingTemplateImageSection">
-        <img src="../assets/controlpanel/images/template.png">
-    </div>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="innovationsPageEditingSection">
-    <h5 class="boldieText fancyTextColor">Innovation Platform page editing</h5>
-
-    <div class="small-12 medium-6 large-6 columns" id="innovationPageEditingFormDiv"
-         style="background-color: #FFF;padding:20px 0 20px 0;">
-        <form>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText fancyTextColor">Mexico</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationMexicoPageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationMexicoPageEditingContactName-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationMexicoEditingContactJobTitle-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationMexicoEditingContactEmail-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationMexicoPageEditingContent-textareaDIV"><textarea
-                        id="innovationMexicoPageEditingContent-redactortextarea" style="height: 300px;"
-                        name="content"></textarea></div>
-            </div>
-
-
-            <div id="innovationMexicoPageSave&PreviewAllDIV">
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationMexicoPageEditing-previewAllButton"
-                       class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationMexicoPageEditing-saveAllButton" class="button tiny">Save</a>
-                </div>
-            </div>
-            <!--Closes the div researchPageSave&PreviewAllDIV-->
-
-        </form>
-
-        <form>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText fancyTextColor">Tanzania</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationTanzaniaPageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationTanzaniaPageEditingContactName-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationTanzaniaEditingContactJobTitle-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationTanzaniaEditingContactEmail-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationTanzaniaPageEditingContent-textareaDIV"><textarea
-                        id="innovationTanzaniaPageEditingContent-redactortextarea" style="height: 300px;"
-                        name="content"></textarea></div>
-            </div>
-
-
-            <div id="innovationTanzaniaPageSave&PreviewAllDIV">
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationTanzaniaPageEditing-previewAllButton" class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationTanzaniaPageEditing-saveAllButton" class="button tiny">Save</a>
-                </div>
-            </div>
-            <!--Closes the div researchPageSave&PreviewAllDIV-->
-
-        </form>
-
-        <form>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText fancyTextColor">India</h5></div>
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Image Slider</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <label><span class="boldieText darkTextColor">Caption 1</span>
-                    <textarea id="innovationIndiaPageEditingCarCaption1-textarea"
-                              placeholder="Enter a description to the banner image here" class="pageEditingTextArea"
-                              style="height: 75px;  "></textarea>
-                </label>
-            </div>
-            <!--<div class="small-6 medium-6 large-6 columns" style="text-align:left;">
-                <a href="#" id="researchPageEditingCarCaption1-previewButton" class="button tiny secondary">Preview</a>
-            </div>
-            <div class="small-6 medium-6 large-6 columns" style="text-align:right;">
-                <a href="#" id="researchPageEditingCarCaption1-saveButton" class="button tiny">Save</a>
-            </div>-->
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Contact information</h5></div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Name</span></label>
-                <input type="text" id="innovationIndiaPageEditingContactName-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Job Title</span></label>
-                <input type="text" id="innovationIndiaEditingContactJobTitle-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-            <div class="small-12 medium-12 large-4 columns">
-                <label><span class="boldieText darkTextColor">Email</span></label>
-                <input type="text" id="innovationIndiaEditingContactEmail-input"
-                       placeholder="Enter the name of the research contact" class="pageEditingInputField"/>
-            </div>
-
-
-            <div class="small-12 medium-12 large-12 columns"><h5 class="boldieText">Main content</h5></div>
-            <div class="small-12 medium-12 large-12 columns">
-                <!--<label><span class="boldieText darkTextColor">Main content</span></label>-->
-                <div id="innovationIndiaPageEditingContent-textareaDIV"><textarea
-                        id="innovationIndiaPageEditingContent-redactortextarea" style="height: 300px;"
-                        name="content"></textarea></div>
-            </div>
-
-
-            <div id="innovationIndiaPageSave&PreviewAllDIV">
-                <div class="small-6 medium-6 large-6 columns" style="text-align:left;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationIndiaPageEditing-previewAllButton"
-                       class="button tiny secondary">Preview</a>
-                </div>
-                <div class="small-6 medium-6 large-6 columns" style="text-align:right;margin: 20px 0 0 0;">
-                    <a href="#" id="innovationIndiaPageEditing-saveAllButton" class="button tiny">Save</a>
-                </div>
-            </div>
-            <!--Closes the div researchPageSave&PreviewAllDIV-->
-
-        </form>
-    </div>
-    <!--Closes the div researchPageEditingFormDiv-->
-
-    <div class="small-12 medium-6 large-6 columns" id="innovationIndiaPageEditingTemplateImageSection">
-        <img src="../assets/controlpanel/images/template.png">
-    </div>
-</div>
-
-<div class="large-12 columns contentSwitchableSection" id="timelineSection">
-    <div class="row"><div class="small-12 medium-12 large-12 columns"><h4 class="boldieText">Timeline</h4></div></div>
-    <div class="row"><div class="small-12 medium-12 large-12 columns"><div id="my-timeline"></div></div></div>
+<div class="large-12 columns contentSwitchableSection" id="personalSection">
+    <p>Loading Personal Stuff...</p>
 </div>
 
 </div>
@@ -578,12 +159,76 @@
         return timestamp.toISOString();
     }
 
+    var switchActiveCanvasSection = function(event) {
+        var sectionItemID = $(this).attr("data-section-id");
+        var currentactive = $(".activeSection").attr("id");
+        $("#" + currentactive).removeClass("activeSection");
+        $("#" + sectionItemID).addClass("activeSection");
+    };
+
+    $(".offCanvasMenuAnchor").on('click', switchActiveCanvasSection);
+
+    var start_isotope = function(){
+        //var $container = $('.portfolioContainer');
+        var $container = $("#contentDivContainer");
+        $container.isotope({
+            filter: '*',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+
+        $('.portfolioFilter a').click(function(){
+            $('.portfolioFilter .current').removeClass('current');
+            $(this).addClass('current');
+
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+                filter: selector,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+            return false;
+        });
+    }//closes function Start_isotope
+
+    var reLayout_isotope = function() {
+        var $container = $('#contentDivContainer');
+        $container.isotope( 'reLayout');
+    };
+
+    var initializeAll = function () {
+
+        $(document).foundation(
+                {
+                    reveal: {
+                        animation: 'fadeAndPop',
+                        animation_speed: 250,
+                        close_on_background_click: false,
+                        close_on_esc: false
+                    }
+
+                }
+        );
+
+        $.ajaxSetup({cache: true});
+    }
+
+
+    initializeAll();
 
     var tUI = TheBall.Interface.UI;
     var tDCM = new tUI.DataConnectionManager();
     var tOP = new tUI.OperationManager(tDCM);
     var tUDG = new tUI.UpdatingDataGetter();
 
+
+    /*
     tUDG.RegisterDataURL("CATEGORYTREE", function (args) {
         var nodeSummaryContainer = args[0];
         var categoriesWithChildren = AppScripts.Common.ConvertCategoriesFromParentToChildren(nodeSummaryContainer.NodeSourceCategories.CollectionContent);
@@ -629,38 +274,30 @@
     }, [  "../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/ImageCollection/MasterCollection.json"
     ]);
-
-
-    require(["GroupInfoView/GroupInfoViewController"], function (vcClass) {
-        var vc = new vcClass("groupSection", tOP, tUDG);
-        vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
-        vc.VisibleTemplateRender();
-    });
-    require(["CategoryView/CategoryViewController"], function (vcClass) {
-        var vc = new vcClass("categoriesSection", tOP, tUDG);
-        vc.Initialize("CATEGORYTREE");
-        vc.VisibleTemplateRender();
-    });
-    require(["GroupMemberView/GroupMemberViewController"], function (vcClass) {
-        var vc = new vcClass("groupMembersSection", tOP, tUDG);
-        vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
-        vc.VisibleTemplateRender();
-    });
-    require(["MainContentView/MainContentViewController"], function (vcClass) {
-        var vc = new vcClass("addEditContentSection", tOP, tUDG);
-        vc.Initialize("MAINCONTENT");
-        vc.VisibleTemplateRender();
-    });
-
-    /*
-    require(["FileManagerView/FileManagerViewController"], function(vcClass) {
-        var vc = new vcClass("fileManagerSection", tOP, tUDG);
-        vc.Initialize("FILEMANAGERCONTENT");
-        vc.VisibleTemplateRender();
-    });
     */
 
 
+    tUDG.RegisterDataURL("PERSONALINFO", function(args) {
+        var accountContainer = args[0];
+        return accountContainer;
+    }, [ "../../AaltoGlobalImpact.OIP/AccountContainer/default.json" ]);
+
+    tUDG.RegisterDataURL("GROUPS", function(args) {
+        var accountContainer = args[0];
+        return accountContainer.AccountModule.Roles;
+    }, [ "../../AaltoGlobalImpact.OIP/AccountContainer/default.json" ]);
+
+    require(["GroupsView/GroupsViewController"], function (vcClass) {
+        var vc = new vcClass("groupsSection", tOP, tUDG);
+        vc.Initialize("GROUPS");
+        vc.VisibleTemplateRender();
+    });
+
+    require(["PersonalInfoView/PersonalInfoViewController"], function (vcClass) {
+        var vc = new vcClass("personalSection", tOP, tUDG);
+        vc.Initialize("PERSONALINFO");
+        vc.VisibleTemplateRender();
+    });
 </script>
 
 </body>

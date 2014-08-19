@@ -9,12 +9,12 @@
 
 import ViewControllerBase = require("../ViewControllerBase");
 
-class GroupInfoViewController extends ViewControllerBase {
+class PersonalInfoViewController extends ViewControllerBase {
 
     ControllerInitialize():void {
         var me = this;
-        require(["GroupInfoView/GroupInfo_dust"], (template) => {
-            dust.render("GroupInfo.dust", {
+        require(["PersonalInfoView/PersonalInfo_dust"], (template) => {
+            dust.render("PersonalInfo.dust", {
             }, (error, output) =>  {
                 var $hostDiv = $("#" + me.divID);
                 $hostDiv.empty();
@@ -120,4 +120,4 @@ class GroupInfoViewController extends ViewControllerBase {
     }
 }
 
-export = GroupInfoViewController;
+export = PersonalInfoViewController;

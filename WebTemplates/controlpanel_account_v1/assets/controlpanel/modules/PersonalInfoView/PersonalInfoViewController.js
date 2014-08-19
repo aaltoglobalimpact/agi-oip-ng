@@ -8,15 +8,15 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../ViewControllerBase"], function(require, exports, ViewControllerBase) {
-    var GroupInfoViewController = (function (_super) {
-        __extends(GroupInfoViewController, _super);
-        function GroupInfoViewController() {
+    var PersonalInfoViewController = (function (_super) {
+        __extends(PersonalInfoViewController, _super);
+        function PersonalInfoViewController() {
             _super.apply(this, arguments);
         }
-        GroupInfoViewController.prototype.ControllerInitialize = function () {
+        PersonalInfoViewController.prototype.ControllerInitialize = function () {
             var me = this;
-            require(["GroupInfoView/GroupInfo_dust"], function (template) {
-                dust.render("GroupInfo.dust", {}, function (error, output) {
+            require(["PersonalInfoView/PersonalInfo_dust"], function (template) {
+                dust.render("PersonalInfo.dust", {}, function (error, output) {
                     var $hostDiv = $("#" + me.divID);
                     $hostDiv.empty();
                     $hostDiv.html(output);
@@ -25,7 +25,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
-        GroupInfoViewController.prototype.VisibleTemplateRender = function () {
+        PersonalInfoViewController.prototype.VisibleTemplateRender = function () {
             var me = this;
             this.currUDG.GetData(this.dataUrl, function (myData) {
                 me.currentData = myData;
@@ -35,7 +35,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             });
         };
 
-        GroupInfoViewController.prototype.populateFromCurrentData = function () {
+        PersonalInfoViewController.prototype.populateFromCurrentData = function () {
             var groupProfile = this.currentData.GroupProfile;
 
             //alert(JSON.stringify(groupProfile));
@@ -62,14 +62,14 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             this.$getNamedFieldWithin("WwwSiteToPublishTo").val(groupProfile.WwwSiteToPublishTo);
         };
 
-        GroupInfoViewController.prototype.InvisibleTemplateRender = function () {
+        PersonalInfoViewController.prototype.InvisibleTemplateRender = function () {
         };
 
-        GroupInfoViewController.prototype.myFunc = function () {
+        PersonalInfoViewController.prototype.myFunc = function () {
             alert("My stuff to do!");
         };
 
-        GroupInfoViewController.prototype.Save = function () {
+        PersonalInfoViewController.prototype.Save = function () {
             var objectID = this.currentData.GroupProfile.ID;
             var objectRelativeLocation = this.currentData.RelativeLocation;
             var eTag = this.currentData.MasterETag;
@@ -110,9 +110,9 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 });
             });
         };
-        return GroupInfoViewController;
+        return PersonalInfoViewController;
     })(ViewControllerBase);
 
     
-    return GroupInfoViewController;
+    return PersonalInfoViewController;
 });
