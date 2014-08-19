@@ -38,36 +38,23 @@ class PersonalInfoViewController extends ViewControllerBase {
     }
 
     public populateFromCurrentData() {
-        var groupProfile = this.currentData.GroupProfile;
+        var accountProfile = this.currentData.AccountModule.Profile;
         //alert(JSON.stringify(groupProfile));
 
         var $profileImageInput = this.$getNamedFieldWithin("tmpProfileImage");
         if($profileImageInput.length == 1) {
-            $profileImageInput.attr("data-oipfile-filegroupid", "groupProfileImage");
-            var currentObject = groupProfile.ProfileImage;
+            $profileImageInput.attr("data-oipfile-filegroupid", "personalProfileImage");
+            var currentObject = accountProfile.ProfileImage;
             var imageSizeString = "256";
             var currentImagePath = currentObject && currentObject.ImageData
                 ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
                 : null;
-            this.currOPM.InitiateBinaryFileElementsAroundInput($profileImageInput, groupProfile.ID, "ProfileImage", currentImagePath,
+            this.currOPM.InitiateBinaryFileElementsAroundInput($profileImageInput, accountProfile.ID, "ProfileImage", currentImagePath,
                 "../assets/controlpanel/images/lightGray.jpg");
         }
 
-        var $iconImageInput = this.$getNamedFieldWithin("tmpIconImage");
-        if($iconImageInput.length == 1) {
-            $iconImageInput.attr("data-oipfile-filegroupid", "groupIconImage");
-            currentObject = groupProfile.IconImage;
-            currentImagePath = currentObject && currentObject.ImageData
-                ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
-                : null;
-            this.currOPM.InitiateBinaryFileElementsAroundInput($iconImageInput, groupProfile.ID, "IconImage", currentImagePath,
-                "../assets/controlpanel/images/lightGray.jpg");
-        }
-
-        this.$getNamedFieldWithin("GroupName").val(groupProfile.GroupName);
-        this.$getNamedFieldWithin("Description").val(groupProfile.Description);
-        this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val(groupProfile.OrganizationsAndGroupsLinkedToUs);
-        this.$getNamedFieldWithin("WwwSiteToPublishTo").val(groupProfile.WwwSiteToPublishTo);
+        this.$getNamedFieldWithin("FirstName").val(accountProfile.FirstName);
+        this.$getNamedFieldWithin("LastName").val(accountProfile.LastName);
     }
 
     public InvisibleTemplateRender():void {
@@ -80,23 +67,19 @@ class PersonalInfoViewController extends ViewControllerBase {
     }
 
     Save() {
-        var objectID = this.currentData.GroupProfile.ID;
+        var accountProfile = this.currentData.AccountModule.Profile;
+        var objectID = accountProfile.ID;
         var objectRelativeLocation = this.currentData.RelativeLocation;
         var eTag = this.currentData.MasterETag;
-        var groupName = this.$getNamedFieldWithin("GroupName").val();
-        var description = this.$getNamedFieldWithin("Description").val();
-        var organizationsAndGroupsLinkedToUs = this.$getNamedFieldWithin("OrganizationsAndGroupsLinkedToUs").val();
-        var wwwSiteToPublishTo = this.$getNamedFieldWithin("WwwSiteToPublishTo").val();
+        var firstName = this.$getNamedFieldWithin("FirstName").val();
+        var lastName = this.$getNamedFieldWithin("LastName").val();
 
         var saveData = {
-            GroupName: groupName,
-            Description: description,
-            OrganizationsAndGroupsLinkedToUs: organizationsAndGroupsLinkedToUs,
-            WwwSiteToPublishTo: wwwSiteToPublishTo
+            FirstName: firstName,
+            LastName: lastName,
         };
         var me = this;
-        var profileImageID = this.currentData.GroupProfile.ProfileImage.ID;
-        var iconImageID = this.currentData.GroupProfile.IconImage.ID;
+        var profileImageID = accountProfile.ProfileImage.ID;
         var jq:any = $;
         //alert(profileImageID);
         //alert(objectID);
@@ -106,14 +89,9 @@ class PersonalInfoViewController extends ViewControllerBase {
             me.currOPM.SaveIndependentObject(objectID, objectRelativeLocation, eTag, saveData, function() {
                 jq.unblockUI();
                 me.ReInitialize();
-            }, function() {
-                alert("Save failed!");
-                jq.unblockUI();
-            }, function(keyName) {
+            }, me.CommonErrorHandler, function(keyName) {
                 if(keyName == "FileEmbedded_" + objectID + "_ProfileImage")
                     keyName = "FileEmbedded_" + profileImageID + "_ImageData";
-                if(keyName == "FileEmbedded_" + objectID + "_IconImage")
-                    keyName = "FileEmbedded_" + iconImageID + "_ImageData";
                 return keyName;
             });
         });
