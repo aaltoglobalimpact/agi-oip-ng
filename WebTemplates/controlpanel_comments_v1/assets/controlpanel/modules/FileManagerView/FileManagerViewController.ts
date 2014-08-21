@@ -43,18 +43,6 @@ class FileManagerViewController extends ViewControllerBase {
                 });
             });
         });
-
-
-        /*
-         require(["GroupInfoView/GroupInfo_dust"], (template) => {
-         dust.render("GroupInfo.dust", {
-         }, (error, output) =>  {
-         var $hostDiv = $("#" + me.divID);
-         $hostDiv.empty();
-         $hostDiv.html(output);
-         me.ControllerInitializeDone();
-         });
-         });*/
     }
 
     currUploaded = 0;
@@ -131,85 +119,106 @@ class FileManagerViewController extends ViewControllerBase {
             }, me.CommonErrorHandler);
     }
 
-    /*
-
-     me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "AttachedToObject", attachedToData,
-     function(attachedDataResponse)
-     {
-     if($modalToRefreshAttachmentsAfter) {
-     setTimeout(function() {
-     jq.unblockUI();
-     //me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
-     }, 4000);
-     } else
-     jq.unblockUI();
-     }, me.CommonErrorHandler);
-
-     */
-
-
     VisibleTemplateRender() {
         var me = this;
         $.when(this.DoneInitializedPromise()).then(function() {
         });
     }
 
-    Modal_EditContentUploadAttachment($modal)
-    {
-        var $fileInput:any = this.$getNamedFieldWithinModal($modal, "AttachmentBinaryData");
-        var currContentID = this.$getNamedFieldWithinModal($modal, "ID").val();
-        var me = this;
-
-        var input:HTMLInputElement = <HTMLInputElement>$fileInput[0];
-        if (input.files && input.files[0]) {
-            var firstFile = input.files[0];
-            var fileName = firstFile.name;
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var fileContent = e.target.result;
-                var originalFilename = fileName;
-                var binaryFileSaveData = {
-                    "FileEmbedded_Data": fileContent,
-                    "Title": originalFilename,
-                    "OriginalFileName": originalFilename
-                };
-                me.SaveAsBinaryAttachment("AaltoGlobalImpact.OIP", "TextContent", currContentID, binaryFileSaveData, $modal);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
+    EditBinaryFile($source) {
+        var objectID = $source.attr("data-objectid");
+        var fetchDataUrl = "../../AaltoGlobalImpact.OIP/BinaryFile/" + objectID + ".json";
+        var thumbnailImageUrl = "../assets/controlpanel/images/lightGray.jpg";
+        this.EditBinaryOrImageFile(objectID, fetchDataUrl, thumbnailImageUrl);
     }
 
-    SaveAsBinaryAttachment(objectDomain:string, objectName:string, objectID:string, attachmentBinarySaveData:any, $modalToRefreshAttachmentsAfter?:any)
-    {
+    EditImageFile($source) {
+        var objectID = $source.attr("data-objectid");
+        var fetchDataUrl = "../../AaltoGlobalImpact.OIP/Image/" + objectID + ".json";
+        var currentObject = this.getObjectByID(this.currData.ImageFiles.CollectionContent, objectID);
+        //var imageSizeString = 128;
+        var thumbnailImageUrl = "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_640x480_crop" + currentObject.ImageData.AdditionalFormatFileExt
+        this.EditBinaryOrImageFile(objectID, fetchDataUrl, thumbnailImageUrl);
+    }
+
+    EditBinaryOrImageFile(objectID, fetchDataUrl, thumbnailImageUrl) {
         var me = this;
         var jq:any = $;
-        jq.blockUI({ message: '<h2>Uploading Attachment File...</h2>' });
-        me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "BinaryFile", attachmentBinarySaveData,
-            function(dataResponse) {
-                //jq.unblockUI();
-                var binaryID = dataResponse.ID;
-                jq.blockUI({ message: '<h2>Attaching file to this content...</h2>' });
-                var attachedToData = {
-                    SourceObjectID: binaryID,
-                    SourceObjectName: "BinaryFile",
-                    SourceObjectDomain: "AaltoGlobalImpact.OIP",
-                    TargetObjectID: objectID,
-                    TargetObjectName: objectName,
-                    TargetObjectDomain: objectDomain
-                };
-                me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "AttachedToObject", attachedToData,
-                    function(attachedDataResponse)
-                    {
-                        if($modalToRefreshAttachmentsAfter) {
-                            setTimeout(function() {
-                                jq.unblockUI();
-                                //me.RefreshAttachments($modalToRefreshAttachmentsAfter, objectDomain, objectName, objectID);
-                            }, 4000);
-                        } else
-                            jq.unblockUI();
-                    }, me.CommonErrorHandler);
-            }, me.CommonErrorHandler);
+        var wnd:any = window;
+        var $modal:any = this.$getNamedFieldWithin("EditBinaryAndImageFileModal");
+        $.getJSON(fetchDataUrl, function (contentData) {
+            var currentObject = contentData;
+            var currentID = currentObject.ID;
+            var currentETag = currentObject.MasterETag;
+            var currentRelativeLocation = currentObject.RelativeLocation;
+            var currentTitle = currentObject.Title;
+            var currentDescription = currentObject.Description;
+
+            var selectedCategories = [];
+            if(currentObject.Categories && currentObject.Categories.CollectionContent) {
+                for(var categoryIX = 0; categoryIX < currentObject.Categories.CollectionContent.length; categoryIX++) {
+                    var item = currentObject.Categories.CollectionContent[categoryIX];
+                    //me.CategoriesListed += item.ID + ",";
+                    selectedCategories.push(item.ID);
+                }
+            }
+
+            var categoryoptions = "<option value=''>(None)</option>";
+            for (var i in me.currData.Categories.CollectionContent) {
+                var categoryObject = me.currData.Categories.CollectionContent[i];
+                var categoryID = categoryObject.ID;
+                var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+            }
+            var $categoriesSelect = me.$getNamedFieldWithinModal($modal, "Categories");
+            $categoriesSelect.empty();
+            $categoriesSelect.append(categoryoptions);
+            $categoriesSelect.val(selectedCategories);
+
+            // Image support content initiation
+            var imageSizeString = "256";
+            /*var currentImagePath = currentObject.ImageData
+                ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
+                : null;
+                */
+            me.$getNamedFieldWithinModal($modal, "ThumbnailImage").attr("src", thumbnailImageUrl);
+
+            me.$getNamedFieldWithinModal($modal, "ID").val(currentID);
+            me.$getNamedFieldWithinModal($modal, "ETag").val(currentETag);
+            me.$getNamedFieldWithinModal($modal, "RelativeLocation").val(currentRelativeLocation);
+            me.$getNamedFieldWithinModal($modal, "Title").val(currentTitle);
+            me.$getNamedFieldWithinModal($modal, "Description").val(currentDescription);
+            $modal.foundation('reveal', 'open');
+        });
     }
+
+    Modal_SaveExistingContent($modal) {
+        var id = this.$getNamedFieldWithinModal($modal, "ID").val();
+        var etag = this.$getNamedFieldWithinModal($modal, "ETag").val();
+        var objectRelativeLocation = this.$getNamedFieldWithinModal($modal, "RelativeLocation").val();
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
+
+        var saveData =
+        {
+            Title: title,
+            Description: description,
+            Object_Categories: categories,
+        };
+
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Saving content...</h2>' });
+        me.currOPM.SaveIndependentObject(id, objectRelativeLocation, etag, saveData, function() {
+            setTimeout(function () {
+                jq.unblockUI();
+                $modal.foundation('reveal', 'close');
+                me.ReInitialize();
+            }, 2500);
+        }, me.CommonErrorHandler);
+    }
+
 
     DeleteObject($this)
     {

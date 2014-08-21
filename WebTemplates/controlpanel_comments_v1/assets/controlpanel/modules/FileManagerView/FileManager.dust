@@ -4,3 +4,5 @@
         {>"Filelist.dust" /}
     </div>
 </div>
+
+{>"FileManagerModals.dust" /}

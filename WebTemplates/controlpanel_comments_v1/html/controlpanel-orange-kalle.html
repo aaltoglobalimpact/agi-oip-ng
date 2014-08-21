@@ -622,12 +622,15 @@
     tUDG.RegisterDataURL("FILEMANAGERCONTENT", function(args) {
         var binaryFileCollection = args[0][0];
         var imageCollection = args[1][0];
+        var categoryCollection = args[2][0];
         return {
             BinaryFiles : binaryFileCollection,
             ImageFiles : imageCollection,
+            Categories : categoryCollection
         };
     }, [  "../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json",
-        "../../AaltoGlobalImpact.OIP/ImageCollection/MasterCollection.json"
+        "../../AaltoGlobalImpact.OIP/ImageCollection/MasterCollection.json",
+        "../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json"
     ]);
 
 
