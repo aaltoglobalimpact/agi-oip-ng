@@ -141,7 +141,15 @@
     <div class="row">
         <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
     </div>
-
+    <div class="row">
+        <div id="viewContentModal-attachments"></div>
+    </div>
+    <br>
+    {!
+    <div class="row">
+        <div id="viewContentModal-iframes"></div>
+    </div>
+    !}
     <div class="row" id="viewModalcommentarea-row">
         <div class="large-12 columns">
             <div id="viewmodalcommentareaph"></div>

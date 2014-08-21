@@ -243,9 +243,54 @@ var initializeAll = function () {
     });
     $("#addNewContentModal-uploadFile1").on('click', submit_New_Binary_Form);
     $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose", { click: closeAlertDynamicNotification });
+
 }
 
 var global_uploaded_attachments = 0;
+
+function getAttachments() {
+    if(!allAttachments) {
+        $.getJSON("../../AaltoGlobalImpact.OIP/AttachedToObjectCollection/MasterCollection.json", function(attachments) {
+            allAttachments = attachments;
+        });
+    }
+}
+
+function getBinaries() {
+    if(!allBinaryFiles) {
+        $.getJSON("../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json", function(binaryFiles) {
+            allBinaryFiles = binaryFiles;
+        });
+    }
+}
+
+var allAttachments;
+var allBinaryFiles;
+
+var getObjectAttachments = function (objectID) {
+    if(!allAttachments)
+        return [];
+    var result = [];
+    for(var i = 0; i < allAttachments.CollectionContent.length; i++) {
+        var attachment = allAttachments.CollectionContent[i];
+        if(attachment.TargetObjectID == objectID)
+            result.push(attachment);
+    }
+    return result;
+};
+
+var getBinaryFile = function (binaryFileID) {
+    if(!allBinaryFiles)
+        return null;
+    for(var i = 0; i < allBinaryFiles.CollectionContent.length; i++) {
+        var binaryFile = allBinaryFiles.CollectionContent[i];
+        if(binaryFile.ID == binaryFileID)
+            return binaryFile;
+    }
+    return null;
+};
+
+
 
 function closeAlertDynamicNotification() {
 

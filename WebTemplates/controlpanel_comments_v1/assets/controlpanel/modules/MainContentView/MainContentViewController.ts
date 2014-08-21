@@ -16,6 +16,7 @@ class MainContentViewController extends ViewControllerBase {
 
     ControllerInitialize():void {
         var me = this;
+        var wnd:any = window;
         require(["MainContentView/MainContent_dust",
             "MainContentView/Modals_dust",
             "lib/dusts/command_button_dust",
@@ -27,6 +28,8 @@ class MainContentViewController extends ViewControllerBase {
             "lib/dusts/modal_end_dust",
             "MainContentView/ImportantLinks_dust",
             "MainContentView/MainContent"], (template) => {
+                wnd.getAttachments();
+                wnd.getBinaries();
                 me.currUDG.GetData(this.dataUrl, function(data) {
                     me.currData = data;
                     dust.render("MainContent.dust", {
@@ -391,6 +394,7 @@ class MainContentViewController extends ViewControllerBase {
 
 
     ViewContent($source) {
+        var me = this;
         var id = $source.attr("data-oip-command-args");
         var $modal:any = this.$getNamedFieldWithin("ViewContentModal");
         var textContent = this.getObjectByID(this.currData.TextContents.CollectionContent, id);
@@ -475,6 +479,38 @@ class MainContentViewController extends ViewControllerBase {
             });
             this.src = this.src;
         });
+
+        $("#viewContentModal-attachments").empty();
+        var myAttachments = wnd.getObjectAttachments(currentID);
+        if(myAttachments.length > 0) {
+            var myBinaries = [];
+            for(var attachmentIX = 0; attachmentIX < myAttachments.length; attachmentIX++)
+            {
+                var currAttachment = myAttachments[attachmentIX];
+                var binaryFileID = currAttachment.SourceObjectID;
+                var attachedBinary = wnd.getBinaryFile(binaryFileID);
+                if(attachedBinary && attachedBinary.Data)
+                    myBinaries.push(attachedBinary);
+            }
+            myBinaries.sort(function(a, b) {
+                if(a && b && a.OriginalFileName && b.OriginalFileName)
+                    return a.OriginalFileName.localeCompare(b.OriginalFileName);
+                return 0;
+            });
+            for(var binaryIX = 0; binaryIX < myBinaries.length; binaryIX++)
+            {
+                var currBinary = myBinaries[binaryIX];
+                var data = currBinary.Data;
+                var contentID = data.ID;
+                var originalFileName = currBinary.OriginalFileName;
+                var binaryUrl = encodeURI("../../AaltoGlobalImpact.OIP/MediaContent/" + contentID + "/" + originalFileName);
+                var binaryLinkTag = '<br><a href="' + binaryUrl +  '">' + originalFileName + '</a><br>';
+                $("#viewContentModal-attachments").append(binaryLinkTag);
+            }
+        }
+
+
+
         wnd.ReConnectComments(currentID);
 
         $modal.foundation('reveal', 'open');
