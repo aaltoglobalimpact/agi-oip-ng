@@ -630,6 +630,11 @@
         "../../AaltoGlobalImpact.OIP/ImageCollection/MasterCollection.json"
     ]);
 
+    require(["MainContentView/MainContentViewController"], function (vcClass) {
+        var vc = new vcClass("addEditContentSection", tOP, tUDG);
+        vc.Initialize("MAINCONTENT");
+        vc.VisibleTemplateRender();
+    });
 
     require(["GroupInfoView/GroupInfoViewController"], function (vcClass) {
         var vc = new vcClass("groupSection", tOP, tUDG);
@@ -644,11 +649,6 @@
     require(["GroupMemberView/GroupMemberViewController"], function (vcClass) {
         var vc = new vcClass("groupMembersSection", tOP, tUDG);
         vc.Initialize("../../AaltoGlobalImpact.OIP/GroupContainer/default.json");
-        vc.VisibleTemplateRender();
-    });
-    require(["MainContentView/MainContentViewController"], function (vcClass) {
-        var vc = new vcClass("addEditContentSection", tOP, tUDG);
-        vc.Initialize("MAINCONTENT");
         vc.VisibleTemplateRender();
     });
 

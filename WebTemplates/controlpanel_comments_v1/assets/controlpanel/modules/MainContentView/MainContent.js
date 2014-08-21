@@ -245,9 +245,6 @@ var initializeAll = function () {
     $("#addNewContentAttachmentAlertHOLDER").delegate(".alertAnchorClose", { click: closeAlertDynamicNotification });
 }
 
-var tUI = TheBall.Interface.UI;
-var tDCM = new tUI.DataConnectionManager();
-var tOP = new tUI.OperationManager(tDCM);
 var global_uploaded_attachments = 0;
 
 function closeAlertDynamicNotification() {

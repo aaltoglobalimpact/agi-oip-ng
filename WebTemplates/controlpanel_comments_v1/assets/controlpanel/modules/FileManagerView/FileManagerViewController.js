@@ -21,7 +21,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "FileManagerView/FileManager_dust",
                 "FileManagerView/Filelist_dust",
                 "FileManagerView/FileUploadPanel_dust",
-                "FileManagerView/Modals_dust",
+                "FileManagerView/FileManagerModals_dust",
                 "lib/dusts/objectdeleteicon_dust",
                 "lib/dusts/command_button_dust",
                 "lib/dusts/command_icon_dust",
@@ -32,6 +32,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 "lib/dusts/modal_end_dust"], function (template) {
                 me.currUDG.GetData(_this.dataUrl, function (data) {
                     me.currData = data;
+
+                    //console.log("Init: " + dataUrl);
                     dust.render("FileManager.dust", data, function (error, output) {
                         if (error)
                             alert("DUST ERROR: " + error);

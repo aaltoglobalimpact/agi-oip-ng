@@ -19,7 +19,7 @@ class FileManagerViewController extends ViewControllerBase {
         require(["FileManagerView/FileManager_dust",
             "FileManagerView/Filelist_dust",
             "FileManagerView/FileUploadPanel_dust",
-            "FileManagerView/Modals_dust",
+            "FileManagerView/FileManagerModals_dust",
             "lib/dusts/objectdeleteicon_dust",
             "lib/dusts/command_button_dust",
             "lib/dusts/command_icon_dust",
@@ -30,6 +30,7 @@ class FileManagerViewController extends ViewControllerBase {
             "lib/dusts/modal_end_dust"], (template) => {
             me.currUDG.GetData(this.dataUrl, function(data) {
                 me.currData = data;
+                //console.log("Init: " + dataUrl);
                 dust.render("FileManager.dust", data, (error, output) => {
                     if(error)
                         alert("DUST ERROR: " + error);
