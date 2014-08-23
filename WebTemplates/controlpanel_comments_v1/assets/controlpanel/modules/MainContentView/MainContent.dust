@@ -8,8 +8,10 @@
     <div class="small-12-5 medium-2-5 large-2-5 columns noPaddingRight" style="float:none !important; display:inline-block !important;">
         <a href="#" class="button split expand" style="margin-bottom: 0;!important"><div class="oip-controller-command" data-oip-command="OpenModalAddNewContentModal">Post an update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
         <ul id="drop-PostAndUpdate" class="f-dropdown" data-dropdown-content>
-            <li><a href="../../wwwsite/html/index.html" target="_blank">Preview changes</a></li>
-            <li><a class="oip-controller-command" data-oip-command="PublishToWww">Publish changes</a></li>
+            <li><a href="../../wwwsite/html/index.html" target="_blank">Preview Content</a></li>
+            <li><a class="oip-controller-command" data-oip-command="PublishToWww">Publish Content</a></li>
+            <li><a class="oip-controller-command" data-oip-command="OpenModalAddLinkToModal">Add Link To Content</a></li>
+            <li><a class="oip-controller-command" data-oip-command="OpenModalAddEmbeddedModal">Add Embedded Content</a></li>
         </ul>
     </div>
     {>"ImportantLinks.dust" /}
