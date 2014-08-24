@@ -117,9 +117,11 @@
     </div> <!--Closes addNewPost-attachmenRow-->
 
 
-    <div class="row" style="margin-top: 20px;"><div class="large-12 columns">
-        {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
-        {>"insidemodal_button.dust" command="SaveExistingContent" button_label="Save" style="float:right;font-color:Green" /}
+    <div class="row" style="margin-top: 20px;">
+        <div class="large-12 columns">
+            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
+            {>"insidemodal_button.dust" command="SaveExistingContent" button_label="Save" style="float:right;font-color:Green" /}
+        </div>
     </div>
 {>"modal_end.dust" /}
 
@@ -127,29 +129,38 @@
     <div class="row">
         <div class="large-4 columns" id="viewContentModal-image"></div>
         <div class="large-8 columns">
-            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><span id="viewContentModal-categories" class="fancyTagBig"></span></div>
-            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i class='icon-pencil fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Author" class="discreetLinks"></span></div>
-            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i class='icon-calendaralt-cronjobs fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Date" class="discreetLinks"></span></div>
+            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><span
+                    id="viewContentModal-categories" class="fancyTagBig"></span></div>
+            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i
+                    class='icon-pencil fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Author"
+                                                                              class="discreetLinks"></span></div>
+            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><i
+                    class='icon-calendaralt-cronjobs fancyTextColor font80'></i>&nbsp;<span id="viewContentModal-Date"
+                                                                                            class="discreetLinks"></span>
+            </div>
         </div>
-        <div class="large-8 columns" style="padding-right:0;padding-top: 0;padding-bottom:0;"><div class="content-card-line"><hr></div></div>
-        <div class="large-8 columns" style="padding-bottom: 12px;padding-right:10px;padding-top:10px;"><strong><span name="Title" class="hugeTitleText"></span></strong><br></div>
-        <div class="large-8 columns" style="padding-right:15px;"><span  id="viewContentModal-excerpt" class="contentCardExcerpt bigTitleText discreetTextColor"></span></div>
+        <div class="large-8 columns" style="padding-right:0;padding-top: 0;padding-bottom:0;">
+            <div class="content-card-line">
+                <hr>
+            </div>
+        </div>
+        <div class="large-8 columns" style="padding-bottom: 12px;padding-right:10px;padding-top:10px;"><strong><span
+                name="Title" class="hugeTitleText"></span></strong><br></div>
+        <div class="large-8 columns" style="padding-right:15px;"><span id="viewContentModal-excerpt"
+                                                                       class="contentCardExcerpt bigTitleText discreetTextColor"></span>
+        </div>
     </div>
     <div class="row">
         <div class="large-12 columns" style="height:20px;"></div>
     </div>
     <div class="row">
-        <div class="large-12 columns articleText" id="viewContentModal-content" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
+        <div class="large-12 columns articleText" id="viewContentModal-content"
+             style="padding-left: 15px !important; padding-right: 15px !important;"></div>
     </div>
     <div class="row">
         <div id="viewContentModal-attachments"></div>
     </div>
     <br>
-    {!
-    <div class="row">
-        <div id="viewContentModal-iframes"></div>
-    </div>
-    !}
     <div class="row" id="viewModalcommentarea-row">
         <div class="large-12 columns">
             <div id="viewmodalcommentareaph"></div>
@@ -163,54 +174,59 @@
     </div>
 {>"modal_end.dust" /}
 
-
-
-
-
-{>"modal_begin.dust" modal_name="AddNewLinkToModal" /}
-    <h2>Adding a new Link To</h2>
-
-    <div class="row">
-        <div class="large-6 columns">
-            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-                <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#c7c7c7;text-align: center">
-                    <input type="file" name="ImageData">
-                    <a class="button small oipfile" data-oipfile-filegroupid="imageDataImage" data-oipfile-buttontype="select">Select</a>
-                    <a class="button small oipfile" data-oipfile-filegroupid="imageDataImage" data-oipfile-buttontype="remove">Remove</a>
-                    <img class="oipfile" style="max-height: 247;width: 100%" src="../assets/controlpanel/images/lightGray.jpg" data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg" data-oipfile-filegroupid="imageDataImage">
+{>"modal_begin.dust" modal_name="AddLinkToModal" /}
+<h2>Adding a new Link To</h2>
+<div class="row">
+    <div class="large-6 columns">
+        <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+            <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#c7c7c7;text-align: center">
+                <input type="file" name="ImageData">
+                <a class="button small oipfile" data-oipfile-filegroupid="imageDataImage"
+                   data-oipfile-buttontype="select">Select</a>
+                <a class="button small oipfile" data-oipfile-filegroupid="imageDataImage"
+                   data-oipfile-buttontype="remove">Remove</a>
+                <img class="oipfile" style="max-height: 247;width: 100%"
+                     src="../assets/controlpanel/images/lightGray.jpg"
+                     data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg"
+                     data-oipfile-filegroupid="imageDataImage">
+            </div>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
+            <form>
+                <div class="text-field"><label>URL<input type="text" name="URL"/></label>
+                    <small class="error">URL is required.</small>
                 </div>
-            </div>
-        </div>
-        <div class="large-6 columns">
-            <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
-                <form>
-                    <div class="text-field"><label>URL<input type="text" name="URL" required/></label><small class="error">URL is required.</small></div>
-                    <div class="title-field"><label>Title<input type="text" name="Title" required/></label><small class="error">Title is required.</small></div>
-                    <div class="categories-field">
-                        <label>Categories
-                            <select name="Categories" multiple style="height: 120px; background-image: none">
-                            </select>
-                        </label>
-                    </div>
-                </form>
-            </div>
+                <div class="title-field"><label>Title<input type="text" name="Title"/></label>
+                    <small class="error">Title is required.</small>
+                </div>
+                <div class="categories-field">
+                    <label>Categories
+                        <select name="Categories" multiple style="height: 120px; background-image: none">
+                        </select>
+                    </label>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="excerpt-field">
-                <label>Description
-                    <textarea rows="5" name="Description"/>
-                </label>
-            </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <div class="excerpt-field">
+            <label>Description
+                <textarea rows="5" name="Description"/>
+            </label>
         </div>
     </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="large-12 columns">
-            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
-            {>"insidemodal_button.dust" command="SaveNewContent" button_label="Save" style="float:right;font-color:Green" /}
-        </div>
+</div>
+<div class="row" style="margin-top: 20px;">
+    <div class="large-12 columns">
+        {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}
+        <div style="width: 10px;float: right;">&nbsp;</div>
+        {>"insidemodal_button.dust" command="SaveNewContent" button_label="Save" style="float:right;font-color:Green" /}
     </div>
+</div>
 {>"modal_end.dust" /}
 
 {>"modal_begin.dust" modal_name="EditLinkToModal" /}
@@ -219,16 +235,24 @@
         <div class="large-6 columns" style="padding-right: 0;">
             <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#c7c7c7;text-align: center">
                 <input type="file" name="ImageDataFileInput">
-                <a class="button small oipfile" data-oipfile-filegroupid="editModal" data-oipfile-buttontype="select">Select</a>
-                <a class="button small oipfile" data-oipfile-filegroupid="editModal" data-oipfile-buttontype="remove">Remove</a>
-                <img class="oipfile" style="max-height: 247;width: 100%" src="../assets/controlpanel/images/lightGray.jpg" data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg" data-oipfile-filegroupid="editModal">
+                <a class="button small oipfile" data-oipfile-filegroupid="editModal"
+                   data-oipfile-buttontype="select">Select</a>
+                <a class="button small oipfile" data-oipfile-filegroupid="editModal"
+                   data-oipfile-buttontype="remove">Remove</a>
+                <img class="oipfile" style="max-height: 247;width: 100%" src="../assets/controlpanel/images/lightGray.jpg"
+                     data-oipfile-noimageurl="../assets/controlpanel/images/lightGray.jpg"
+                     data-oipfile-filegroupid="editModal">
             </div>
         </div>
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <form>
-                    <div class="text-field"><label>URL<input type="text" name="URL" required/></label><small class="error">URL is required.</small></div>
-                    <div class="title-field"><label>Title<input type="text" name="Title" required/></label><small class="error">Title is required.</small></div>
+                    <div class="text-field"><label>URL<input type="text" name="URL" required/></label>
+                        <small class="error">URL is required.</small>
+                    </div>
+                    <div class="title-field"><label>Title<input type="text" name="Title" required/></label>
+                        <small class="error">Title is required.</small>
+                    </div>
                     <div class="categories-field">
                         <label>Categories
                             <select name="Categories" multiple style="height: 120px; background-image: none">
@@ -251,56 +275,66 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 20px;"><div class="large-12 columns">
-        {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
-        {>"insidemodal_button.dust" command="SaveExistingContent" button_label="Save" style="float:right;font-color:Green" /}
+    <div class="row" style="margin-top: 20px;">
+        <div class="large-12 columns">
+            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}
+            <div style="width: 10px;float: right;">&nbsp;</div>
+            {>"insidemodal_button.dust" command="SaveExistingContent" button_label="Save" style="float:right;font-color:Green" /}
+        </div>
     </div>
 {>"modal_end.dust" /}
 
 {>"modal_begin.dust" modal_name="ViewLinkToModal" /}
-        <div class="row">
-            <div class="large-4 columns" id="viewContentModal-image"></div>
-            <div class="large-8 columns">
-                <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><span id="viewContentModal-categories" class="fancyTagBig"></span></div>
-            </div>
-            <div class="large-8 columns" style="padding-right:0;padding-top: 0;padding-bottom:0;"><div class="content-card-line"><hr></div></div>
-            <div class="large-8 columns" style="padding-bottom: 12px;padding-right:10px;padding-top:10px;"><strong><span name="Title" class="hugeTitleText"></span></strong><br></div>
-            <div class="large-8 columns" style="padding-right:15px;"><span  name="Description" class="contentCardExcerpt bigTitleText discreetTextColor"></span></div>
+    <div class="row">
+        <div class="large-4 columns" id="viewContentModal-image"></div>
+        <div class="large-8 columns">
+            <div class="itemWrapper-fixedWidth" style="padding-right: 10px;padding-bottom: 5px;"><span
+                    id="viewContentModal-categories" class="fancyTagBig"></span></div>
         </div>
-        <div class="row">
-            <div name="LinkToURL" class="large-12 columns" style="height:20px;"></div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns articleText" name="LinkToIFrame" style="padding-left: 15px !important; padding-right: 15px !important;"></div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="large-12 columns">
-                <div Name="CommentArea"></div>
+        <div class="large-8 columns" style="padding-right:0;padding-top: 0;padding-bottom:0;">
+            <div class="content-card-line">
+                <hr>
             </div>
         </div>
-        <div class="row">
-            <div class="large-12">
-                <br>
-                {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Close" style="float:right !important;" /}
-            </div>
+        <div class="large-8 columns" style="padding-bottom: 12px;padding-right:10px;padding-top:10px;"><strong><span
+                name="Title" class="hugeTitleText"></span></strong><br></div>
+        <div class="large-8 columns" style="padding-right:15px;"><span name="Description"
+                                                                       class="contentCardExcerpt bigTitleText discreetTextColor"></span>
         </div>
-{>"modal_end.dust" /}
+    </div>
+    <div class="row">
+        <div name="LinkToURL" class="large-12 columns" style="height:20px;"></div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns articleText" name="LinkToIFrame"
+             style="padding-left: 15px !important; padding-right: 15px !important;"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="large-12 columns">
+            <div Name="CommentArea"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12">
+            <br>
+            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Close" style="float:right !important;" /}
+        </div>
+    </div>
+    {>"modal_end.dust" /}
 
-
-
-{>"modal_begin.dust" modal_name="AlertContentDeleteConfirm" /}
+    {>"modal_begin.dust" modal_name="AlertContentDeleteConfirm" /}
     <h3>Are you sure you want to delete this item?
     </h3>
     {>"hiddeninput.dust" field_name="ID" /}
     {>"hiddeninput.dust" field_name="ObjectName" /}
     {>"hiddeninput.dust" field_name="DomainName" /}
-    <div name="ContentDescription" />
+    <div name="ContentDescription"/>
     <div class="row" style="margin-top: 20px;">
         <div class="large-12 columns">
-            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}<div style="width: 10px;float: right;">&nbsp;</div>
+            {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}
+            <div style="width: 10px;float: right;">&nbsp;</div>
             {>"insidemodal_button.dust" command="DeleteContent" button_label="Delete" style="float:right;font-color:Red" /}
         </div>
     </div>
 {>"modal_end.dust" /}
-

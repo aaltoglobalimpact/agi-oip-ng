@@ -86,6 +86,33 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         return false;
         })//ends getJson
         }*/
+        MainContentViewController.prototype.OpenModalAddLinkToModal = function () {
+            var $modal = this.$getNamedFieldWithin("AddLinkToModal");
+            var me = this;
+            this.$getNamedFieldWithinModal($modal, "URL").val("");
+            this.$getNamedFieldWithinModal($modal, "Title").val("");
+            this.$getNamedFieldWithinModal($modal, "Description").val("");
+
+            var categoryoptions = "<option value=''>(None)</option>";
+            for (var i in this.currData.Categories.CollectionContent) {
+                var categoryObject = me.currData.Categories.CollectionContent[i];
+                var categoryID = categoryObject.ID;
+                var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+            }
+            var $categoriesSelect = this.$getNamedFieldWithinModal($modal, "Categories");
+            $categoriesSelect.empty();
+            $categoriesSelect.append(categoryoptions);
+
+            var $newupdatefileinput = this.$getNamedFieldWithinModal($modal, "ImageData");
+            $newupdatefileinput.replaceWith($newupdatefileinput = $newupdatefileinput.clone(true));
+
+            var $imageDataInput = this.$getNamedFieldWithinModal($modal, "ImageData");
+            $imageDataInput.attr("data-oipfile-filegroupid", "imageDataImage");
+            this.currOPM.InitiateBinaryFileElementsAroundInput($imageDataInput, "000", "ImageData", null, "../assets/controlpanel/images/lightGray.jpg");
+            $modal.foundation('reveal', 'open');
+        };
+
         MainContentViewController.prototype.OpenModalAddNewContentModal = function () {
             var $modal = this.$getNamedFieldWithin("AddNewContentModal");
             var me = this;
