@@ -10,8 +10,8 @@
         <ul id="drop-PostAndUpdate" class="f-dropdown" data-dropdown-content>
             <li><a href="../../wwwsite/html/index.html" target="_blank">Preview Content</a></li>
             <li><a class="oip-controller-command" data-oip-command="PublishToWww">Publish Content</a></li>
-            <li><a class="oip-controller-command" data-oip-command="OpenModalAddLinkToModal">Add Link To Content</a></li>
-            <li><a class="oip-controller-command" data-oip-command="OpenModalAddEmbeddedModal">Add Embedded Content</a></li>
+            <li><a class="oip-controller-command" data-oip-command="OpenModalAddLinkToContentModal">Add Link To Content</a></li>
+            <li><a class="oip-controller-command" data-oip-command="OpenModalAddEmbeddedContentModal">Add Embedded Content</a></li>
         </ul>
     </div>
     {>"ImportantLinks.dust" /}

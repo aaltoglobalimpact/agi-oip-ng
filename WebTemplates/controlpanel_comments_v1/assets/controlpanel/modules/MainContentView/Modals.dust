@@ -174,8 +174,8 @@
     </div>
 {>"modal_end.dust" /}
 
-{>"modal_begin.dust" modal_name="AddLinkToModal" /}
-<h2>Adding a new Link To</h2>
+{>"modal_begin.dust" modal_name="AddLinkToContentModal" /}
+<h2>Adding a new Link To Content</h2>
 <div class="row">
     <div class="large-6 columns">
         <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
@@ -195,16 +195,19 @@
     <div class="large-6 columns">
         <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
             <form>
-                <div class="text-field"><label>URL<input type="text" name="URL"/></label>
-                    <small class="error">URL is required.</small>
+                <div class="text-field">
+                    <label>URL
+                        <input type="text" name="URL"/>
+                    </label>
                 </div>
-                <div class="title-field"><label>Title<input type="text" name="Title"/></label>
-                    <small class="error">Title is required.</small>
+                <div class="title-field">
+                    <label>Title
+                        <input type="text" name="Title"/>
+                    </label>
                 </div>
                 <div class="categories-field">
                     <label>Categories
-                        <select name="Categories" multiple style="height: 120px; background-image: none">
-                        </select>
+                        <select name="Categories" multiple style="height: 120px; background-image: none" />
                     </label>
                 </div>
             </form>
@@ -214,9 +217,7 @@
 <div class="row">
     <div class="large-12 columns">
         <div class="excerpt-field">
-            <label>Description
-                <textarea rows="5" name="Description"/>
-            </label>
+            <label>Description<textarea rows="5" name="Description"/></label>
         </div>
     </div>
 </div>
@@ -224,13 +225,13 @@
     <div class="large-12 columns">
         {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}
         <div style="width: 10px;float: right;">&nbsp;</div>
-        {>"insidemodal_button.dust" command="SaveNewContent" button_label="Save" style="float:right;font-color:Green" /}
+        {>"insidemodal_button.dust" command="SaveNewLinkToContent" button_label="Save" style="float:right;font-color:Green" /}
     </div>
 </div>
 {>"modal_end.dust" /}
 
-{>"modal_begin.dust" modal_name="EditLinkToModal" /}
-    <h2>Editing Link To</h2>
+{>"modal_begin.dust" modal_name="EditLinkToContentModal" /}
+    <h2>Editing Link To Content</h2>
     <div class="row">
         <div class="large-6 columns" style="padding-right: 0;">
             <div style="width: 100%;margin: 0px;padding: 0px;height:300px; background-color:#c7c7c7;text-align: center">
@@ -247,16 +248,19 @@
         <div class="large-6 columns">
             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
                 <form>
-                    <div class="text-field"><label>URL<input type="text" name="URL" required/></label>
-                        <small class="error">URL is required.</small>
+                    <div class="text-field">
+                        <label>URL
+                            <input type="text" name="URL">
+                        </label>
                     </div>
-                    <div class="title-field"><label>Title<input type="text" name="Title" required/></label>
-                        <small class="error">Title is required.</small>
+                    <div class="title-field">
+                        <label>Title
+                            <input type="text" name="Title">
+                        </label>
                     </div>
                     <div class="categories-field">
                         <label>Categories
-                            <select name="Categories" multiple style="height: 120px; background-image: none">
-                            </select>
+                            <select name="Categories" multiple style="height: 120px; background-image: none" />
                         </label>
                     </div>
                     <input type="hidden" name="ID"/>
@@ -279,7 +283,7 @@
         <div class="large-12 columns">
             {>"insidemodal_button.dust" command="Common_CloseOpenModal" button_label="Cancel" style="float: right;" /}
             <div style="width: 10px;float: right;">&nbsp;</div>
-            {>"insidemodal_button.dust" command="SaveExistingContent" button_label="Save" style="float:right;font-color:Green" /}
+            {>"insidemodal_button.dust" command="SaveExistingLinkToContent" button_label="Save" style="float:right;font-color:Green" /}
         </div>
     </div>
 {>"modal_end.dust" /}

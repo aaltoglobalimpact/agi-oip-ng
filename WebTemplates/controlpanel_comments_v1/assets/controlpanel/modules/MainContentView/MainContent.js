@@ -11,7 +11,8 @@ var GetCommentCountForItemID = function(itemID) {
     return itemComments.length;
 };
 
-var initializeContent = function(contentData, commentData) {
+var initializeTextContents = function(contentData, commentData)
+{
     CommentCollection = commentData;
     var user_content="";
     var newscounter=1;
@@ -83,9 +84,67 @@ var initializeContent = function(contentData, commentData) {
             $("#important"+importantcounter+"text").append(currentimportanttext);
             importantcounter++;
         }
-
-
     }
+    return user_content;
+};
+
+var initializeLinkToContents = function(contentData, commentData)
+{
+    CommentCollection = commentData;
+    var user_content="";
+
+    for (var i in contentData.CollectionContent) {
+        var currentObject=contentData.CollectionContent[i];
+
+        /*var aproxCardSize=210;*/
+        var currentID=currentObject.ID;
+        var currentTitle=currentObject.Title ? currentObject.Title : "";
+        var imageSizeString="256";
+
+        var currentImagePath=currentObject.ImageData
+            ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
+            : null;
+
+        var currentMainCategory;
+
+        if(!currentObject.Categories|| !currentObject.Categories.CollectionContent ||
+            !currentObject.Categories.CollectionContent.length)
+            currentMainCategory="";
+        else
+            currentMainCategory=currentObject.Categories.CollectionContent[0].Title;
+
+        var numberOfComments=GetCommentCountForItemID(currentID);
+
+        var isInternal = false;
+        var backgroundColorStyle = "";
+
+        if(currentObject.Categories && currentObject.Categories.CollectionContent) {
+            var internalArray = $.grep(currentObject.Categories.CollectionContent, function(internalCandidate) {
+                return internalCandidate.Title == "INTERNAL";
+            });
+            isInternal = internalArray.length > 0;
+            if(isInternal) {
+                console.log("Internal filter: " + currentTitle);
+                backgroundColorStyle = "background-color: #d3d3d3;";
+            }
+        }
+
+        user_content+="<div class='content-card "+currentMainCategory+"' id='contentCardDataId-"+currentID+"'>";
+        if(currentImagePath)
+            user_content+="<img src='"+currentImagePath+"' alt='image' id='contentCardImage-dataID-"+currentID+"'/>";
+        user_content+="<div class='content-card-title' style='font-size:95%; font-weight:bold; column-rule: #000000;" + backgroundColorStyle + "' id='contentCardTitle-dataID-"+currentID+"'>"+currentTitle+"</div>";
+        user_content+="<div class='content-card-options'><a class='editContentButton oip-controller-command' id='editContentButton-dataID-"+currentID+"' data-oip-command='EditLinkToContent' data-objectid='" + currentID + "'>Edit&nbsp;</a><a class='oip-controller-command' id='viewContentButton-dataID-"+currentID+"' data-oip-command='ViewLinkToContent' data-oip-command-args='" + currentID + "'>&nbsp;View&nbsp;</a><a class='oip-controller-command' data-oip-command='DeleteLinkToContent' data-objectid='" +currentID+ "'>&nbsp;Trash&nbsp;</a><a class='content-card-options-right hide' id='toggleVisibilityContentButton-dataID-"+currentID+"'><i class='icon-eye-open' style='font-size:110%;'></i></a></div>";
+        user_content+="<div class='content-card-line'><hr></div>";
+        user_content+="<div class='content-card-options'><a class='commentContentButton' id='contentAddCommentButton-dataID-"+currentID+"'><i class='icon-pencil'></i>&nbsp;Comment&nbsp;</a><span class='content-card-options-right' id='contentNumberOfComments-dataID-"+currentID+"'>"+numberOfComments+"&nbsp;<i class='icon-commentround'></i></span></div>";
+        user_content+="</div>";
+    }
+    return user_content;
+};
+
+
+var initializeContent = function(textContentData, linkToContentData, embeddedContentData, commentData) {
+    var user_content = initializeTextContents(textContentData, commentData);
+    user_content += initializeLinkToContents(linkToContentData, commentData);
     Foundation.libs.equalizer.reflow();
     $("#contentDivContainer").append(user_content).isotope('reLayout');
 };

@@ -607,16 +607,22 @@
         var categoryCollection = args[1][0];
         var commentCollection = args[2][0];
         var binaryFileCollection = args[3][0];
+        var linkToContentCollection = args[4][0];
+        var embeddedContentCollection = args[5][0];
         return {
             TextContents: textContentCollection,
             Categories: categoryCollection,
             Comments: commentCollection,
-            BinaryFiles : binaryFileCollection
+            BinaryFiles : binaryFileCollection,
+            LinkToContents: linkToContentCollection,
+            EmbeddedContents: embeddedContentCollection
         };
     }, [ "../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json",
         "../../AaltoGlobalImpact.OIP/CommentCollection/MasterCollection.json",
-        "../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json"
+        "../../AaltoGlobalImpact.OIP/BinaryFileCollection/MasterCollection.json",
+        "../../AaltoGlobalImpact.OIP/LinkToContentCollection/MasterCollection.json",
+        "../../AaltoGlobalImpact.OIP/EmbeddedContentCollection/MasterCollection.json"
     ]);
 
     tUDG.RegisterDataURL("FILEMANAGERCONTENT", function(args) {

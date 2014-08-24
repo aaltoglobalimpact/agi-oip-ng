@@ -64,7 +64,7 @@ class MainContentViewController extends ViewControllerBase {
             $(document).ready(function() {
                 var wnd:any = window;
                 wnd.initializeAll();
-                wnd.initializeContent(me.currData.TextContents, me.currData.Comments);
+                wnd.initializeContent(me.currData.TextContents, me.currData.LinkToContents, me.currData.EmbeddedContents, me.currData.Comments);
                 wnd.start_isotope();
                 wnd.reLayout_isotope();
                 setInterval(wnd.reLayout_isotope, 2000)
@@ -90,9 +90,65 @@ class MainContentViewController extends ViewControllerBase {
         })//ends getJson
     }*/
 
+    EditLinkToContent($source) {
+        var $modal:any = this.$getNamedFieldWithin("EditLinkToContentModal");
+        var me = this;
+        var jq:any = $;
+        var wnd:any = window;
+        var clickedEditID = $source.attr("data-objectid");
+        $.getJSON('../../AaltoGlobalImpact.OIP/LinkToContent/' + clickedEditID + ".json", function (contentData) {
+            //tDCM.SetObjectInStorage(contentData);
+            var currentObject = contentData;
+            var currentID = currentObject.ID;
+            var currentETag = currentObject.MasterETag;
+            var currentRelativeLocation = currentObject.RelativeLocation;
+            var currentURL = currentObject.URL;
+            var currentTitle = currentObject.Title;
+            var currentDescription = currentObject.Description;
 
-    OpenModalAddLinkToModal() {
-        var $modal:any = this.$getNamedFieldWithin("AddLinkToModal");
+            var selectedCategories = [];
+            if(currentObject.Categories && currentObject.Categories.CollectionContent) {
+                for(var categoryIX = 0; categoryIX < currentObject.Categories.CollectionContent.length; categoryIX++) {
+                    var item = currentObject.Categories.CollectionContent[categoryIX];
+                    selectedCategories.push(item.ID);
+                }
+            }
+
+            var categoryoptions = "<option value=''>(None)</option>";
+            for (var i in me.currData.Categories.CollectionContent) {
+                var categoryObject = me.currData.Categories.CollectionContent[i];
+                var categoryID = categoryObject.ID;
+                var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+            }//ends FOR loop
+            var $categoriesSelect = me.$getNamedFieldWithinModal($modal, "Categories");
+            $categoriesSelect.empty();
+            $categoriesSelect.append(categoryoptions);
+            $categoriesSelect.val(selectedCategories);
+
+            // Image support content initiation
+            var imageSizeString = "256";
+            var currentImagePath = currentObject.ImageData
+                ? "../../AaltoGlobalImpact.OIP/MediaContent/" + currentObject.ImageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + currentObject.ImageData.AdditionalFormatFileExt
+                : null;
+            // Initiate binary file elements for image
+            var noImageUrl = "../assets/controlpanel/images/lightGray.jpg";
+            var $imageDataFileInput = me.$getNamedFieldWithinModal($modal, "ImageDataFileInput")
+            $imageDataFileInput.attr("data-oipfile-filegroupid", "editModal");
+            me.currOPM.InitiateBinaryFileElementsAroundInput($imageDataFileInput, currentID, "ImageData", currentImagePath, noImageUrl);
+
+            me.$getNamedFieldWithinModal($modal, "ID").val(currentID);
+            me.$getNamedFieldWithinModal($modal, "ETag").val(currentETag);
+            me.$getNamedFieldWithinModal($modal, "RelativeLocation").val(currentRelativeLocation);
+            me.$getNamedFieldWithinModal($modal, "URL").val(currentURL);
+            me.$getNamedFieldWithinModal($modal, "Title").val(currentTitle);
+            me.$getNamedFieldWithinModal($modal, "Description").val(currentDescription);
+            $modal.foundation('reveal', 'open');
+        }); //ends getJson
+    }
+
+    OpenModalAddLinkToContentModal() {
+        var $modal:any = this.$getNamedFieldWithin("AddLinkToContentModal");
         var me = this;
         this.$getNamedFieldWithinModal($modal, "URL").val("");
         this.$getNamedFieldWithinModal($modal, "Title").val("");
@@ -119,7 +175,65 @@ class MainContentViewController extends ViewControllerBase {
         $modal.foundation('reveal', 'open');
     }
 
+    Modal_SaveNewLinkToContent($modal) {
+        var url = this.$getNamedFieldWithinModal($modal, "URL").val();
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
 
+        var saveData =
+        {
+            Title: title,
+            URL: url,
+            Description: description,
+            Object_Categories: categories
+        };
+
+        var me = this;
+        var jq:any = $;
+        this.currOPM.AppendBinaryFileValuesToData("000", saveData, function () {
+            jq.blockUI({ message: '<h2>Adding new content...</h2>' });
+            me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "LinkToContent", saveData, function() {
+                setTimeout(function () {
+                    jq.unblockUI();
+                    $modal.foundation('reveal', 'close');
+                    me.ReInitialize();
+                }, 2500);
+            }, me.CommonErrorHandler);
+        });
+    }
+
+
+    Modal_SaveExistingLinkToContent($modal) {
+        var id = this.$getNamedFieldWithinModal($modal, "ID").val();
+        var etag = this.$getNamedFieldWithinModal($modal, "ETag").val();
+        var objectRelativeLocation = this.$getNamedFieldWithinModal($modal, "RelativeLocation").val();
+        var url = this.$getNamedFieldWithinModal($modal, "URL").val();
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
+
+        var saveData =
+        {
+            Title: title,
+            URL: url,
+            Description: description,
+            Object_Categories: categories
+        };
+
+        var me = this;
+        var jq:any = $;
+        this.currOPM.AppendBinaryFileValuesToData(id, saveData, function () {
+            jq.blockUI({ message: '<h2>Saving content...</h2>' });
+            me.currOPM.SaveIndependentObject(id, objectRelativeLocation, etag, saveData, function() {
+                setTimeout(function () {
+                    jq.unblockUI();
+                    $modal.foundation('reveal', 'close');
+                    me.ReInitialize();
+                }, 2500);
+            }, me.CommonErrorHandler);
+        });
+    }
 
     OpenModalAddNewContentModal() {
         var $modal:any = this.$getNamedFieldWithin("AddNewContentModal");
@@ -569,6 +683,23 @@ class MainContentViewController extends ViewControllerBase {
             }, 2500);
         });
     }
+
+    DeleteLinkToContent($this)
+    {
+        var id = $this.attr("data-objectid");
+        var domainName = "AaltoGlobalImpact.OIP";
+        var objectName = "LinkToContent";
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Deleting Content...</h2>' });
+        this.currOPM.DeleteIndependentObject(domainName, objectName, id, function(responseData) {
+            setTimeout(function() {
+                jq.unblockUI();
+                me.ReInitialize();
+            }, 2500);
+        });
+    }
+
 
     Modal_SaveExistingContent($modal) {
         var id = this.$getNamedFieldWithinModal($modal, "ID").val();
