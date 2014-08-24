@@ -19,6 +19,9 @@ class MainContentViewController extends ViewControllerBase {
         var wnd:any = window;
         require(["MainContentView/MainContent_dust",
             "MainContentView/Modals_dust",
+            "MainContentView/TextContent_Modals_dust",
+            "MainContentView/LinkToContent_Modals_dust",
+            "MainContentView/EmbeddedContent_Modals_dust",
             "lib/dusts/command_button_dust",
             "lib/dusts/command_icon_dust",
             "lib/dusts/insidemodal_button_dust",
@@ -175,6 +178,73 @@ class MainContentViewController extends ViewControllerBase {
         $modal.foundation('reveal', 'open');
     }
 
+    EditEmbeddedContent($source) {
+        var $modal:any = this.$getNamedFieldWithin("EditEmbeddedContentModal");
+        var me = this;
+        var jq:any = $;
+        var wnd:any = window;
+        var clickedEditID = $source.attr("data-objectid");
+        $.getJSON('../../AaltoGlobalImpact.OIP/EmbeddedContent/' + clickedEditID + ".json", function (contentData) {
+            //tDCM.SetObjectInStorage(contentData);
+            var currentObject = contentData;
+            var currentID = currentObject.ID;
+            var currentETag = currentObject.MasterETag;
+            var currentRelativeLocation = currentObject.RelativeLocation;
+            var currentIFrameTagContents = currentObject.IFrameTagContents;
+            var currentTitle = currentObject.Title;
+            var currentDescription = currentObject.Description;
+
+            var selectedCategories = [];
+            if(currentObject.Categories && currentObject.Categories.CollectionContent) {
+                for(var categoryIX = 0; categoryIX < currentObject.Categories.CollectionContent.length; categoryIX++) {
+                    var item = currentObject.Categories.CollectionContent[categoryIX];
+                    selectedCategories.push(item.ID);
+                }
+            }
+
+            var categoryoptions = "<option value=''>(None)</option>";
+            for (var i in me.currData.Categories.CollectionContent) {
+                var categoryObject = me.currData.Categories.CollectionContent[i];
+                var categoryID = categoryObject.ID;
+                var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+                categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+            }//ends FOR loop
+            var $categoriesSelect = me.$getNamedFieldWithinModal($modal, "Categories");
+            $categoriesSelect.empty();
+            $categoriesSelect.append(categoryoptions);
+            $categoriesSelect.val(selectedCategories);
+
+            me.$getNamedFieldWithinModal($modal, "ID").val(currentID);
+            me.$getNamedFieldWithinModal($modal, "ETag").val(currentETag);
+            me.$getNamedFieldWithinModal($modal, "RelativeLocation").val(currentRelativeLocation);
+            me.$getNamedFieldWithinModal($modal, "IFrameTagContents").val(currentIFrameTagContents);
+            me.$getNamedFieldWithinModal($modal, "Title").val(currentTitle);
+            me.$getNamedFieldWithinModal($modal, "Description").val(currentDescription);
+            $modal.foundation('reveal', 'open');
+        }); //ends getJson
+    }
+
+    OpenModalAddEmbeddedContentModal() {
+        var $modal:any = this.$getNamedFieldWithin("AddEmbeddedContentModal");
+        var me = this;
+        this.$getNamedFieldWithinModal($modal, "IFrameTagContents").val("");
+        this.$getNamedFieldWithinModal($modal, "Title").val("");
+        this.$getNamedFieldWithinModal($modal, "Description").val("");
+
+        var categoryoptions = "<option value=''>(None)</option>";
+        for (var i in this.currData.Categories.CollectionContent) {
+            var categoryObject = me.currData.Categories.CollectionContent[i];
+            var categoryID = categoryObject.ID;
+            var categoryTitle = categoryObject.Title ? categoryObject.Title : "";
+            categoryoptions += "<option value='" + categoryID + "'>" + categoryTitle + "</option>";
+        }
+        var $categoriesSelect = this.$getNamedFieldWithinModal($modal, "Categories");
+        $categoriesSelect.empty();
+        $categoriesSelect.append(categoryoptions);
+
+        $modal.foundation('reveal', 'open');
+    }
+
     Modal_SaveNewLinkToContent($modal) {
         var url = this.$getNamedFieldWithinModal($modal, "URL").val();
         var title = this.$getNamedFieldWithinModal($modal, "Title").val();
@@ -203,6 +273,31 @@ class MainContentViewController extends ViewControllerBase {
         });
     }
 
+    Modal_SaveNewEmbeddedContent($modal) {
+        var iFrameTagContents = this.$getNamedFieldWithinModal($modal, "IFrameTagContents").val();
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
+
+        var saveData =
+        {
+            Title: title,
+            IFrameTagContents: iFrameTagContents,
+            Description: description,
+            Object_Categories: categories
+        };
+
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Saving content...</h2>' });
+        me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "EmbeddedContent", saveData, function() {
+            setTimeout(function () {
+                jq.unblockUI();
+                $modal.foundation('reveal', 'close');
+                me.ReInitialize();
+            }, 2500);
+        }, me.CommonErrorHandler);
+    }
 
     Modal_SaveExistingLinkToContent($modal) {
         var id = this.$getNamedFieldWithinModal($modal, "ID").val();
@@ -233,6 +328,35 @@ class MainContentViewController extends ViewControllerBase {
                 }, 2500);
             }, me.CommonErrorHandler);
         });
+    }
+
+    Modal_SaveExistingEmbeddedContent($modal) {
+        var id = this.$getNamedFieldWithinModal($modal, "ID").val();
+        var etag = this.$getNamedFieldWithinModal($modal, "ETag").val();
+        var objectRelativeLocation = this.$getNamedFieldWithinModal($modal, "RelativeLocation").val();
+        var iFrameTagContents = this.$getNamedFieldWithinModal($modal, "IFrameTagContents").val();
+        var title = this.$getNamedFieldWithinModal($modal, "Title").val();
+        var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var categories = this.$getNamedFieldWithinModal($modal, "Categories").val();
+
+        var saveData =
+        {
+            Title: title,
+            IFrameTagContents: iFrameTagContents,
+            Description: description,
+            Object_Categories: categories
+        };
+
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Saving content...</h2>' });
+        me.currOPM.SaveIndependentObject(id, objectRelativeLocation, etag, saveData, function() {
+            setTimeout(function () {
+                jq.unblockUI();
+                $modal.foundation('reveal', 'close');
+                me.ReInitialize();
+            }, 2500);
+        }, me.CommonErrorHandler);
     }
 
     OpenModalAddNewContentModal() {
@@ -689,6 +813,22 @@ class MainContentViewController extends ViewControllerBase {
         var id = $this.attr("data-objectid");
         var domainName = "AaltoGlobalImpact.OIP";
         var objectName = "LinkToContent";
+        var me = this;
+        var jq:any = $;
+        jq.blockUI({ message: '<h2>Deleting Content...</h2>' });
+        this.currOPM.DeleteIndependentObject(domainName, objectName, id, function(responseData) {
+            setTimeout(function() {
+                jq.unblockUI();
+                me.ReInitialize();
+            }, 2500);
+        });
+    }
+
+    DeleteEmbeddedContent($this)
+    {
+        var id = $this.attr("data-objectid");
+        var domainName = "AaltoGlobalImpact.OIP";
+        var objectName = "EmbeddedContent";
         var me = this;
         var jq:any = $;
         jq.blockUI({ message: '<h2>Deleting Content...</h2>' });
