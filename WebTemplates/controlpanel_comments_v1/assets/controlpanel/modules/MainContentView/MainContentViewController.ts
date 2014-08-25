@@ -272,13 +272,13 @@ class MainContentViewController extends ViewControllerBase {
         var me = this;
         var jq:any = $;
         this.currOPM.AppendBinaryFileValuesToData("000", saveData, function () {
-            jq.blockUI({ message: '<h2>Adding new content...</h2>' });
+            jq.blockUI({ message: '<h2>Adding new content...</h2><br>(If no image was given, fetching thumbnail image will take around 30 seconds)' });
             me.currOPM.CreateObjectAjax("AaltoGlobalImpact.OIP", "LinkToContent", saveData, function() {
                 setTimeout(function () {
                     jq.unblockUI();
                     $modal.foundation('reveal', 'close');
                     me.ReInitialize();
-                }, 2500);
+                }, 4000);
             }, me.CommonErrorHandler);
         });
     }
@@ -329,13 +329,13 @@ class MainContentViewController extends ViewControllerBase {
         var me = this;
         var jq:any = $;
         this.currOPM.AppendBinaryFileValuesToData(id, saveData, function () {
-            jq.blockUI({ message: '<h2>Saving content...</h2>' });
+            jq.blockUI({ message: '<h2>Saving Link To Content...</h2><br>(If no image was given, fetching thumbnail image will take around 30 seconds)' });
             me.currOPM.SaveIndependentObject(id, objectRelativeLocation, etag, saveData, function() {
                 setTimeout(function () {
                     jq.unblockUI();
                     $modal.foundation('reveal', 'close');
                     me.ReInitialize();
-                }, 2500);
+                }, 4000);
             }, me.CommonErrorHandler);
         });
     }
