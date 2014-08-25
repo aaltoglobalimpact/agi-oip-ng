@@ -2,3 +2,6 @@
 WebTemplates/AaltoGlobalImpact.OIP/*
 .idea/deployment.xml
 Thumbs.db
+WebTemplates/TheBall.CORE/*
+WebTemplates/TheBall.Index/*
+WebTemplates/TheBall.Interface/*

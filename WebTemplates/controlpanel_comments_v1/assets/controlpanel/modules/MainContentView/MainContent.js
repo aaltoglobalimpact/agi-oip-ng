@@ -455,6 +455,9 @@ function switchActiveCanvasSection(event) {
     if (triggerid == "fileManagerMenuAnchor") {
         $("#fileManagerSection").addClass("activeSection");
     }
+    if (triggerid == "connectionsMenuAnchor") {
+        $("#connectionsSection").addClass("activeSection");
+    }
     if (triggerid == "collaboratorsMenuAnchor") {
         $("#collaboratorsSection").addClass("activeSection");
     }

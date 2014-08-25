@@ -81,9 +81,10 @@
 <aside class="left-off-canvas-menu">
     <ul class="off-canvas-list">
         <li><label>Manage Posts</label></li>
-        <li><a href="#" id="addEditContentMenuAnchor" class="offCanvasMenuAnchor">Add or edit posts</a></li>
-        <li><a href="#" id="manageCategoriesMenuAnchor" class="offCanvasMenuAnchor">Add or edit categories</a></li>
+        <li><a href="#" id="addEditContentMenuAnchor" class="offCanvasMenuAnchor">Add or Edit Posts</a></li>
+        <li><a href="#" id="manageCategoriesMenuAnchor" class="offCanvasMenuAnchor">Add or Edit Categories</a></li>
         <li><a href="#" id="fileManagerMenuAnchor" class="offCanvasMenuAnchor">File Manager</a></li>
+        <li><a href="#" id="connectionsMenuAnchor" class="offCanvasMenuAnchor">Connections to Other Groups</a></li>
         <li><a href="#" id="timelineMenuAnchor" class="offCanvasMenuAnchor">View data as timeline</a></li>
         <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
         <li><label>Manage Pages</label></li>
@@ -113,12 +114,16 @@
     <h3>Loading Files...</h3>
 </div>
 
+<div class="large-12 columns contentSwitchableSection" id="connectionsSection">
+    <h3>Loading Connections...</h3>
+</div>
+
 <div class="large-12 columns contentSwitchableSection" id="groupSection">
-    <h3>groupSection</h3>
+    <h3>Loading Group Data...</h3>
 </div>
 
 <div class="large-12 columns contentSwitchableSection" id="groupMembersSection">
-    <h3>groupMembersSection</h3>
+    <h3>Loading Group Members...</h3>
 </div>
 
 
@@ -639,6 +644,18 @@
         "../../AaltoGlobalImpact.OIP/CategoryCollection/MasterCollection.json"
     ]);
 
+    tUDG.RegisterDataURL("CONNECTIONCONTENT", function(args) {
+        var connectionCollection = args[0][0];
+        var authenticatedAsDeviceCollection = args[1][0];
+        return {
+            Connections : connectionCollection,
+            AuthenticatedAsDevices : authenticatedAsDeviceCollection,
+            //Categories : categoryCollection
+        };
+    }, [  "../../TheBall.Interface/ConnectionCollection/MasterCollection.json",
+        "../../TheBall.CORE/AuthenticatedAsActiveDeviceCollection/MasterCollection.json"
+    ]);
+
 
     require(["GroupInfoView/GroupInfoViewController"], function (vcClass) {
         var vc = new vcClass("groupSection", tOP, tUDG);
@@ -666,6 +683,13 @@
         vc.Initialize("FILEMANAGERCONTENT");
         vc.VisibleTemplateRender();
     });
+
+    require(["ConnectionView/ConnectionViewController"], function(vcClass) {
+        var vc = new vcClass("connectionsSection", tOP, tUDG);
+        vc.Initialize("CONNECTIONCONTENT");
+        vc.VisibleTemplateRender();
+    });
+
 
 </script>
 

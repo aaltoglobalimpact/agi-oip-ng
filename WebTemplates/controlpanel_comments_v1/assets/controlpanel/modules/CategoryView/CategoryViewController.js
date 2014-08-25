@@ -17,6 +17,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             var me = this;
             require([
                 "CategoryView/CategoryEditor_dust",
+                "CategoryView/CategoryView_Modals_dust",
                 "CategoryView/category_treeitem_dust",
                 "CategoryView/category_rowitem_dust",
                 "lib/dusts/objectdeleteicon_dust",
@@ -30,6 +31,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 me.currUDG.GetData(me.dataUrl, function (callBackData) {
                     me.currentData = callBackData;
                     dust.render("CategoryEditor.dust", callBackData, function (error, output) {
+                        if (error)
+                            alert("Dust error: " + error);
                         var $hostDiv = $("#" + me.divID);
                         $hostDiv.empty();
                         $hostDiv.html(output);
