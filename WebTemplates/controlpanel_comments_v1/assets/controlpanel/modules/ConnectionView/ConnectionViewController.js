@@ -31,6 +31,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     me.currData = data;
 
                     //console.log("Init: " + dataUrl);
+                    me.UpdateConnectionsAvailableCommands(data.Connections.CollectionContent);
+                    me.UpdateConnectionsHostAndGroupID(data.Connections.CollectionContent);
                     dust.render("Connections.dust", data, function (error, output) {
                         if (error)
                             alert("DUST ERROR: " + error);
@@ -41,6 +43,43 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                     });
                 });
             });
+        };
+
+        ConnectionViewController.prototype.UpdateConnectionsHostAndGroupID = function (connections) {
+            for (var i = 0; i < connections.length; i++) {
+                var conn = connections[i];
+                var currDevice = this.getObjectByID(this.currData.AuthenticatedAsDevices.CollectionContent, conn.DeviceID);
+                if (currDevice) {
+                    conn.ConnectionURL = currDevice.ConnectionURL;
+                }
+            }
+        };
+
+        ConnectionViewController.prototype.UpdateConnectionsAvailableCommands = function (connections) {
+            for (var i = 0; i < connections.length; i++) {
+                var conn = connections[i];
+                conn.AvailableCommands = [];
+                if (!conn.OtherSideConnectionID) {
+                    conn.AvailableCommands.push({
+                        ID: conn.ID,
+                        Command: "FinalizeConnection",
+                        Label: "Finalize Connection"
+                    });
+                } else {
+                    conn.AvailableCommands.push({
+                        ID: conn.ID,
+                        Command: "SynchronizeConnectionCategories",
+                        Label: "Synchronize Categories"
+                    });
+                    if (conn.ThisSideCategories.length) {
+                        conn.AvailableCommands.push({
+                            ID: conn.ID,
+                            Command: "DefineCategoryMapping",
+                            Label: "Define Category Mapping"
+                        });
+                    }
+                }
+            }
         };
 
         ConnectionViewController.prototype.VisibleTemplateRender = function () {

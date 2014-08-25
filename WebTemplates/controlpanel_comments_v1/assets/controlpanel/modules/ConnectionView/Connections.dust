@@ -1,21 +1,28 @@
 {#Connections}
 <div class="row">
     <div class="small-12 medium-6 large-6 columns">
-        <h4 class="boldieText"> Current available categories: </h4>
+        <h4 class="boldieText">Current Connections</h4>
         <div>
             <table id="categories-table" style="text-align: left;">
                 <tr>
                     <th width="5%">Act</th>
-                    <th width="20%">Host</th>
-                    <th width="10%">Group ID</th>
+                    <th width="30%">Host / Group Connection</th>
                     <th width="80%">Description</th>
                     <th width="5%">Delete</th>
                 </tr>
 {#CollectionContent}
                 <tr>
+                    {!
                     <td>{>"command_icon.dust" command="ConnectionAction" command_args="{ID}" icon_class_name="icon-edit" /}</td>
-                    <td style='text-transform:none !important;' class='fancyTextColor'>{Host}</td>
-                    <td style='text-transform:none !important;font-style:italic;font-size: 12px;'>{OtherSideGroupID}</td>
+                    !}
+                    <td><a href="#" class="small button dropdown" data-dropdown="drop-Connection{ID}">Do...</a>
+                        <ul id="drop-Connection{ID}" data-dropdown-content class="f-dropdown">
+                            {#AvailableCommands}
+                            <li><a href="#" class="button oip-controller-command oip-dropdown-button" data-oip-command="{Command}" data-object-id="{ID}">{Label}</a></li>
+                            {/AvailableCommands}
+                        </ul>
+                    </td>
+                    <td style='text-transform:none !important;' class='fancyTextColor'>{ConnectionURL}</td>
                     <td style='text-transform:none !important;font-style:italic;font-size: 12px;'>{Description}</td>
                     <td>{>"objectdeleteicon.dust" object_delete_title="{Title}" /}</td>
                 </tr>
@@ -63,6 +70,6 @@
     </dl>
 {/Connections}!}
 
-{>"command_button.dust" button_label="Add New Connection" command="OpenAddConnectionModal" command_args="{ID}" icon_class_name="icon-edit" /}
+{>"command_button.dust" button_label="Add New Connection" command="OpenAddConnectionModal" command_args="{ID}" /}
 
 {>"ConnectionView_Modals.dust" /}
