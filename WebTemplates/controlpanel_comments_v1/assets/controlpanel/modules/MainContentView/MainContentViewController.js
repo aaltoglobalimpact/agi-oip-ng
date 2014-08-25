@@ -36,7 +36,7 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
                 wnd.getBinaries();
                 me.currUDG.GetData(_this.dataUrl, function (data) {
                     me.currData = data;
-                    dust.render("MainContent.dust", {}, function (error, output) {
+                    dust.render("MainContent.dust", data, function (error, output) {
                         if (error)
                             alert("DUST ERROR: " + error);
                         var $hostDiv = $("#" + me.divID);

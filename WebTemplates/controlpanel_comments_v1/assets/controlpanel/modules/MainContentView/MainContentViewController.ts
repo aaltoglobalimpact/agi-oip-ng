@@ -35,8 +35,7 @@ class MainContentViewController extends ViewControllerBase {
                 wnd.getBinaries();
                 me.currUDG.GetData(this.dataUrl, function(data) {
                     me.currData = data;
-                    dust.render("MainContent.dust", {
-                    }, (error, output) => {
+                    dust.render("MainContent.dust", data, (error, output) => {
                         if(error)
                             alert("DUST ERROR: " + error);
                         var $hostDiv = $("#" + me.divID);
@@ -785,8 +784,6 @@ class MainContentViewController extends ViewControllerBase {
                 $("#viewContentModal-attachments").append(binaryLinkTag);
             }
         }
-
-
 
         wnd.ReConnectComments(currentID);
 
