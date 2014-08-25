@@ -151,6 +151,8 @@ class MainContentViewController extends ViewControllerBase {
     }
 
     OpenModalAddLinkToContentModal() {
+        var wnd:any = window;
+        wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
         var $modal:any = this.$getNamedFieldWithin("AddLinkToContentModal");
         var me = this;
         this.$getNamedFieldWithinModal($modal, "URL").val("");
@@ -224,7 +226,15 @@ class MainContentViewController extends ViewControllerBase {
         }); //ends getJson
     }
 
+    OpenPreviewOnNewTab() {
+        var wnd:any = window;
+        wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
+        window.open("../../wwwsite/html/index.html");
+    }
+
     OpenModalAddEmbeddedContentModal() {
+        var wnd:any = window;
+        wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
         var $modal:any = this.$getNamedFieldWithin("AddEmbeddedContentModal");
         var me = this;
         this.$getNamedFieldWithinModal($modal, "IFrameTagContents").val("");
@@ -785,6 +795,8 @@ class MainContentViewController extends ViewControllerBase {
 
     PublishToWww()
     {
+        var wnd:any = window;
+        wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
         this.CommonWaitForOperation("Publishing content... please wait");
         this.currOPM.ExecuteOperationWithForm("PublishGroupToWww",
             { },

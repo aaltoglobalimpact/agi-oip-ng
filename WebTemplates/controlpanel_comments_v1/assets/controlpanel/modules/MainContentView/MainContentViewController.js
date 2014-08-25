@@ -146,6 +146,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         };
 
         MainContentViewController.prototype.OpenModalAddLinkToContentModal = function () {
+            var wnd = window;
+            wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
             var $modal = this.$getNamedFieldWithin("AddLinkToContentModal");
             var me = this;
             this.$getNamedFieldWithinModal($modal, "URL").val("");
@@ -218,7 +220,15 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
             }); //ends getJson
         };
 
+        MainContentViewController.prototype.OpenPreviewOnNewTab = function () {
+            var wnd = window;
+            wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
+            window.open("../../wwwsite/html/index.html");
+        };
+
         MainContentViewController.prototype.OpenModalAddEmbeddedContentModal = function () {
+            var wnd = window;
+            wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
             var $modal = this.$getNamedFieldWithin("AddEmbeddedContentModal");
             var me = this;
             this.$getNamedFieldWithinModal($modal, "IFrameTagContents").val("");
@@ -742,6 +752,8 @@ define(["require", "exports", "../ViewControllerBase"], function(require, export
         };
 
         MainContentViewController.prototype.PublishToWww = function () {
+            var wnd = window;
+            wnd.Foundation.libs.dropdown.close($("#drop-PostAndPublish"));
             this.CommonWaitForOperation("Publishing content... please wait");
             this.currOPM.ExecuteOperationWithForm("PublishGroupToWww", {}, this.CommonSuccessHandler, this.CommonErrorHandler);
         };
