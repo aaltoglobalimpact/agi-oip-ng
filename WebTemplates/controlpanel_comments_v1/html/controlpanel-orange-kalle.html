@@ -93,6 +93,7 @@
         <li><a href="#" id="timelineMenuAnchor" class="offCanvasMenuAnchor">View data as timeline</a></li>
         <!--<li><a href="#" id="managePagesMenuAnchor" class="offCanvasMenuAnchor">Manage Pages</a></li>-->
         <li><label>Manage Pages</label></li>
+        <li><a href="#" id="dynamicContentMenuAnchor" class="offCanvasMenuAnchor">Dynamic Page Content</a></li>
         <li><a href="#" id="homePageEditingMenuAnchor" class="offCanvasMenuAnchor">Homepage</a></li>
         <li><a href="#" id="researchPageEditingMenuAnchor" class="offCanvasMenuAnchor">Research</a></li>
         <li><a href="#" id="businessPageEditingMenuAnchor" class="offCanvasMenuAnchor">Business</a></li>
@@ -129,6 +130,10 @@
 
 <div class="large-12 columns contentSwitchableSection" id="groupMembersSection">
     <h3>Loading Group Members...</h3>
+</div>
+
+<div class="large-12 columns contentSwitchableSection" id="dynamicContentSection">
+    <h3>Loading Dynamic Content Editor...</h3>
 </div>
 
 
@@ -601,7 +606,9 @@
     }, [ "../../AaltoGlobalImpact.OIP/NodeSummaryContainer/default.json" ]);
 
     tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/GroupContainer/default.json", function (args) {
-        alert("Kau!");
+    });
+
+    tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json", function(args) {
     });
 
     tUDG.RegisterDataURL("MAINCONTENT", function (args) {
@@ -698,6 +705,12 @@
     require(["ConnectionView/ConnectionViewController"], function(vcClass) {
         var vc = new vcClass("connectionsSection", tOP, tUDG);
         vc.Initialize("CONNECTIONCONTENT");
+        vc.VisibleTemplateRender();
+    });
+
+    require(["DynamicContentView/DynamicContentViewController"], function(vcClass) {
+        var vc = new vcClass("dynamicContentSection", tOP, tUDG);
+        vc.Initialize("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json");
         vc.VisibleTemplateRender();
     });
 

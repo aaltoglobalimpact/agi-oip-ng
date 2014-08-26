@@ -18,8 +18,8 @@
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/IViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/ConnectionView/ConnectionViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupMemberView/GroupMemberViewController.js" />
-        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/MainContentView/MainContentViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/FileManagerView/FileManagerViewController.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/MainContentView/MainContentViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/main.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_account_v1/assets/controlpanel/modules/main.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ModuleCustomGlue.js" />
@@ -49,6 +49,7 @@
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/ViewControllerBase.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/config.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_account_v1/assets/controlpanel/modules/PersonalInfoView/PersonalInfoViewController.js" />
+        <item url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/DynamicContentView/DynamicContentViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/783f4164-247a-4a07-a677-62b272471e7e_Input/DEV_kallecpanel/assets/controlpanel/modules/main.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/IViewController.js" />
         <item url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/GroupInfoView/GroupInfoViewController.js" />
@@ -89,8 +90,8 @@
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/IViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/ConnectionView/ConnectionViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/GroupMemberView/GroupMemberViewController.js" />
-      <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/FileManagerView/FileManagerViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/MainContentView/MainContentViewController.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/FileManagerView/FileManagerViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_account_v1/assets/controlpanel/modules/main.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/main.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/ModuleCustomGlue.js" />
@@ -121,6 +122,7 @@
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/config.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_account_v1/assets/controlpanel/modules/PersonalInfoView/PersonalInfoViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/783f4164-247a-4a07-a677-62b272471e7e_Input/DEV_kallecpanel/assets/controlpanel/modules/main.js" />
+      <root url="file://$PROJECT_DIR$/WebTemplates/controlpanel_comments_v1/assets/controlpanel/modules/DynamicContentView/DynamicContentViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/IViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/GroupInfoView/GroupInfoViewController.js" />
       <root url="file://$PROJECT_DIR$/WebTemplates/TheBall.CORE/DeviceMembership/0e5409fe-3199-4e89-8e40-62ef9bd8ca16_Input/DEV_kallecpanel/assets/controlpanel/modules/CategoryView/CategoryViewController.js" />
