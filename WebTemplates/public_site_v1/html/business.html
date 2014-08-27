@@ -107,11 +107,12 @@
                         Key capabilities developed in the process include understanding and being able to conduct the co-creation process from fuzzy, complex problems to simple, affordable, and functioning solutions. This creates pathways for the outstanding solutions developed by Finnish companies to global growth markets. The co-creation approach enables to discover the local needs, opportunities, and lifestyles, and therefore to develop innovations based on them. Involving local stakeholders in the co-creation process also creates ownership for the solution developed, and therefore creates market demand, already during the co-creation process.
                     </p>
                     </div>
-                    <div class="row" id="BusinessContactRow" style="padding-bottom: 20px;">
+                    <!--starts BusinessContactRow-->
+                    <div class="row" id="BusinessContactRow" style="padding-bottom: 20px; display: inline-block; vertical-align: top;float:none !important;">
                         <div id="businessContact-featureimageContactPhotoWholeDiv" class="articleText2 small-4 medium-4 large-4 columns" style="display:inline-block !important; float:none !important;vertical-align:top;">
-                            <div id="business-featureimageContactPhoto" style="width: 100%"><img id="imgOverallphoto1" src="../assets/images/Petri_07.jpg"></div>
+                            <div id="business-featureimageContactPhoto" style="width: 100%;display:inline-block !important; float:none !important;vertical-align:top;"><img id="imgOverallphoto1" src="../assets/images/Petri_07.jpg" style="display:inline-block !important; float:none !important;vertical-align:top;"></div>
                         </div>
-                        <div id="businesContact-textDiv" class="small-8 medium-8 large-8 columns">
+                        <div id="businesContact-textDiv" class="small-8 medium-8 large-8 columns" style="max-width: 65% !important;">
                             <div id="businessContactDescriptionDiv">
                                 <div id="businessContactSectionTitle" class="articleText2 boldieText">Contact</div>
                                 <div id="businessContactName" style="width: 100%;">Petri Allekotte</div>
@@ -121,6 +122,9 @@
                             </div>
                         </div>
                     </div> <!--Closes BusinessContactRow-->
+
+
+
                 </div> <!--Closes divClass divSection1text-->
             </div>
 
@@ -229,6 +233,27 @@
             </div>
             <a class="close-reveal-modal">&#215;</a>
         </div> <!--closes div for the viewContentModal-about-->
+        <div id="WorkspaceLoginModal" class="reveal-modal medium" data-reveal>
+            <div class="row">
+                <div class="small-12 medium-12 large-12 columns"><h2 class="boldieText fancyTextColor">The New Global</h2></div>
+                <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText mediumBlackTextColor">Collaboration platform login</h4></div>
+                <div id="loginOptionsBlockDiv" class="small-12 medium-12 large-12 columns" style="padding-top:15px; padding-bottom: 15px;">
+                    <ul class="small-block-grid-3">
+                        <li><a class="discreetTextColor"><i class='icon-circlegoogleplus' style='font-size:150%;padding: 0 5px 0 0'></i>Google</a></li>
+                        <li><a class="discreetTextColor"><i class='icon-circleyahoo' style='font-size:150%;padding: 0 5px 0 0'></i>Yahoo</a></li>
+                        <li><a class="discreetTextColor"><i class='icon-circlefacebook' style='font-size:150%;padding: 0 5px 0 0'></i>Other</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12">
+                    <br>
+                    <a class="button small" id="closeWorkspaceLoginModalAnchor" style="float:right !important;">Close</a>
+                </div>
+            </div>
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
+
     </div>
 </div>
 
@@ -236,16 +261,27 @@
 
 <div id="aboutPage"></div>
 
-<!--<div class="aaltoBottomBar contain-to-grid sticky topbar">-->
-<div id="bottombar">
-    <div class="row">
-        <div class="small-12 medium-12 large-12 columns" id="aaltoLogoDiv" style="display:inline-block; margin:auto;">
-            <div class="boldieText whiteTextColor" style="font-size:45px; padding:15px 0 0 0;display:inline-block;">A?</div>
-            <div class="boldieText whiteTextColor" style="font-size:15px; padding:15px 0 0 0;display:inline-block;">Aalto University</div>
+<!--Aalto login footer starts-->
+<div id="bottombar" style="padding:5px 0 15px 0;min-height: 130px;">
+    <div class="row" style="background-color: #333; min-height: 124px;">
+        <div class="show-for-medium-up medium-2 large-2 columns"><div style="background-color: #333;width:90%;height:10px;"></div></div>
+
+        <div class="small-6 medium-4 large-4 columns" id="aaltoLogoDiv" style="display:inline-block; margin:auto;vertical-align:text-top;padding:15px 0 0 0;background-color: #333;">
+            <div class="boldieText whiteTextColor" style="font-size:66px; padding:0;float: left;">A?</div>
+            <div class="boldieText whiteTextColor" style="font-size:16px; padding:7px 0 0 15px;float:left;">Aalto University</div>
         </div> <!--Closes logoDiv-->
+        <div class="small-6 medium-4 large-4 columns" id="aaltoFooterLoginDiv" style="display:inline-block; margin:auto;vertical-align:text-top;padding:15px 0 15px 0; background-color: #333;">
+            <div class="articleText2 boldieText whiteTextColor" style="padding:7px 0 0 15px;float:left; width: 100%;">Address</div>
+            <div class="articleText2 whiteTextColor" style="padding:0px 0 0 15px;float:left; width: 100%;">Arkadia building</div>
+            <div class="articleText2 whiteTextColor" style="padding:0px 0 0 15px;float:left; width: 100%;">Lapuankatu 2, Helsinki</div>
+            <div class="articleText2" style="padding:0px 0 0 15px;float:left; width: 100%;"><a class="boldieText" id="WorkspaceLoginAnchor">Login ></a></div>
+        </div>
+
+        <div class="show-for-medium-up medium-2 large-2 columns"><div style="background-color: #333;width:90%;height:10px;"></div></div>
+
     </div>
 </div>
-<!--</div>-->
+<!--ends Aalto login footer-->
 
 <script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
@@ -357,6 +393,8 @@ $(document).ready(function(){
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
     $("#schoolsButton").click(function () { $(document).foundation('joyride', 'start');});
     $(".innovationPlatformSubmenuLink").on('click', switchSections);
+    $("#WorkspaceLoginAnchor").click(function () { $('#WorkspaceLoginModal').foundation('reveal', 'open');});
+    $("#closeWorkspaceLoginModalAnchor").click(function () { $('#WorkspaceLoginModal').foundation('reveal', 'close');});
 
 
     function switchSections (event){

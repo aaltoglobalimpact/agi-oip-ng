@@ -61,8 +61,9 @@
     <div class="row" id="postAndimportantWrapperRow">
     <div class="small-12-5 medium-2-5 large-2-5 columns noPaddingRight" style="float:none !important; display:inline-block !important;" id="PostUpdateDiv"> <!--style="height: 37px;"-->
         <!--<a><div id="postUpdateButton" class="orangeButton">Post an update</div></a>-->
-        <a href="#" class="button split expand" style="margin-bottom: 0 !important;"><div id="postUpdateButtonB">Post an update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
+        <a href="#" class="button split expand" id="PostUpdateSplitButton" style="margin-bottom: 0 !important;"><div id="postUpdateButtonB">Post an update</div><span data-dropdown="drop-PostAndUpdate"></span></a><br>
         <ul id="drop-PostAndUpdate" class="f-dropdown" data-dropdown-content>
+            <li><a href="#" id="PostShortMessageAnchor">Post a short message</a></li>
             <li><a href="#">Preview changes</a></li>
             <li><a href="#">Publish changes</a></li>
         </ul>
@@ -127,7 +128,6 @@
             <div id="ModalsHolderDiv-Content">
                 <div id="addNewContentModal" class="reveal-modal medium" data-reveal>
                     <h2>Adding a new update</h2>
-
                     <div class="row">
                         <div class="large-6 columns">
                             <div style="width: 100%; height: auto;margin: 0px;padding: 0px;">
@@ -194,6 +194,27 @@
 
                     <a class="close-reveal-modal">&#215;</a>
                 </div>
+                <div id="addNewShortMessageModal" class="reveal-modal medium" data-reveal>
+                    <h2>Post a short message</h2>
+                    <div class="row">
+                        <div class="large-12 columns"><div class="title-field"><label class="boldieText">Title<input type="text" id="addNewShortMessageModal-title"></label></div>
+                        </div>
+                        <div class="large-12 columns"><div class="title-field"><label class="boldieText">Message<textarea id="addNewShortMessageModal-content" style="height: 150px;resize: none;" name="content"></textarea></label></div>
+                        </div>
+                        <div class="large-12 columns"><div class="title-field"><label class="boldieText">Attachments<input type="file" id="addNewShortMessageModal-file"></label></div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 10px;" id="addNewShortMessageAttachmentAlertRow"><div class="large-12 columns" id="addNewShortMessageAttachmentAlertHOLDER"></div>
+                    </div> <!--Closes addNewShortMessageAttachmentAlertRow-->
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="large-12 columns"><a class="button" id="canceladdNewShortMessageModal" style="float: right;">Cancel</a><div style="width: 10px;float: right;">&nbsp;</div>
+                            <a class="button" id="addNewShortMessageModal-submit" style="float: right;">Submit</a></div>
+                    </div>
+                    <a class="close-reveal-modal">&#215;</a>
+        </div>
+
                 <div id="editContentModal" class="reveal-modal medium" data-reveal>
                     <h2>Editing content</h2>
                     <div class="row">
@@ -918,8 +939,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-1" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-1" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-1" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -938,8 +959,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-2" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-2" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-2" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -958,8 +979,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-3" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-3" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-3" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -978,8 +999,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-4" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-4" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-4" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -998,8 +1019,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-5" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-5" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-5" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -1018,8 +1039,8 @@
                 <input type="text" id="peoplePageEditingAssociateTitle-6" placeholder="Project Coordinator" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
-                <label><span class="boldieText darkTextColor">Title</span></label>
-                <input type="text" id="peoplePageEditingAssociateEmail-6" placeholder="Project Coordinator" class="pageEditingInputField"/>
+                <label><span class="boldieText darkTextColor">Email</span></label>
+                <input type="text" id="peoplePageEditingAssociateEmail-6" placeholder="someone@somewhere.com" class="pageEditingInputField"/>
             </div>
             <div class="small-12 medium-12 large-12">
                 <label><span class="boldieText darkTextColor">Text</span></label>
@@ -1259,6 +1280,9 @@ $(document).ready(function(){
     $("#categoriesSection-hierarchyModal-launchModalButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'open');});
     $("#categoriesSection-hierarchyModal-CloseCustomButton").click(function () { $('#categoriesSection-hierarchyModal').foundation('reveal', 'close');});
     $(".savePageButton").on('click', savePageData);
+    $("#PostShortMessageAnchor").click(function () {$( "#PostUpdateSplitButton" ).trigger( "click" );$('#addNewShortMessageModal').foundation('reveal', 'open');});
+    $("#canceladdNewShortMessageModal").click(function () { $('#addNewShortMessageModal').foundation('reveal', 'close');});
+
     $(window).on('resize', equalize);
 
     var tUI = TheBall.Interface.UI;
@@ -1429,6 +1453,7 @@ $(document).ready(function(){
 
         if (triggerid=="addEditContentMenuAnchor")
         {
+            $("#my-timeline").empty();
             $("#addEditContentSection").addClass("activeSection");
         }
         if (triggerid=="manageCategoriesMenuAnchor")
@@ -1574,31 +1599,6 @@ $(document).ready(function(){
         {
             $("#timelineSection").addClass("activeSection");
             $("#my-timeline").empty();
-            /*var myTimelineData={"timeline":{
-                    "headline":"The Main Timeline Headline Goes here",
-                    "type":"default",
-                    "text":"<p>Intro body text goes here, some HTML is ok</p>",
-                    "asset": {"media":"http://yourdomain_or_socialmedialink_goes_here.jpg","credit":"Credit Name Goes Here","caption":"Caption text goes here"
-                },
-                    "date": [
-                    {"startDate":"2011,12,10",
-                        "endDate":"2011,12,11",
-                        "headline":"Headline Goes Here",
-                        "text":"<p>Body text goes here, some HTML is OK</p>",
-                        "tag":"This is Optional",
-                        "classname":"optionaluniqueclassnamecanbeaddedhere",
-                        "asset": {"media":"http://twitter.com/ArjunaSoriano/status/164181156147900416",
-                            "thumbnail":"optional-32x32px.jpg",
-                            "credit":"Credit Name Goes Here",
-                            "caption":"Caption text goes here"}}
-                ], "era": [
-                    {"startDate":"2011,12,10",
-                     "endDate":"2011,12,11",
-                     "headline":"Headline Goes Here",
-                     "text":"<p>Body text goes here, some HTML is OK</p>",
-                     "tag":"This is Optional"}]}
-            }*///closes the var "options"
-           /*createStoryJS({ type:'timeline',width:'100%',height:'600',source: myTimelineData,embed_id:'my-timeline'});*/
             $.getJSON('../../AaltoGlobalImpact.OIP/TextContentCollection/MasterCollection.json', function(contentData) {
                 /*var wholeTimelineData=new Array();*/
                 var wholeTimelineData={

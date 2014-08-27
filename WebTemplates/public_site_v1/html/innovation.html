@@ -19,8 +19,6 @@
         ga('send', 'pageview');
 
     </script>
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/oipdynamicreplacer.js"></script>
 </head>
 <body>
 
@@ -95,11 +93,14 @@
                         Bicycle rights consequat laborum put a bird on it, next level twee cillum gentrify. Forage sriracha small batch, consectetur paleo ethnic Echo Park. Beard freegan placeat officia, brunch +1 chillwave disrupt squid. Commodo bespoke cliche letterpress. Fingerstache Banksy meggings you probably haven't heard of them, ad butcher Kickstarter literally typewriter mustache pickled roof party Portland squid elit. Quinoa irure kogi aliqua, umami whatever tofu. Bespoke flexitarian magna PBR.
                     </p>
                 </div> <!--Closes divClass divSection1text-->
-                <div id="divOverall-featureimageContactPhotoAndDescription" class="articleText2" style="display:inline-block !important; float:none !important;vertical-align:top; width: 23%;">
+
+                <!--begins: This section is to add info and Photo of a Contact person to this page-->
+                <!--<div id="divOverall-featureimageContactPhotoAndDescription" class="articleText2" style="display:inline-block !important; float:none !important;vertical-align:top; width: 23%;">
                     <div id="divOverall-featureimageContactPhoto" style="width: 100%"><img id="imgOverallphoto1" src="../assets/images/d2.png">
                     </div>
                     <h4 class="fancyTextColor">Photo</h4>
-                </div> <!--Closes divClass divSection1text-->
+                </div>-->
+                <!--ends: This section is to add info and Photo of a Contact person to this page-->
             </div>
         </div> <!--Closes innovationPlatformOveral div ID-->
 
@@ -299,16 +300,19 @@
 
                     </p>
                 </div> <!--Closes divClass divSection1text-->
+
+                <!--begins: section for the Contact Picture and Information -->
                 <div id="divIndia-featureimageContactPhotoAndDescription" class="articleText2" style="display:inline-block !important; float:none !important;vertical-align:top; width: 23%;">
-                    <div id="divIndia-featureimageContactPhoto" style="width: 100%"><img id="imgIndiaphoto1" src="../assets/images/bio_pictures/Henri.png">
+                    <div id="divIndia-featureimageContactPhoto" style="width: 100%"><img id="imgIndiaphoto1" src="../assets/images/bio_pictures/Sujil.png">
                     </div>
                     <div id="IndiaContactDescriptionDiv">
                         <div id="IndiaContactSectionTitle" class="articleText2 boldieText">Contact</div>
-                        <div id="IndiaContactName" style="width: 100%;">Henri Simula</div>
-                        <div id="IndiaContactJob" class="articleText2" style="font-style: italic! important; width: 100%;">Research fellow</div>
-                        <div id="IndiaContactEmail" class="articleText2"><a href="#" style="width: 100%;">henri.simula@aalto.fi</a></div>
+                        <div id="IndiaContactName" style="width: 100%;">Sujil Kodathoor</div>
+                        <div id="IndiaContactJob" class="articleText2" style="font-style: italic! important; width: 100%;">Country Manager, India & Sri Lanka</div>
+                        <div id="IndiaContactEmail" class="articleText2"><a href="#" style="width: 100%;">sujil.kodathoor@aalto.fi</a></div>
                     </div>
-                </div> <!--Closes divClass divSection1text-->
+                </div>
+                <!--ends: section for the Contact Picture and Information -->
             </div>
         </div> <!--Closes innovationPlatformIndia div ID-->
 
@@ -369,23 +373,55 @@
             </div>
             <a class="close-reveal-modal">&#215;</a>
         </div> <!--closes div for the viewContentModal-about-->
+        <div id="WorkspaceLoginModal" class="reveal-modal medium" data-reveal>
+            <div class="row">
+                <div class="small-12 medium-12 large-12 columns"><h2 class="boldieText fancyTextColor">The New Global</h2></div>
+                <div class="small-12 medium-12 large-12 columns"><h4 class="boldieText mediumBlackTextColor">Collaboration platform login</h4></div>
+                <div id="loginOptionsBlockDiv" class="small-12 medium-12 large-12 columns" style="padding-top:15px; padding-bottom: 15px;">
+                    <ul class="small-block-grid-3">
+                        <li><a class="discreetTextColor"><i class='icon-circlegoogleplus' style='font-size:150%;padding: 0 5px 0 0'></i>Google</a></li>
+                        <li><a class="discreetTextColor"><i class='icon-circleyahoo' style='font-size:150%;padding: 0 5px 0 0'></i>Yahoo</a></li>
+                        <li><a class="discreetTextColor"><i class='icon-circlefacebook' style='font-size:150%;padding: 0 5px 0 0'></i>Other</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12">
+                    <br>
+                    <a class="button small" id="closeWorkspaceLoginModalAnchor" style="float:right !important;">Close</a>
+                </div>
+            </div>
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
     </div>
 </div>
 
 
 <div id="aboutPage"></div>
 
-<!--<div class="aaltoBottomBar contain-to-grid sticky topbar">-->
-<div id="bottombar">
-    <div class="row">
-        <div class="small-12 medium-12 large-12 columns" id="aaltoLogoDiv" style="display:inline-block; margin:auto;">
-            <div class="boldieText whiteTextColor" style="font-size:45px; padding:15px 0 0 0;display:inline-block;">A?</div>
-            <div class="boldieText whiteTextColor" style="font-size:15px; padding:15px 0 0 0;display:inline-block;">Aalto University</div>
+<!--Aalto login footer starts-->
+<div id="bottombar" style="padding:5px 0 15px 0;min-height: 130px;">
+    <div class="row" style="background-color: #333; min-height: 124px;">
+        <div class="show-for-medium-up medium-2 large-2 columns"><div style="background-color: #333;width:90%;height:10px;"></div></div>
+
+        <div class="small-6 medium-4 large-4 columns" id="aaltoLogoDiv" style="display:inline-block; margin:auto;vertical-align:text-top;padding:15px 0 0 0;background-color: #333;">
+            <div class="boldieText whiteTextColor" style="font-size:66px; padding:0;float: left;">A?</div>
+            <div class="boldieText whiteTextColor" style="font-size:16px; padding:7px 0 0 15px;float:left;">Aalto University</div>
         </div> <!--Closes logoDiv-->
+        <div class="small-6 medium-4 large-4 columns" id="aaltoFooterLoginDiv" style="display:inline-block; margin:auto;vertical-align:text-top;padding:15px 0 15px 0; background-color: #333;">
+            <div class="articleText2 boldieText whiteTextColor" style="padding:7px 0 0 15px;float:left; width: 100%;">Address</div>
+            <div class="articleText2 whiteTextColor" style="padding:0px 0 0 15px;float:left; width: 100%;">Arkadia building</div>
+            <div class="articleText2 whiteTextColor" style="padding:0px 0 0 15px;float:left; width: 100%;">Lapuankatu 2, Helsinki</div>
+            <div class="articleText2" style="padding:0px 0 0 15px;float:left; width: 100%;"><a class="boldieText" id="WorkspaceLoginAnchor">Login ></a></div>
+        </div>
+
+        <div class="show-for-medium-up medium-2 large-2 columns"><div style="background-color: #333;width:90%;height:10px;"></div></div>
+
     </div>
 </div>
-<!--</div>-->
+<!--ends Aalto login footer-->
 
+<script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
 <!--<script src="js/foundation/foundation.js"></script>-->
 <script src="../assets/js/foundation/foundation.topbar.js"></script>
@@ -395,17 +431,7 @@
 <script src="../assets/lib/markdowndeep/MarkdownDeepLib.min.js"></script>
 <script src="../assets/js/purl.js"></script>
 <script>
-
-    $(document).foundation(
-            {
-                reveal : {
-                    animation: 'fadeAndPop',
-                    animation_speed: 250,
-                    close_on_background_click: false
-                }
-
-            }
-    );
+    $(document).foundation({reveal : { animation: 'fadeAndPop',animation_speed: 250,close_on_background_click: false}});
 </script>
 <script>
 var getCategoriesOrderedAndFiltered = function(categoryCollection)
@@ -504,6 +530,8 @@ $(document).ready(function(){
     $("#closeViewContentModal").click(function () { $('#viewContentModal').foundation('reveal', 'close');});
     $("#schoolsButton").click(function () { $(document).foundation('joyride', 'start');});
     $(".innovationPlatformSubmenuLink").on('click', switchSections);
+    $("#WorkspaceLoginAnchor").click(function () { $('#WorkspaceLoginModal').foundation('reveal', 'open');});
+    $("#closeWorkspaceLoginModalAnchor").click(function () { $('#WorkspaceLoginModal').foundation('reveal', 'close');});
 
 
     function switchSections (event){
