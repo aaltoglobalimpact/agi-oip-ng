@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/css/style.orange.css">
     <link rel="stylesheet" type="text/css" media="all" href="../assets/css/whhg.css" />
     <script src="../assets/js/modernizr.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/oipdynamicreplacer.js"></script>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -83,10 +85,10 @@
                         <img class="show-for-medium-up" src="../assets/images/top_banners/Research.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
                         <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
 
-                        <div class="show-for-medium-up orbit-caption fancyTextColor">
+                        <div id="image-caption-medium-up" class="show-for-medium-up orbit-caption fancyTextColor">
                             Research topics related to the <br/> New Global project
                         </div>
-                        <div class="show-for-small-only orbit-caption">
+                        <div id="image-caption-small-only" class="show-for-small-only orbit-caption">
                             Research topics related to the New Global project
                         </div>
                     </li>
@@ -154,7 +156,7 @@
                         <div id="researchContactSectionTitle" class="articleText2 boldieText">Contact</div>
                         <div id="researchContactName" style="width: 100%;">Sara Lindeman</div>
                         <div id="researchContactJob" class="articleText2" style="font-style: italic! important; width: 100%;">Project manager</div>
-                        <div id="researchContactEmail" class="articleText2"><a href="#" style="width: 100%;">sara.lindeman@aalto.fi</a></div>
+                        <div id="researchContactEmail" class="articleText2"><a id="researchContactEmailLink" href="#" style="width: 100%;">sara.lindeman@aalto.fi</a></div>
                     </div>
                 </div> <!--Closes divClass divSection1text-->
             </div>
@@ -267,7 +269,6 @@
 </div>
 <!--ends Aalto login footer-->
 
-<script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
 <!--<script src="js/foundation/foundation.js"></script>-->
 <script src="../assets/js/foundation/foundation.topbar.js"></script>

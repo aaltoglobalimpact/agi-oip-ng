@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/css/style.orange.css">
     <link rel="stylesheet" type="text/css" media="all" href="../assets/css/whhg.css" />
     <script src="../assets/js/modernizr.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/oipdynamicreplacer.js"></script>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -79,7 +81,7 @@
                      <img class="show-for-medium-up" src="../assets/images/Business_Petri.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
                      <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
 
-                        <div class="orbit-caption">
+                        <div id="image-caption" class="orbit-caption">
                             Co-creating new business opportunities in unexplored emerging markets through multi-stakeholder partnership networks                        </div>
                     </li>
                 </ul>
@@ -143,7 +145,7 @@
             <h4 class="boldieText fancyTextColor">Events</h4>
             <div id="BusinessEventsWholeDiv1" style="padding:0">
                 <div id="BusinessEventsDiv-date1" class="articleText2">25.2 - 15.3.2014</div>
-                <div id="BusinessEventsDiv-date1Titleh6"><h6 class="fancyTextColor" style="padding:0;margin:0;">Trip to tanzania</h6></div>
+                <div id="BusinessEventsDiv-date1Titleh6"><h6 id="BusinessEventsDiv-date1TitleContent" class="fancyTextColor" style="padding:0;margin:0;">Trip to tanzania</h6></div>
                 <div id="BusinessEventsDiv-date1Text" style="width: 100%;" class="articleText2"><p>Kitsch mollit labore Pinterest excepteur, aesthetic est Intelligentsia letterpress distillery sartorial Wes Anderson odio artisan salvia.</p></div>
             </div>
             <div id="BusinessEventsWholeDiv2" style="padding:0">
@@ -283,7 +285,6 @@
 </div>
 <!--ends Aalto login footer-->
 
-<script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
 <!--<script src="js/foundation/foundation.js"></script>-->
 <script src="../assets/js/foundation/foundation.topbar.js"></script>
