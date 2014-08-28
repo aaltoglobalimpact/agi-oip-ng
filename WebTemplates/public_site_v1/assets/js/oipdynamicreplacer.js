@@ -14,7 +14,14 @@ $.getJSON("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection
         if (currDynamic.HostName == currentPage) {
             var $ph = $(currDynamic.ElementQuery);
             console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
-            $ph.html(currDynamic.Content);
+            if(currDynamic.RawContent) {
+                console.log("RAW Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
+                $ph.html(currDynamic.RawContent);
+            }
+            else {
+                console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
+                $ph.html(currDynamic.Content);
+            }
         }
     }
     $.holdReady(false);

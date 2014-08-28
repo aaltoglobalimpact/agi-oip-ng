@@ -51,8 +51,11 @@ class DynamicContentViewController extends ViewControllerBase {
         this.$getNamedFieldWithinModal($modal, "ContentName").val("");
         this.$getNamedFieldWithinModal($modal, "ElementQuery").val("");
         this.$getNamedFieldWithinModal($modal, "Description").val("");
+        this.$getNamedFieldWithinModal($modal, "RawContent").val("");
         this.$getNamedFieldWithinModal($modal, "Content").val("");
         var $content:any = this.$getNamedFieldWithinModal($modal, "Content");
+        $content.destroyEditor();
+        $content.val("");
         $content.redactor(
             {   minHeight: 300,
                 maxHeight: 350,
@@ -80,8 +83,10 @@ class DynamicContentViewController extends ViewControllerBase {
             me.$getNamedFieldWithinModal($modal, "ContentName").val(contentData.ContentName);
             me.$getNamedFieldWithinModal($modal, "ElementQuery").val(contentData.ElementQuery);
             me.$getNamedFieldWithinModal($modal, "Description").val(contentData.Description);
-            me.$getNamedFieldWithinModal($modal, "Content").val(contentData.Content);
+            me.$getNamedFieldWithinModal($modal, "RawContent").val(contentData.RawContent);
             var $content:any = me.$getNamedFieldWithinModal($modal, "Content");
+            $content.destroyEditor();
+            $content.val(contentData.Content);
             $content.redactor(
                 {   minHeight: 300,
                     maxHeight: 350,
@@ -104,7 +109,10 @@ class DynamicContentViewController extends ViewControllerBase {
             me.$getNamedFieldWithinModal($modal, "ContentName").html(contentData.ContentName);
             me.$getNamedFieldWithinModal($modal, "ElementQuery").html(contentData.ElementQuery);
             me.$getNamedFieldWithinModal($modal, "Description").html(contentData.Description);
-            me.$getNamedFieldWithinModal($modal, "Content").html(contentData.Content);
+            if(contentData.RawContent)
+                me.$getNamedFieldWithinModal($modal, "Content").html(contentData.RawContent);
+            else
+                me.$getNamedFieldWithinModal($modal, "Content").html(contentData.Content);
             $modal.foundation('reveal', 'open');
         });
     }
@@ -114,6 +122,8 @@ class DynamicContentViewController extends ViewControllerBase {
         var contentName = this.$getNamedFieldWithinModal($modal, "ContentName").val();
         var elementQuery = this.$getNamedFieldWithinModal($modal, "ElementQuery").val();
         var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var rawContent = this.$getNamedFieldWithinModal($modal, "RawContent").val();
+        rawContent = $("<div/>").text(rawContent).html();
         var content = this.$getNamedFieldWithinModal($modal, "Content").val();
         content = $('<div/>').text(content).html();
 
@@ -122,6 +132,7 @@ class DynamicContentViewController extends ViewControllerBase {
             ContentName: contentName,
             ElementQuery: elementQuery,
             Description: description,
+            "ENC.RawContent": rawContent,
             "ENC.Content": content
         };
 
@@ -145,6 +156,8 @@ class DynamicContentViewController extends ViewControllerBase {
         var contentName = this.$getNamedFieldWithinModal($modal, "ContentName").val();
         var elementQuery = this.$getNamedFieldWithinModal($modal, "ElementQuery").val();
         var description = this.$getNamedFieldWithinModal($modal, "Description").val();
+        var rawContent = this.$getNamedFieldWithinModal($modal, "RawContent").val();
+        rawContent = $("<div/>").text(rawContent).html();
         var content = this.$getNamedFieldWithinModal($modal, "Content").val();
         content = $('<div/>').text(content).html();
 
@@ -153,6 +166,7 @@ class DynamicContentViewController extends ViewControllerBase {
             ContentName: contentName,
             ElementQuery: elementQuery,
             Description: description,
+            "ENC.RawContent": rawContent,
             "ENC.Content": content
         };
 

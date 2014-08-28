@@ -611,6 +611,21 @@
     tUDG.RegisterDataURL("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json", function(args) {
     });
 
+    tUDG.RegisterDataURL("DYNAMICVIEWCONTENT", function(args) {
+        var dynamicContentCollection = args[0];
+        dynamicContentCollection.CollectionContent.sort(function(a, b) {
+            if(a.HostName == b.HostName)
+                return 0;
+            if(!a.HostName)
+                return -1;
+            var firstCompare = a.HostName.localeCompare(b.HostName);
+            if(!firstCompare)
+                return a.Description.localeCompare(b.Description);
+            return firstCompare;
+        });
+        return dynamicContentCollection;
+    }, [ "../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json"] );
+
     tUDG.RegisterDataURL("MAINCONTENT", function (args) {
         var textContentCollection = args[0][0];
         textContentCollection.CollectionContent.sort(function(a, b) {
@@ -710,7 +725,7 @@
 
     require(["DynamicContentView/DynamicContentViewController"], function(vcClass) {
         var vc = new vcClass("dynamicContentSection", tOP, tUDG);
-        vc.Initialize("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json");
+        vc.Initialize("DYNAMICVIEWCONTENT");
         vc.VisibleTemplateRender();
     });
 

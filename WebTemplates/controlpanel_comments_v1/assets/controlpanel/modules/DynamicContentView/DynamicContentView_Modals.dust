@@ -16,6 +16,11 @@
                     <textarea rows="5" name="Description"/>
                 </label>
             </div>
+            <div class="RawContent-field">
+                <label>
+                    <textarea rows="5" name="RawContent" />
+                </label>
+            </div>
         </div>
     </div>
 </div>
@@ -54,6 +59,11 @@
                     <textarea rows="5" name="Description"/>
                 </label>
             </div>
+            <div class="RawContent-field">
+                <label>Raw Content
+                    <textarea rows="5" name="RawContent" />
+                </label>
+            </div>
         </div>
     </div>
 </div>
@@ -76,7 +86,7 @@
 
 {>"modal_begin.dust" modal_name="ViewDynamicContentModal" /}
 <div class="row">
-    <div class="large-12 columns right">
+    <div class="large-12 columns">
         <table>
             <tr><th>Page</th><th>Name</th><th>Location</th><th>Description</th></tr>
                 <tr><td name="HostName"></td><td name="ContentName"></td><td name="ElementQuery"></td><td name="Description"></td></tr>
@@ -84,9 +94,14 @@
     </div>
 </div>
 <div class="row">
-    <div class="large-12 columns right textAreaEditorDiv"><label>Content</label>
+    <div class="large-12 columns">Editor Content Begins -</div>
+    <div class="large-12 columns textAreaEditorDiv">
         <div name="Content" />
     </div>
+    <div class="large-12 columns">- Editor Content Ends</div>
+</div>
+<div class="row">
+
 </div>
 
 
