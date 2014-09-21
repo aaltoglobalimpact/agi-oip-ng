@@ -4,6 +4,7 @@
 $(document).ready(function () {
     console.log("Dynamic Replacer Ready Indicator (should be after all replacements)!");
 });
+//$("body").hide();
 $.holdReady(true);
 console.log("Initiating fetch for Dynamic Content JSON...");
 $.getJSON("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection.json", function (contentData) {
@@ -22,7 +23,9 @@ $.getJSON("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection
                 console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
                 $ph.html(currDynamic.Content);
             }
+            //$ph.show();
         }
     }
+//    $("body").show();
     $.holdReady(false);
 });
