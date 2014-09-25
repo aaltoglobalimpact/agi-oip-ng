@@ -632,7 +632,10 @@ $(document).ready(function(){
                  rawbody=rawbody.replace(new RegExp("<br>", "g"), '<p></p>');
                  rawbody=rawbody.replace(new RegExp("</br>", "g"), '<p></p>');*/
 
-                queryValue=$.htmlClean(rawbody, {format:true});
+                queryValue=$.htmlClean(rawbody, {
+                    removeTags: ["basefont", "center", "dir", "font", "frame", "frameset", "isindex", "menu", "noframes", "s", "strike", "u"],
+                    format:true
+                });
             } else {
                 var bodyRendered = markdown.Transform(contentData.CollectionContent[i].Body.replaceAll("javascript:", ""));
                 rawbody = bodyRendered;
