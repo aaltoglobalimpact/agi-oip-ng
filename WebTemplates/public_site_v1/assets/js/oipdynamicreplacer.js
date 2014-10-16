@@ -15,13 +15,25 @@ $.getJSON("../../AaltoGlobalImpact.OIP/DynamicContentCollection/MasterCollection
         if (currDynamic.HostName == currentPage) {
             var $ph = $(currDynamic.ElementQuery);
             console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
-            if(currDynamic.RawContent) {
-                console.log("RAW Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
-                $ph.html(currDynamic.RawContent);
-            }
-            else {
-                console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
-                $ph.html(currDynamic.Content);
+            if(currDynamic.EditType == "IMAGESMALL" || currDynamic.EditType == "IMAGELARGE") {
+                var imageData = currDynamic.ImageData;
+                if(imageData) {
+                    var imageSizeString = 256;
+                    //var imageUrl = "../../AaltoGlobalImpact.OIP/MediaContent/" + imageData.ID + "_" + imageSizeString + "x" + imageSizeString + "_crop" + imageData.AdditionalFormatFileExt;
+                    var imageUrl = "../../AaltoGlobalImpact.OIP/MediaContent/" + imageData.ID + imageData.FileExt;
+                    $ph.attr("src", imageUrl);
+                } else {
+                    $ph.hide();
+                }
+            } else {
+                if(currDynamic.RawContent) {
+                    console.log("RAW Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
+                    $ph.html(currDynamic.RawContent);
+                }
+                else {
+                    console.log("Dynamic '" + currDynamic.ContentName + "' replacing all tags matching: " + currDynamic.ElementQuery + " = total " + $ph.length);
+                    $ph.html(currDynamic.Content);
+                }
             }
             //$ph.show();
         }

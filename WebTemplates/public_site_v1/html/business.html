@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/css/style.orange.css">
     <link rel="stylesheet" type="text/css" media="all" href="../assets/css/whhg.css" />
     <script src="../assets/js/modernizr.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/oipdynamicreplacer.js"></script>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -79,10 +81,10 @@
                   next_on_click: true;
                   slide_number: false;">
                     <li>
-                     <img class="show-for-medium-up" src="../assets/images/Business_Petri.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
-                     <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
+                     <img id="bannerImageMediumUp" class="show-for-medium-up" src="../assets/images/Business_Petri.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
+                     <img id="bannerImageSmallOnly" class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
 
-                        <div class="orbit-caption">
+                        <div id="bannerImageCaption" class="orbit-caption">
                             Co-creating new business opportunities in unexplored emerging markets through multi-stakeholder partnership networks                        </div>
                     </li>
                 </ul>
@@ -116,7 +118,7 @@
                         <div id="businessContactSectionTitle" class="articleText2 boldieText">Contact</div>
                         <div id="businessContactName" style="width: 100%;">Petri Allekotte</div>
                         <div id="businessContactJob" class="articleText2" style="font-style: italic! important; width: 100%;">Business Engagement Manager</div>
-                        <div id="businessContactEmail" class="articleText2"><a href="#" style="width: 100%;">petri.allekotte@aalto.fi</a></div>
+                        <div id="businessContactEmail" class="articleText2"><a href="" style="width: 100%;">petri.allekotte@aalto.fi</a></div>
                     </div>
                 </div> <!--Closes divClass divSection1text-->
             </div>
@@ -188,7 +190,6 @@
 </div>
 <!--</div>-->
 
-<script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
 <!--<script src="js/foundation/foundation.js"></script>-->
 <script src="../assets/js/foundation/foundation.topbar.js"></script>
