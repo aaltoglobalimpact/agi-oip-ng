@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/css/style.orange.css">
     <link rel="stylesheet" type="text/css" media="all" href="../assets/css/whhg.css" />
     <script src="../assets/js/modernizr.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/oipdynamicreplacer.js"></script>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -73,9 +75,9 @@
                   next_on_click: true;
                   slide_number: false;">
             <li>
-                <img class="show-for-medium-up" src="../assets/images/bannerFront.png" alt="Bringing people together." />
-                <img class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
-                <div class="show-for-small-only orbit-caption" style="width: 100%;">
+                <img id="imgBannerMediumUp" class="show-for-medium-up" src="../assets/images/bannerFront.png" alt="Bringing people together." />
+                <img id="imgBannerSmall" class="show-for-small-only" src="../assets/images/orange.png" style="width: 100%;" alt="The New Global.Towards a better world."/>
+                <div id="BannerCaptionSmall" class="show-for-small-only orbit-caption" style="width: 100%;">
                     The New Global is an innovation project integrating academic research and private sector business development to jointly innovate in developing high business potential markets.
                 </div>
             </li>
@@ -190,7 +192,6 @@
 </div>
 <!--ends Aalto login footer-->
 
-<script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/foundation.min.js"></script>
 <!--<script src="js/foundation/foundation.js"></script>-->
 <script src="../assets/js/foundation/foundation.topbar.js"></script>
